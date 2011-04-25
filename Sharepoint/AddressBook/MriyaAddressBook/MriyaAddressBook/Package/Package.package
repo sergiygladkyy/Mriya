@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="1eaaec09-3bd9-4fee-8145-6b9eaf5b90d9" solutionId="1eaaec09-3bd9-4fee-8145-6b9eaf5b90d9" resetWebServer="false" name="MriyaAddressBook" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <projectOutputAssembly location="UserProfilesDAL.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\UserProfilesDAL\UserProfilesDAL.csproj" />
+  </assemblies>
+  <features>
+    <featureReference itemId="99d37b74-b695-4c28-a111-6b8a6f02a592" />
+  </features>
+</package>

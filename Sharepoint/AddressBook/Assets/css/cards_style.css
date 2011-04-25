@@ -1,0 +1,272 @@
+﻿/*****************************************************************************
+ * Address book
+ ****************************************************************************/
+
+#mr-address_book {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: #333;
+	margin: 0px;
+	padding: 0px;
+	padding-bottom: 64px;
+}
+#mr-address_book.a {
+	color: #781d7e;
+}
+#mr-address_book h1 {
+	font-size: 26px;
+	font-weight: normal;
+	color: #781D7E;
+}
+#mr-address_book a img {
+	border: none;
+}
+#mr-address_book table {
+	width: 100%;
+}
+#mr-address_book th {
+	background-color: #e1f39e;
+	text-align: left;
+	padding: 6px;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #ABBC67;
+	border-bottom-color: #ABBC67;
+	font-weight: normal;
+}
+#mr-address_book th a {
+	color: #3a80ad;
+}
+
+#mr-address_book td {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	padding: 6px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #e1dce1;
+}
+#mr-address_book .tr_gray {
+	background-color: #fbfbfb;
+}
+#mr-address_book .photo_icon {
+	background-image: url('../../../../SiteCollectionImages/photo_icn.gif');
+	height: 16px;
+	width: 23px;
+	position: relative;
+	border: none;
+}
+#mr-address_book .photo_icon a img {
+	border: none;
+}
+#mr-address_book .photo_icon a.visited img {
+	border: none;
+}
+#mr-address_book .photo_img {
+	background-image: url('../../../../SiteCollectionImages/photo_shadow.png');
+	background-repeat: no-repeat;
+	float: left;
+	height: 86px;
+	width: 86px;
+	border: none;
+}
+
+.mr-ab-popup_photo {
+	position: absolute;
+	background-image: url('../../../../SiteCollectionImages/popup_photo_bg.png');
+	background-repeat: no-repeat;
+	left: 0px;
+	top: 0px;
+	height: 100px;
+	width: 110px;
+	display: none;
+}
+.mr-ab-popup_padd {
+	padding-top: 5px;
+	padding-left: 15px;
+}
+.mr-ab-popup_photo img {
+	border: 1px solid #FFF;
+}
+
+/*****************************************************************************
+ * Employees - short vertical list (small card)
+ ****************************************************************************/
+
+#mr-short_list {
+	color: #333333;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    /*background-color: #FDEADE;*/
+    padding: 10px;
+    width: 310px;
+}
+
+#mr-short_list .employee_card {
+    background-image: url("../../../../SiteCollectionImages/clip_top.png");
+    background-repeat: no-repeat;
+    margin-bottom: 24px;
+    margin-left: 3px;
+    padding-top: 3px;
+}
+
+#mr-short_list .card_body {
+    background-color: #FFFFFF;
+    background-image: url("../../../../SiteCollectionImages/hp_card_bg.gif");
+    background-repeat: repeat-x;
+}
+
+#mr-short_list .card_padd {
+    background-image: url("../../../../SiteCollectionImages/clip_bttm.png");
+    background-position: left top;
+    background-repeat: no-repeat;
+    padding: 11px 9px 7px 26px;
+}
+
+#mr-short_list .card_shadow_rght {
+    background-image: url("../../../../SiteCollectionImages/shad_right.png");
+    background-position: right top;
+    background-repeat: no-repeat;
+    padding-right: 4px;
+}
+
+#mr-short_list .shad_bttm_lft {
+    background-image: url("../../../../SiteCollectionImages/bttm_shad_lft.png");
+    background-position: left top;
+    background-repeat: no-repeat;
+    float: left;
+    height: 4px;
+    width: 50%;
+}
+
+#mr-short_list .shad_bttm_rgt {
+    background-image: url("../../../../SiteCollectionImages/bttm_shad_rgt.png");
+    background-position: right top;
+    background-repeat: no-repeat;
+    float: left;
+    height: 4px;
+    width: 50%;
+}
+
+#mr-short_list .photo_img {
+	background-image: url('../../../../SiteCollectionImages/photo_shadow.png');
+	background-repeat: no-repeat;
+	float: left;
+	height: 86px;
+	width: 86px;
+	border: none;
+}
+
+#mr-short_list .photo_img img{
+	height: 80px;
+	width: 80px;
+	border: none;
+}
+
+#mr-short_list .card_txt {
+    float: left;
+    width: 170px;
+    padding-left: 6px;
+    padding-top: 4px;
+}
+
+
+#mr-short_list .refresh {
+	font-size: 11px;
+	text-align: right;
+}
+
+/*****************************************************************************
+ * Employees - short vertical list (big card)
+ ****************************************************************************/
+
+#best_worker #mr-short_list {
+	color: #333333;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    /*background-color: #FDEADE;*/
+    padding: 10px;
+    width: 420px;
+}
+
+#best_worker #mr-short_list .employee_card {
+    background-image: none;
+    margin-bottom: 24px;
+    margin-left: 3px;
+    padding-top: 3px;
+}
+
+#best_worker #mr-short_list .card_body {
+    background-color: transparent;
+    background-image: none;
+}
+
+#best_worker #mr-short_list .card_padd {
+    background-image: none;
+    padding: 0;
+}
+
+#best_worker #mr-short_list .card_shadow_rght {
+    background-image: none;
+    padding-right: 0;
+}
+
+#best_worker #mr-short_list .shad_bttm_lft {
+    background-image: none;
+    float: left;
+    height: 0;
+    width: 0;
+}
+
+#best_worker #mr-short_list .shad_bttm_rgt {
+    background-image: none;
+    background-position: right top;
+    background-repeat: no-repeat;
+    float: left;
+    height: 0;
+    width: 0;
+}
+
+#best_worker #mr-short_list .photo_img {
+	background-image: none;
+	background-repeat: no-repeat;
+	float: left;
+	height: 144px;
+	width: 144px;
+	border: solid 4px;
+	border-color:#FFFFFF;
+}
+
+#best_worker #mr-short_list .photo_img img{
+	height: 144px;
+	width: 144px;
+	border: none;
+}
+
+#best_worker #mr-short_list .card_txt {
+    float: left;
+    width: 245px;
+    padding-left: 16px;
+    padding-top: 14px;
+}
+
+#best_worker #mr-short_list #card_text_caption_name {
+	font-size: 26px;
+	font-weight: normal;
+}
+
+#best_worker #mr-short_list #card_text_caption_position {
+	font-size: 13px;
+	display:block;
+	padding-bottom: 8px;
+	border-bottom: 1px;
+	border-bottom-color:#ECC9B6;
+	border-bottom-style:solid;
+	width: 245px;
+}
+
+#best_worker #mr-short_list .card_text_caption {
+	display:none;
+}

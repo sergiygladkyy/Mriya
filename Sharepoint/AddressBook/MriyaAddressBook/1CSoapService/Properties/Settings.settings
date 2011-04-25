@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="_1CSoapService.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="_1CSoapService_test1c_AddressBook_AddressBook" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://v81c.contoso.com/v81c_hrm_demo/ws/AddressBook</Value>
+    </Setting>
+    <Setting Name="soapServerUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://v81c.contoso.com/v81c_hrm_demo/ws/AddressBook</Value>
+    </Setting>
+    <Setting Name="soapServerUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)">silver</Value>
+    </Setting>
+    <Setting Name="soapServerPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Rbc123!_</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

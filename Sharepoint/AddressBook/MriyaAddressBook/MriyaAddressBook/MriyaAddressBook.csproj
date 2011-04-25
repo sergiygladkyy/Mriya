@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FAA944AE-7095-4BE9-BB31-4FF1CEF06A60}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MriyaAddressBook</RootNamespace>
+    <AssemblyName>MriyaAddressBook</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{BB1F664B-9266-4fd6-B973-E1E44974B511};{14822709-B5A1-4724-98CA-57A101D1B079};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SandboxedSolution>False</SandboxedSolution>
+    <ActiveDeploymentConfiguration>Default</ActiveDeploymentConfiguration>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Office.Server, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Office.Server.UserProfiles, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.SharePoint" />
+    <Reference Include="Microsoft.SharePoint.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Features\MriyaAddressBook\MriyaAddressBook.EventReceiver.cs">
+      <DependentUpon>MriyaAddressBook.feature</DependentUpon>
+    </Compile>
+    <Compile Include="ITableProfiles.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserList\ABTableColumn.cs" />
+    <Compile Include="UserList\UserList.cs" />
+    <Compile Include="UserList\UserListUserControl.ascx.cs">
+      <DependentUpon>UserListUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserList\UserListUserControl.ascx.designer.cs">
+      <DependentUpon>UserListUserControl.ascx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserProfileProvider\UserProfileProvider.cs" />
+    <Compile Include="UserShortVerticalList\ABShortListRows.cs" />
+    <Compile Include="UserShortVerticalList\UserShortVerticalList.cs" />
+    <Compile Include="UserShortVerticalList\UserShortVerticalListUserControl.ascx.cs">
+      <DependentUpon>UserShortVerticalListUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserShortVerticalList\UserShortVerticalListUserControl.ascx.designer.cs">
+      <DependentUpon>UserShortVerticalListUserControl.ascx.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="key.snk" />
+    <None Include="UserList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{c6bd7fce-eb0a-45c0-8563-6bf4e32a59b9}</SharePointProjectItemId>
+    </None>
+    <None Include="UserList\UserList.webpart" />
+    <None Include="UserProfileProvider\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{30332e6b-5f69-427e-adbe-cb35ba30f298}</SharePointProjectItemId>
+    </None>
+    <None Include="UserProfileProvider\UserProfileProvider.webpart" />
+    <None Include="UserShortVerticalList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{b998f4da-3d82-4aec-861c-767477932103}</SharePointProjectItemId>
+    </None>
+    <None Include="UserShortVerticalList\UserShortVerticalList.webpart" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserList\Elements.xml" />
+    <Content Include="UserList\UserListUserControl.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+    <Content Include="UserProfileProvider\Elements.xml" />
+    <Content Include="UserShortVerticalList\Elements.xml" />
+    <Content Include="UserShortVerticalList\UserShortVerticalListUserControl.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Package\Package.package">
+      <PackageId>{1eaaec09-3bd9-4fee-8145-6b9eaf5b90d9}</PackageId>
+    </None>
+    <None Include="Package\Package.Template.xml">
+      <DependentUpon>Package.package</DependentUpon>
+    </None>
+    <None Include="Features\MriyaAddressBook\MriyaAddressBook.feature">
+      <FeatureId>{99d37b74-b695-4c28-a111-6b8a6f02a592}</FeatureId>
+    </None>
+    <None Include="Features\MriyaAddressBook\MriyaAddressBook.Template.xml">
+      <DependentUpon>MriyaAddressBook.feature</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UserProfilesDAL\UserProfilesDAL.csproj">
+      <Project>{509C8E49-3611-4886-B9AB-B7E8AFAE40E1}</Project>
+      <Name>UserProfilesDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\SharePointTools\Microsoft.VisualStudio.SharePoint.targets" />
+</Project>
