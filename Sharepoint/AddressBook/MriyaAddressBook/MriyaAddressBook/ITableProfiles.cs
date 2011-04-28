@@ -9,6 +9,6 @@ namespace MriyaAddressBook
 {
     public interface ITableProfiles
     {
-        TableProfiles ProgilesTable { get; }
+        TableProfiles ProfilesTable { get; }
     }
 }

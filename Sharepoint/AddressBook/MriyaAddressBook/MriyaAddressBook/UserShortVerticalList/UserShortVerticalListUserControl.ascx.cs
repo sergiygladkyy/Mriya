@@ -24,7 +24,11 @@ namespace MriyaAddressBook.UserShortVerticalList
         public UserShortVerticalList _webPart = null;
         private SPSite _site = null;
 
+        private const string _cStrButtonShowAll = "Показати всі";
+        private const string _cStrButtonHide = "Сховати";
+
         bool _bShowRefreshShowAll = true;
+        bool _bShowNumberOfRecords = true;
 
         int _recordNumber = 2;
         UserShortVerticalList.RecordSelectionType _recordSelectionType = UserShortVerticalList.RecordSelectionType.Randomly;
@@ -64,6 +68,8 @@ namespace MriyaAddressBook.UserShortVerticalList
             rowMerit = 13
         };
 
+        bool _bShowBigPicture = false;
+
         private string _sNoProfileImageFile = "/SiteCollectionImages/mrab_no_profile_image.png";
 
         private string _strFilter = "";
@@ -73,6 +79,10 @@ namespace MriyaAddressBook.UserShortVerticalList
         {
             if (_webPart != null)
             {
+
+                if (_webPart.TableProfiles != null)
+                    _users.Add(_webPart.TableProfiles);
+
                 _bShowRefreshShowAll = _webPart.EnableRefreshShowAll;
                 _sNoProfileImageFile = _webPart.NoProfileImageFile;
 
@@ -91,8 +101,11 @@ namespace MriyaAddressBook.UserShortVerticalList
                 _dataListRow[(int)dataListRowNames.rowBirthdayShort].Visible = _webPart.ShowColumnBirthdayShort;
                 _dataListRow[(int)dataListRowNames.rowMerit].Visible = _webPart.ShowColumnMerit;
 
+                _bShowBigPicture = _webPart.ShowBigPhoto;
+
                 _recordNumber = _webPart.NumberOfRecords;
                 _recordSelectionType = _webPart.SelectionType;
+                _users.GetBestEmployeesWeeklyOnly = _webPart.ShowBestWorkersWeeklyOnly;
                 _users.GetBestEmployeesOnly = _webPart.ShowBestWorkersOnly;
                 _users.GetNewEmployeesOnly = _webPart.ShowNewEmployeesOnly;
                 _users.NewEmployeeDays = _webPart.NewEmployeesDays;
@@ -159,7 +172,8 @@ namespace MriyaAddressBook.UserShortVerticalList
             panelRefresh.Visible = _bShowRefreshShowAll;
             if (!IsPostBack)
             {
-                ReadProfiles();
+                if (_users.IsEmpty)
+                    ReadProfiles();
                 ShowRecords();
             }
         }
@@ -168,38 +182,14 @@ namespace MriyaAddressBook.UserShortVerticalList
         {
             try
             {
-                SPSecurity.RunWithElevatedPrivileges(delegate()
-                {
-                    Guid currentSiteId = SPContext.Current.Site.ID;
-                    Guid currentWebId = SPContext.Current.Web.ID;
-
-                    using (SPSite site2 = new SPSite(currentSiteId))
-                    {
-                        using (SPWeb web = site2.OpenWeb(currentWebId))
-                        {
-                            web.AllowUnsafeUpdates = true;
-                            SPServiceContext sc = SPServiceContext.GetContext(site2);
-                            UserProfileManager upm = new UserProfileManager(sc);
-                            foreach (UserProfile profile in upm)
-                            {
-                                // TODO: Figure out how to filter the list and skill all service accounts
-                                if (profile["AccountName"].Value != null &&
-                                    (profile["AccountName"].Value.ToString().ToUpper().IndexOf("\\SM_") >= 0 ||
-                                    profile["AccountName"].Value.ToString().ToUpper().IndexOf("\\SP_") >= 0))
-                                    continue;
-                                if (profile["AccountName"].Value != null &&
-                                    profile["AccountName"].Value.ToString() == profile.DisplayName)
-                                    continue;
-
-                                _users.Add(profile);
-                            }
-                        }
-                    }
-                });
+                if (_webPart != null && _webPart.SPDataSource == UserShortVerticalList.SPDataSourcer.SQL)
+                    _users.ReadSqlSPProfiles(_webPart.SPConnectionString, _webPart.SPSiteProfiles);
+                else
+                    _users.ReadSPProfiles(SPContext.Current.Site.ID);
             }
             catch (Exception ex)
             {
-                labelError.Text = ex.ToString();
+                labelError.Text = "Помилка при отриманні профілів користувача!<br/><br/>\n\n" + ex.Message;
                 labelError.Visible = true;
             }
         }
@@ -209,6 +199,7 @@ namespace MriyaAddressBook.UserShortVerticalList
             StringBuilder sbCards = new StringBuilder();
             List<RecordUserProfile> profilesSrc = _users.GetProfiles(_strOrder, _strFilter);
             List<RecordUserProfile> profilesDest = new List<RecordUserProfile>();
+            int iAllCount = profilesSrc.Count;
 
             if (_recordSelectionType == UserShortVerticalList.RecordSelectionType.Randomly)
             {
@@ -241,6 +232,7 @@ namespace MriyaAddressBook.UserShortVerticalList
                 string sPhotoURL = "";
                 string sEmail = "";
 
+                
                 if (profile.ProfileURL.Trim().Length > 0)
                     sProfileURL = "javascript:ShowABShortListProfileDialog('" +
                     profile.LastName.Replace("\'", "\\\'").Replace("\"", "\\\"") + ", " +
@@ -249,8 +241,14 @@ namespace MriyaAddressBook.UserShortVerticalList
 
                 if (profile.PhotoURL.Trim().Length > 0)
                 {
+                    //_MThumb
+                    string strPhotoURL = profile.PhotoURL;
+
+                    if (_bShowBigPicture)
+                        strPhotoURL = profile.PhotoURL.Replace("_MThumb.", "_LThumb.");
+
                     sPhotoURL = string.Format("<img  src=\"{0}\">",
-                        profile.PhotoURL);
+                        strPhotoURL);
                 }
                 else
                 {
@@ -387,11 +385,18 @@ namespace MriyaAddressBook.UserShortVerticalList
                 sbCards.AppendLine("</div>"); //employee_card
             }
             literalCards.Text = sbCards.ToString();
+
+            if (_bShowNumberOfRecords)
+            {
+                linkButtonShowAll.Text = string.Format("{0} ({1})",
+                    _cStrButtonShowAll, iAllCount);
+            }
         }
 
         protected void linkButtonRefresh_Click(object sender, EventArgs e)
         {
-            ReadProfiles();
+            if (_users.IsEmpty)
+                ReadProfiles();
             ShowRecords();
         }
 
@@ -401,16 +406,19 @@ namespace MriyaAddressBook.UserShortVerticalList
             {
                 linkButtonRefresh.Visible = false;
                 labelRefreshDelim.Visible = false;
-                linkButtonShowAll.Text = "Сховати";
+                linkButtonShowAll.Text = _cStrButtonHide;
+                _bShowNumberOfRecords = false;
                 _recordNumber = int.MaxValue;
             }
             else
             {
                 linkButtonRefresh.Visible = true;
                 labelRefreshDelim.Visible = true;
-                linkButtonShowAll.Text = "Показати всі";
+                linkButtonShowAll.Text = _cStrButtonShowAll;
+                _bShowNumberOfRecords = true;
             }
-            ReadProfiles();
+            if (_users.IsEmpty)
+                ReadProfiles();
             ShowRecords();
         }
     }

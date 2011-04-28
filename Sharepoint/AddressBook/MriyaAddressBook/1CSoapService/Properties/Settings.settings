@@ -14,5 +14,11 @@
     <Setting Name="soapServerPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">Rbc123!_</Value>
     </Setting>
+    <Setting Name="spSiteUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://intranet.contoso.com</Value>
+    </Setting>
+    <Setting Name="spSqlConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=(local);Initial Catalog="User Profile Service Application_ProfileDB_987e27f4752344ee939de2826d85a9ad";Integrated Security=True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

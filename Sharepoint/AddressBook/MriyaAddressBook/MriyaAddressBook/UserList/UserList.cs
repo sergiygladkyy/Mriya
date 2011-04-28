@@ -8,12 +8,22 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using Microsoft.SharePoint;
 
+using UserProfilesDAL;
+
 namespace MriyaAddressBook.UserList
 {
     public class UserList : WebPart
     {
         // Visual Studio might automatically update this path when you change the Visual Web Part project item.
         private const string _ascxPath = @"~/_CONTROLTEMPLATES/MriyaAddressBook/UserList/UserListUserControl.ascx";
+
+        private ITableProfiles _provider = null;
+
+        public enum SPDataSourcer
+        {
+            API,
+            SQL
+        }
 
         public enum Timeframe
         {
@@ -35,6 +45,10 @@ namespace MriyaAddressBook.UserList
         const string c_PhotoImageFile = "/SiteCollectionImages/photo_icn.gif";
         const string c_NoProfileImageFile = "/SiteCollectionImages/mrab_no_profile_image.png";
 
+        const SPDataSourcer c_SPDataSource = SPDataSourcer.API;
+        const string c_SPConnectionString = "Data Source=(local);Initial Catalog=\"User Profile Service Application_ProfileDB_987e27f4752344ee939de2826d85a9ad\";Integrated Security=True";
+        const string c_SPSiteProfiles = "http://intranet.contoso.com/my";
+
         const bool c_ShowColumnPhoto = true;
         const bool c_ShowColumnPhotoIcon = true;
         const bool c_ShowColumnLastName = true;
@@ -51,6 +65,7 @@ namespace MriyaAddressBook.UserList
         const bool c_ShowColumnBirthdayShort = false;
         const bool c_ShowColumnMerit = false;
 
+        const bool c_ShowBestWorkersWeeklyOnly = false;
         const bool c_ShowBestWorkersOnly = false;
         const bool c_ShowNewEmployeesOnly = false;
         const uint c_NewEmployeesDays = 30;
@@ -64,6 +79,10 @@ namespace MriyaAddressBook.UserList
         private string photoImageFile;
         private string noProfileImageFile;
 
+        private SPDataSourcer spDataSource;
+        private string spConnectionString;
+        private string spSiteProfiles;
+        
         private bool showColumnPhoto;
         private bool showColumnPhotoIcon;
         private bool showColumnLastName;
@@ -80,11 +99,14 @@ namespace MriyaAddressBook.UserList
         private bool showColumnBirthdayShort;
         private bool showColumnMerit;
 
+        private bool showBestWorkersWeeklyOnly;
         private bool showBestWorkersOnly;
         private bool showNewEmployeesOnly;
         private uint newEmployeesDays;
         private bool showWhosBirthdayOnly;
         private Timeframe birthdayTimeframe;
+
+        private TableProfiles _tableProfiles = null;
 
         // Constructor
         public UserList()
@@ -95,6 +117,10 @@ namespace MriyaAddressBook.UserList
             enableSearch = c_EnableSearch;
             photoImageFile = c_PhotoImageFile;
             noProfileImageFile = c_NoProfileImageFile;
+
+            spDataSource = c_SPDataSource;
+            spConnectionString = c_SPConnectionString;
+            spSiteProfiles = c_SPSiteProfiles;
 
             showColumnPhoto = c_ShowColumnPhoto;
             showColumnPhotoIcon = c_ShowColumnPhotoIcon;
@@ -113,6 +139,7 @@ namespace MriyaAddressBook.UserList
             showColumnMerit = c_ShowColumnMerit;
 
             showNewEmployeesOnly = c_ShowNewEmployeesOnly;
+            showBestWorkersWeeklyOnly = c_ShowBestWorkersWeeklyOnly;
             showBestWorkersOnly = c_ShowBestWorkersOnly;
             newEmployeesDays = c_NewEmployeesDays;
             showWhosBirthdayOnly = c_ShowWhosBirthdayOnly;
@@ -125,6 +152,11 @@ namespace MriyaAddressBook.UserList
         //
 
         #region WebPart custom properties
+
+        public TableProfiles TableProfiles
+        {
+            get { return _tableProfiles; }
+        }
 
         #region Additional
 
@@ -229,6 +261,71 @@ namespace MriyaAddressBook.UserList
         }
 
         #endregion Additional
+
+        #region Data receive
+
+        [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
+        System.Web.UI.WebControls.WebParts.WebDisplayName("Джерело отримання даних"),
+        System.Web.UI.WebControls.WebParts.WebDescription("Виберіть, джередо, щоб отримати дані."),
+        System.Web.UI.WebControls.WebParts.Personalizable(
+        System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared),
+        System.ComponentModel.Category("Отримання даних"),
+        System.ComponentModel.DefaultValue(c_SPDataSource)
+        ]
+        public SPDataSourcer SPDataSource
+        {
+            get
+            {
+                return spDataSource;
+            }
+            set
+            {
+                spDataSource = value;
+            }
+        }
+
+        [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
+        System.Web.UI.WebControls.WebParts.WebDisplayName("Строка підключення до MS SQL"),
+        System.Web.UI.WebControls.WebParts.WebDescription("Введіть строку підключення до MS SQL."),
+        System.Web.UI.WebControls.WebParts.Personalizable(
+        System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared),
+        System.ComponentModel.Category("Отримання даних"),
+        System.ComponentModel.DefaultValue(c_SPConnectionString)
+        ]
+        public string SPConnectionString
+        {
+            get
+            {
+                return spConnectionString;
+            }
+            set
+            {
+                spConnectionString = value;
+            }
+        }
+
+
+        [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
+        System.Web.UI.WebControls.WebParts.WebDisplayName("Адреса колекції сайтів профілів користувачів"),
+        System.Web.UI.WebControls.WebParts.WebDescription("Введіть адресу колекції сайтів профілів користувачів."),
+        System.Web.UI.WebControls.WebParts.Personalizable(
+        System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared),
+        System.ComponentModel.Category("Отримання даних"),
+        System.ComponentModel.DefaultValue(c_SPSiteProfiles)
+        ]
+        public string SPSiteProfiles
+        {
+            get
+            {
+                return spSiteProfiles;
+            }
+            set
+            {
+                spSiteProfiles = value;
+            }
+        }
+
+        #endregion Data Receive
 
         #region Table columns
 
@@ -537,6 +634,26 @@ namespace MriyaAddressBook.UserList
         #region Filter data
 
         [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
+        System.Web.UI.WebControls.WebParts.WebDisplayName("Показувати тільки Працівників тижня"),
+        System.Web.UI.WebControls.WebParts.WebDescription("Виберіть, для того, щоб активувати."),
+        System.Web.UI.WebControls.WebParts.Personalizable(
+        System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared),
+        System.ComponentModel.Category("Фільтр"),
+        System.ComponentModel.DefaultValue(c_ShowBestWorkersWeeklyOnly)
+        ]
+        public bool ShowBestWorkersWeeklyOnly
+        {
+            get
+            {
+                return showBestWorkersWeeklyOnly;
+            }
+            set
+            {
+                showBestWorkersWeeklyOnly = value;
+            }
+        }
+
+        [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
         System.Web.UI.WebControls.WebParts.WebDisplayName("Показувати тільки кращих працівників"),
         System.Web.UI.WebControls.WebParts.WebDescription("Виберіть, для того, щоб активувати."),
         System.Web.UI.WebControls.WebParts.Personalizable(
@@ -640,6 +757,13 @@ namespace MriyaAddressBook.UserList
         #endregion Filter data
 
         #endregion WebPart custom properties
+
+        [ConnectionConsumer("UserProfileProvider")]
+        public void RegisterUserProfileProvider(ITableProfiles provider)
+        {
+            this._provider = provider;
+            _tableProfiles = this._provider.ProfilesTable;
+        }
 
         protected override void CreateChildControls()
         {

@@ -13,13 +13,18 @@ using UserProfilesDAL;
 
 namespace MriyaAddressBook.UserShortVerticalList
 {
-    [ToolboxItemAttribute(false)]
     public class UserShortVerticalList : WebPart
     {
         // Visual Studio might automatically update this path when you change the Visual Web Part project item.
         private const string _ascxPath = @"~/_CONTROLTEMPLATES/MriyaAddressBook/UserShortVerticalList/UserShortVerticalListUserControl.ascx";
 
         private ITableProfiles _provider = null;
+
+        public enum SPDataSourcer
+        {
+            API,
+            SQL
+        }
 
         public enum Timeframe
         {
@@ -45,7 +50,12 @@ namespace MriyaAddressBook.UserShortVerticalList
         const bool c_EnableRefreshShowAll = true;
         const string    c_NoProfileImageFile = "/SiteCollectionImages/mrab_no_profile_image.png";
 
+        const SPDataSourcer c_SPDataSource = SPDataSourcer.API;
+        const string c_SPConnectionString = "Data Source=(local);Initial Catalog=\"User Profile Service Application_ProfileDB_987e27f4752344ee939de2826d85a9ad\";Integrated Security=True";
+        const string c_SPSiteProfiles = "http://intranet.contoso.com/my";
+
         const bool c_ShowColumnPhoto = true;
+        const bool c_ShowBigPhoto = false;
         const bool c_ShowColumnLastName = true;
         const bool c_ShowColumnFirstName = true;
         const bool c_ShowColumnMiddleName = false;
@@ -62,6 +72,7 @@ namespace MriyaAddressBook.UserShortVerticalList
 
         const int c_NumberOfRecords = 2;
         const RecordSelectionType c_SelectionType = RecordSelectionType.Randomly;
+        const bool c_ShowBestWorkersWeeklyOnly = false;
         const bool c_ShowBestWorkersOnly = false;
         const bool c_ShowNewEmployeesOnly = false;
         const uint c_NewEmployeesDays = 30;
@@ -72,7 +83,12 @@ namespace MriyaAddressBook.UserShortVerticalList
         bool enableRefreshShowAll;
         private string noProfileImageFile;
 
+        private SPDataSourcer spDataSource;
+        private string spConnectionString;
+        private string spSiteProfiles;
+        
         private bool showColumnPhoto;
+        private bool showBigPhoto;
         private bool showColumnLastName;
         private bool showColumnFirstName;
         private bool showColumnMiddleName;
@@ -89,14 +105,14 @@ namespace MriyaAddressBook.UserShortVerticalList
 
         private int numberOfRecords;
         private RecordSelectionType selectionType;
+        private bool showBestWorkersWeeklyOnly;
         private bool showBestWorkersOnly;
         private bool showNewEmployeesOnly;
         private uint newEmployeesDays;
         private bool showWhosBirthdayOnly;
         private Timeframe birthdayTimeframe;
 
-        DateTime _t1 = DateTime.Now;
-        DateTime _t2 = DateTime.Now;
+        private TableProfiles _tableProfiles = null;
 
         // Constructor
         public UserShortVerticalList()
@@ -105,7 +121,12 @@ namespace MriyaAddressBook.UserShortVerticalList
             enableRefreshShowAll = c_EnableRefreshShowAll;
             noProfileImageFile = c_NoProfileImageFile;
 
+            spDataSource = c_SPDataSource;
+            spConnectionString = c_SPConnectionString;
+            spSiteProfiles = c_SPSiteProfiles;
+
             showColumnPhoto = c_ShowColumnPhoto;
+            showBigPhoto = c_ShowBigPhoto;
             showColumnLastName = c_ShowColumnLastName;
             showColumnFirstName = c_ShowColumnFirstName;
             showColumnMiddleName = c_ShowColumnMiddleName;
@@ -123,6 +144,7 @@ namespace MriyaAddressBook.UserShortVerticalList
             numberOfRecords = c_NumberOfRecords;
             selectionType = c_SelectionType;
             showNewEmployeesOnly = c_ShowNewEmployeesOnly;
+            showBestWorkersWeeklyOnly = c_ShowBestWorkersWeeklyOnly;
             showBestWorkersOnly = c_ShowBestWorkersOnly;
             newEmployeesDays = c_NewEmployeesDays;
             showWhosBirthdayOnly = c_ShowWhosBirthdayOnly;
@@ -135,6 +157,11 @@ namespace MriyaAddressBook.UserShortVerticalList
         //
 
         #region WebPart custom properties
+
+        public TableProfiles TableProfiles 
+        {
+            get { return _tableProfiles; }
+        }
 
         #region Additional
 
@@ -180,6 +207,71 @@ namespace MriyaAddressBook.UserShortVerticalList
 
         #endregion Additional
 
+        #region Data receive
+
+        [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
+        System.Web.UI.WebControls.WebParts.WebDisplayName("Джерело отримання даних"),
+        System.Web.UI.WebControls.WebParts.WebDescription("Виберіть, джередо, щоб отримати дані."),
+        System.Web.UI.WebControls.WebParts.Personalizable(
+        System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared),
+        System.ComponentModel.Category("Отримання даних"),
+        System.ComponentModel.DefaultValue(c_SPDataSource)
+        ]
+        public SPDataSourcer SPDataSource
+        {
+            get
+            {
+                return spDataSource;
+            }
+            set
+            {
+                spDataSource = value;
+            }
+        }
+
+        [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
+        System.Web.UI.WebControls.WebParts.WebDisplayName("Строка підключення до MS SQL"),
+        System.Web.UI.WebControls.WebParts.WebDescription("Введіть строку підключення до MS SQL."),
+        System.Web.UI.WebControls.WebParts.Personalizable(
+        System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared),
+        System.ComponentModel.Category("Отримання даних"),
+        System.ComponentModel.DefaultValue(c_SPConnectionString)
+        ]
+        public string SPConnectionString
+        {
+            get
+            {
+                return spConnectionString;
+            }
+            set
+            {
+                spConnectionString = value;
+            }
+        }
+
+
+        [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
+        System.Web.UI.WebControls.WebParts.WebDisplayName("Адреса колекції сайтів профілів користувачів"),
+        System.Web.UI.WebControls.WebParts.WebDescription("Введіть адресу колекції сайтів профілів користувачів."),
+        System.Web.UI.WebControls.WebParts.Personalizable(
+        System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared),
+        System.ComponentModel.Category("Отримання даних"),
+        System.ComponentModel.DefaultValue(c_SPSiteProfiles)
+        ]
+        public string SPSiteProfiles
+        {
+            get
+            {
+                return spSiteProfiles;
+            }
+            set
+            {
+                spSiteProfiles = value;
+            }
+        }
+
+        #endregion Data Receive
+
         #region Data
 
         [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
@@ -199,6 +291,26 @@ namespace MriyaAddressBook.UserShortVerticalList
             set
             {
                 showColumnPhoto = value;
+            }
+        }
+
+        [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
+         System.Web.UI.WebControls.WebParts.WebDisplayName("Показувати фото великого розміру"),
+         System.Web.UI.WebControls.WebParts.WebDescription("Показувати фото великого розміру."),
+         System.Web.UI.WebControls.WebParts.Personalizable(
+         System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared),
+         System.ComponentModel.Category("Дані"),
+         System.ComponentModel.DefaultValue(c_ShowBigPhoto)
+         ]
+        public bool ShowBigPhoto
+        {
+            get
+            {
+                return showBigPhoto;
+            }
+            set
+            {
+                showBigPhoto = value;
             }
         }
 
@@ -507,6 +619,26 @@ namespace MriyaAddressBook.UserShortVerticalList
         }
 
         [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
+        System.Web.UI.WebControls.WebParts.WebDisplayName("Показувати тільки Працівників тижня"),
+        System.Web.UI.WebControls.WebParts.WebDescription("Виберіть, для того, щоб активувати."),
+        System.Web.UI.WebControls.WebParts.Personalizable(
+        System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared),
+        System.ComponentModel.Category("Фільтр"),
+        System.ComponentModel.DefaultValue(c_ShowBestWorkersWeeklyOnly)
+        ]
+        public bool ShowBestWorkersWeeklyOnly
+        {
+            get
+            {
+                return showBestWorkersWeeklyOnly;
+            }
+            set
+            {
+                showBestWorkersWeeklyOnly = value;
+            }
+        }
+
+        [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
         System.Web.UI.WebControls.WebParts.WebDisplayName("Показувати тільки кращих працівників"),
         System.Web.UI.WebControls.WebParts.WebDescription("Виберіть, для того, щоб активувати."),
         System.Web.UI.WebControls.WebParts.Personalizable(
@@ -611,73 +743,42 @@ namespace MriyaAddressBook.UserShortVerticalList
 
         #endregion WebPart custom properties
 
-        [ConnectionConsumer("ITableProfiles")]
+        [ConnectionConsumer("UserProfileProvider")]
         public void RegisterUserProfileProvider(ITableProfiles provider)
         {
             this._provider = provider;
+            _tableProfiles = this._provider.ProfilesTable;
         }
 
         protected override void CreateChildControls()
         {
+            // DEBUG
+            //DateTime _t1 = DateTime.Now;
+            //DateTime _t2 = DateTime.Now;
+
+            //_t1 = DateTime.Now;
+
             if (ScriptManager.GetCurrent(this.Page) == null)
             {
                 ScriptManager manager = new ScriptManager();
                 manager.EnablePartialRendering = true;
                 Controls.Add(manager);
             }
-            /*
+
             UserShortVerticalListUserControl control = (UserShortVerticalListUserControl)Page.LoadControl(_ascxPath);
             if (control != null)
             {
                 control._webPart = this;
                 Controls.Add(control);
             }
-            */
-            ReadProfiles();
-            LiteralControl ctlDebug = new LiteralControl();
-            _t2 = DateTime.Now;
-            ctlDebug.Text = string.Format("<br/><br/>Total time is {0} msec<br/>Data provider is {1}",
-                (_t2 - _t1).Milliseconds,
-                (_provider == null)?("not connected"):("connected"));
-            Controls.Add(ctlDebug);
-        }
 
-//        protected TableProfiles _users = new TableProfiles();
-        
-        public void ReadProfiles()
-        {
-            try
-            {
-                SPSecurity.RunWithElevatedPrivileges(delegate()
-                {
-                    Guid currentSiteId = SPContext.Current.Site.ID;
-
-                    using (SPSite site2 = new SPSite(currentSiteId))
-                    {
-                        SPServiceContext sc = SPServiceContext.GetContext(site2);
-                        UserProfileManager upm = new UserProfileManager(sc);
-
-                        foreach (UserProfile profile in upm)
-                        {
-                        //    // TODO: Figure out how to filter the list and skill all service accounts
-                        //    if (profile["AccountName"].Value != null &&
-                        //        (profile["AccountName"].Value.ToString().ToUpper().IndexOf("\\SM_") >= 0 ||
-                        //        profile["AccountName"].Value.ToString().ToUpper().IndexOf("\\SP_") >= 0))
-                        //        continue;
-                        //    if (profile["AccountName"].Value != null &&
-                        //        profile["AccountName"].Value.ToString() == profile.DisplayName)
-                        //        continue;
-
-                        //    _users.Add(profile);
-                        }
-                    }
-                });
-            }
-            catch (Exception ex)
-            {
-                //labelError.Text = ex.ToString();
-                //labelError.Visible = true;
-            }
+            // DEBUG
+            //LiteralControl ctlDebug = new LiteralControl();
+            //_t2 = DateTime.Now;
+            //ctlDebug.Text = string.Format("<br/><br/>Total time is {0} msec<br/>Data provider is {1}",
+            //    (_t2 - _t1).Milliseconds,
+            //    (this._provider == null) ? ("not connected") : ("connected"));
+            //Controls.Add(ctlDebug);
         }
 
     }

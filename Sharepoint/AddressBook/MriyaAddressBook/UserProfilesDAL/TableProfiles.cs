@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
+using System.Data.SqlClient;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Security;
 using Microsoft.Office.Server;
 using Microsoft.Office.Server.UserProfiles;
+using Microsoft.SqlServer;
 
 namespace UserProfilesDAL
 {
@@ -13,11 +18,14 @@ namespace UserProfilesDAL
         private ulong _ulID = 0;
 
         private bool _bBestEmployees = false;
+        private bool _bBestEmployeesWeekly = false;
         private bool _bNewEmployees = false;
         private uint _uiNewEmployees = 30;
         private bool _bBirthday= false;
         private DateTime _dtBirthdayStart = DateTime.MinValue;
         private DateTime _dtBirthdayEnd = DateTime.MinValue;
+
+        private bool _bEmpty = true;
 
         #region Properties
 
@@ -32,6 +40,12 @@ namespace UserProfilesDAL
             }
         }
 
+        public bool IsEmpty 
+        {
+            get { return _bEmpty; }
+            set { _bEmpty = value; }
+        }
+
         /// <summary>
         /// If true then GetProfiles() will return only records with BestWorker property set to true 
         /// </summary>
@@ -43,10 +57,29 @@ namespace UserProfilesDAL
                 _bBestEmployees = value;
                 if (_bBestEmployees)
                 {
+                    _bBestEmployeesWeekly = false;
                     _bNewEmployees = false;
                     _bBirthday = false;
                 }
             } 
+        }
+
+        /// <summary>
+        /// If true then GetProfiles() will return only records with BestWorkerWeekly property set to true 
+        /// </summary>
+        public bool GetBestEmployeesWeeklyOnly
+        {
+            get { return _bBestEmployeesWeekly; }
+            set
+            {
+                _bBestEmployeesWeekly = value;
+                if (_bBestEmployeesWeekly)
+                {
+                    _bBestEmployees = false;
+                    _bNewEmployees = false;
+                    _bBirthday = false;
+                }
+            }
         }
 
         /// <summary>
@@ -62,6 +95,7 @@ namespace UserProfilesDAL
                 if (_bNewEmployees)
                 {
                     _bBestEmployees = false;
+                    _bBestEmployeesWeekly = false;
                     _bBirthday = false;
                 }
             } 
@@ -90,6 +124,7 @@ namespace UserProfilesDAL
                 {
                     _bNewEmployees = false;
                     _bBestEmployees = false;
+                    _bBestEmployeesWeekly = false;
                 }
             }
         }
@@ -162,6 +197,140 @@ namespace UserProfilesDAL
             Add(record);
         }
 
+        public void Add(TableProfiles tableUserProfiles)
+        {
+            this.Clear();
+            foreach (RecordUserProfile record in tableUserProfiles.userProfiles)
+            {
+                Add(record);
+            }
+            this._bEmpty = false;
+        }
+
+        public void ReadSPProfiles(Guid currentSiteId)
+        {
+            this.Clear();
+            SPSecurity.RunWithElevatedPrivileges(delegate()
+            {
+                using (SPSite site = new SPSite(currentSiteId))
+                {
+                    SPServiceContext sc = SPServiceContext.GetContext(site);
+                    UserProfileManager upm = new UserProfileManager(sc);
+                    foreach (UserProfile profile in upm)
+                    {
+                        // TODO: Figure out how to filter the list and skill all service accounts
+                        if (profile["AccountName"].Value != null &&
+                            (profile["AccountName"].Value.ToString().ToUpper().IndexOf("\\SM_") >= 0 ||
+                            profile["AccountName"].Value.ToString().ToUpper().IndexOf("\\SP_") >= 0))
+                            continue;
+                        if (profile["AccountName"].Value != null &&
+                            profile["AccountName"].Value.ToString() == profile.DisplayName)
+                            continue;
+
+                        Add(profile);
+                    }
+                }
+            });
+            this._bEmpty = false;
+        }
+
+        public void ReadSPProfiles(string strSiteUrl)
+        {
+            this.Clear();
+            using (SPSite site2 = new SPSite(strSiteUrl))
+            {
+                using (SPWeb web = site2.OpenWeb())
+                {
+                    web.AllowUnsafeUpdates = true;
+                    SPServiceContext sc = SPServiceContext.GetContext(site2);
+                    UserProfileManager upm = new UserProfileManager(sc);
+                    foreach (UserProfile profile in upm)
+                    {
+                        // TODO: Figure out how to filter the list and skill all service accounts
+                        if (profile["AccountName"].Value != null &&
+                            (profile["AccountName"].Value.ToString().ToUpper().IndexOf("\\SM_") >= 0 ||
+                            profile["AccountName"].Value.ToString().ToUpper().IndexOf("\\SP_") >= 0))
+                            continue;
+                        if (profile["AccountName"].Value != null &&
+                            profile["AccountName"].Value.ToString() == profile.DisplayName)
+                            continue;
+
+                        Add(profile);
+                    }
+                }
+            }
+            this._bEmpty = false;
+        }
+
+        public void ReadSqlSPProfiles(string strConnectionString)
+        {
+            ReadSqlSPProfiles(strConnectionString, "");
+        }
+
+        public void ReadSqlSPProfiles(string strConnectionString, string strSiteProfiles)
+        {
+            this.Clear();
+
+            SqlConnection sqlConnection = new SqlConnection(strConnectionString);
+            SqlDataAdapter daProfiles = new SqlDataAdapter("SELECT [RecordID], [UserID], [NTName], [PreferredName], [Email], [Manager], [PictureUrl] " +
+                "FROM dbo.UserProfile_Full " +
+                "WHERE [bDeleted] = 0", sqlConnection);
+            SqlDataAdapter daPropertyValues = new SqlDataAdapter("SELECT [RecordID], [PropertyName], [PropertyVal] " +
+                "FROM dbo.PropertyList AS pl, dbo.UserProfileValue AS pv " +
+                "WHERE 	pv.PropertyID = pl.PropertyID", sqlConnection);
+            DataTable tableProfiles = new DataTable();
+            DataTable tablePropertyValues = new DataTable();
+
+            sqlConnection.Open();
+
+            daProfiles.Fill(tableProfiles);
+            daPropertyValues.Fill(tablePropertyValues);
+
+            sqlConnection.Close();
+
+            // Read data
+            foreach (DataRow rowProfile in tableProfiles.Rows)
+            {
+                long id = 0;
+
+                try { id = Convert.ToInt64(rowProfile["RecordID"]); }
+                catch { continue; }
+
+                DataRow[] rowPropValues = tablePropertyValues.Select("RecordID = " + id.ToString());
+
+                RecordUserProfile rp = new RecordUserProfile();
+
+                string strDisplayName = rowProfile["PreferredName"].ToString();
+                rp.AccountName = rowProfile["NTName"].ToString();
+
+                foreach (DataRow rowValue in rowPropValues)
+                {
+                    if (rowValue["PropertyName"] == null || rowValue["PropertyName"] == DBNull.Value)
+                        continue;
+                    if (rowValue["PropertyVal"] == null || rowValue["PropertyVal"] == DBNull.Value)
+                        continue;
+                    string strName = rowValue["PropertyName"].ToString().Trim();
+                    string strVal = rowValue["PropertyVal"].ToString();
+
+                    rp.SetProperty(strName, strVal);
+                }
+
+                if (rp.AccountName == null ||
+                    rp.AccountName.ToUpper().IndexOf("\\SM_") >= 0 ||
+                    rp.AccountName.ToUpper().IndexOf("\\SP_") >= 0 ||
+                    rp.AccountName == strDisplayName ||
+                    rp.LastName.Trim().Length < 1)
+                    continue;
+
+                rp.ProfileURL = strSiteProfiles + "/" + "Person.aspx?accountname=" +
+                    System.Web.HttpUtility.UrlEncode(rp.AccountName);
+
+                Add(rp);
+            }
+
+            this._bEmpty = false;
+        }
+
         public List<RecordUserProfile> GetProfiles()
         {
             return GetProfiles(int.MaxValue, 0, string.Empty, string.Empty);
@@ -206,6 +375,8 @@ namespace UserProfilesDAL
             foreach (RecordUserProfile p in list)
             {
                 if (_bBestEmployees && p.BestWorker == false)
+                    continue;
+                if (_bBestEmployeesWeekly && p.BestWorkerWeekly == false)
                     continue;
                 if (_bNewEmployees && p.EmploymentDate < dateNewEmployeeValid)
                     continue;

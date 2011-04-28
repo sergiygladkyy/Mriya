@@ -28,6 +28,7 @@ namespace UserProfilesDAL
         private string sPosition = "";
         private DateTime dtEmployed = DateTime.MinValue;
         private bool bBestWorker = false;
+        private bool bBestWorkerWeekly = false;
         private string sBestWorkerMerit = "";
         private byte[] bytesPhoto = null;
         private string sPhotoURL = "";
@@ -47,21 +48,25 @@ namespace UserProfilesDAL
         public Guid ID
         {
             get { return guidID; }
+            set { guidID = value; }
         }
 
         public string LastName
         {
             get { return sLastName; }
+            set { sLastName = value; }
         }
 
         public string FirstName
         {
             get { return sFirstName; }
+            set { sFirstName = value; }
         }
 
         public string MiddleName
         {
             get { return sMiddleName; }
+            set { sMiddleName = value; }
         }
 
         public object Birthday
@@ -72,61 +77,82 @@ namespace UserProfilesDAL
                 else
                     return null;
             }
+            set {
+                try
+                {
+                    dtBirthday = Convert.ToDateTime(value);
+                }
+                catch
+                {
+                    dtBirthday = DateTime.MinValue;
+                }
+            }
         }
 
         public DateTime BirthdayDT
         {
             get { return dtBirthday; }
+            set { dtBirthday = value; }
         }
 
         public string PhoneWork
         {
             get { return sPhoneWork; }
+            set { sPhoneWork = value; }
         }
 
         public string EmailWork
         {
             get { return sEmailWork; }
+            set { sEmailWork = value; }
         }
 
         public string PhoneHome
         {
             get { return sPhoneHome; }
+            set { sPhoneHome = value; }
         }
 
         public string EmailHome
         {
             get { return sEmailHome; }
+            set { sEmailHome = value; }
         }
         
         public string INN
         {
             get { return sINN; }
+            set { sINN = value; }
         }
 
         public string SSN
         {
             get { return sSSN; }
+            set { sSSN = value; }
         }
 
         public string Organization
         {
             get { return sOrganization; }
+            set { sOrganization = value; }
         }
 
         public string SubDivision
         {
             get { return sSubDivision; }
+            set { sSubDivision = value; }
         }
 
         public string SeparateDivision
         {
             get { return sSeparateDivision; }
+            set { sSeparateDivision = value; }
         }
 
         public string Position
         {
             get { return sPosition; }
+            set { sPosition = value; }
         }
 
         public object DateOfEmployment
@@ -138,41 +164,65 @@ namespace UserProfilesDAL
                 else
                     return null;
             }
+            set
+            {
+                try
+                {
+                    dtEmployed = Convert.ToDateTime(value);
+                }
+                catch
+                {
+                    dtEmployed = DateTime.MinValue;
+                }
+            }
         }
 
         public DateTime EmploymentDate
         {
             get { return dtEmployed; }
+            set { dtEmployed = value; }
         }
-
+        
         public bool BestWorker 
         {
             get { return bBestWorker; }
+            set { bBestWorker = value; }
+        }
+
+        public bool BestWorkerWeekly
+        {
+            get { return bBestWorkerWeekly; }
+            set { bBestWorkerWeekly = value; }
         }
 
         public string BestWorkerMerit
         {
             get { return sBestWorkerMerit; }
+            set { sBestWorkerMerit = value; }
         }
 
         public byte[] Photo
         {
             get { return bytesPhoto; }
+            set { bytesPhoto = value; }
         }
 
         public string PhotoURL
         {
             get { return sPhotoURL; }
+            set { sPhotoURL = value; }
         }
 
         public string AccountName
         {
             get { return sAccountName; }
+            set { sAccountName = value; }
         }
 
         public string ProfileURL
         {
             get { return sProfileURL; }
+            set { sProfileURL = value; }
         }
 
         public UserProfile UserProfile 
@@ -221,6 +271,111 @@ namespace UserProfilesDAL
                 UpdatePropertiesFromImportUserProfile();
         }
 
+        public void SetProperty(string strPropName, string strValue)
+        {
+            if (strPropName == "UserProfile_GUID")
+            {
+                try
+                {
+                    guidID = new Guid(strValue);
+                }
+                catch { }
+            }
+            else if (strPropName == "LastName")
+            {
+                sLastName = strValue;
+            }
+            else if (strPropName == "FirstName")
+            {
+                sFirstName = strValue;
+            }
+            else if (strPropName == "Mr-MiddleName")
+            {
+                sMiddleName = strValue;
+            }
+            else if (strPropName == "SPS-Birthday")
+            {
+                try
+                {
+                    dtBirthday = Convert.ToDateTime(strValue);
+                }
+                catch { dtBirthday = DateTime.MinValue; }
+            }
+            else if (strPropName == "WorkPhone")
+            {
+                sPhoneWork = strValue;
+            }
+            else if (strPropName == "WorkEmail")
+            {
+                sEmailWork = strValue;
+            }
+            else if (strPropName == "Office")
+            {
+                sSeparateDivision = strValue;
+            }
+            else if (strPropName == "Department")
+            {
+                sSubDivision = strValue;
+            }
+            //else if (strPropName == "SPS-JobTitle")
+            //{
+            //    sPosition = strValue;
+            //}
+            else if (strPropName == "Title")
+            {
+                sPosition = strValue;
+            }
+            else if (strPropName == "SPS-HireDate")
+            {
+                try
+                {
+                    dtEmployed = Convert.ToDateTime(strValue);
+                }
+                catch { dtEmployed = DateTime.MinValue; }
+            }
+            else if (strPropName == "PictureURL")
+            {
+                sPhotoURL = strValue;
+            }
+            else if (strPropName == "AccountName")
+            {
+                sAccountName = strValue;
+            }
+            // Custom values
+            else if (strPropName == "Mr-Inn")
+            {
+                sINN = strValue;
+            }
+            else if (strPropName == "Mr-Ssn")
+            {
+                sSSN = strValue;
+            }
+            else if (strPropName == "Mr-Organization")
+            {
+                sOrganization = strValue;
+            }
+            else if (strPropName == "Mr-BestWorker")
+            {
+                try
+                {
+                    bBestWorker = Convert.ToBoolean(strValue);
+                }
+                catch { bBestWorker = false; }
+            }
+            else if (strPropName == "Mr-BestWorkerWeekly")
+            {
+                try
+                {
+                    bBestWorkerWeekly = Convert.ToBoolean(strValue);
+                }
+                catch { bBestWorkerWeekly = false; }
+            }
+            else if (strPropName == "Mr-BestWorkerMerit")
+            {
+                sBestWorkerMerit = strValue;
+            }
+        }
+
         private void ClearProperties()
         {
             guidID = new Guid();
@@ -240,6 +395,7 @@ namespace UserProfilesDAL
             sPosition = "";
             dtEmployed = DateTime.MinValue;
             bBestWorker = false;
+            bBestWorkerWeekly = false;
             sBestWorkerMerit = "";
             bytesPhoto = null;
             sPhotoURL = "";
@@ -347,6 +503,15 @@ namespace UserProfilesDAL
             catch
             {
                 bBestWorker = false;
+            }
+            try
+            {
+                if (userProfile["Mr-BestWorkerWeekly"].Value != null)
+                    bBestWorkerWeekly = Convert.ToBoolean(userProfile["Mr-BestWorkerWeekly"].Value);
+            }
+            catch
+            {
+                bBestWorkerWeekly = false;
             }
             try
             {

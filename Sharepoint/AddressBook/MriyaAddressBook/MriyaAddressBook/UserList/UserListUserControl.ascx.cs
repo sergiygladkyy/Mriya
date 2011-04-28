@@ -73,6 +73,9 @@ namespace MriyaAddressBook.UserList
         {
             if (_webPart != null)
             {
+                if (_webPart.TableProfiles != null)
+                    _users.Add(_webPart.TableProfiles);
+
                 _bShowCaptionPanel = _webPart.EnableCaption;
                 _sCaptionText = _webPart.CaptionText;
                 _bShowSearchPanel = _webPart.EnableSearch;
@@ -97,6 +100,7 @@ namespace MriyaAddressBook.UserList
                 _tableColumns[(int)columnNames.columnMerit].Visible = _webPart.ShowColumnMerit;
 
                 _users.GetBestEmployeesOnly = _webPart.ShowBestWorkersOnly;
+                _users.GetBestEmployeesWeeklyOnly = _webPart.ShowBestWorkersWeeklyOnly;
                 _users.GetNewEmployeesOnly = _webPart.ShowNewEmployeesOnly;
                 _users.NewEmployeeDays = _webPart.NewEmployeesDays;
                 _users.GetEmployeesWithBirthdayOnly = _webPart.ShowWhosBirthdayOnly;
@@ -178,7 +182,7 @@ namespace MriyaAddressBook.UserList
         protected void Page_Load(object sender, EventArgs e)
         {
             _site = new SPSite(SPContext.Current.Site.ID);
-
+             
             if (Page.IsPostBack)
             {
                 if (ViewState["strFilter"] != null)
@@ -196,7 +200,8 @@ namespace MriyaAddressBook.UserList
             panelSearch.Visible = _bShowSearchPanel;
             buttonShowAll.Visible = (_strFilter.Trim().Length > 0);
 
-            ReadProfiles();
+            if (_users.IsEmpty)
+                ReadProfiles();
             ShowGrid();
         }
 
@@ -204,38 +209,14 @@ namespace MriyaAddressBook.UserList
         {
             try
             {
-                SPSecurity.RunWithElevatedPrivileges(delegate()
-                {
-                    Guid currentSiteId = SPContext.Current.Site.ID;
-                    Guid currentWebId = SPContext.Current.Web.ID;
-
-                    using (SPSite site2 = new SPSite(currentSiteId))
-                    {
-                        using (SPWeb web = site2.OpenWeb(currentWebId))
-                        {
-                            web.AllowUnsafeUpdates = true;
-                            SPServiceContext sc = SPServiceContext.GetContext(site2);
-                            UserProfileManager upm = new UserProfileManager(sc);
-                            foreach (UserProfile profile in upm)
-                            {
-                                // TODO: Figure out how to filter the list and skill all service accounts
-                                if (profile["AccountName"].Value != null &&
-                                    (profile["AccountName"].Value.ToString().ToUpper().IndexOf("\\SM_") >= 0 ||
-                                    profile["AccountName"].Value.ToString().ToUpper().IndexOf("\\SP_") >= 0))
-                                    continue;
-                                if (profile["AccountName"].Value != null &&
-                                    profile["AccountName"].Value.ToString() == profile.DisplayName)
-                                    continue;
-
-                                _users.Add(profile);
-                            }
-                        }
-                    }
-                });
+                if (_webPart != null && _webPart.SPDataSource == UserList.SPDataSourcer.SQL)
+                    _users.ReadSqlSPProfiles(_webPart.SPConnectionString, _webPart.SPSiteProfiles);
+                else
+                    _users.ReadSPProfiles( SPContext.Current.Site.ID);
             }
             catch (Exception ex)
             {
-                labelError.Text = ex.ToString();
+                labelError.Text = "Помилка при отриманні профілів користувача!<br/><br/>\n\n" + ex.Message;
                 labelError.Visible = true;
             }
         }

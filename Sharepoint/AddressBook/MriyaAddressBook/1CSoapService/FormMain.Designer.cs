@@ -31,22 +31,36 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configureConnectionTo1CSOAPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridViewABSoap = new System.Windows.Forms.DataGridView();
             this.buttonGetSoapData = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.configureConnectionTo1CSOAPServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonGetDALData = new System.Windows.Forms.Button();
             this.dataGridViewABDal = new System.Windows.Forms.DataGridView();
+            this.buttonGetDALData = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.dataGridViewSP = new System.Windows.Forms.DataGridView();
+            this.buttonbuttonGetSPData = new System.Windows.Forms.Button();
+            this.dataGridViewSPDal = new System.Windows.Forms.DataGridView();
+            this.buttonbuttonGetSPDataDal = new System.Windows.Forms.Button();
+            this.labelSoapStatus = new System.Windows.Forms.Label();
+            this.labelABDalStatus = new System.Windows.Forms.Label();
+            this.labelSPStatus = new System.Windows.Forms.Label();
+            this.labelSPDalStatus = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewABSoap)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewABDal)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSPDal)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -75,6 +89,21 @@
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configureConnectionTo1CSOAPServerToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // configureConnectionTo1CSOAPServerToolStripMenuItem
+            // 
+            this.configureConnectionTo1CSOAPServerToolStripMenuItem.Name = "configureConnectionTo1CSOAPServerToolStripMenuItem";
+            this.configureConnectionTo1CSOAPServerToolStripMenuItem.Size = new System.Drawing.Size(269, 22);
+            this.configureConnectionTo1CSOAPServerToolStripMenuItem.Text = "Configure connection to 1C SOAP server";
+            this.configureConnectionTo1CSOAPServerToolStripMenuItem.Click += new System.EventHandler(this.configureConnectionTo1CSOAPServerToolStripMenuItem_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Location = new System.Drawing.Point(0, 379);
@@ -87,6 +116,8 @@
             // 
             this.tabControlMain.Controls.Add(this.tabPage1);
             this.tabControlMain.Controls.Add(this.tabPage2);
+            this.tabControlMain.Controls.Add(this.tabPage3);
+            this.tabControlMain.Controls.Add(this.tabPage4);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlMain.Location = new System.Drawing.Point(0, 24);
             this.tabControlMain.Name = "tabControlMain";
@@ -96,6 +127,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.labelSoapStatus);
             this.tabPage1.Controls.Add(this.dataGridViewABSoap);
             this.tabPage1.Controls.Add(this.buttonGetSoapData);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -108,9 +140,9 @@
             // 
             // dataGridViewABSoap
             // 
-            this.dataGridViewABSoap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewABSoap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewABSoap.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewABSoap.Location = new System.Drawing.Point(7, 37);
             this.dataGridViewABSoap.Name = "dataGridViewABSoap";
@@ -129,6 +161,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.labelABDalStatus);
             this.tabPage2.Controls.Add(this.dataGridViewABDal);
             this.tabPage2.Controls.Add(this.buttonGetDALData);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -139,20 +172,16 @@
             this.tabPage2.Text = "DAL data";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // settingsToolStripMenuItem
+            // dataGridViewABDal
             // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.configureConnectionTo1CSOAPServerToolStripMenuItem});
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // configureConnectionTo1CSOAPServerToolStripMenuItem
-            // 
-            this.configureConnectionTo1CSOAPServerToolStripMenuItem.Name = "configureConnectionTo1CSOAPServerToolStripMenuItem";
-            this.configureConnectionTo1CSOAPServerToolStripMenuItem.Size = new System.Drawing.Size(269, 22);
-            this.configureConnectionTo1CSOAPServerToolStripMenuItem.Text = "Configure connection to 1C SOAP server";
-            this.configureConnectionTo1CSOAPServerToolStripMenuItem.Click += new System.EventHandler(this.configureConnectionTo1CSOAPServerToolStripMenuItem_Click);
+            this.dataGridViewABDal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewABDal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewABDal.Location = new System.Drawing.Point(9, 37);
+            this.dataGridViewABDal.Name = "dataGridViewABDal";
+            this.dataGridViewABDal.Size = new System.Drawing.Size(586, 289);
+            this.dataGridViewABDal.TabIndex = 1;
             // 
             // buttonGetDALData
             // 
@@ -164,16 +193,103 @@
             this.buttonGetDALData.UseVisualStyleBackColor = true;
             this.buttonGetDALData.Click += new System.EventHandler(this.buttonGetDALData_Click);
             // 
-            // dataGridViewABDal
+            // tabPage3
             // 
-            this.dataGridViewABDal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewABDal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewABDal.Location = new System.Drawing.Point(9, 37);
-            this.dataGridViewABDal.Name = "dataGridViewABDal";
-            this.dataGridViewABDal.Size = new System.Drawing.Size(586, 289);
-            this.dataGridViewABDal.TabIndex = 1;
+            this.tabPage3.Controls.Add(this.labelSPStatus);
+            this.tabPage3.Controls.Add(this.dataGridViewSP);
+            this.tabPage3.Controls.Add(this.buttonbuttonGetSPData);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(603, 329);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "SP Profiles (API)";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.labelSPDalStatus);
+            this.tabPage4.Controls.Add(this.dataGridViewSPDal);
+            this.tabPage4.Controls.Add(this.buttonbuttonGetSPDataDal);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(603, 329);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "SP Profiles (SQL)";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewSP
+            // 
+            this.dataGridViewSP.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewSP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSP.Location = new System.Drawing.Point(5, 35);
+            this.dataGridViewSP.Name = "dataGridViewSP";
+            this.dataGridViewSP.Size = new System.Drawing.Size(593, 289);
+            this.dataGridViewSP.TabIndex = 3;
+            // 
+            // buttonbuttonGetSPData
+            // 
+            this.buttonbuttonGetSPData.Location = new System.Drawing.Point(5, 5);
+            this.buttonbuttonGetSPData.Name = "buttonbuttonGetSPData";
+            this.buttonbuttonGetSPData.Size = new System.Drawing.Size(75, 23);
+            this.buttonbuttonGetSPData.TabIndex = 2;
+            this.buttonbuttonGetSPData.Text = "Get data";
+            this.buttonbuttonGetSPData.UseVisualStyleBackColor = true;
+            this.buttonbuttonGetSPData.Click += new System.EventHandler(this.buttonbuttonGetSPData_Click);
+            // 
+            // dataGridViewSPDal
+            // 
+            this.dataGridViewSPDal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewSPDal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSPDal.Location = new System.Drawing.Point(5, 35);
+            this.dataGridViewSPDal.Name = "dataGridViewSPDal";
+            this.dataGridViewSPDal.Size = new System.Drawing.Size(593, 289);
+            this.dataGridViewSPDal.TabIndex = 5;
+            // 
+            // buttonbuttonGetSPDataDal
+            // 
+            this.buttonbuttonGetSPDataDal.Location = new System.Drawing.Point(5, 5);
+            this.buttonbuttonGetSPDataDal.Name = "buttonbuttonGetSPDataDal";
+            this.buttonbuttonGetSPDataDal.Size = new System.Drawing.Size(75, 23);
+            this.buttonbuttonGetSPDataDal.TabIndex = 4;
+            this.buttonbuttonGetSPDataDal.Text = "Get data";
+            this.buttonbuttonGetSPDataDal.UseVisualStyleBackColor = true;
+            this.buttonbuttonGetSPDataDal.Click += new System.EventHandler(this.buttonbuttonGetSPDataDal_Click);
+            // 
+            // labelSoapStatus
+            // 
+            this.labelSoapStatus.AutoSize = true;
+            this.labelSoapStatus.Location = new System.Drawing.Point(88, 12);
+            this.labelSoapStatus.Name = "labelSoapStatus";
+            this.labelSoapStatus.Size = new System.Drawing.Size(0, 13);
+            this.labelSoapStatus.TabIndex = 2;
+            // 
+            // labelABDalStatus
+            // 
+            this.labelABDalStatus.AutoSize = true;
+            this.labelABDalStatus.Location = new System.Drawing.Point(90, 12);
+            this.labelABDalStatus.Name = "labelABDalStatus";
+            this.labelABDalStatus.Size = new System.Drawing.Size(0, 13);
+            this.labelABDalStatus.TabIndex = 2;
+            // 
+            // labelSPStatus
+            // 
+            this.labelSPStatus.AutoSize = true;
+            this.labelSPStatus.Location = new System.Drawing.Point(86, 10);
+            this.labelSPStatus.Name = "labelSPStatus";
+            this.labelSPStatus.Size = new System.Drawing.Size(0, 13);
+            this.labelSPStatus.TabIndex = 4;
+            // 
+            // labelSPDalStatus
+            // 
+            this.labelSPDalStatus.AutoSize = true;
+            this.labelSPDalStatus.Location = new System.Drawing.Point(86, 10);
+            this.labelSPDalStatus.Name = "labelSPDalStatus";
+            this.labelSPDalStatus.Size = new System.Drawing.Size(0, 13);
+            this.labelSPDalStatus.TabIndex = 6;
             // 
             // FormMain
             // 
@@ -190,9 +306,17 @@
             this.menuStrip1.PerformLayout();
             this.tabControlMain.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewABSoap)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewABDal)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSPDal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,6 +337,16 @@
         private System.Windows.Forms.ToolStripMenuItem configureConnectionTo1CSOAPServerToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridViewABDal;
         private System.Windows.Forms.Button buttonGetDALData;
+        private System.Windows.Forms.Label labelSoapStatus;
+        private System.Windows.Forms.Label labelABDalStatus;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Label labelSPStatus;
+        private System.Windows.Forms.DataGridView dataGridViewSP;
+        private System.Windows.Forms.Button buttonbuttonGetSPData;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Label labelSPDalStatus;
+        private System.Windows.Forms.DataGridView dataGridViewSPDal;
+        private System.Windows.Forms.Button buttonbuttonGetSPDataDal;
 
     }
 }

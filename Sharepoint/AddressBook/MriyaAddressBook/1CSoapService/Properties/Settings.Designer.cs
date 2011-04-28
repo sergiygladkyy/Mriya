@@ -68,5 +68,30 @@ namespace _1CSoapService.Properties {
                 this["soapServerPassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://intranet.contoso.com")]
+        public string spSiteUrl {
+            get {
+                return ((string)(this["spSiteUrl"]));
+            }
+            set {
+                this["spSiteUrl"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(local);Initial Catalog=\"User Profile Service Application_ProfileDB_9" +
+            "87e27f4752344ee939de2826d85a9ad\";Integrated Security=True")]
+        public string spSqlConnectionString {
+            get {
+                return ((string)(this["spSqlConnectionString"]));
+            }
+            set {
+                this["spSqlConnectionString"] = value;
+            }
+        }
     }
 }
