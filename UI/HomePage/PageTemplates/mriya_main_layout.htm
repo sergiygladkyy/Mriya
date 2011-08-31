@@ -1,0 +1,310 @@
+<%@ Page language="C#" MasterPageFile="v2.MriyaMain.master" inherits="Microsoft.SharePoint.WebPartPages.WebPartPage, Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" meta:webpartpageexpansion="full" meta:progid="SharePoint.WebPartPage.Document" %>
+<%@ Register Tagprefix="SharePointWebControls" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %> <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %> <%@ Register Tagprefix="PublishingWebControls" Namespace="Microsoft.SharePoint.Publishing.WebControls" Assembly="Microsoft.SharePoint.Publishing, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %> <%@ Register Tagprefix="PublishingNavigation" Namespace="Microsoft.SharePoint.Publishing.Navigation" Assembly="Microsoft.SharePoint.Publishing, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<asp:Content ContentPlaceholderID="PlaceHolderAdditionalPageHead" runat="server">
+	<SharePointWebControls:UIVersionedContent UIVersion="3" runat="server">
+		<ContentTemplate>
+			<style type="text/css">
+					.ms-pagetitleareaframe table, .ms-titleareaframe
+					{
+						background: none;
+						height: 10px;
+						overflow:hidden;
+					}
+					.ms-pagetitle, .ms-titlearea
+					{
+						display:none;
+					}
+			</style>
+			<SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Core Styles/pageLayouts.css %>" runat="server"/>
+			<PublishingWebControls:editmodepanel runat="server">
+				<!-- Styles for edit mode only-->
+				<SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Core Styles/zz2_editMode.css %>" runat="server"/>
+			</PublishingWebControls:editmodepanel>
+		</ContentTemplate>
+	</SharePointWebControls:UIVersionedContent>
+	<SharePointWebControls:UIVersionedContent UIVersion="4" runat="server">
+		<ContentTemplate>
+			<style type="text/css">
+				.v4master #s4-leftpanel { display: none; }
+				.v4master .s4-ca { margin-left: 0px; }
+			</style>
+			<SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Core Styles/page-layouts-21.css %>" runat="server"/>
+			<PublishingWebControls:EditModePanel runat="server" id="editmodestyles">
+				<!-- Styles for edit mode only-->
+				<SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Core Styles/edit-mode-21.css %>"
+					After="<% $SPUrl:~sitecollection/Style Library/~language/Core Styles/page-layouts-21.css %>" runat="server"/>
+			</PublishingWebControls:EditModePanel>
+		</ContentTemplate>
+	</SharePointWebControls:UIVersionedContent>
+	<SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Themable/Core Styles/mriya_main_layout.css %>" After="mriya_main_master.css" runat="server"/>
+</asp:Content>
+<asp:Content ContentPlaceholderID="PlaceHolderPageTitle" runat="server">
+	<SharePointWebControls:FieldValue id="PageTitle" FieldName="Title" runat="server"/>
+</asp:Content>
+<asp:Content ContentPlaceholderID="PlaceHolderPageTitleInTitleArea" runat="server">
+	<SharePointWebControls:UIVersionedContent UIVersion="3" runat="server">
+		<ContentTemplate>
+			<SharePointWebControls:TextField id="TitleField" FieldName="Title" runat="server"/>
+		</ContentTemplate>
+	</SharePointWebControls:UIVersionedContent>
+	<SharePointWebControls:UIVersionedContent UIVersion="4" runat="server">
+		<ContentTemplate>
+			<SharePointWebControls:FieldValue FieldName="Title" runat="server"/>
+		</ContentTemplate>
+	</SharePointWebControls:UIVersionedContent>
+</asp:Content>
+<asp:Content ContentPlaceHolderId="PlaceHolderTitleBreadcrumb" runat="server">
+	<div class="breadcrumb">
+		<asp:SiteMapPath runat="server" SiteMapProvider="CurrentNavigation"
+			RenderCurrentNodeAsLink="false" SkipLinkText="" CurrentNodeStyle-CssClass="current" NodeStyle-CssClass="ms-sitemapdirectional"/>
+	</div>
+</asp:Content>
+<asp:Content ContentPlaceholderID="PlaceHolderMain" runat="server">
+	<SharePointWebControls:UIVersionedContent UIVersion="3" runat="server">
+		<ContentTemplate>
+			<div class="ms-pagebreadcrumb removeMargins">
+				<asp:SiteMapPath ID="siteMapPath" Runat="server" SiteMapProvider="CurrentNavSiteMapProviderNoEncode" RenderCurrentNodeAsLink="false" SkipLinkText="" NodeStyle-CssClass="ms-sitemapdirectional" />
+			</div>
+			<PublishingWebControls:editmodepanel runat="server" id="editmodepanel1">
+					<!-- Add field controls here to bind custom metadata viewable and editable in edit mode only.-->
+				</PublishingWebControls:editmodepanel>
+			<div class="welcomeImage">
+				<PublishingWebControls:RichImageField id="PageImage" FieldName="PublishingPageImage"  runat="server" />
+			</div>
+			<div class="pageContent">
+				<!-- place1 -->	
+			</div>
+		</ContentTemplate>
+	</SharePointWebControls:UIVersionedContent>
+	<SharePointWebControls:UIVersionedContent UIVersion="4" runat="server">
+		<ContentTemplate>
+			<div class="welcome welcome-links">
+				<PublishingWebControls:EditModePanel runat="server" CssClass="edit-mode-panel">
+					<SharePointWebControls:TextField runat="server" FieldName="Title" />
+				</PublishingWebControls:EditModePanel>
+				<div class="welcome-image">
+					<!-- place0 -->
+				</div>
+				<div class="welcome-content">
+					<WebPartPages:WikiContentWebpart frametype="none" chrometype="None" runat="server" partorder="1" __WebPartId="{43B46E47-3629-4177-8D62-B98B21E4F902}" id="g_43b46e47_3629_4177_8d62_b98b21e4f902">
+					<content>
+					<div>
+					<!-- place2 -->
+					</div>
+					</content>
+				</WebPartPages:WikiContentWebpart>
+				</div>
+		</ContentTemplate>
+	</SharePointWebControls:UIVersionedContent>
+	
+	<div id="body">
+		<div id="clmn_left">
+			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="BanerZone" FrameType="TitleBarOnly"
+				Title="BanerZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			<h1 class="news">Новини</h1>
+			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="NewsZone" FrameType="TitleBarOnly"
+				Title="NewsZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+		</div>
+		
+		<div id="clmn_middle">
+			<h1 class="celebrating">Святкуємо</h1>
+			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="CelebratingZone" FrameType="TitleBarOnly"
+				Title="CelebratingZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+					
+			<h1 class="industry_news"><nobr>Новини галузі</nobr></h1>
+			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="IndustryNewsZone" FrameType="TitleBarOnly"
+				Title="IndustryNewsZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+					
+			<h1 class="advertisement"><nobr>Організаційні оголошення</nobr></h1>
+			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="AdvertisementZone" FrameType="TitleBarOnly"
+				Title="AdvertisementZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+					
+			<h1 class="photo">Фото</h1>
+			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="PhotoZone" FrameType="TitleBarOnly"
+				Title="PhotoZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+					
+			<h1 class="move">Відео</h1>
+			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="MoveZone" FrameType="TitleBarOnly"
+				Title="MoveZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+		</div>
+		
+		<div id="clmn_right">
+			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="PanelZone" FrameType="TitleBarOnly"
+				Title="PanelZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+		
+			<h1 class="communication">Cпілкування</h1>
+			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="CommunicationZone" FrameType="TitleBarOnly"
+				Title="CommunicationZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+		
+			<h1 class="new_employees"><nobr>Вітаємо в компанії</nobr></h1>
+			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="NewEmployeeZone" FrameType="TitleBarOnly"
+				Title="NewEmployeeZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+		
+			<h1 class="map"><nobr>Карта Мрії</nobr></h1>
+			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="MapZone" FrameType="TitleBarOnly"
+				Title="MapZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>		
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		//first news web part
+		var firstnews = document.getElementById('cbqwpctl00_ctl23_g_609a7931_1a98_4a97_9bda_1aea13b2ac52');
+		if (firstnews != null) {
+		firstnews.style.marginTop = '-7px'; }
+		
+		//second news web part
+		var secondnews = document.getElementById('cbqwpctl00_ctl23_g_640afe3e_7358_4f7a_baf7_00b3054fada5');
+		if (secondnews != null) {
+			secondnews.style.marginTop = '-7px';
+			if (secondnews.getElementsByTagName('ul').length > 0) {
+				var secondnewsUl = secondnews.getElementsByTagName('ul')[0];
+				if (secondnewsUl.getElementsByTagName('li').length > 0) {
+					if (secondnewsUl.getElementsByTagName('li')[0] != null)
+						//hide 1-st news
+						var secondnewsSecondLi = secondnewsUl.getElementsByTagName('li')[0].style.display = 'none';
+				}
+			}
+		}
+		
+		//third news web part
+		var thirdnews = document.getElementById('cbqwpctl00_ctl23_g_817acae3_1df3_43ed_97f8_0cbb0cc52150');
+		if (thirdnews != null) {
+			thirdnews.style.marginTop = '-7px';
+			if (thirdnews.getElementsByTagName('ul').length > 0) {
+				var thirdnewsUl = thirdnews.getElementsByTagName('ul')[0];
+				if (thirdnewsUl.getElementsByTagName('li').length > 0)
+				{
+					if (thirdnewsUl.getElementsByTagName('li')[0] != null)
+					{
+						//hide 1-st news
+						var thirdnewsSecondLi = thirdnewsUl.getElementsByTagName('li')[0].style.display = 'none';
+					}
+					if (thirdnewsUl.getElementsByTagName('li')[1] != null)
+					{
+						//hide 2-nd news
+						var thirdnewsSecondLi = thirdnewsUl.getElementsByTagName('li')[1].style.display = 'none';
+					}
+				}
+			}
+		}
+		
+		//new employees web part
+		var newemployees = document.getElementById('cbqwpctl00_ctl23_g_baa41682_3244_4741_82d3_de7a07ef0d42');
+		if (newemployees != null) {
+			if (newemployees.getElementsByTagName('ul').length > 0)
+			{
+				var newemployeesUl = newemployees.getElementsByTagName('ul')[0];
+				if (newemployeesUl.getElementsByTagName('li').length > 0)
+				{
+					var newemployeesSecondLi = newemployeesUl.getElementsByTagName('li')[newemployeesUl.getElementsByTagName('li').length - 1];
+					//hide bottom border for second employee
+					newemployeesSecondLi.getElementsByTagName('div')[0].style.borderBottomWidth = "0px";
+				}
+			}
+		}
+		
+		//birthday web part
+		var birthday = document.getElementById('cbqwpctl00_ctl23_g_509f6c12_d388_4241_9b50_50938aa6ea39');
+		if (birthday != null) {
+			if (birthday.getElementsByTagName('ul').length > 0)
+			{
+				var birthdayUl = birthday.getElementsByTagName('ul')[0];
+				if(birthdayUl.getElementsByTagName('li').length > 0)
+				{
+					var birthdaySecondLi = birthdayUl.getElementsByTagName('li')[birthdayUl.getElementsByTagName('li').length - 1];
+					//hide bottom border for second employee
+					birthdaySecondLi.getElementsByTagName('div')[0].style.borderBottomWidth = "0px";
+				}
+			}
+		}
+		
+		//work with date
+		var today = new Date();
+		var dayNumber = today.getDate() + "";
+		if(dayNumber.length == 1)
+		{
+			dayNumber = "0" + dayNumber;
+		}
+		var monthNumber = (today.getMonth() + 1);
+		if(monthNumber.length == 1)
+		{
+			monthNumber = "0" + monthNumber;
+		} 
+		var todayDate = dayNumber + "." + monthNumber + "." + today.getFullYear();
+		var allDivs = document.getElementsByTagName('div');
+		for(i=0; i<allDivs.length; i++) {
+			if (allDivs[i].className == "description") {
+				if (allDivs[i].innerHTML.match("%br%")) {
+					while (allDivs[i].innerHTML.match("%br%")) {
+						allDivs[i].innerHTML = allDivs[i].innerHTML.replace("%br%","<br />");
+					}
+				}
+				if (allDivs[i].innerHTML.match(todayDate)) {
+					allDivs[i].innerHTML = allDivs[i].innerHTML.replace(todayDate,"Сьогодні");
+				}
+				/*
+				else if (allDivs[i].innerHTML.match("00:00:00")) {
+					allDivs[i].innerHTML = allDivs[i].innerHTML.replace(" 00:00:00","");
+								
+					var today = new Date();
+					if ( (today.getMonth() - parseInt(allDivs[i].innerHTML.substr(5,2)-1) == 0)
+						&& (today.getDate() - parseInt(allDivs[i].innerHTML.substr(8,2)) == 0) ) 
+					{
+						allDivs[i].innerHTML = "Сьогодні";
+					}
+					else
+					{
+						allDivs[i].innerHTML = allDivs[i].innerHTML.substr(8,2) + "." 
+							+ allDivs[i].innerHTML.substr(5,2) +  "." + allDivs[i].innerHTML.substr(0,4);
+					}
+				}*/
+			}
+		}
+		
+		//---------surveys----------
+		//make syrvey table smaller
+		var allTables = document.getElementsByTagName('table');
+		for(i=0; i<allTables.length; i++) {
+			if (allTables[i].style.width == "375pt") {
+				allTables[i].style.width = "155pt";
+			}
+		}
+		//remove last 'Тип вмісту'
+		var survey = document.getElementById('WebPartWPQ3');
+		if (survey != null)
+		{
+			if (survey.getElementsByTagName('table').length > 0)
+			{
+				var surTable = survey.getElementsByTagName('table')[0];
+				var surTbody = surTable.getElementsByTagName('tbody')[0];
+				var surTr = surTbody.getElementsByTagName('tr')[0];
+				var surTd = surTr.getElementsByTagName('td')[0];
+				if (surTd.getElementsByTagName('h3').length > 0)
+				{
+					surTd.getElementsByTagName('h3')[surTd.getElementsByTagName('h3').length - 1].style.display = "none";
+				}
+				if (surTd.getElementsByTagName('table').length > 0)
+				{
+					surTd.getElementsByTagName('table')[surTd.getElementsByTagName('table').length - 1].style.display = "none";
+					
+					for(i=0; i<surTd.getElementsByTagName('table').length - 1;i++)
+					{
+						var surTable1 = surTd.getElementsByTagName('table')[i];
+						//если это не таблица с состоянием голосования по конретному варианту 
+						if (surTable1.style.width == '')
+						{
+							var surTbody1 = surTable1.getElementsByTagName('tbody')[0];
+							surTbody1.getElementsByTagName('tr')[surTbody1.getElementsByTagName('tr').length - 1].style.display = "none";
+						}
+					}
+				}
+			}
+		}
+
+	</script>
+	<SharePointWebControls:UIVersionedContent UIVersion="4" runat="server">
+		<ContentTemplate>
+			
+		</ContentTemplate>
+	</SharePointWebControls:UIVersionedContent>
+</asp:Content>

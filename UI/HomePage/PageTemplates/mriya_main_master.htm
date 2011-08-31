@@ -1,0 +1,635 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%@ Master language="C#" %>
+<%@ Import Namespace="Microsoft.SharePoint" %>
+<%@ Register Tagprefix="SharePoint" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register TagPrefix="wssuc" TagName="Welcome" src="~/_controltemplates/Welcome.ascx" %>
+<%@ Register TagPrefix="wssuc" TagName="DesignModeConsole" src="~/_controltemplates/DesignModeConsole.ascx" %>
+<%@ Register TagPrefix="wssuc" TagName="MUISelector" src="~/_controltemplates/MUISelector.ascx" %>
+<%@ Register Tagprefix="PublishingWebControls" Namespace="Microsoft.SharePoint.Publishing.WebControls" Assembly="Microsoft.SharePoint.Publishing, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register Tagprefix="PublishingNavigation" Namespace="Microsoft.SharePoint.Publishing.Navigation" Assembly="Microsoft.SharePoint.Publishing, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Assembly Name="Microsoft.SharePoint.Portal, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register Tagprefix="MSSWC" Namespace="Microsoft.SharePoint.Portal.WebControls" Assembly="Microsoft.Office.Server.Search, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="<%$Resources:wss,language_value %>" dir="<%$Resources:wss,multipages_direction_dir_value %>" runat="server" __expr-val-dir="ltr">
+
+<head runat="server">
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<meta name="GENERATOR" content="Microsoft SharePoint" />
+<meta name="progid" content="SharePoint.WebPartPage.Document" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Expires" content="0" />
+<SharePoint:RobotsMetaTag runat="server"/>
+<title id="onetidTitle"><asp:ContentPlaceHolder id="PlaceHolderPageTitle" runat="server"/>
+</title>
+<SharePoint:CssLink runat="server" Version="4" DefaultUrl="corev4.css"/>
+<SharePoint:ULSClientConfig runat="server"/>
+<script type="text/javascript">
+	var _fV4UI = true;
+	</script>
+<SharePoint:ScriptLink name="init.js" runat="server"/>
+<SharePoint:CustomJSUrl runat="server"/>
+<SharePoint:SoapDiscoveryLink runat="server"/>
+<asp:ContentPlaceHolder id="PlaceHolderAdditionalPageHead" runat="server">
+	</asp:ContentPlaceHolder>
+<SharePoint:DelegateControl runat="server" ControlId="AdditionalPageHead" AllowMultipleControls="true"/>
+<SharePoint:SPShortcutIcon runat="server" IconUrl="/_layouts/images/favicon.ico"/>
+<SharePoint:SPPageManager runat="server"/>
+<SharePoint:SPHelpPageComponent Visible="false" runat="server"/>
+<SharePoint:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Themable/Core Styles/controls_mriya.css %>" runat="server"/>
+<SharePoint:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Themable/Core Styles/mriya_main_master.css %>" After="corev4.css" runat="server"/>
+</head>
+
+<body scroll="no" onload="if (typeof(_spBodyOnLoadWrapper) != 'undefined') _spBodyOnLoadWrapper(); " class="nightandday">
+<form runat="server" onsubmit="if (typeof(_spFormOnSubmitWrapper) != 'undefined') {return _spFormOnSubmitWrapper();} else {return true;}">
+	<asp:ScriptManager id="ScriptManager" runat="server" enablepagemethods="false" enablepartialrendering="true" enablescriptglobalization="true" enablescriptlocalization="true" />
+	<WebPartPages:SPWebPartManager runat="server"/>
+	<span id="TurnOnAccessibility" style="display: none" class="s4-notdlg">
+	<a id="linkTurnOnAcc" href="#" class="ms-TurnOnAcc" onclick="SetIsAccessibilityFeatureEnabled(true);UpdateAccessibilityUI();document.getElementById('linkTurnOffAcc').focus();return false;">
+	<SharePoint:EncodedLiteral runat="server" text="<%$Resources:wss,master_turnonaccessibility%>" EncodeMethod="HtmlEncode"/>
+	</a></span>
+	<span id="TurnOffAccessibility" style="display: none" class="s4-notdlg">
+	<a id="linkTurnOffAcc" href="#" class="ms-TurnOffAcc" onclick="SetIsAccessibilityFeatureEnabled(false);UpdateAccessibilityUI();document.getElementById('linkTurnOnAcc').focus();return false;">
+	<SharePoint:EncodedLiteral runat="server" text="<%$Resources:wss,master_turnoffaccessibility%>" EncodeMethod="HtmlEncode"/>
+	</a></span><span class="s4-notdlg s4-skipribbonshortcut">
+	<a href="javascript:;" onclick="javascript:this.href='#startNavigation';" class="ms-SkiptoNavigation" accesskey="<%$Resources:wss,skipribbon_accesskey%>" runat="server">
+	<SharePoint:EncodedLiteral runat="server" text="<%$Resources:wss,skipRibbonCommandsLink%>" EncodeMethod="HtmlEncode"/>
+	</a></span><span class="s4-notdlg">
+	<a href="javascript:;" onclick="javascript:this.href='#mainContent';" class="ms-SkiptoMainContent" accesskey="<%$Resources:wss,maincontent_accesskey%>" runat="server">
+	<SharePoint:EncodedLiteral runat="server" text="<%$Resources:wss,mainContentLink%>" EncodeMethod="HtmlEncode"/>
+	</a></span><a id="HiddenAnchor" href="javascript:;" style="display: none;">
+	</a>
+	<div id="s4-statusbarcontainer">
+		<div id="pageStatusBar" class="s4-status-s1">
+		</div>
+	</div>
+	<div class="ribbonbackground">
+		<div class="s4-notdlg top-row">
+		</div>
+		<table id="ribbon_line" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td align="center">
+			
+		<div id="s4-ribbonrow" class="s4-pr s4-ribbonrowhidetitle">
+			<SharePoint:SPRibbon runat="server" PlaceholderElementId="RibbonContainer" CssFile="">
+				<SharePoint:SPRibbonPeripheralContent
+					runat="server"
+					Location="TabRowLeft"
+					CssClass="ms-siteactionscontainer s4-notdlg">
+					   <span class="ms-siteactionsmenu" id="siteactiontd">
+					   <SharePoint:SiteActions runat="server" accesskey="<%$Resources:wss,tb_SiteActions_AK%>" id="SiteActionsMenuMain"
+						PrefixHtml=""
+						SuffixHtml=""
+						MenuNotVisibleHtml="&amp;nbsp;"
+						>
+						<CustomTemplate>
+						<SharePoint:FeatureMenuTemplate runat="server"
+							FeatureScope="Site"
+							Location="Microsoft.SharePoint.StandardMenu"
+							GroupId="SiteActions"
+							UseShortId="true"
+							>
+							<SharePoint:MenuItemTemplate runat="server" id="MenuItem_EditPage"
+								Text="<%$Resources:wss,siteactions_editpage%>"
+								Description="<%$Resources:wss,siteactions_editpagedescriptionv4%>"
+								ImageUrl="/_layouts/images/ActionsEditPage.png"
+								MenuGroupId="100"
+								Sequence="110"
+								ClientOnClickNavigateUrl="javascript:ChangeLayoutMode(false);"
+								/>
+							<SharePoint:MenuItemTemplate runat="server" id="MenuItem_TakeOffline"
+								Text="<%$Resources:wss,siteactions_takeoffline%>"
+								Description="<%$Resources:wss,siteactions_takeofflinedescription%>"
+								ImageUrl="/_layouts/images/connecttospworkspace32.png"
+								MenuGroupId="100"
+								Sequence="120"
+								/>
+							<SharePoint:MenuItemTemplate runat="server" id="MenuItem_CreatePage"
+								Text="<%$Resources:wss,siteactions_createpage%>"
+								Description="<%$Resources:wss,siteactions_createpagedesc%>"
+								ImageUrl="/_layouts/images/NewContentPageHH.png"
+								MenuGroupId="200"
+								Sequence="210"
+								UseShortId="true"
+								ClientOnClickScriptContainingPrefixedUrl="if (LaunchCreateHandler('Page')) { OpenCreateWebPageDialog('~site/_layouts/createwebpage.aspx') }"
+								PermissionsString="AddListItems, EditListItems"
+								PermissionMode="All" />
+							<SharePoint:MenuItemTemplate runat="server" id="MenuItem_CreateDocLib"
+								Text="<%$Resources:wss,siteactions_createdoclib%>"
+								Description="<%$Resources:wss,siteactions_createdoclibdesc%>"
+								ImageUrl="/_layouts/images/NewDocLibHH.png"
+								MenuGroupId="200"
+								Sequence="220"
+								UseShortId="true"
+								ClientOnClickScriptContainingPrefixedUrl="if (LaunchCreateHandler('DocLib')) { GoToPage('~site/_layouts/new.aspx?FeatureId={00bfea71-e717-4e80-aa17-d0c71b360101}&amp;ListTemplate=101') }"
+								PermissionsString="ManageLists"
+								PermissionMode="Any"
+								VisibilityFeatureId="00BFEA71-E717-4E80-AA17-D0C71B360101" />
+							<SharePoint:MenuItemTemplate runat="server" id="MenuItem_CreateSite"
+								Text="<%$Resources:wss,siteactions_createsite%>"
+								Description="<%$Resources:wss,siteactions_createsitedesc%>"
+								ImageUrl="/_layouts/images/newweb32.png"
+								MenuGroupId="200"
+								Sequence="230"
+								UseShortId="true"
+								ClientOnClickScriptContainingPrefixedUrl="if (LaunchCreateHandler('Site')) { STSNavigate('~site/_layouts/newsbweb.aspx') }"
+								PermissionsString="ManageSubwebs,ViewFormPages"
+								PermissionMode="All" />
+							<SharePoint:MenuItemTemplate runat="server" id="MenuItem_Create"
+								Text="<%$Resources:wss,siteactions_create%>"
+								Description="<%$Resources:wss,siteactions_createdesc%>"
+								MenuGroupId="200"
+								Sequence="240"
+								UseShortId="true"
+								ClientOnClickScriptContainingPrefixedUrl="if (LaunchCreateHandler('All')) { STSNavigate('~site/_layouts/create.aspx') }"
+								PermissionsString="ManageLists, ManageSubwebs"
+								PermissionMode="Any" />
+							<SharePoint:MenuItemTemplate runat="server" id="MenuItem_ViewAllSiteContents"
+								Text="<%$Resources:wss,quiklnch_allcontent%>"
+								Description="<%$Resources:wss,siteactions_allcontentdescription%>"
+								ImageUrl="/_layouts/images/allcontent32.png"
+								MenuGroupId="300"
+								Sequence="302"
+								UseShortId="true"
+								ClientOnClickNavigateUrl="~site/_layouts/viewlsts.aspx"
+								PermissionsString="ViewFormPages"
+								PermissionMode="Any" />
+							 <SharePoint:MenuItemTemplate runat="server" id="MenuItem_EditSite"
+								Text="<%$Resources:wss,siteactions_editsite%>"
+								Description="<%$Resources:wss,siteactions_editsitedescription%>"
+								ImageUrl="/_layouts/images/SharePointDesigner32.png"
+								MenuGroupId="300"
+								Sequence="304"
+								UseShortId="true"
+								ClientOnClickScriptContainingPrefixedUrl="EditInSPD('~site/',true);"
+								PermissionsString="AddAndCustomizePages"
+								PermissionMode="Any"
+							/>
+							<SharePoint:MenuItemTemplate runat="server" id="MenuItem_SitePermissions"
+								Text="<%$Resources:wss,people_sitepermissions%>"
+								Description="<%$Resources:wss,siteactions_sitepermissiondescriptionv4%>"
+								ImageUrl="/_layouts/images/Permissions32.png"
+								MenuGroupId="300"
+								Sequence="310"
+								UseShortId="true"
+								ClientOnClickNavigateUrl="~site/_layouts/user.aspx"
+								PermissionsString="EnumeratePermissions"
+								PermissionMode="Any" />
+							<SharePoint:MenuItemTemplate runat="server" id="MenuItem_Settings"
+								Text="<%$Resources:wss,settings_pagetitle%>"
+								Description="<%$Resources:wss,siteactions_sitesettingsdescriptionv4%>"
+								ImageUrl="/_layouts/images/settingsIcon.png"
+								MenuGroupId="300"
+								Sequence="320"
+								UseShortId="true"
+								ClientOnClickNavigateUrl="~site/_layouts/settings.aspx"
+								PermissionsString="EnumeratePermissions,ManageWeb,ManageSubwebs,AddAndCustomizePages,ApplyThemeAndBorder,ManageAlerts,ManageLists,ViewUsageData"
+								PermissionMode="Any" />
+							<SharePoint:MenuItemTemplate runat="server" id="MenuItem_CommitNewUI"
+								Text="<%$Resources:wss,siteactions_commitnewui%>"
+								Description="<%$Resources:wss,siteactions_commitnewuidescription%>"
+								ImageUrl="/_layouts/images/visualupgradehh.png"
+								MenuGroupId="300"
+								Sequence="330"
+								UseShortId="true"
+								ClientOnClickScriptContainingPrefixedUrl="GoToPage('~site/_layouts/prjsetng.aspx')"
+								PermissionsString="ManageWeb"
+								PermissionMode="Any"
+								ShowOnlyIfUIVersionConfigurationEnabled="true" />
+						</SharePoint:FeatureMenuTemplate>
+						</CustomTemplate>
+					  </SharePoint:SiteActions></span>
+					<SharePoint:PopoutMenu
+							runat="server"
+							ID="GlobalBreadCrumbNavPopout"
+							IconUrl="/_layouts/images/fgimg.png"
+							IconAlt="<%$Resources:wss,master_breadcrumbIconAlt%>"
+							IconOffsetX=0
+							Visible="false" 
+							IconOffsetY=112
+							IconWidth=16
+							IconHeight=16
+							AnchorCss="s4-breadcrumb-anchor"
+							AnchorOpenCss="s4-breadcrumb-anchor-open"
+							MenuCss="s4-breadcrumb-menu">
+							<div class="s4-breadcrumb-top">
+								<asp:Label ID="Label1" runat="server" CssClass="s4-breadcrumb-header" Text="<%$Resources:wss,master_breadcrumbHeader%>" />
+							</div>
+							<asp:ContentPlaceHolder id="PlaceHolderTitleBreadcrumb" runat="server">
+								<SharePoint:ListSiteMapPath
+									runat="server"
+									SiteMapProviders="CurrentNavigation"
+									RenderCurrentNodeAsLink="false"
+									PathSeparator=""
+									CssClass="s4-breadcrumb"
+									NodeStyle-CssClass="s4-breadcrumbNode"
+									CurrentNodeStyle-CssClass="s4-breadcrumbCurrentNode"
+									RootNodeStyle-CssClass="s4-breadcrumbRootNode"
+									NodeImageOffsetX=0
+									NodeImageOffsetY=353
+									NodeImageWidth=16
+									NodeImageHeight=16
+									NodeImageUrl="/_layouts/images/fgimg.png"
+									HideInteriorRootNodes="true"
+									SkipLinkText="" />
+								</asp:ContentPlaceHolder>
+						</SharePoint:PopoutMenu>
+					<SharePoint:PageStateActionButton id="PageStateActionButton" runat="server" Visible="false" />
+				</SharePoint:SPRibbonPeripheralContent>	
+				
+			</SharePoint:SPRibbon>
+			<div id="notificationArea" class="s4-noti">
+			</div>
+			<asp:ContentPlaceHolder ID="SPNavigation" runat="server">
+				<SharePoint:DelegateControl runat="server" ControlId="PublishingConsole" Id="PublishingConsoleDelegate"/>
+			</asp:ContentPlaceHolder>
+			<div id="WebPartAdderUpdatePanelContainer">
+				<asp:UpdatePanel ID="WebPartAdderUpdatePanel" UpdateMode="Conditional" ChildrenAsTriggers="false" runat="server">
+					<ContentTemplate>
+						<WebPartPages:WebPartAdder ID="WebPartAdder" runat="server"/>
+					</ContentTemplate>
+					<Triggers>
+						<asp:PostBackTrigger ControlID="WebPartAdder" />
+					</Triggers>
+				</asp:UpdatePanel>
+			</div>
+		</div>
+		
+			</td>
+			<td id="ribbon_line_mg_right">&nbsp;</td>
+		</tr>
+		</table>
+	</div>
+	<div id="s4-workspace">
+		<div id="s4-bodyContainer">
+			<div id="s4-titlerow" class="s4-pr s4-notdlg s4-titlerowhidetitle">
+				<div class="ribbon-table-backgroud">
+					<SharePoint:SPRibbonPeripheralContent runat="server" Location="TabRowRight"	CssClass="ms-siteactionscontainer s4-notdlg">
+					<div id="right_header_block">
+						<table id="user_info" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td>
+								<div class="s4-trc-container s4-notdlg top-row-elements" style="padding:0px; margin:0px;">
+									<SharePoint:DelegateControl runat="server" ControlId="GlobalSiteLink0"/>
+									<a href="#" tabindex="-1" style="display:none"></a><a href="#" tabindex="-1" style="display:none"></a>
+									<SharePoint:DelegateControl ControlId="GlobalSiteLink3-mini" Scope="Farm" runat="server"/>
+									<div class="s4-trc-container-menu">
+										<wssuc:Welcome id="IdWelcome" runat="server" EnableViewState="false">
+										</wssuc:Welcome>
+										<wssuc:MUISelector runat="server"/>
+									</div>
+									<SharePoint:DelegateControl ControlId="GlobalSiteLink2" Scope="Farm" runat="server"/>
+									<span>
+										<span style="display:inline-block;position:relative;">
+											<Sharepoint:DeveloperDashboardLauncher
+												ID="DeveloperDashboardLauncher"
+												NavigateUrl="javascript:ToggleDeveloperDashboard()"
+												runat="server"
+												ImageUrl="/_layouts/images/fgimg.png"
+												Text="<%$Resources:wss,multipages_launchdevdashalt_text%>"
+												OffsetX=0
+												OffsetY=222
+												Height=16
+												Width=16/>
+										</span>
+									</span>
+								</div>
+							</td>
+						</tr>
+						</table>
+						<br />
+						<table class="titlerow-table" border="0" cellspacing="0" cellpadding="0">
+						<tr class="ribbon-table-backgroud">
+							<!--<td class="s4-titlelogo" style="text-align: left;">
+								<SharePoint:SPLinkButton id="onetidProjectPropertyTitleGraphic" runat="server" NavigateUrl="/" __designer:Preview="&lt;a id=&quot;ctl00_onetidProjectPropertyTitleGraphic&quot; href=&quot;/&quot;&gt;
+									&lt;img id=&quot;ctl00_onetidHeadbnnr2&quot; name=&quot;onetidHeadbnnr0&quot; Src=&quot;/SiteCollectionImages/logo.png&quot; alt=&quot;Головна&quot; style=&quot;border-width:0px;&quot; /&gt;
+								&lt;/a&gt;" __designer:Values="&lt;P N='ID' T='onetidProjectPropertyTitleGraphic' /&gt;&lt;P N='NavigateUrl' T='/' /&gt;&lt;P N='PermissionsString' T='EmptyMask' /&gt;&lt;P N='Page' ID='1' /&gt;&lt;P N='TemplateControl' ID='2' /&gt;&lt;P N='AppRelativeTemplateSourceDirectory' R='-1' /&gt;">
+									<SharePoint:SiteLogoImage name="onetidHeadbnnr0" id="onetidHeadbnnr2" LogoImageUrl="<% $SPUrl:~sitecollection/Style Library/Images/nd_logo.png %>" runat="server"/>
+								</SharePoint:SPLinkButton>
+							</td>-->
+							<td class="title" style="display: none;">
+								<h1>
+									<asp:ContentPlaceHolder id="PlaceHolderPageTitleInTitleArea" runat="server" />
+								</h1>
+								<h3>
+									<asp:ContentPlaceHolder id="PlaceHolderPageDescription" runat="server" />
+								</h3>
+							</td>
+							<td>
+								<div id="s4-searcharea" class="s4-search s4-rp">
+									<asp:ContentPlaceHolder id="PlaceHolderSearchArea" runat="server">
+										<SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox" Version="4"/>								
+										<br />
+										<br />
+										<div class="extendedSearch" style="padding-left: 10px; margin-top: -5px; display:none;">
+											<a href="/search/Pages/advanced.aspx">Розширений пошук</a>
+										</div>
+									</asp:ContentPlaceHolder>
+								</div>
+							</td>
+						</tr>
+						</table>
+					</div>
+					</SharePoint:SPRibbonPeripheralContent>
+				</div>
+			</div>
+			
+			<div id="header_menu">
+				<table id="main_menu" class="s4-notdlg titlerow-table" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td colspan="3">
+						<div class=".s4-div s4-topmenulinks">
+							<!-- Dynamic menu -->
+							<asp:ContentPlaceHolder id="PlaceHolderTopNavBar" runat="server">
+								<asp:ContentPlaceHolder id="PlaceHolderHorizontalNav" runat="server">
+									<SharePoint:AspMenu
+										  ID="TopNavigationMenuV4"
+										  Runat="server"
+										  EnableViewState="false"
+										  DataSourceID="topSiteMap"
+										  AccessKey="<%$Resources:wss,navigation_accesskey%>"
+										  UseSimpleRendering="true"
+										  UseSeparateCss="false"
+										  Orientation="Horizontal"
+										  StaticDisplayLevels="2"
+										  MaximumDynamicDisplayLevels="1"
+										  SkipLinkText=""
+										  CssClass="s4-topmenu" __designer:Preview="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/_layouts/1058/styles/menu-21.css&quot;/&gt;
+&lt;div id=&quot;zz12_TopNavigationMenuV4&quot; class=&quot;s4-topmenu&quot;&gt;
+	&lt;div class=&quot;menu horizontal menu-horizontal&quot;&gt;
+		&lt;ul class=&quot;root static&quot;&gt;
+			&lt;li class=&quot;static&quot;&gt;&lt;a class=&quot;static menu-item&quot; href=&quot;/Pages/default.aspx&quot; accesskey=&quot;1&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Головна&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;ul class=&quot;static&quot;&gt;
+				&lt;li class=&quot;static dynamic-children&quot;&gt;&lt;a class=&quot;static dynamic-children menu-item&quot; href=&quot;/Company/Activity/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Компанія&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;ul class=&quot;dynamic&quot;&gt;
+					&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/Activity/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Напрямки діяльності&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/Mission/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Цілі та місія&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/Management/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Керівництво&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/Culture/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Корпоративна культура&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/Career/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Кар&amp;#39;єра&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/Contacts/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Наші офіси&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/PressCenter/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Про нас пишуть&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/News/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Сайт публікації&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+				&lt;/ul&gt;&lt;/li&gt;&lt;li class=&quot;static&quot;&gt;&lt;a class=&quot;static menu-item&quot; href=&quot;/Staff/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Співробітники&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;static&quot;&gt;&lt;a class=&quot;static menu-item&quot; href=&quot;/OrganizationChart/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Структура&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;static dynamic-children&quot;&gt;&lt;a class=&quot;static dynamic-children menu-item&quot; href=&quot;/Community/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Наше життя&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;ul class=&quot;dynamic&quot;&gt;
+					&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Community/News/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Новини&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Community/News/Announsment&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Організаційні оголошення&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Community/Pages/VideoGallery.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Відеогалерея&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Community/Pages/PhotoGallery.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Фотогалерея&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Community/Forum/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Форум&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Community/Pages/Events.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Календар подій&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+				&lt;/ul&gt;&lt;/li&gt;&lt;li class=&quot;static&quot;&gt;&lt;a class=&quot;static menu-item&quot; href=&quot;/Links/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Корисна інформація&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;static dynamic-children&quot;&gt;&lt;a class=&quot;static dynamic-children menu-item&quot; href=&quot;/Toolbox/Pages/default12.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Сервісна скринька&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;ul class=&quot;dynamic&quot;&gt;
+					&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Toolbox/Dictionary/Lists/WordList/WordsList.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Агрословник&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Toolbox/Library/Lists/Books/LibraryView.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Бібліотека&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+				&lt;/ul&gt;&lt;/li&gt;&lt;li class=&quot;static&quot;&gt;&lt;a class=&quot;static menu-item&quot; href=&quot;/Pages/NewMainPage.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;NewMainPage&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+			&lt;/ul&gt;&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/div&gt;
+&lt;/div&gt;" __designer:Values="&lt;P N='ID' T='TopNavigationMenuV4' /&gt;&lt;P N='UseSimpleRendering' T='True' /&gt;&lt;P N='MaximumDynamicDisplayLevels' T='1' /&gt;&lt;P N='Orientation' E='0' /&gt;&lt;P N='SkipLinkText' R='-1' /&gt;&lt;P N='StaticDisplayLevels' T='2' /&gt;&lt;P N='DataSourceID' T='topSiteMap' /&gt;&lt;P N='AccessKey' Bound='True' T='Resources:wss,navigation_accesskey' /&gt;&lt;P N='CssClass' T='s4-topmenu' /&gt;&lt;P N='EnableViewState' T='False' /&gt;&lt;P N='Page' ID='1' /&gt;&lt;P N='TemplateControl' ID='2' /&gt;&lt;P N='AppRelativeTemplateSourceDirectory' R='-1' /&gt;" __designer:Templates="&lt;Group Name=&quot;Item Templates&quot;&gt;&lt;Template Name=&quot;StaticItemTemplate&quot; Flags=&quot;D&quot; Content=&quot;&quot; /&gt;&lt;Template Name=&quot;DynamicItemTemplate&quot; Flags=&quot;D&quot; Content=&quot;&quot; /&gt;&lt;/Group&gt;"/>
+									<SharePoint:DelegateControl runat="server" ControlId="TopNavigationDataSource" Id="topNavigationDelegate" __designer:Preview="&lt;span style=&quot;display:none&quot;&gt;&lt;table cellpadding=4 cellspacing=0 style=&quot;font:messagebox;color:buttontext;background-color:buttonface;border: solid 1px;border-top-color:buttonhighlight;border-left-color:buttonhighlight;border-bottom-color:buttonshadow;border-right-color:buttonshadow&quot;&gt;
+              &lt;tr&gt;&lt;td nowrap&gt;&lt;span style=&quot;font-weight:bold&quot;&gt;PortalSiteMapDataSourceSwitch&lt;/span&gt; - topSiteMap&lt;/td&gt;&lt;/tr&gt;
+              &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+            &lt;/table&gt;&lt;/span&gt;" __designer:Values="&lt;P N='ControlId' T='TopNavigationDataSource' /&gt;&lt;P N='ID' T='topNavigationDelegate' /&gt;&lt;P N='Page' ID='1' /&gt;&lt;P N='TemplateControl' ID='2' /&gt;&lt;P N='AppRelativeTemplateSourceDirectory' R='-1' /&gt;">
+										<Template_Controls>
+											<asp:SiteMapDataSource
+												  ShowStartingNode="False"
+												  SiteMapProvider="SPNavigationProvider"
+												  id="topSiteMap"
+												  runat="server"
+												  StartingNodeUrl="sid:1002"/>
+										</Template_Controls>
+									</SharePoint:DelegateControl>
+								</asp:ContentPlaceHolder>
+							</asp:ContentPlaceHolder>
+							
+
+							<!-- Static menu 
+							<div id="zz15_TopNavigationMenuV4" class="s4-topmenu">
+								<div class="menu horizontal menu-horizontal">
+									<ul class="root static">
+										<li class="static">
+											<a class="static menu-item" href="/sites/mriya/Pages/default.aspx" accesskey="1">
+												<span class="additional-background"><span class="menu-item-text i1">Головна</span></span>
+											</a>
+											<ul class="static">
+												<li class="static dynamic-children">
+													<a class="static dynamic-children menu-item" href="/sites/mriya/Company/Activity/Pages/default.aspx">
+														<span class="additional-background"><span class="menu-item-text i2">Компанія</span></span>
+													</a>
+													<ul class="dynamic">
+														<li class="dynamic"><a class="dynamic menu-item" href="/sites/mriya/Company/Activity/Pages/default.aspx"><span class="additional-background"><span class="menu-item-text">Напрямки діяльності</span></span></a></li>
+														<li class="dynamic"><a class="dynamic menu-item" href="/sites/mriya/Company/Mission/Pages/default.aspx"><span class="additional-background"><span class="menu-item-text">Цілі та місія</span></span></a></li>
+														<li class="dynamic"><a class="dynamic menu-item" href="/sites/mriya/Company/Management/Pages/default.aspx"><span class="additional-background"><span class="menu-item-text">Керівництво</span></span></a></li>
+														<li class="dynamic"><a class="dynamic menu-item" href="/sites/mriya/Company/Culture/Pages/default.aspx"><span class="additional-background"><span class="menu-item-text">Корпоративна культура</span></span></a></li>
+														<li class="dynamic"><a class="dynamic menu-item" href="/sites/mriya/Company/Career/Pages/default.aspx"><span class="additional-background"><span class="menu-item-text">Кар&#39;єра</span></span></a></li>
+														<li class="dynamic"><a class="dynamic menu-item" href="/sites/mriya/Company/Contacts/Pages/default.aspx"><span class="additional-background"><span class="menu-item-text">Наші офіси</span></span></a></li>
+														<li class="dynamic"><a class="dynamic menu-item" href="/sites/mriya/Company/PressCenter/Pages/default.aspx"><span class="additional-background"><span class="menu-item-text">Про нас пишуть</span></span></a></li>
+														<li class="dynamic"><a class="dynamic menu-item" href="/sites/mriya/Company/News/Pages/default.aspx"><span class="additional-background"><span class="menu-item-text">Сайт публікації</span></span></a></li>
+													</ul>
+												</li>
+												<li class="static">
+													<a class="static menu-item" href="/sites/mriya/Staff/Pages/default.aspx">
+														<span class="additional-background"><span class="menu-item-text i3">Співробітники</span></span>
+													</a>
+												</li>
+												<li class="static">
+													<a class="static menu-item" href="/sites/mriya/OrganizationChart/Pages/default.aspx">
+														<span class="additional-background"><span class="menu-item-text i4">Структура</span></span>
+													</a>
+												</li>
+												<li class="static dynamic-children">
+													<a class="static dynamic-children menu-item" href="/sites/mriya/Community/Pages/default.aspx">
+														<span class="additional-background"><span class="menu-item-text i5">Наше життя</span></span>
+													</a>
+													<ul class="dynamic">
+														<li class="dynamic"><a class="dynamic menu-item" href="/sites/mriya/Community/News/Pages/default.aspx"><span class="additional-background"><span class="menu-item-text">Новини</span></span></a></li>
+														<li class="dynamic"><a class="dynamic menu-item" href="/sites/mriya/Community/News/Announsment"><span class="additional-background"><span class="menu-item-text">Організаційні оголошення</span></span></a></li>
+														<li class="dynamic"><a class="dynamic menu-item" href="/sites/mriya/Community/Pages/VideoGallery.aspx"><span class="additional-background"><span class="menu-item-text">Відеогалерея</span></span></a></li>
+														<li class="dynamic"><a class="dynamic menu-item" href="/sites/mriya/Community/Pages/PhotoGallery.aspx"><span class="additional-background"><span class="menu-item-text">Фотогалерея</span></span></a></li>
+														<li class="dynamic"><a class="dynamic menu-item" href="/sites/mriya/Community/Forum/Pages/default.aspx"><span class="additional-background"><span class="menu-item-text">Форум</span></span></a></li>
+														<li class="dynamic"><a class="dynamic menu-item" href="/sites/mriya/Community/Pages/Events.aspx"><span class="additional-background"><span class="menu-item-text">Календар подій</span></span></a></li>
+													</ul>
+												</li>
+												<li class="static">
+													<a class="static menu-item" href="/sites/mriya/Links/Pages/default.aspx">
+														<span class="additional-background"><span class="menu-item-text i6">Корисна інформація</span></span>
+													</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>-->
+						</div>
+						<div class="topmenuline" style="display: none;">
+						</div>
+						<div class="topsubmenuline" style="display: none;">
+							<div cssclass="nightanday-menu-bottom">
+								<a href="http://www.mriya.ua" style="padding-left: 5px; padding-right: 5px;" target="_blank" title="Зовнішній сайт компанії">
+									<img src="../../SiteCollectionImages/web.png" style="border-width: 0px; padding-right: 2px; vertical-align: middle;" alt=""> 
+									Mriya.ua</a>
+								<a href="/Staff/" style="padding-left: 5px; padding-right: 5px;" title="Адресна книга">
+									<img src="../../SiteCollectionImages/addressbook.png" style="border-width: 0px; padding-right: 2px; vertical-align: middle;" alt=""> 
+									Адресна книга</a>
+								<a href="/Pages/Sitemap.aspx" style="padding-left: 5px; padding-right: 5px;" title="Карта порталу">
+									<img src="../../SiteCollectionImages/sitemap.png" style="border-width: 0px; padding-right: 2px; vertical-align: middle;" alt=""> 
+									Карта порталу</a>
+							</div>
+						</div>
+					</td>
+				</tr>
+				</table>
+			</div>
+			
+			<!--Begin Nav|Content Area-->
+			<div class="body-wrapper">
+				<a name="startNavigation"></a>
+				<asp:ContentPlaceHolder id="PlaceHolderGlobalNavigation" runat="server" />
+				<asp:ContentPlaceHolder id="PlaceHolderGlobalNavigationSiteMap" runat="server" />
+				<asp:ContentPlaceHolder id="PlaceHolderLeftNavBarDataSource" runat="server" />
+				<asp:ContentPlaceHolder id="PlaceHolderCalendarNavigator" runat="server" />
+				<asp:ContentPlaceHolder id="PlaceHolderWikiNavigator" runat="server" />
+				<asp:ContentPlaceHolder id="PlaceHolderLeftNavBarTop" runat="server" />
+				<PublishingNavigation:PortalSiteMapDataSource ID="SiteMapDS" runat="server" EnableViewState="false" SiteMapProvider="CurrentNavigation" StartFromCurrentNode="true" StartingNodeOffset="0" ShowStartingNode="false" TrimNonCurrentTypes="Heading"/>
+				<asp:ContentPlaceHolder id="PlaceHolderLeftNavBar" runat="server" />
+				<asp:ContentPlaceHolder id="PlaceHolderLeftActions" runat="server" />
+				<asp:ContentPlaceHolder id="PlaceHolderNavSpacer" runat="server" />
+				<div class="wrapper-inline" style="display: none;">
+					<div class="bottom-menuplace-container">
+						<div class="bottom-menuplace">
+							<SharePoint:AspMenu ID="CurrentNav" runat="server" EnableViewState="false" DataSourceID="SiteMapDS" UseSeparateCSS="false" UseSimpleRendering="true" Orientation="Vertical" StaticDisplayLevels="1" MaximumDynamicDisplayLevels="0" CssClass="nightanday-menu" SkipLinkText="<%$Resources:cms,masterpages_skiplinktext%>"/>
+							<Sharepoint:SPNavigationManager runat="server" id="TreeViewNavigationManager" ContainedControl="TreeView">
+				           		<table class="ms-navSubMenu1" cellpadding="0" cellspacing="0" border="0">
+				           		<tr>
+				           			<td>
+				           				<table class="ms-navheader" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td nowrap="nowrap" id="idSiteHierarchy"><SharePoint:SPLinkButton runat="server" NavigateUrl="~site/_layouts/viewlsts.aspx" id="idNavLinkSiteHierarchy" Text="<%$Resources:wss,treeview_header%>" accesskey="<%$Resources:wss,quiklnch_allcontent_AK%>"/></td></tr></table>
+				           			</td>
+				           		</tr>
+				           		</table>
+					            <div class="ms-treeviewouter">
+						            <SharePoint:DelegateControl runat="server" ControlId="TreeViewAndDataSource">
+							            <Template_Controls>
+								            <SharePoint:SPHierarchyDataSourceControl
+									            runat="server"
+									            id="TreeViewDataSource"
+									            RootContextObject="Web"
+									            IncludeDiscussionFolders="true"/>
+								            <SharePoint:SPRememberScroll runat="server" id="TreeViewRememberScroll" onscroll="javascript:_spRecordScrollPositions(this);" style="overflow: auto;height: 400px;width: 160px; ">
+									            <Sharepoint:SPTreeView
+										            id="WebTreeView"
+										            runat="server"
+										            ShowLines="false"
+										            DataSourceId="TreeViewDataSource"
+										            ExpandDepth="0"
+										            SelectedNodeStyle-CssClass="ms-tvselected"
+										            NodeStyle-CssClass="ms-navitem"
+										            NodeStyle-HorizontalPadding="2"
+										            SkipLinkText=""
+										            NodeIndent="12"
+										            ExpandImageUrl="/_layouts/images/tvplus.gif"
+										            CollapseImageUrl="/_layouts/images/tvminus.gif"
+										            NoExpandImageUrl="/_layouts/images/tvblank.gif">
+								               </Sharepoint:SPTreeView>
+								            </Sharepoint:SPRememberScroll>
+							            </Template_Controls>
+						            </SharePoint:DelegateControl>
+					            </div>
+				            </Sharepoint:SPNavigationManager>
+						</div>
+					</div>
+					<div class="bannerplace"></div>
+				</div>
+				<div class="topmenuline" style="margin-top: 15px; display: none;"></div>
+				<div class="main-container" id="MSO_ContentDiv" runat="server">
+					<div class="main-content">
+						<a name="mainContent"></a>
+						<asp:ContentPlaceHolder id="PlaceHolderMain" runat="server" />
+					</div>
+				</div>
+				<!--End Nav|Content Area-->
+				
+				<div id="DeveloperDashboard" class="ms-developerdashboard">
+					<SharePoint:DeveloperDashboard runat="server"/>
+				</div>
+			</div>
+		</div>
+		<div id="footer" class="s4-pr s4-notdlg">
+			<div>
+				<div id="mriyaCC">
+					<a href="http://www.mriya.ua" target="_blank" title="Зовнішній сайт компанії">© Мрія 2011</a>
+				</div>
+				<div id="bottommenu">
+					<div cssclass="nightanday-menu-bottom">
+						<a href="/" style="padding-left: 10px; padding-right: 10px;">Головна</a>
+						<a href="/Company/" style="padding-left: 10px; padding-right: 10px;">Компанія</a>
+						<a href="/OrganizationChart/" style="padding-left: 10px; padding-right: 10px;">Структура</a>
+						<a href="/Staff/" style="padding-left: 10px; padding-right: 10px;">Співробітники</a>
+						<a href="/Community/" style="padding-left: 10px; padding-right: 10px;">Наше життя</a>
+						<a href="/Links/" style="padding-left: 10px; padding-right: 10px;">Корисна інформація</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			var header = document.getElementById("s4-workspace");
+			header.style.overflowY = "hidden";
+			var w1 = header.clientWidth;
+			header.style.overflowY = "scroll";
+			document.getElementById("ribbon_line_mg_right").width = w1 - header.clientWidth;
+			
+			/*var imgs = document.getElementById("s4-searcharea").getElementsByTagName("IMG");
+			for (i = 0; i < imgs.length; i++) {
+				if (imgs[i].className == "srch-gosearchimg") {
+					break;
+				}
+			}*/
+			
+			/*Hide search menu element*/
+			var atags = document.getElementsByTagName("a");
+			var ahref = location.protocol + '//' + location.host + '/search/';
+			for(i=0;i<atags.length;i++) {
+				if(atags[i].href == ahref) {
+					atags[i].style.display = 'none';
+				}
+			}
+			/* hide td from webpart title line*/
+			var tdtags = document.getElementsByTagName("td");
+			var i=1;
+			while(i<tdtags.length){
+				if(tdtags[i].className == "ms-wpTdSpace" 
+					& tdtags[i-1].className == "ms-WPHeaderTdSelection") {
+					tdtags[i].style.display = 'none';
+				}
+				i++;
+			}
+			/*hide last line in left menu*/
+			var divs = document.getElementsByTagName("div");
+			for(i=0;i<divs.length;i++)
+			{
+				if (divs[i].className == "menu vertical menu-vertical")
+				{
+					if (divs[i].getElementsByTagName("ul").length > 0)
+					{
+						var uls = divs[i].getElementsByTagName("ul");
+						if (uls[0].getElementsByTagName("li").length > 0)
+						{
+							var menuLi = uls[0].getElementsByTagName("li")[uls[0].getElementsByTagName("li").length - 1];
+							if (menuLi.getElementsByTagName("a").length > 0)
+							{
+								menuLi.getElementsByTagName("a")[menuLi.getElementsByTagName("a").length - 1].style.borderBottomWidth = "0px";
+							}
+						}
+					}
+					break;
+				}
+			}
+		</script>
+	</div>
+	<asp:Panel Visible="false" runat="server">
+		<asp:ContentPlaceHolder id="PlaceHolderSiteName" runat="server" />
+		<asp:ContentPlaceHolder ID="PlaceHolderPageImage" runat="server" />
+		<asp:ContentPlaceHolder ID="PlaceHolderBodyLeftBorder" runat="server" />
+		<asp:ContentPlaceHolder ID="PlaceHolderTitleLeftBorder" runat="server" />
+		<asp:ContentPlaceHolder ID="PlaceHolderTitleAreaSeparator" runat="server" />
+		<asp:ContentPlaceHolder ID="OSSConsole" runat="server" />
+		<asp:ContentPlaceHolder ID="PlaceHolderTitleRightMargin" runat="server" />
+		<asp:ContentPlaceHolder id="PlaceHolderBodyAreaClass" runat ="server" />
+		<asp:ContentPlaceHolder id="PlaceHolderTitleAreaClass" runat ="server" />
+		<asp:ContentPlaceHolder id="PlaceHolderBodyRightMargin" runat="server" />
+		<asp:ContentPlaceHolder id="PlaceHolderLeftNavBorder" runat="server" />
+		<asp:ContentPlaceHolder id="WSSDesignConsole" runat="server" />
+		<asp:ContentPlaceHolder ID="PlaceHolderMiniConsole" runat="server" />
+	</asp:Panel>
+	
+	<asp:ContentPlaceHolder id="PlaceHolderFormDigest" runat="server">
+		<SharePoint:FormDigest runat="server"/>
+	</asp:ContentPlaceHolder>
+	
+</form>
+<asp:ContentPlaceHolder id="PlaceHolderUtilityContent" runat="server" />
+</body>
+</html>
