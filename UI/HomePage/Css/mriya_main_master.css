@@ -12,6 +12,11 @@ body {
 
 body #ribbon_line {
 	width: 100%;
+	text-align: left;
+}
+
+body .ms-wpadder {
+	text-align: left;
 }
 
 body #s4-ribbonrow {
@@ -113,9 +118,16 @@ body #s4-bodyContainer {
 	border-right: 0 none;
 }
 
+.s4-breadcrumb-anchor:hover,
+.s4-breadcrumb-anchor-open,
+.ms-qatbutton:hover,
 .ms-welcomeMenu.ms-SpLinkButtonActive {
     background: url("/_layouts/images/bgximg.png") repeat-x scroll 0 -489px transparent;
     border: 1px solid #444;
+}
+
+.s4-breadcrumb-anchor, .ms-qatbutton {
+	padding: 3px 5px 2px;
 }
 
 #header_menu {

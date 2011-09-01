@@ -99,50 +99,73 @@
 	
 	<div id="body">
 		<div id="clmn_left">
-			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="BanerZone" FrameType="TitleBarOnly"
-				Title="BanerZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
-			<h1 class="news">Новини</h1>
-			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="NewsZone" FrameType="TitleBarOnly"
-				Title="NewsZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			<div id="baner_zone" class="web_part_zone">
+				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="BanerZone" FrameType="TitleBarOnly"
+					Title="BanerZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			</div>
+			
+			<div id="news_zone" class="web_part_zone">
+				<h1 class="news">Новини</h1>
+				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="NewsZone" FrameType="TitleBarOnly"
+					Title="NewsZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			</div>
 		</div>
 		
 		<div id="clmn_middle">
-			<h1 class="celebrating">Святкуємо</h1>
-			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="CelebratingZone" FrameType="TitleBarOnly"
-				Title="CelebratingZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
-					
-			<h1 class="industry_news"><nobr>Новини галузі</nobr></h1>
-			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="IndustryNewsZone" FrameType="TitleBarOnly"
-				Title="IndustryNewsZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
-					
-			<h1 class="advertisement"><nobr>Організаційні оголошення</nobr></h1>
-			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="AdvertisementZone" FrameType="TitleBarOnly"
-				Title="AdvertisementZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
-					
-			<h1 class="photo">Фото</h1>
-			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="PhotoZone" FrameType="TitleBarOnly"
-				Title="PhotoZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
-					
-			<h1 class="move">Відео</h1>
-			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="MoveZone" FrameType="TitleBarOnly"
-				Title="MoveZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			<div id="advertisement_zone" class="web_part_zone">
+				<h1 class="advertisement"><nobr>Організаційні оголошення</nobr></h1>
+				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="AdvertisementZone" FrameType="TitleBarOnly"
+					Title="AdvertisementZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			</div>
+			
+			<div id="industry_news_zone" class="web_part_zone">
+				<h1 class="industry_news"><nobr>Новини галузі</nobr></h1>
+				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="IndustryNewsZone" FrameType="TitleBarOnly"
+					Title="IndustryNewsZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			</div>
+			
+			<div id="communication_zone" class="web_part_zone">
+				<h1 class="communication">Cпілкування</h1>
+				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="CommunicationZone" FrameType="TitleBarOnly"
+					Title="CommunicationZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			</div>
+			
+			<div id="photo_zone" class="web_part_zone">
+				<h1 class="photo">Фото</h1>
+				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="PhotoZone" FrameType="TitleBarOnly"
+					Title="PhotoZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			</div>
+			
+			<div id="move_zone" class="web_part_zone">
+				<h1 class="move">Відео</h1>
+				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="MoveZone" FrameType="TitleBarOnly"
+					Title="MoveZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			</div>
 		</div>
 		
 		<div id="clmn_right">
-			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="PanelZone" FrameType="TitleBarOnly"
-				Title="PanelZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
-		
-			<h1 class="communication">Cпілкування</h1>
-			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="CommunicationZone" FrameType="TitleBarOnly"
-				Title="CommunicationZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
-		
-			<h1 class="new_employees"><nobr>Вітаємо в компанії</nobr></h1>
-			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="NewEmployeeZone" FrameType="TitleBarOnly"
-				Title="NewEmployeeZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
-		
-			<h1 class="map"><nobr>Карта Мрії</nobr></h1>
-			<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="MapZone" FrameType="TitleBarOnly"
-				Title="MapZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>		
+			<div id="panel_zone" class="web_part_zone">
+				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="PanelZone" FrameType="TitleBarOnly"
+					Title="PanelZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			</div>
+			
+			<div id="celebrating_zone" class="web_part_zone">
+				<h1 class="celebrating"><nobr>Дні народження</nobr></h1>
+				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="CelebratingZone" FrameType="TitleBarOnly"
+					Title="CelebratingZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			</div>
+			
+			<div id="new_employees_zone" class="web_part_zone">
+				<h1 class="new_employees"><nobr>Вітаємо в компанії</nobr></h1>
+				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="NewEmployeeZone" FrameType="TitleBarOnly"
+					Title="NewEmployeeZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			</div>
+			
+			<div id="map_zone" class="web_part_zone">
+				<h1 class="map"><nobr>Карта Мрії</nobr></h1>
+				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="MapZone" FrameType="TitleBarOnly"
+					Title="MapZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			</div>
 		</div>
 	</div>
 	
