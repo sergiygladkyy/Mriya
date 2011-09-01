@@ -194,6 +194,10 @@ h3 {
 	font-family: Tahoma,Geneva,sans-serif;
 }
 
+.employee_table_list .etable_list_row td {
+	vertical-align: top;
+}
+
 .employee_table_list .ecard_padd {
 	display: inline-block;
     font-size: 9px;

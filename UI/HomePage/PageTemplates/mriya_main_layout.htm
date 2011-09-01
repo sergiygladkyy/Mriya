@@ -31,6 +31,15 @@
 			<SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Core Styles/page-layouts-21.css %>" runat="server"/>
 			<PublishingWebControls:EditModePanel runat="server" id="editmodestyles">
 				<!-- Styles for edit mode only-->
+				<style type="text/css">
+					#advertisement_zone {
+						overflow: auto !important;
+					}
+					
+					.web_part_zone {
+						overflow: auto !important;
+					}
+				</style>
 				<SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Core Styles/edit-mode-21.css %>"
 					After="<% $SPUrl:~sitecollection/Style Library/~language/Core Styles/page-layouts-21.css %>" runat="server"/>
 			</PublishingWebControls:EditModePanel>
