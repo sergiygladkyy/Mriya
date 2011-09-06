@@ -21,9 +21,11 @@ body .ms-wpadder {
 
 body #s4-ribbonrow {
 	width: 980px !important;
+	height: auto !important;
 	margin: 0 20px;
 	padding: 0;
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/system_header.jpg") no-repeat;
+	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/system_header.jpg") no-repeat left -18px;
+	min-height: 26px;
 }
 
 .ribbonbackground {
@@ -35,7 +37,7 @@ body #s4-ribbonrow {
 }
 
 .ms-cui-TabRowLeft {
-	margin-top: 20px
+	margin-top: 3px
 }
 
 .ms-siteactionsmenuinner {
@@ -57,6 +59,19 @@ body #s4-ribbonrow {
 
 .ms-cui-topBar2 {
     border-bottom: 1px solid #CCCCCC;
+	height: 26px;
+}
+
+.ms-cui-tts, .ms-cui-tts-scale-1, .ms-cui-tts-scale-2 {
+	height: 27px;
+}
+
+.ms-cui-tt, .ms-cui-cg {
+	height: 25px;
+}
+
+.ms-cui-tt-a {
+	margin-top: 3px;
 }
 
 body #s4-workspace {
@@ -77,6 +92,14 @@ body #s4-bodyContainer {
 	width: 980px !important;
 	height: 91px;
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/header_top.jpg") left top no-repeat;
+}
+
+#s4-titlerow #logo {
+	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/logo.png") no-repeat transparent;
+    float: left;
+    height: 48px;
+    margin: 24px 0 0 37px;
+    width: 140px;
 }
 
 #s4-titlerow .s4-pr{
@@ -241,6 +264,8 @@ body #s4-bodyContainer {
 	float: right;
 	text-align: right;
 	margin: 11px 8px 2px 0px;
+	max-width: 790px;
+	max-height: 78px;
 }
 
 #right_header_block #user_info {

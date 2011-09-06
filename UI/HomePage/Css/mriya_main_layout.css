@@ -245,3 +245,11 @@ h3 {
 	border-top: 1px dashed #aaa;
 	padding-top: 8px;
 }
+
+#celebrating_zone .employee_table_list .ecard_photo_img {
+	background: #dee5c4;
+}
+
+#new_employees_zone .employee_table_list .ecard_photo_img {
+	background: #e8d3e4;
+}
