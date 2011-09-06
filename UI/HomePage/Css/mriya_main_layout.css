@@ -211,7 +211,7 @@ h3 {
 }
 
 .employee_table_list .ecard_photo_img {
-	padding: 3px;
+	padding: 3px 3px 1px;
 	background: #dee5c4;
 	border-radius: 3px;
 	-moz-border-radius: 3px;
