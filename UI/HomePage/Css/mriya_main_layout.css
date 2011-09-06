@@ -141,11 +141,10 @@ h3 {
 /* News styles for old html */
 
 #output2 > div {
-	max-height: 155px !important;
+	min-height: 155px !important;
 	overflow: hidden !important;
 	text-align: left !important;
 	padding: 0 !important;
-    margin: 0 0 26px !important;
 }
 
 #output2 > div > div:first-child {
@@ -155,7 +154,7 @@ h3 {
 }
 
 #output2 > div > div {
-	display: none;
+	padding: 5px 0;
 }
 
 #output2 > div > a {
@@ -182,8 +181,6 @@ h3 {
     padding: 0 !important;
     margin: 6px 0 0 !important;
     overflow: hidden !important;
-    letter-spacing: 0.05em;
-    line-height: 1.2em;
 }
 
 

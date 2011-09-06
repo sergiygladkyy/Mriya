@@ -53,8 +53,7 @@ body #s4-ribbonrow {
 }
 
 .ms-cui-tabContainer {
-	border-left: 1px solid #aaa;
-	border-right: 1px solid #aaa;
+	border-width: 0;
 }
 
 .ms-cui-topBar2 {
@@ -72,6 +71,28 @@ body #s4-ribbonrow {
 
 .ms-cui-tt-a {
 	margin-top: 3px;
+}
+
+.ms-cui-cg-i{
+	display: none;
+}
+
+.ms-cui-cg {
+	margin: 3px 2px 0;
+}
+
+.ms-cui-ct-first .ms-cui-tt-a {
+    border-left: 1px none transparent;
+}
+
+.ms-cui-ct-last .ms-cui-tt-a {
+    border-right: 1px none transparent;
+}
+
+.ms-cui-tabBody {
+    border-width: 0 1px 1px;
+    border-color: #aaa;
+    width: auto;
 }
 
 body #s4-workspace {
