@@ -143,6 +143,15 @@ body #s4-bodyContainer {
 	/*background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/search_btn.png") left top no-repeat;*/
 }
 
+#s4-bodyContainer .wrapper-inline {
+	float: left;
+	width: 22%;
+}
+
+#s4-bodyContainer .main-container {
+	margin: 0 0 0 22%;
+}
+
 .s4-search input.ms-sbplain {
 	background: #8ab500;
 	border-color: #8ab500 !important;
@@ -320,4 +329,78 @@ body #s4-bodyContainer {
 .s4-trc-container-menu {
     float: left;
     margin: 0;
+}
+
+
+/* Left menu */
+
+.menu ul {
+    list-style: none outside none;
+}
+
+.nightandday .bottom-menuplace-container {
+	width: 100%;
+	color: #781D7E;
+    font-family: "Trebuchet MS","Times New Roman",Times,serif;
+}
+
+.nightandday #s4-leftpanel {
+    margin-left: 0;
+    width: 100%;
+}
+
+#s4-leftpanel .nightanday-menu {
+    font-size: 10pt;
+    line-height: 1.25em;
+    margin: 10px 15px 0;
+}
+
+.nightanday-menu ul.root a {
+    color: #781D7E;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.nightanday-menu a {
+    padding: 3px 3px 3px 0;
+    text-decoration: none;
+    border-bottom: 1px solid #99839A;
+    cursor: pointer;
+}
+
+.menu a.menu-item span {
+    cursor: pointer;
+}
+
+.nightanday-menu span {
+    display: block;
+    padding: 3px 3px 3px 0;
+    text-decoration: none;
+}
+
+.menu-vertical .menu-item-text {
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.nightanday-menu ul.root ul.static a {
+    background-image: none;
+    border-color: -moz-use-text-color -moz-use-text-color #CCC1CC;
+    border-style: none none solid;
+    border-width: 0 0 1px;
+    color: #781D7E;
+    font-size: 0.9em;
+    font-weight: normal;
+    padding: 2px 5px 1px;
+}
+
+.nightanday-menu a.selected.static.menu-item {
+    color: #000000;
+}
+
+.nightanday-menu ul.dynamic {
+	background-color: #f0f0f0;
+	border: 0px none;
+	padding: 0;
+	margin-left: 2px;
 }

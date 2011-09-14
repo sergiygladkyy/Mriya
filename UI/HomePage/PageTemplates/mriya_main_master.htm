@@ -406,71 +406,83 @@
 				</table>
 			</div>
 			
-			<!--Begin Nav|Content Area-->
 			<div class="body-wrapper">
+				
+				<!--Begin Nav|Content Area-->
+				
 				<a name="startNavigation"></a>
 				<asp:ContentPlaceHolder id="PlaceHolderGlobalNavigation" runat="server" />
 				<asp:ContentPlaceHolder id="PlaceHolderGlobalNavigationSiteMap" runat="server" />
-				<asp:ContentPlaceHolder id="PlaceHolderLeftNavBarDataSource" runat="server" />
-				<asp:ContentPlaceHolder id="PlaceHolderCalendarNavigator" runat="server" />
-				<asp:ContentPlaceHolder id="PlaceHolderWikiNavigator" runat="server" />
-				<asp:ContentPlaceHolder id="PlaceHolderLeftNavBarTop" runat="server" />
-				<PublishingNavigation:PortalSiteMapDataSource ID="SiteMapDS" runat="server" EnableViewState="false" SiteMapProvider="CurrentNavigation" StartFromCurrentNode="true" StartingNodeOffset="0" ShowStartingNode="false" TrimNonCurrentTypes="Heading"/>
-				<asp:ContentPlaceHolder id="PlaceHolderLeftNavBar" runat="server" />
-				<asp:ContentPlaceHolder id="PlaceHolderLeftActions" runat="server" />
-				<asp:ContentPlaceHolder id="PlaceHolderNavSpacer" runat="server" />
-				<div class="wrapper-inline" style="display: none;">
+				<div id="wrapper-inline-block" class="wrapper-inline">
 					<div class="bottom-menuplace-container">
-						<div class="bottom-menuplace">
-							<SharePoint:AspMenu ID="CurrentNav" runat="server" EnableViewState="false" DataSourceID="SiteMapDS" UseSeparateCSS="false" UseSimpleRendering="true" Orientation="Vertical" StaticDisplayLevels="1" MaximumDynamicDisplayLevels="0" CssClass="nightanday-menu" SkipLinkText="<%$Resources:cms,masterpages_skiplinktext%>"/>
-							<Sharepoint:SPNavigationManager runat="server" id="TreeViewNavigationManager" ContainedControl="TreeView">
-				           		<table class="ms-navSubMenu1" cellpadding="0" cellspacing="0" border="0">
-				           		<tr>
-				           			<td>
-				           				<table class="ms-navheader" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td nowrap="nowrap" id="idSiteHierarchy"><SharePoint:SPLinkButton runat="server" NavigateUrl="~site/_layouts/viewlsts.aspx" id="idNavLinkSiteHierarchy" Text="<%$Resources:wss,treeview_header%>" accesskey="<%$Resources:wss,quiklnch_allcontent_AK%>"/></td></tr></table>
-				           			</td>
-				           		</tr>
-				           		</table>
-					            <div class="ms-treeviewouter">
-						            <SharePoint:DelegateControl runat="server" ControlId="TreeViewAndDataSource">
-							            <Template_Controls>
-								            <SharePoint:SPHierarchyDataSourceControl
-									            runat="server"
-									            id="TreeViewDataSource"
-									            RootContextObject="Web"
-									            IncludeDiscussionFolders="true"/>
-								            <SharePoint:SPRememberScroll runat="server" id="TreeViewRememberScroll" onscroll="javascript:_spRecordScrollPositions(this);" style="overflow: auto;height: 400px;width: 160px; ">
-									            <Sharepoint:SPTreeView
-										            id="WebTreeView"
-										            runat="server"
-										            ShowLines="false"
-										            DataSourceId="TreeViewDataSource"
-										            ExpandDepth="0"
-										            SelectedNodeStyle-CssClass="ms-tvselected"
-										            NodeStyle-CssClass="ms-navitem"
-										            NodeStyle-HorizontalPadding="2"
-										            SkipLinkText=""
-										            NodeIndent="12"
-										            ExpandImageUrl="/_layouts/images/tvplus.gif"
-										            CollapseImageUrl="/_layouts/images/tvminus.gif"
-										            NoExpandImageUrl="/_layouts/images/tvblank.gif">
-								               </Sharepoint:SPTreeView>
-								            </Sharepoint:SPRememberScroll>
-							            </Template_Controls>
-						            </SharePoint:DelegateControl>
-					            </div>
-				            </Sharepoint:SPNavigationManager>
+						<div id="s4-leftpanel" class="left-nav-bar s4-notdlg res-nav-l">
+							<asp:ContentPlaceHolder id="PlaceHolderLeftNavBarDataSource" runat="server" />
+							<asp:ContentPlaceHolder id="PlaceHolderCalendarNavigator" runat="server" />
+							<asp:ContentPlaceHolder id="PlaceHolderWikiNavigator" runat="server" />
+							<asp:ContentPlaceHolder id="PlaceHolderLeftNavBarTop" runat="server" />
+							<PublishingNavigation:PortalSiteMapDataSource ID="SiteMapDS" runat="server" EnableViewState="false" SiteMapProvider="CurrentNavigation" StartFromCurrentNode="true" StartingNodeOffset="0" ShowStartingNode="false" TrimNonCurrentTypes="Heading"/>
+							<asp:ContentPlaceHolder id="PlaceHolderLeftNavBar" runat="server">
+								<SharePoint:AspMenu
+									ID="CurrentNav"
+									runat="server"
+									EnableViewState="false"
+									DataSourceID="SiteMapDS"
+									UseSeparateCSS="false"
+									UseSimpleRendering="true"
+									Orientation="Vertical"
+									StaticDisplayLevels="2"
+									MaximumDynamicDisplayLevels="1"
+									CssClass="nightanday-menu" SkipLinkText="<%$Resources:cms,masterpages_skiplinktext%>"/>
+								<Sharepoint:SPNavigationManager runat="server"
+									id="TreeViewNavigationManager"
+									ContainedControl="TreeView">
+									<table class="ms-navSubMenu1" cellpadding="0" cellspacing="0" border="0"><tr><td>
+									<table class="ms-navheader" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td nowrap="nowrap" id="idSiteHierarchy"><SharePoint:SPLinkButton runat="server" NavigateUrl="~site/_layouts/viewlsts.aspx" id="idNavLinkSiteHierarchy" Text="<%$Resources:wss,treeview_header%>" accesskey="<%$Resources:wss,quiklnch_allcontent_AK%>"/></td></tr></table>
+									</td></tr></table>
+									<div class="ms-treeviewouter">
+										<SharePoint:DelegateControl runat="server" ControlId="TreeViewAndDataSource">
+											<Template_Controls>
+												<SharePoint:SPHierarchyDataSourceControl
+													runat="server"
+													id="TreeViewDataSource"
+													RootContextObject="Web"
+													IncludeDiscussionFolders="true"/>
+												<SharePoint:SPRememberScroll runat="server" id="TreeViewRememberScroll" onscroll="javascript:_spRecordScrollPositions(this);" style="overflow: auto;height: 400px;width: 160px; ">
+													<Sharepoint:SPTreeView
+														id="WebTreeView"
+														runat="server"
+														ShowLines="false"
+														DataSourceId="TreeViewDataSource"
+														ExpandDepth="0"
+														SelectedNodeStyle-CssClass="ms-tvselected"
+														NodeStyle-CssClass="ms-navitem"
+														NodeStyle-HorizontalPadding="2"
+														SkipLinkText=""
+														NodeIndent="12"
+														ExpandImageUrl="/_layouts/images/tvplus.gif"
+														CollapseImageUrl="/_layouts/images/tvminus.gif"
+														NoExpandImageUrl="/_layouts/images/tvblank.gif">
+													</Sharepoint:SPTreeView>
+												</Sharepoint:SPRememberScroll>
+											</Template_Controls>
+										</SharePoint:DelegateControl>
+									</div>
+								</Sharepoint:SPNavigationManager>			            
+							</asp:ContentPlaceHolder>
+							<asp:ContentPlaceHolder id="PlaceHolderLeftActions" runat="server" />
+							<asp:ContentPlaceHolder id="PlaceHolderNavSpacer" runat="server">
+							</asp:ContentPlaceHolder>
 						</div>
 					</div>
-					<div class="bannerplace"></div>
 				</div>
-				<div class="topmenuline" style="margin-top: 15px; display: none;"></div>
+
 				<div class="main-container" id="MSO_ContentDiv" runat="server">
 					<div class="main-content">
 						<a name="mainContent"></a>
 						<asp:ContentPlaceHolder id="PlaceHolderMain" runat="server" />
 					</div>
 				</div>
+				
 				<!--End Nav|Content Area-->
 				
 				<div id="DeveloperDashboard" class="ms-developerdashboard">
@@ -503,12 +515,16 @@
 			header.style.overflowY = "scroll";
 			document.getElementById("ribbon_line_mg_right").width = w1 - header.clientWidth;
 			
-			/*var imgs = document.getElementById("s4-searcharea").getElementsByTagName("IMG");
-			for (i = 0; i < imgs.length; i++) {
-				if (imgs[i].className == "srch-gosearchimg") {
-					break;
+			var node = document.getElementById("wrapper-inline-block");
+			if (node.style.display == 'none' || node.offsetHeight == 0) {
+				var els = document.getElementsByName("main-container-tag");
+				for (var i in els) {
+					if (els[i].className == 'main-container') {
+						els[i].style.marginLeft = 0;
+						break;
+					}
 				}
-			}*/
+			}
 			
 			/*Hide search menu element*/
 			var atags = document.getElementsByTagName("a");

@@ -14,6 +14,12 @@
 					{
 						display:none;
 					}
+					.wrapper-inline {
+						display: none !important;
+					}
+					.main-container {
+						margin-left: 0 !important;
+					}
 			</style>
 			<SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Core Styles/pageLayouts.css %>" runat="server"/>
 			<PublishingWebControls:editmodepanel runat="server">
@@ -27,6 +33,12 @@
 			<style type="text/css">
 				.v4master #s4-leftpanel { display: none; }
 				.v4master .s4-ca { margin-left: 0px; }
+				.wrapper-inline {
+					display: none !important;
+				}
+				.main-container {
+					margin-left: 0 !important;
+				}
 			</style>
 			<SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Core Styles/page-layouts-21.css %>" runat="server"/>
 			<PublishingWebControls:EditModePanel runat="server" id="editmodestyles">

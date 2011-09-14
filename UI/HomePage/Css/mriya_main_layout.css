@@ -50,41 +50,41 @@ h1 {
 }
 
 h1.news  {
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/2.gif") left 80% no-repeat;
+	background: url("/SiteCollectionImages/Mriya Theme/icons/2.gif") left 80% no-repeat;
 }
 
 h1.celebrating {
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/4.gif") left 50% no-repeat;
+	background: url("/SiteCollectionImages/Mriya Theme/icons/4.gif") left 50% no-repeat;
 }
 
 h1.industry_news {
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/3.gif") left 80% no-repeat;
+	background: url("/SiteCollectionImages/Mriya Theme/icons/3.gif") left 80% no-repeat;
 }
 
 h1.advertisement {
-	/*background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/1.gif") left 80% no-repeat;*/
+	/*background: url("/SiteCollectionImages/Mriya Theme/icons/1.gif") left 80% no-repeat;*/
 	margin-top: 0px;
 	padding-left: 0px;
 }
 
 h1.photo {
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/7.gif") left 80% no-repeat;
+	background: url("/SiteCollectionImages/Mriya Theme/icons/7.gif") left 80% no-repeat;
 }
 
 h1.move {
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/9.gif") left 80% no-repeat;
+	background: url("/SiteCollectionImages/Mriya Theme/icons/9.gif") left 80% no-repeat;
 }
 
 h1.communication {
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/5.gif") left 80% no-repeat;
+	background: url("/SiteCollectionImages/Mriya Theme/icons/5.gif") left 80% no-repeat;
 }
 
 h1.new_employees {
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/6.gif") left 80% no-repeat;
+	background: url("/SiteCollectionImages/Mriya Theme/icons/6.gif") left 80% no-repeat;
 }
 
 h1.map {
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/8.gif") left 80% no-repeat;
+	background: url("/SiteCollectionImages/Mriya Theme/icons/8.gif") left 80% no-repeat;
 }
 
 h3 {
@@ -104,11 +104,10 @@ h3 {
 #advertisement_zone {
 	overflow: hidden;
 	width: 100%;
-	height: 190px;
 }
 
 #baner_zone {
-	margin-bottom: 24px;
+	margin-bottom: 0;
 }
 
 .advert_list .date {
@@ -150,7 +149,7 @@ h3 {
 #output2 > div > div:first-child {
 	display: block;
 	padding: 0 !important;
-	margin: 5px 16px 16px 0 !important;
+	margin: 5px 16px 0 0 !important;
 }
 
 #output2 > div > div {
