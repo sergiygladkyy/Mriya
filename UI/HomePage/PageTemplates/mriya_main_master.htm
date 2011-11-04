@@ -534,11 +534,11 @@
 			{
 				var current = 1;
 				
-				jQuery('#main_menu .menu-horizontal .root > li').children('.menu-item').addClass('menu-item-'.current);
+				jQuery('#main_menu .menu-horizontal .root > li').children('.menu-item').addClass('menu-item-' + current);
 				jQuery('#main_menu .menu-horizontal .root > li > ul.static > li').each(function(index) {
 					current++;
 					
-					jQuery(this).children('.menu-item').addClass('menu-item-'.current);
+					jQuery(this).children('.menu-item').addClass('menu-item-' + current);
 				});
 			}
 			
