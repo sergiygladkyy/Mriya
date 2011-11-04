@@ -526,7 +526,9 @@
 				}
 			}
 			
-			jQuery(document).ready(function() {
+			/* Prepare main menu */
+			
+			/*jQuery(document).ready(function() {
 				prepareTopMenu();
 			});
 			
@@ -540,6 +542,115 @@
 					
 					jQuery(this).children('.menu-item').addClass('menu-item-' + current);
 				});
+			}*/
+			
+			var func = window.onload;
+			
+			window.onload = function(){ 
+				if (func) func();
+				prepareTopMenu();
+			}
+			
+			function prepareTopMenu()
+			{
+				// Find menu container (class = .menu-horizontal)
+				var menu  = document.getElementById('main_menu');
+				var elems = menu.getElementsByTagName('DIV');
+				var find  = false;
+		
+				for (var i = 0; i < elems.length; i++)
+				{
+					if (elems[i].className.search(/\bmenu-horizontal\b/g) > -1)
+					{
+						menu = elems[i];
+						
+						find = true;
+						
+						break;
+					}
+				}
+				
+				if (find) {
+					find = false;
+				}
+				else {
+					return false;
+				}
+				
+				// Find root
+				for (var i = 0; i < menu.childNodes.length; i++)
+				{
+					if (menu.childNodes[i].className && menu.childNodes[i].className.search(/\broot\b/g) > -1)
+					{
+						menu = menu.childNodes[i];
+						
+						find = true;
+						
+						break;
+					}
+				}
+				
+				if (find) {
+					find = false;
+				}
+				else {
+					return false;
+				}
+				
+				// Update root
+				var current = 1;
+				var child;
+				
+				for (var i = 0; i < menu.childNodes.length; i++)
+				{
+					if (menu.childNodes[i].nodeName == 'LI')
+					{
+						menu = menu.childNodes[i];
+						find = true;
+						
+						for (var j = 0; j < menu.childNodes.length; j++)
+						{
+							if (menu.childNodes[j].nodeName == 'UL')
+							{
+								child = menu.childNodes[j];
+							}
+							else if (menu.childNodes[j].className && menu.childNodes[j].className.search(/\bmenu-item\b/g) > -1)
+							{
+								menu.childNodes[j].className += ' menu-item-' + current;
+							}
+						}
+						
+						break;
+					}
+				}
+				
+				if (find) {
+					find = false;
+				}
+				else {
+					return false;
+				}
+				
+				// Uodate children
+				if (!child) return true;
+				
+				for (var i = 0; i < child.childNodes.length; i++)
+				{
+					if (child.childNodes[i].nodeName == 'LI')
+					{
+						var item = child.childNodes[i];
+						
+						for (var j = 0; j < item.childNodes.length; j++)
+						{
+							if (item.childNodes[j].className && item.childNodes[j].className.search(/\bmenu-item\b/g) > -1)
+							{
+								item.childNodes[j].className += ' menu-item-' + (++current);
+							}
+						}
+					}
+				}
+				
+				return true;
 			}
 			
 			/*Hide search menu element*/
