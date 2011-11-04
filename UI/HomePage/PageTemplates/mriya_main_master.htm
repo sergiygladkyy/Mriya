@@ -526,6 +526,22 @@
 				}
 			}
 			
+			jQuery(document).ready(function() {
+				prepareTopMenu();
+			});
+			
+			function prepareTopMenu()
+			{
+				var current = 1;
+				
+				jQuery('#main_menu .menu-horizontal .root > li').children('.menu-item').addClass('menu-item-'.current);
+				jQuery('#main_menu .menu-horizontal .root > li > ul.static > li').each(function(index) {
+					current++;
+					
+					jQuery(this).children('.menu-item').addClass('menu-item-'.current);
+				});
+			}
+			
 			/*Hide search menu element*/
 			var atags = document.getElementsByTagName("a");
 			var ahref = location.protocol + '//' + location.host + '/search/';

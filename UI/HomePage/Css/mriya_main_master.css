@@ -255,12 +255,12 @@ body #s4-bodyContainer {
 	background: #dcdcdc;
 }
 
-#main_menu .menu-item .i1 { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/1.gif") left bottom no-repeat; }
-#main_menu .menu-item .i2 { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/2.gif") left bottom no-repeat; }
-#main_menu .menu-item .i3 { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/3.gif") left bottom no-repeat; }
-#main_menu .menu-item .i4 { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/4.gif") left bottom no-repeat; }
-#main_menu .menu-item .i5 { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/5.gif") left bottom no-repeat; }
-#main_menu .menu-item .i6 { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/6.gif") left bottom no-repeat; }
+#main_menu .menu-item-1 { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/1.gif") left bottom no-repeat; padding-left: 24px; }
+#main_menu .menu-item-2 { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/2.gif") left bottom no-repeat; padding-left: 24px; }
+#main_menu .menu-item-3 { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/3.gif") left bottom no-repeat; padding-left: 24px; }
+#main_menu .menu-item-4 { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/4.gif") left bottom no-repeat; padding-left: 24px; }
+#main_menu .menu-item-5 { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/5.gif") left bottom no-repeat; padding-left: 24px; }
+#main_menu .menu-item-6 { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/6.gif") left bottom no-repeat; padding-left: 24px; }
 
 #footer
 {
