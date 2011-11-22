@@ -128,21 +128,6 @@ body #s4-bodyContainer {
 	overflow: hidden;
 }
 
-#s4-titlerow .s4-search table {
-	margin: 0;
-	padding: 0;
-	width: 177px;	
-}
-
-#s4-titlerow .ms-sbcell input {
-	width: 148px !important;
-	font-size: 12px;
-}
-
-#s4-titlerow .s4-search .srch-gosearchimg {
-	/*background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/search_btn.png") left top no-repeat;*/
-}
-
 #s4-bodyContainer .wrapper-inline {
 	float: left;
 	width: 22%;
@@ -150,21 +135,6 @@ body #s4-bodyContainer {
 
 #s4-bodyContainer .main-container {
 	margin: 0 0 0 22%;
-}
-
-.s4-search input.ms-sbplain {
-	background: #8ab500;
-	border-color: #8ab500 !important;
-	padding: 2px 3px 0px;
-	color: #f3f3f3;
-	border-radius: 3px 0px 0px 3px;
-	-moz-border-radius: 3px 0px 0px 3px;
-}
-
-.ms-sbplain {
-    border-color: #8ab500 -moz-use-text-color #8ab500 #8ab500 !important;
-    border-style: solid none solid solid !important;
-    border-width: 1px medium 1px 1px !important;
 }
 
 .ms-titlerowborder {
@@ -189,10 +159,56 @@ body #s4-bodyContainer {
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/header_bottom.jpg") center top no-repeat;
 }
 
+#header_menu td.search {
+	width: 177px;
+	padding: 8px 8px 7px;
+}
+
+#header_menu .search,
+#header_menu .search #s4-searcharea {
+	width:  177px;
+	height: 22px;
+	overflow: hidden;
+	border: 0 none;
+	padding: 0;
+	margin: 0;
+}
+
+#header_menu .ms-sbcell input {
+	width: 148px !important;
+	font-size: 12px;
+}
+
+#header_menu .search .s4-search table {
+	margin: 0;
+	padding: 0;
+	width: 177px;	
+}
+
+.search .s4-search .srch-gosearchimg {
+	/*background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/search_btn.png") left top no-repeat;*/
+}
+
+.s4-search input.ms-sbplain {
+	background: #8ab500;
+	border-color: #8ab500 !important;
+	padding: 2px 3px 0px;
+	color: #f3f3f3;
+	border-radius: 3px 0px 0px 3px;
+	-moz-border-radius: 3px 0px 0px 3px;
+}
+
+.ms-sbplain {
+    border-color: #8ab500 -moz-use-text-color #8ab500 #8ab500 !important;
+    border-style: solid none solid solid !important;
+    border-width: 1px medium 1px 1px !important;
+}
+
 #main_menu {
 	position: relative;
 	top: 1px;
 	height: 38px;
+	overflow: hidden;
 }
 
 #main_menu .static .menu-item {
@@ -293,13 +309,13 @@ body #s4-bodyContainer {
 #right_header_block {
 	float: right;
 	text-align: right;
-	margin: 11px 8px 2px 0px;
+	margin: 9px 1px 0 0;
 	max-width: 790px;
-	max-height: 78px;
+	max-height: 28px;
 }
 
 #right_header_block #user_info {
-	height: 35px;
+	height: 28px;
 }
 
 #right_header_block table {

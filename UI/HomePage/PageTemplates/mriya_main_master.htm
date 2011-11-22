@@ -10,6 +10,9 @@
 <%@ Register Tagprefix="PublishingNavigation" Namespace="Microsoft.SharePoint.Publishing.Navigation" Assembly="Microsoft.SharePoint.Publishing, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Assembly Name="Microsoft.SharePoint.Portal, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <%@ Register Tagprefix="MSSWC" Namespace="Microsoft.SharePoint.Portal.WebControls" Assembly="Microsoft.Office.Server.Search, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register tagprefix="WeatherInformerWebPart" namespace="ANROM.OnlineServices.WeatherInformerWebPart" assembly="Mriya.OnlineServices, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7172172328838be4" %>
+<%@ Register tagprefix="CurrencyInformerWebPart" namespace="ANROM.OnlineServices.CurrencyInformerWebPart" assembly="Mriya.OnlineServices, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7172172328838be4" %>
+<%@ Register tagprefix="TrafficInformerWebPart" namespace="ANROM.OnlineServices.TrafficInformerWebPart" assembly="Mriya.OnlineServices, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7172172328838be4" %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<%$Resources:wss,language_value %>" dir="<%$Resources:wss,multipages_direction_dir_value %>" runat="server" __expr-val-dir="ltr">
 
 <head runat="server">
@@ -245,7 +248,7 @@
 			<div id="WebPartAdderUpdatePanelContainer">
 				<asp:UpdatePanel ID="WebPartAdderUpdatePanel" UpdateMode="Conditional" ChildrenAsTriggers="false" runat="server">
 					<ContentTemplate>
-						<WebPartPages:WebPartAdder ID="WebPartAdder" runat="server"/>
+						<WebPartPages:WebPartAdder ID="WebPartAdder" runat="server" />
 					</ContentTemplate>
 					<Triggers>
 						<asp:PostBackTrigger ControlID="WebPartAdder" />
@@ -297,7 +300,6 @@
 							</td>
 						</tr>
 						</table>
-						<br />
 						<table class="titlerow-table" border="0" cellspacing="0" cellpadding="0">
 						<tr class="ribbon-table-backgroud">
 							<!--<td class="s4-titlelogo" style="text-align: left;">
@@ -315,18 +317,6 @@
 									<asp:ContentPlaceHolder id="PlaceHolderPageDescription" runat="server" />
 								</h3>
 							</td>
-							<td>
-								<div id="s4-searcharea" class="s4-search s4-rp">
-									<asp:ContentPlaceHolder id="PlaceHolderSearchArea" runat="server">
-										<SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox" Version="4"/>								
-										<br />
-										<br />
-										<div class="extendedSearch" style="padding-left: 10px; margin-top: -5px; display:none;">
-											<a href="/search/Pages/advanced.aspx">Розширений пошук</a>
-										</div>
-									</asp:ContentPlaceHolder>
-								</div>
-							</td>
 						</tr>
 						</table>
 					</div>
@@ -337,7 +327,7 @@
 			<div id="header_menu">
 				<table id="main_menu" class="s4-notdlg titlerow-table" border="0" cellspacing="0" cellpadding="0">
 				<tr>
-					<td colspan="3">
+					<td>
 						<div class=".s4-div s4-topmenulinks">
 							<!-- Dynamic menu -->
 							<asp:ContentPlaceHolder id="PlaceHolderTopNavBar" runat="server">
@@ -354,26 +344,8 @@
 										  StaticDisplayLevels="2"
 										  MaximumDynamicDisplayLevels="1"
 										  SkipLinkText=""
-										  CssClass="s4-topmenu" __designer:Preview="&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/_layouts/1058/styles/menu-21.css&quot;/&gt;
-&lt;div id=&quot;zz12_TopNavigationMenuV4&quot; class=&quot;s4-topmenu&quot;&gt;
-	&lt;div class=&quot;menu horizontal menu-horizontal&quot;&gt;
-		&lt;ul class=&quot;root static&quot;&gt;
-			&lt;li class=&quot;static&quot;&gt;&lt;a class=&quot;static menu-item&quot; href=&quot;/Pages/default.aspx&quot; accesskey=&quot;1&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Головна&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;ul class=&quot;static&quot;&gt;
-				&lt;li class=&quot;static dynamic-children&quot;&gt;&lt;a class=&quot;static dynamic-children menu-item&quot; href=&quot;/Company/Activity/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Компанія&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;ul class=&quot;dynamic&quot;&gt;
-					&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/Activity/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Напрямки діяльності&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/Mission/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Цілі та місія&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/Management/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Керівництво&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/Culture/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Корпоративна культура&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/Career/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Кар&amp;#39;єра&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/Contacts/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Наші офіси&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/PressCenter/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Про нас пишуть&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Company/News/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Сайт публікації&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-				&lt;/ul&gt;&lt;/li&gt;&lt;li class=&quot;static&quot;&gt;&lt;a class=&quot;static menu-item&quot; href=&quot;/Staff/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Співробітники&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;static&quot;&gt;&lt;a class=&quot;static menu-item&quot; href=&quot;/OrganizationChart/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Структура&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;static dynamic-children&quot;&gt;&lt;a class=&quot;static dynamic-children menu-item&quot; href=&quot;/Community/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Наше життя&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;ul class=&quot;dynamic&quot;&gt;
-					&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Community/News/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Новини&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Community/News/Announsment&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Організаційні оголошення&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Community/Pages/VideoGallery.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Відеогалерея&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Community/Pages/PhotoGallery.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Фотогалерея&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Community/Forum/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Форум&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Community/Pages/Events.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Календар подій&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-				&lt;/ul&gt;&lt;/li&gt;&lt;li class=&quot;static&quot;&gt;&lt;a class=&quot;static menu-item&quot; href=&quot;/Links/Pages/default.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Корисна інформація&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;static dynamic-children&quot;&gt;&lt;a class=&quot;static dynamic-children menu-item&quot; href=&quot;/Toolbox/Pages/default12.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Сервісна скринька&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;ul class=&quot;dynamic&quot;&gt;
-					&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Toolbox/Dictionary/Lists/WordList/WordsList.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Агрословник&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class=&quot;dynamic&quot;&gt;&lt;a class=&quot;dynamic menu-item&quot; href=&quot;/Toolbox/Library/Lists/Books/LibraryView.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;Бібліотека&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-				&lt;/ul&gt;&lt;/li&gt;&lt;li class=&quot;static&quot;&gt;&lt;a class=&quot;static menu-item&quot; href=&quot;/Pages/NewMainPage.aspx&quot;&gt;&lt;span class=&quot;additional-background&quot;&gt;&lt;span class=&quot;menu-item-text&quot;&gt;NewMainPage&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-			&lt;/ul&gt;&lt;/li&gt;
-		&lt;/ul&gt;
-	&lt;/div&gt;
-&lt;/div&gt;" __designer:Values="&lt;P N='ID' T='TopNavigationMenuV4' /&gt;&lt;P N='UseSimpleRendering' T='True' /&gt;&lt;P N='MaximumDynamicDisplayLevels' T='1' /&gt;&lt;P N='Orientation' E='0' /&gt;&lt;P N='SkipLinkText' R='-1' /&gt;&lt;P N='StaticDisplayLevels' T='2' /&gt;&lt;P N='DataSourceID' T='topSiteMap' /&gt;&lt;P N='AccessKey' Bound='True' T='Resources:wss,navigation_accesskey' /&gt;&lt;P N='CssClass' T='s4-topmenu' /&gt;&lt;P N='EnableViewState' T='False' /&gt;&lt;P N='Page' ID='1' /&gt;&lt;P N='TemplateControl' ID='2' /&gt;&lt;P N='AppRelativeTemplateSourceDirectory' R='-1' /&gt;" __designer:Templates="&lt;Group Name=&quot;Item Templates&quot;&gt;&lt;Template Name=&quot;StaticItemTemplate&quot; Flags=&quot;D&quot; Content=&quot;&quot; /&gt;&lt;Template Name=&quot;DynamicItemTemplate&quot; Flags=&quot;D&quot; Content=&quot;&quot; /&gt;&lt;/Group&gt;"/>
-									<SharePoint:DelegateControl runat="server" ControlId="TopNavigationDataSource" Id="topNavigationDelegate" __designer:Preview="&lt;span style=&quot;display:none&quot;&gt;&lt;table cellpadding=4 cellspacing=0 style=&quot;font:messagebox;color:buttontext;background-color:buttonface;border: solid 1px;border-top-color:buttonhighlight;border-left-color:buttonhighlight;border-bottom-color:buttonshadow;border-right-color:buttonshadow&quot;&gt;
-              &lt;tr&gt;&lt;td nowrap&gt;&lt;span style=&quot;font-weight:bold&quot;&gt;PortalSiteMapDataSourceSwitch&lt;/span&gt; - topSiteMap&lt;/td&gt;&lt;/tr&gt;
-              &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-            &lt;/table&gt;&lt;/span&gt;" __designer:Values="&lt;P N='ControlId' T='TopNavigationDataSource' /&gt;&lt;P N='ID' T='topNavigationDelegate' /&gt;&lt;P N='Page' ID='1' /&gt;&lt;P N='TemplateControl' ID='2' /&gt;&lt;P N='AppRelativeTemplateSourceDirectory' R='-1' /&gt;">
+										  CssClass="s4-topmenu"/>
+									<SharePoint:DelegateControl runat="server" ControlId="TopNavigationDataSource" Id="topNavigationDelegate">
 										<Template_Controls>
 											<asp:SiteMapDataSource
 												  ShowStartingNode="False"
@@ -399,6 +371,20 @@
 								<a href="/Pages/Sitemap.aspx" style="padding-left: 5px; padding-right: 5px;" title="Карта порталу">
 									<img src="../../SiteCollectionImages/sitemap.png" style="border-width: 0px; padding-right: 2px; vertical-align: middle;" alt=""> 
 									Карта порталу</a>
+							</div>
+						</div>
+					</td>
+					<td class="search">
+						<div class="search">
+							<div id="s4-searcharea" class="s4-search s4-rp">
+								<asp:ContentPlaceHolder id="PlaceHolderSearchArea" runat="server">
+									<SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox" Version="4"/>								
+									<br />
+									<br />
+									<div class="extendedSearch" style="padding-left: 10px; margin-top: -5px; display:none;">
+										<a href="/search/Pages/advanced.aspx">Розширений пошук</a>
+									</div>
+								</asp:ContentPlaceHolder>
 							</div>
 						</div>
 					</td>
