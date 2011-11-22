@@ -1,0 +1,26 @@
+#advertisement_zone .s4-wpTopTable table {
+	margin: 0 !important;
+	padding: 8px 10px !important;
+}
+
+#advertisement_zone .s4-wpTopTable .even {
+	background-color: #eeeeee;
+}
+
+#advertisement_zone .s4-wpTopTable table td {
+    vertical-align: top !important;
+	display: inline !important;
+	color: #333 !important;
+}
+
+#advertisement_zone .s4-wpTopTable table td a {
+	color: #333 !important;
+	font-size: 12px !important;
+	font-weight: normal !important;
+}
+
+#advertisement_zone .s4-wpTopTable table td span {
+	color: #8f0fa0 !important;
+	font-size: 9px !important;
+	font-weight: normal !important;
+}

@@ -1,5 +1,8 @@
-<%@ Page language="C#" MasterPageFile="v2.MriyaMain.master" inherits="Microsoft.SharePoint.WebPartPages.WebPartPage, Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" meta:webpartpageexpansion="full" meta:progid="SharePoint.WebPartPage.Document" %>
-<%@ Register Tagprefix="SharePointWebControls" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %> <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %> <%@ Register Tagprefix="PublishingWebControls" Namespace="Microsoft.SharePoint.Publishing.WebControls" Assembly="Microsoft.SharePoint.Publishing, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %> <%@ Register Tagprefix="PublishingNavigation" Namespace="Microsoft.SharePoint.Publishing.Navigation" Assembly="Microsoft.SharePoint.Publishing, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Page language="C#"   Inherits="Microsoft.SharePoint.Publishing.PublishingLayoutPage,Microsoft.SharePoint.Publishing,Version=14.0.0.0,Culture=neutral,PublicKeyToken=71e9bce111e9429c" meta:progid="SharePoint.WebPartPage.Document" meta:webpartpageexpansion="full" %>
+<%@ Register Tagprefix="SharePointWebControls" Namespace="Microsoft.SharePoint.WebControls" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register Tagprefix="PublishingWebControls" Namespace="Microsoft.SharePoint.Publishing.WebControls" Assembly="Microsoft.SharePoint.Publishing, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+<%@ Register Tagprefix="PublishingNavigation" Namespace="Microsoft.SharePoint.Publishing.Navigation" Assembly="Microsoft.SharePoint.Publishing, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 <asp:Content ContentPlaceholderID="PlaceHolderAdditionalPageHead" runat="server">
 	<SharePointWebControls:UIVersionedContent UIVersion="3" runat="server">
 		<ContentTemplate>
@@ -58,6 +61,7 @@
 		</ContentTemplate>
 	</SharePointWebControls:UIVersionedContent>
 	<SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Themable/Core Styles/mriya_main_layout.css %>" After="mriya_main_master.css" runat="server"/>
+	<SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Themable/Core Styles/mriya_main_advertisement.css %>" After="mriya_main_layout.css" runat="server"/>
 </asp:Content>
 <asp:Content ContentPlaceholderID="PlaceHolderPageTitle" runat="server">
 	<SharePointWebControls:FieldValue id="PageTitle" FieldName="Title" runat="server"/>
@@ -191,6 +195,42 @@
 	</div>
 	
 	<script type="text/javascript">
+		var __adv_cnt = 0;
+		
+		prepareAdvertisementZone();
+		
+		function prepareAdvertisementZone()
+		{
+			var cnt = 0;
+			var content = document.getElementById('output444');
+			
+			if (!content) return;
+			
+			var length = content.childNodes.length;
+			
+			if (length == 0)
+			{
+				if (__adv_cnt < 10)
+				{
+					window.setTimeout(prepareAdvertisementZone, 2000);
+					
+					__adv_cnt++;
+				}
+				
+				return;
+			}
+			
+			for (var i = 0; i < length; i++)
+			{
+				if (content.childNodes[i].nodeName == 'TABLE')
+				{
+					content.childNodes[i].className = content.childNodes[i].className + (cnt%2 > 0 ? ' odd' : ' even');
+					
+					cnt++;
+				}
+			}
+		}
+		
 		//first news web part
 		var firstnews = document.getElementById('cbqwpctl00_ctl23_g_609a7931_1a98_4a97_9bda_1aea13b2ac52');
 		if (firstnews != null) {
