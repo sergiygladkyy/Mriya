@@ -1,0 +1,233 @@
+<script type="text/javascript" src="../SitePages/SPAPI/SPAPI_Core.js"></script>
+<script type="text/javascript" src="../SitePages/SPAPI/SPAPI_Lists.js"></script>
+<script type="text/javascript" src="../SitePages/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="../SitePages/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../SitePages/isSlider.js"></script>
+
+<script language="JavaScript">
+function initializeSlider()
+{
+	var fildslist = 
+		'<ViewFields>' +
+			'<FieldRef Name="Title"/>' +
+			'<FieldRef Name="FileRef"/>' + 
+			'<FieldRef Name="PublishingRollupImage"/>' +
+			'<FieldRef Name="ContentType"/>' +
+			'<FieldRef Name="_x041e__x043f__x0438__x0441__x0020__x043d__x043e__x0432__x0438__x043d__x0438_"/>' +
+			'<FieldRef Name="Comments"/>' +
+			'<FieldRef Name="UniqueId"/>' +
+			'<FieldRef Name="ArticleStartDate"/>' +
+			'<FieldRef Name="ArticleByLine"/>' +
+		'</ViewFields>'
+	;
+	
+	var strRowFormat = 
+		'<div class="slide">' +
+			'<img src="{image}" class="image" />' +
+			'<div class="title">{title}</div>' +
+			'<div class="text">' +
+				'<div class="text_padd">' +
+					'<a href="{link}"><img width="6" height="17" src="/sites/mriya/SiteCollectionImages/Mriya Theme/arrow_text.png"></a>' +
+					'{text}' +
+				'</div>' +
+			'</div>' +
+		'</div>'
+	;
+	
+	var strControlFormat = '<div class="control"></div>\n';
+	
+	function getItems()
+	{
+		try
+		{
+			var list  = new SPAPI_Lists('http://neso.contoso.com/sites/mriya/Community/News');
+			var items = list.getListItems('Сторінки', '{FE7CD840-136B-469A-87D3-6A1DE3C72CF7}', '<Query />', fildslist, 4);
+			
+			if (items.status == 200)
+				return items;
+			else
+				alert('There was an error: '+ items.status + ' | ' + items.statusText); 
+		}
+		catch(ex)
+		{
+			alert(ex);
+		}
+		
+		return null;
+	}
+	
+	function setToElement(slider_id, slider_controls_id, val)
+	{
+		var control = document.getElementById(slider_id);
+		
+		if (typeof(control) != 'object')
+			alert('control not found! id="' + slider_id + '" val="' + val + '"');
+		else
+		{
+			jQuery(control).find('.slides').append(val);
+			jQuery('#' + slider_controls_id).append(strControlFormat);
+		}
+	}
+	
+	function PrepareNewsItems(slider_id, slider_controls_id)
+	{
+		var items = getItems();
+		
+		if (items != null)
+		{
+			var rows = items.responseXML.getElementsByTagName('z:row');
+			var str2 = '';
+			
+			for (var i=0; i<rows.length; i++)
+			{
+				var img = '';
+				var title = '';
+				var author = '';
+				var date = '';
+				var link = '';
+				var lead = '';
+				
+				for (var j=0; j<rows[i].attributes.length; j++) 
+				{
+					if (rows[i].attributes[j].name == 'ows_PublishingRollupImage') img = rows[i].attributes[j].value;
+					if (rows[i].attributes[j].name == 'ows_Title') title = rows[i].attributes[j].value;
+					if (rows[i].attributes[j].name == 'ows_ArticleByLine') author = rows[i].attributes[j].value;
+					if (rows[i].attributes[j].name == 'ows_ArticleStartDate') date = rows[i].attributes[j].value.split(' ')[0];
+					if (rows[i].attributes[j].name == 'ows_FileRef') link = ('../' + rows[i].attributes[j].value.split(';#')[1]);
+					if (rows[i].attributes[j].name == 'ows__x041e__x043f__x0438__x0441__x0020__x043d__x043e__x0432__x0438__x043d__x0438_') lead = rows[i].attributes[j].value;
+				}
+				
+				var patt = /src="([^"]+)"/gi;
+				img = patt.exec(img);
+				img = (img.length == 2) ? img[1] : '';
+				
+				str2 = strRowFormat.replace('{image}', img)
+					.replace('{title}', title)
+					.replace('{link}',  link)
+					.replace('{text}',  lead);
+				
+				setToElement(slider_id, slider_controls_id, str2);
+			}
+		}
+		else alert('Items is null!!');
+	}
+	
+	PrepareNewsItems('slider', 'slider_controls');
+	
+	var slider = new isSlider('slider', 'slider_controls', {
+		width: 460,
+		height: 160,
+		interval: 9000
+	});
+	
+	slider.initialize();
+}
+	
+_spBodyOnLoadFunctionNames.push('initializeSlider');
+</script>
+<style type="text/css">
+#slider {
+	width: 460px;
+	height: 160px;
+	overflow: hidden;
+	border: 0 none;
+	border-radius: 8px 8px 8px 8px;
+	font-family: Tahoma,Geneva,sans-serif;
+    font-size: 12px;
+}
+
+#slider .slides {
+	width:  460px;      // Set in js  #slider .slide[width] * (slide_numb + 1)
+	height: 160px;      // Set in js  #slider .slide[height]
+	overflow: hidden;   // Set in js  (hidden)
+	background: #000;
+	position: relative; // Set in js  (relative)
+	padding: 0          // Set in js  (0)
+}
+
+#slider .slide {
+	width:  460px;    // Set in js  (from settings)
+	height: 160px;    // Set in js  (from settings)
+	float: left;      // Set in js  (left)
+	overflow: hidden; // Set in js  (hidden)
+	margin: 0;        // Set in js  (0)
+	padding: 0;       // Set in js  (0)
+	border: 0 none;   // Set in js  (0 none)
+}
+
+.slide .image {
+	width: 100%;
+	height: 100%;
+	border: 0 none;
+}
+
+.slide .title {
+    color: #FFFFFF;
+    font-size: 24px;
+    left: 0;
+    padding: 32px 32px 0;
+    position: relative;
+    text-shadow: 3px 3px 3px #000000;
+    top: -160px;
+    z-index: 99;
+	width: 315px;
+	height: 80px;
+	overflow: hidden;
+}
+
+.slide .text {
+    background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/slide_text_bg.png");
+    color: #FFFFFF;
+    height: 48px;
+    left: 0;
+    position: relative;
+    width: 460px;
+    z-index: 98;
+	top: -160px;
+}
+
+.slide .text .text_padd {
+    padding: 8px 14px 0 30px;
+	height: 30px;
+	overflow: hidden;
+}
+
+.slide .text a {
+    display: inline-block;
+    margin-left: 34px;
+    margin-top: 8px;
+    text-align: center;
+    width: 16px;
+	float: right;
+}
+
+#slider_controls {
+	width: 430px;
+	height: 10px;
+	padding: 10px 20px 10px 10px;
+	margin: 0;
+	overflow: hidden;
+	text-align: right;
+	line-height: 9px;
+}
+
+#slider_controls .control {
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/dot_green.gif") no-repeat transparent;
+	cursor: pointer;
+}
+
+#slider_controls .control.current {
+	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/dot_purple.gif") no-repeat transparent;
+}
+</style>
+<div id="slider">
+	<div class="slides">
+	</div>
+</div>
+<div id="slider_controls">
+</div>

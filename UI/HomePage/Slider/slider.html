@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-gb" xml:lang="en-gb" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, max-age=0, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<title>Галерея</title>
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="js/isSlider.js"></script>
+<style type="text/css">
+#content {
+	width: 450px;
+	margin: 10px auto;
+}
+
+#slider {
+	width: 460px;
+	height: 160px;
+	overflow: hidden;
+	border: 0 none;
+	border-radius: 8px 8px 8px 8px;
+	font-family: Tahoma,Geneva,sans-serif;
+    font-size: 12px;
+}
+
+#slider .slides {
+	width:  460px;      // Set in js  #slider .slide[width] * (slide_numb + 1)
+	height: 160px;      // Set in js  #slider .slide[height]
+	overflow: hidden;   // Set in js  (hidden)
+	background: #000;
+	position: relative; // Set in js  (relative)
+	padding: 0          // Set in js  (0)
+}
+
+#slider .slide {
+	width:  460px;    // Set in js  (from settings)
+	height: 160px;    // Set in js  (from settings)
+	float: left;      // Set in js  (left)
+	overflow: hidden; // Set in js  (hidden)
+	margin: 0;        // Set in js  (0)
+	padding: 0;       // Set in js  (0)
+	border: 0 none;   // Set in js  (0 none)
+}
+
+.slide .image {
+	width: 100%;
+	height: 100%;
+	border: 0 none;
+}
+
+.slide .title {
+    color: #FFFFFF;
+    font-size: 24px;
+    left: 0;
+    padding: 32px 32px 0;
+    position: relative;
+    text-shadow: 3px 3px 3px #000000;
+    top: -160px;
+    z-index: 99;
+	width: 315px;
+	height: 80px;
+	overflow: hidden;
+}
+
+.slide .text {
+    background-image: url("images/slide_text_bg.png");
+    color: #FFFFFF;
+    height: 48px;
+    left: 0;
+    position: relative;
+    width: 460px;
+    z-index: 98;
+	top: -160px;
+}
+
+.slide .text .text_padd {
+    padding: 8px 14px 0 30px;
+	height: 30px;
+	overflow: hidden;
+}
+
+.slide .text a {
+    display: inline-block;
+    margin-left: 34px;
+    margin-top: 8px;
+    text-align: center;
+    width: 16px;
+	float: right;
+}
+
+#slider_controls {
+	width: 430px;
+	height: 10px;
+	padding: 10px 20px 10px 10px;
+	margin: 0;
+	overflow: hidden;
+	text-align: right;
+	line-height: 9px;
+}
+
+#slider_controls .control {
+	width: 10px;
+	height: 10px;
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	background: url("images/dot_green.gif") no-repeat transparent;
+	cursor: pointer;
+}
+
+#slider_controls .control.current {
+	background: url("images/dot_purple.gif") no-repeat transparent;
+}
+</style>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		var slider = new isSlider('slider', 'slider_controls', {
+			width: 460,
+			height: 160,
+			interval: 5000
+		});
+		
+		slider.initialize();
+	});
+</script>
+</head>
+<body>
+<div id="content">
+	<div id="slider">
+		<div class="slides">
+			<div class="slide">
+				<img src="img/main1.jpg" alt="img/main1.jpg" class="image" />
+				<div class="title">«Мрія» розпочала збирання зернових</div>
+				<div class="text">
+					<div class="text_padd">
+						<a href="#"><img width="6" height="17" src="images/arrow_text.png"></a>
+						«Мрія» вітала гостей на Вечірі українського бізнесу в Німеччині на Вечірі українського бізнесу в Німеччині «Мрія» вітала гостей на Вечірі українського бізнесу в Німеччині на Вечірі українського бізнесу в Німеччині
+					</div>
+				</div>
+			</div>
+			<div class="slide">
+				<img src="img/main2.jpg" alt="img/main2.jpg" class="image" />
+				<div class="title">«Мрія» розпочала збирання зернових</div>
+				<div class="text">
+					<div class="text_padd">
+						<a href="#"><img width="6" height="17" src="images/arrow_text.png"></a>
+						«Мрія» розпочала збирання зернових культур 9 липня. За перші 10 днів вже намолочено майже 18 тисяч тонн збіжжя. Цьогоріч комбайни «Мрії» почали жнивувати з Чернівецької та Івано-франківської областей.
+					</div>
+				</div>
+			</div>
+			<div class="slide">
+				<img src="img/main3.jpg" alt="img/main3.jpg" class="image" />
+				<div class="title">«Мрія» розпочала збирання зернових</div>
+				<div class="text">
+					<div class="text_padd">
+						<a href="#"><img width="6" height="17" src="images/arrow_text.png"></a>
+						«Мрія» розпочала збирання зернових культур 9 липня. За перші 10 днів вже намолочено майже 18 тисяч тонн збіжжя. Цьогоріч комбайни «Мрії» почали жнивувати з Чернівецької та Івано-франківської областей.
+					</div>
+				</div>
+			</div>
+			<div class="slide">
+				<img src="img/main4.jpg" alt="img/main4.jpg" class="image" />
+				<div class="title">«Мрія» розпочала збирання зернових</div>
+				<div class="text">
+					<div class="text_padd">
+						<a href="#"><img width="6" height="17" src="images/arrow_text.png"></a>
+						«Мрія» розпочала збирання зернових культур 9 липня. За перші 10 днів вже намолочено майже 18 тисяч тонн збіжжя. Цьогоріч комбайни «Мрії» почали жнивувати з Чернівецької та Івано-франківської областей.
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="slider_controls">
+		<div class="control"></div>
+		<div class="control"></div>
+		<div class="control"></div>
+		<div class="control"></div>
+	</div>
+</div>
+</body>
+</html>
