@@ -10,20 +10,17 @@ function initializeSlider()
 	var fildslist = 
 		'<ViewFields>' +
 			'<FieldRef Name="Title"/>' +
-			'<FieldRef Name="FileRef"/>' + 
-			'<FieldRef Name="PublishingRollupImage"/>' +
-			'<FieldRef Name="ContentType"/>' +
-			'<FieldRef Name="_x041e__x043f__x0438__x0441__x0020__x043d__x043e__x0432__x0438__x043d__x0438_"/>' +
-			'<FieldRef Name="Comments"/>' +
-			'<FieldRef Name="UniqueId"/>' +
-			'<FieldRef Name="ArticleStartDate"/>' +
-			'<FieldRef Name="ArticleByLine"/>' +
+			'<FieldRef Name="FileRef"/>' +
+			'<FieldRef Name="_x041e__x043f__x0438__x0441__x0020__x043d__x043e__x0432__x0438__x043d__x0438_"/>' + // Краткое описание
+			'<FieldRef Name="_x0424__x043e__x043d__x0020__x0441__x043b__x0430__x0439__x0434__x0435__x0440__x0430_"/>' + // Фон слайдера
+			'<FieldRef Name="_x0421__x043b__x0430__x0439__x0434__x0435__x0440_"/>' + // Слайдер
+			'<FieldRef Name="_x0417__x043e__x0432__x043d__x0456__x0448__x043d__x0435__x0020__x041f__x043e__x0441__x0438__x043b__x0430__x043d__x043d__x044f_"/>' + // Внешняя ссылка
 		'</ViewFields>'
 	;
 	
 	var strRowFormat = 
 		'<div class="slide">' +
-			'<img src="{image}" class="image" />' +
+			'<div class="image">{image}</div>' +
 			'<div class="title">{title}</div>' +
 			'<div class="text">' +
 				'<div class="text_padd">' +
@@ -36,12 +33,21 @@ function initializeSlider()
 	
 	var strControlFormat = '<div class="control"></div>\n';
 	
+	var query = 
+		'<Query><Where>' + 
+			'<Eq>' +
+				'<FieldRef Name="_x0421__x043b__x0430__x0439__x0434__x0435__x0440_"/>' + // Слайдер
+				'<Value Type="Text">1</Value>' +
+			'</Eq>' +
+		'</Where></Query>'
+	;
+	
 	function getItems()
 	{
 		try
 		{
 			var list  = new SPAPI_Lists('http://neso.contoso.com/sites/mriya/Community/News');
-			var items = list.getListItems('�������', '{FE7CD840-136B-469A-87D3-6A1DE3C72CF7}', '<Query />', fildslist, 4);
+			var items = list.getListItems('Сторінки', '{FE7CD840-136B-469A-87D3-6A1DE3C72CF7}', query, fildslist/*, 4*/);
 			
 			if (items.status == 200)
 				return items;
@@ -80,31 +86,34 @@ function initializeSlider()
 			
 			for (var i=0; i<rows.length; i++)
 			{
-				var img = '';
+				
 				var title = '';
-				var author = '';
-				var date = '';
-				var link = '';
-				var lead = '';
+				var text  = '';
+				var img   = '';
+				var int_link = '';
+				var ext_link = '';
 				
 				for (var j=0; j<rows[i].attributes.length; j++) 
 				{
-					if (rows[i].attributes[j].name == 'ows_PublishingRollupImage') img = rows[i].attributes[j].value;
 					if (rows[i].attributes[j].name == 'ows_Title') title = rows[i].attributes[j].value;
-					if (rows[i].attributes[j].name == 'ows_ArticleByLine') author = rows[i].attributes[j].value;
-					if (rows[i].attributes[j].name == 'ows_ArticleStartDate') date = rows[i].attributes[j].value.split(' ')[0];
-					if (rows[i].attributes[j].name == 'ows_FileRef') link = ('../' + rows[i].attributes[j].value.split(';#')[1]);
-					if (rows[i].attributes[j].name == 'ows__x041e__x043f__x0438__x0441__x0020__x043d__x043e__x0432__x0438__x043d__x0438_') lead = rows[i].attributes[j].value;
+					if (rows[i].attributes[j].name == 'ows__x041e__x043f__x0438__x0441__x0020__x043d__x043e__x0432__x0438__x043d__x0438_') text = rows[i].attributes[j].value;
+					if (rows[i].attributes[j].name == 'ows__x0424__x043e__x043d__x0020__x0441__x043b__x0430__x0439__x0434__x0435__x0440__x0430_') img = rows[i].attributes[j].value;
+					if (rows[i].attributes[j].name == 'ows_FileRef') int_link = ('../' + rows[i].attributes[j].value.split(';#')[1]);
+					if (rows[i].attributes[j].name == 'ows__x0417__x043e__x0432__x043d__x0456__x0448__x043d__x0435__x0020__x041f__x043e__x0441__x0438__x043b__x0430__x043d__x043d__x044f_') ext_link = rows[i].attributes[j].value;
 				}
 				
-				var patt = /src="([^"]+)"/gi;
-				img = patt.exec(img);
-				img = (img.length == 2) ? img[1] : '';
+				if (img)
+				{
+					img = '<img src="' + img.split(',')[0] +'" alt="" class="image" />';
+				}
+				
+				var link = ext_link ? ext_link.split(',')[0] : int_link;
 				
 				str2 = strRowFormat.replace('{image}', img)
 					.replace('{title}', title)
 					.replace('{link}',  link)
-					.replace('{text}',  lead);
+					.replace('{text}',  text)
+				;
 				
 				setToElement(slider_id, slider_controls_id, str2);
 			}
@@ -159,6 +168,8 @@ _spBodyOnLoadFunctionNames.push('initializeSlider');
 	width: 100%;
 	height: 100%;
 	border: 0 none;
+	padding: 0;
+	margin: 0;
 }
 
 .slide .title {

@@ -25,10 +25,10 @@ function isSlider(sTag, cTag, settings)
 		if (s_numb > 1)
 		{
 			slides.append('<div class="slide">' + slides.find('.slide:first').html() + '</div>');
+			
+			last_pos = s_width * s_numb;
 		}
 		else s_numb = 1;
-		
-		last_pos = s_width * s_numb;
 		
 		slides.css('width', s_width * (s_numb + 1) + 'px')
 			.css('height', s_height + 'px')
