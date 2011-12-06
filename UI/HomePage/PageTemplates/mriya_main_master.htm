@@ -13,6 +13,7 @@
 <%@ Register tagprefix="WeatherInformerWebPart" namespace="ANROM.OnlineServices.WeatherInformerWebPart" assembly="Mriya.OnlineServices, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7172172328838be4" %>
 <%@ Register tagprefix="CurrencyInformerWebPart" namespace="ANROM.OnlineServices.CurrencyInformerWebPart" assembly="Mriya.OnlineServices, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7172172328838be4" %>
 <%@ Register tagprefix="TrafficInformerWebPart" namespace="ANROM.OnlineServices.TrafficInformerWebPart" assembly="Mriya.OnlineServices, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7172172328838be4" %>
+
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<%$Resources:wss,language_value %>" dir="<%$Resources:wss,multipages_direction_dir_value %>" runat="server" __expr-val-dir="ltr">
 
 <head runat="server">
@@ -262,134 +263,137 @@
 		</tr>
 		</table>
 	</div>
+	
 	<div id="s4-workspace">
 		<div id="s4-bodyContainer">
 			<div id="s4-titlerow" class="s4-pr s4-notdlg s4-titlerowhidetitle">
-				<div class="ribbon-table-backgroud">
-					<SharePoint:SPRibbonPeripheralContent runat="server" Location="TabRowRight"	CssClass="ms-siteactionscontainer s4-notdlg">
-					<a href="/Pages/default.aspx"><div id="logo"></div></a>
-					<div id="right_header_block">
-						<table id="user_info" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td>
-								<div class="s4-trc-container s4-notdlg top-row-elements" style="padding:0px; margin:0px;">
-									<SharePoint:DelegateControl runat="server" ControlId="GlobalSiteLink0"/>
-									<a href="#" tabindex="-1" style="display:none"></a><a href="#" tabindex="-1" style="display:none"></a>
-									<SharePoint:DelegateControl ControlId="GlobalSiteLink3-mini" Scope="Farm" runat="server"/>
-									<div class="s4-trc-container-menu">
-										<wssuc:Welcome id="IdWelcome" runat="server" EnableViewState="false">
-										</wssuc:Welcome>
-										<wssuc:MUISelector runat="server"/>
-									</div>
-									<SharePoint:DelegateControl ControlId="GlobalSiteLink2" Scope="Farm" runat="server"/>
-									<span>
-										<span style="display:inline-block;position:relative;">
-											<Sharepoint:DeveloperDashboardLauncher
-												ID="DeveloperDashboardLauncher"
-												NavigateUrl="javascript:ToggleDeveloperDashboard()"
-												runat="server"
-												ImageUrl="/_layouts/images/fgimg.png"
-												Text="<%$Resources:wss,multipages_launchdevdashalt_text%>"
-												OffsetX=0
-												OffsetY=222
-												Height=16
-												Width=16/>
+				<div class="s4-titlerow">
+					<div class="ribbon-table-backgroud">
+						<SharePoint:SPRibbonPeripheralContent runat="server" Location="TabRowRight"	CssClass="ms-siteactionscontainer s4-notdlg">
+						<a href="/Pages/default.aspx"><div id="logo"></div></a>
+						<div id="right_header_block">
+							<table id="user_info" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td>
+									<div class="s4-trc-container s4-notdlg top-row-elements" style="padding:0px; margin:0px;">
+										<SharePoint:DelegateControl runat="server" ControlId="GlobalSiteLink0"/>
+										<a href="#" tabindex="-1" style="display:none"></a><a href="#" tabindex="-1" style="display:none"></a>
+										<SharePoint:DelegateControl ControlId="GlobalSiteLink3-mini" Scope="Farm" runat="server"/>
+										<div class="s4-trc-container-menu">
+											<wssuc:Welcome id="IdWelcome" runat="server" EnableViewState="false">
+											</wssuc:Welcome>
+											<wssuc:MUISelector runat="server"/>
+										</div>
+										<SharePoint:DelegateControl ControlId="GlobalSiteLink2" Scope="Farm" runat="server"/>
+										<span>
+											<span style="display:inline-block;position:relative;">
+												<Sharepoint:DeveloperDashboardLauncher
+													ID="DeveloperDashboardLauncher"
+													NavigateUrl="javascript:ToggleDeveloperDashboard()"
+													runat="server"
+													ImageUrl="/_layouts/images/fgimg.png"
+													Text="<%$Resources:wss,multipages_launchdevdashalt_text%>"
+													OffsetX=0
+													OffsetY=222
+													Height=16
+													Width=16/>
+											</span>
 										</span>
-									</span>
-								</div>
-							</td>
-						</tr>
-						</table>
-						<table class="titlerow-table" border="0" cellspacing="0" cellpadding="0">
-						<tr class="ribbon-table-backgroud">
-							<!--<td class="s4-titlelogo" style="text-align: left;">
-								<SharePoint:SPLinkButton id="onetidProjectPropertyTitleGraphic" runat="server" NavigateUrl="/" __designer:Preview="&lt;a id=&quot;ctl00_onetidProjectPropertyTitleGraphic&quot; href=&quot;/&quot;&gt;
-									&lt;img id=&quot;ctl00_onetidHeadbnnr2&quot; name=&quot;onetidHeadbnnr0&quot; Src=&quot;/SiteCollectionImages/logo.png&quot; alt=&quot;Головна&quot; style=&quot;border-width:0px;&quot; /&gt;
-								&lt;/a&gt;" __designer:Values="&lt;P N='ID' T='onetidProjectPropertyTitleGraphic' /&gt;&lt;P N='NavigateUrl' T='/' /&gt;&lt;P N='PermissionsString' T='EmptyMask' /&gt;&lt;P N='Page' ID='1' /&gt;&lt;P N='TemplateControl' ID='2' /&gt;&lt;P N='AppRelativeTemplateSourceDirectory' R='-1' /&gt;">
-									<SharePoint:SiteLogoImage name="onetidHeadbnnr0" id="onetidHeadbnnr2" LogoImageUrl="<% $SPUrl:~sitecollection/Style Library/Images/nd_logo.png %>" runat="server"/>
-								</SharePoint:SPLinkButton>
-							</td>-->
-							<td class="title" style="display: none;">
-								<h1>
-									<asp:ContentPlaceHolder id="PlaceHolderPageTitleInTitleArea" runat="server" />
-								</h1>
-								<h3>
-									<asp:ContentPlaceHolder id="PlaceHolderPageDescription" runat="server" />
-								</h3>
-							</td>
-						</tr>
-						</table>
-					</div>
-					</SharePoint:SPRibbonPeripheralContent>
-				</div>
-			</div>
-			
-			<div id="header_menu">
-				<table id="main_menu" class="s4-notdlg titlerow-table" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td>
-						<div class=".s4-div s4-topmenulinks">
-							<!-- Dynamic menu -->
-							<asp:ContentPlaceHolder id="PlaceHolderTopNavBar" runat="server">
-								<asp:ContentPlaceHolder id="PlaceHolderHorizontalNav" runat="server">
-									<SharePoint:AspMenu
-										  ID="TopNavigationMenuV4"
-										  Runat="server"
-										  EnableViewState="false"
-										  DataSourceID="topSiteMap"
-										  AccessKey="<%$Resources:wss,navigation_accesskey%>"
-										  UseSimpleRendering="true"
-										  UseSeparateCss="false"
-										  Orientation="Horizontal"
-										  StaticDisplayLevels="2"
-										  MaximumDynamicDisplayLevels="1"
-										  SkipLinkText=""
-										  CssClass="s4-topmenu"/>
-									<SharePoint:DelegateControl runat="server" ControlId="TopNavigationDataSource" Id="topNavigationDelegate">
-										<Template_Controls>
-											<asp:SiteMapDataSource
-												  ShowStartingNode="False"
-												  SiteMapProvider="SPNavigationProvider"
-												  id="topSiteMap"
-												  runat="server"
-												  StartingNodeUrl="sid:1002"/>
-										</Template_Controls>
-									</SharePoint:DelegateControl>
-								</asp:ContentPlaceHolder>
-							</asp:ContentPlaceHolder>
-						</div>
-						<div class="topmenuline" style="display: none;">
-						</div>
-						<div class="topsubmenuline" style="display: none;">
-							<div cssclass="nightanday-menu-bottom">
-								<a href="http://www.mriya.ua" style="padding-left: 5px; padding-right: 5px;" target="_blank" title="Зовнішній сайт компанії">
-									<img src="../../SiteCollectionImages/web.png" style="border-width: 0px; padding-right: 2px; vertical-align: middle;" alt=""> 
-									Mriya.ua</a>
-								<a href="/Staff/" style="padding-left: 5px; padding-right: 5px;" title="Адресна книга">
-									<img src="../../SiteCollectionImages/addressbook.png" style="border-width: 0px; padding-right: 2px; vertical-align: middle;" alt=""> 
-									Адресна книга</a>
-								<a href="/Pages/Sitemap.aspx" style="padding-left: 5px; padding-right: 5px;" title="Карта порталу">
-									<img src="../../SiteCollectionImages/sitemap.png" style="border-width: 0px; padding-right: 2px; vertical-align: middle;" alt=""> 
-									Карта порталу</a>
-							</div>
-						</div>
-					</td>
-					<td class="search">
-						<div class="search">
-							<div id="s4-searcharea" class="s4-search s4-rp">
-								<asp:ContentPlaceHolder id="PlaceHolderSearchArea" runat="server">
-									<SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox" Version="4"/>								
-									<br />
-									<br />
-									<div class="extendedSearch" style="padding-left: 10px; margin-top: -5px; display:none;">
-										<a href="/search/Pages/advanced.aspx">Розширений пошук</a>
 									</div>
+								</td>
+							</tr>
+							</table>
+							<table class="titlerow-table" border="0" cellspacing="0" cellpadding="0">
+							<tr class="ribbon-table-backgroud">
+								<!--<td class="s4-titlelogo" style="text-align: left;">
+									<SharePoint:SPLinkButton id="onetidProjectPropertyTitleGraphic" runat="server" NavigateUrl="/" __designer:Preview="&lt;a id=&quot;ctl00_onetidProjectPropertyTitleGraphic&quot; href=&quot;/&quot;&gt;
+										&lt;img id=&quot;ctl00_onetidHeadbnnr2&quot; name=&quot;onetidHeadbnnr0&quot; Src=&quot;/SiteCollectionImages/logo.png&quot; alt=&quot;Головна&quot; style=&quot;border-width:0px;&quot; /&gt;
+									&lt;/a&gt;" __designer:Values="&lt;P N='ID' T='onetidProjectPropertyTitleGraphic' /&gt;&lt;P N='NavigateUrl' T='/' /&gt;&lt;P N='PermissionsString' T='EmptyMask' /&gt;&lt;P N='Page' ID='1' /&gt;&lt;P N='TemplateControl' ID='2' /&gt;&lt;P N='AppRelativeTemplateSourceDirectory' R='-1' /&gt;">
+										<SharePoint:SiteLogoImage name="onetidHeadbnnr0" id="onetidHeadbnnr2" LogoImageUrl="<% $SPUrl:~sitecollection/Style Library/Images/nd_logo.png %>" runat="server"/>
+									</SharePoint:SPLinkButton>
+								</td>-->
+								<td class="title" style="display: none;">
+									<h1>
+										<asp:ContentPlaceHolder id="PlaceHolderPageTitleInTitleArea" runat="server" />
+									</h1>
+									<h3>
+										<asp:ContentPlaceHolder id="PlaceHolderPageDescription" runat="server" />
+									</h3>
+								</td>
+							</tr>
+							</table>
+						</div>
+						</SharePoint:SPRibbonPeripheralContent>
+					</div>
+				</div>
+			
+				<div id="header_menu" class="s4-notdlg">
+					<table id="main_menu" class="s4-notdlg titlerow-table" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td>
+							<div class=".s4-div s4-topmenulinks">
+								<!-- Dynamic menu -->
+								<asp:ContentPlaceHolder id="PlaceHolderTopNavBar" runat="server">
+									<asp:ContentPlaceHolder id="PlaceHolderHorizontalNav" runat="server">
+										<SharePoint:AspMenu
+											ID="TopNavigationMenuV4"
+											Runat="server"
+											EnableViewState="false"
+											DataSourceID="topSiteMap"
+											AccessKey="<%$Resources:wss,navigation_accesskey%>"
+											UseSimpleRendering="true"
+											UseSeparateCss="false"
+											Orientation="Horizontal"
+											StaticDisplayLevels="2"
+											MaximumDynamicDisplayLevels="1"
+											SkipLinkText=""
+											CssClass="s4-topmenu"/>
+										<SharePoint:DelegateControl runat="server" ControlId="TopNavigationDataSource" Id="topNavigationDelegate">
+											<Template_Controls>
+												<asp:SiteMapDataSource
+													ShowStartingNode="False"
+													SiteMapProvider="SPNavigationProvider"
+													id="topSiteMap"
+													runat="server"
+													StartingNodeUrl="sid:1002"/>
+											</Template_Controls>
+										</SharePoint:DelegateControl>
+									</asp:ContentPlaceHolder>
 								</asp:ContentPlaceHolder>
 							</div>
-						</div>
-					</td>
-				</tr>
-				</table>
+							<div class="topmenuline" style="display: none;">
+							</div>
+							<div class="topsubmenuline" style="display: none;">
+								<div cssclass="nightanday-menu-bottom">
+									<a href="http://www.mriya.ua" style="padding-left: 5px; padding-right: 5px;" target="_blank" title="Зовнішній сайт компанії">
+										<img src="../../SiteCollectionImages/web.png" style="border-width: 0px; padding-right: 2px; vertical-align: middle;" alt=""> 
+										Mriya.ua</a>
+									<a href="/Staff/" style="padding-left: 5px; padding-right: 5px;" title="Адресна книга">
+										<img src="../../SiteCollectionImages/addressbook.png" style="border-width: 0px; padding-right: 2px; vertical-align: middle;" alt=""> 
+										Адресна книга</a>
+									<a href="/Pages/Sitemap.aspx" style="padding-left: 5px; padding-right: 5px;" title="Карта порталу">
+										<img src="../../SiteCollectionImages/sitemap.png" style="border-width: 0px; padding-right: 2px; vertical-align: middle;" alt=""> 
+										Карта порталу</a>
+								</div>
+							</div>
+						</td>
+						<td class="search">
+							<div class="search">
+								<div id="s4-searcharea" class="s4-search s4-rp">
+									<asp:ContentPlaceHolder id="PlaceHolderSearchArea" runat="server">
+										<SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox" Version="4"/>								
+										<br />
+										<br />
+										<div class="extendedSearch" style="padding-left: 10px; margin-top: -5px; display:none;">
+											<a href="/search/Pages/advanced.aspx">Розширений пошук</a>
+										</div>
+									</asp:ContentPlaceHolder>
+								</div>
+							</div>
+						</td>
+					</tr>
+					</table>
+				</div>
 			</div>
 			
 			<div class="body-wrapper">
@@ -475,21 +479,24 @@
 					<SharePoint:DeveloperDashboard runat="server"/>
 				</div>
 			</div>
+			
+			<div id="footer_space"></div>
 		</div>
 		<div id="footer" class="s4-pr s4-notdlg">
-			<div>
-				<div id="mriyaCC">
-					<a href="http://www.mriya.ua" target="_blank" title="Зовнішній сайт компанії">© Мрія 2011</a>
-				</div>
-				<div id="bottommenu">
-					<div cssclass="nightanday-menu-bottom">
-						<a href="/" style="padding-left: 10px; padding-right: 10px;">Головна</a>
-						<a href="/Company/" style="padding-left: 10px; padding-right: 10px;">Компанія</a>
-						<a href="/OrganizationChart/" style="padding-left: 10px; padding-right: 10px;">Структура</a>
-						<a href="/Staff/" style="padding-left: 10px; padding-right: 10px;">Співробітники</a>
-						<a href="/Community/" style="padding-left: 10px; padding-right: 10px;">Наше життя</a>
-						<a href="/Links/" style="padding-left: 10px; padding-right: 10px;">Корисна інформація</a>
-					</div>
+			<div id="footer_links">
+				<ul>
+					<li><a class="menu-item-1" href="/">Головна</a></li>
+					<li><a class="menu-item-2" href="/Company/">Компанія</a></li>
+					<li><a class="menu-item-3" href="/Community/">Наше життя</a></li>
+					<li><a class="menu-item-4" href="/Links/">Корисна інформація</a></li>
+				</ul>
+				<div id="footer_logos">
+					<a href="#"><img width="82" height="55" src="/sites/mriya/SiteCollectionImages/Mriya Theme/imgs/logo_01.png"></a>
+					<a href="#"><img width="82" height="55" src="/sites/mriya/SiteCollectionImages/Mriya Theme/imgs/logo_02.png"></a>
+					<a href="#"><img width="74" height="55" src="/sites/mriya/SiteCollectionImages/Mriya Theme/imgs/logo_03.png"></a>
+					<a href="#"><img width="144" height="55" src="/sites/mriya/SiteCollectionImages/Mriya Theme/imgs/logo_04.png"></a>
+					<a href="#"><img width="47" height="55" src="/sites/mriya/SiteCollectionImages/Mriya Theme/imgs/logo_05.png"></a>
+					<a href="#"><img width="81" height="55" src="/sites/mriya/SiteCollectionImages/Mriya Theme/imgs/logo_06.png"></a>
 				</div>
 			</div>
 		</div>

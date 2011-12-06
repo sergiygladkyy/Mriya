@@ -61,7 +61,6 @@
 		</ContentTemplate>
 	</SharePointWebControls:UIVersionedContent>
 	<SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Themable/Core Styles/mriya_main_layout.css %>" After="mriya_main_master.css" runat="server"/>
-	<SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Themable/Core Styles/mriya_main_advertisement.css %>" After="mriya_main_layout.css" runat="server"/>
 </asp:Content>
 <asp:Content ContentPlaceholderID="PlaceHolderPageTitle" runat="server">
 	<SharePointWebControls:FieldValue id="PageTitle" FieldName="Title" runat="server"/>
@@ -138,21 +137,15 @@
 		
 		<div id="clmn_middle">
 			<div id="advertisement_zone" class="web_part_zone">
-				<h1 class="advertisement"><nobr>Організаційні оголошення</nobr></h1>
+				<h1 class="advertisement"><nobr>Оголошення</nobr></h1>
 				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="AdvertisementZone" FrameType="TitleBarOnly"
 					Title="AdvertisementZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
 			</div>
 			
-			<div id="industry_news_zone" class="web_part_zone">
-				<h1 class="industry_news"><nobr>Новини галузі</nobr></h1>
-				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="IndustryNewsZone" FrameType="TitleBarOnly"
-					Title="IndustryNewsZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
-			</div>
-			
-			<div id="communication_zone" class="web_part_zone">
-				<h1 class="communication">Cпілкування</h1>
-				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="CommunicationZone" FrameType="TitleBarOnly"
-					Title="CommunicationZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+			<h1 class="discussion">Cпілкування</h1>
+			<div id="discussion_zone" class="web_part_zone">
+				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="DiscussionZone" FrameType="TitleBarOnly"
+					Title="DiscussionZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
 			</div>
 			
 			<div id="photo_zone" class="web_part_zone">
@@ -194,198 +187,6 @@
 		</div>
 	</div>
 	
-	<script type="text/javascript">
-		var __adv_cnt = 0;
-		
-		prepareAdvertisementZone();
-		
-		function prepareAdvertisementZone()
-		{
-			var cnt = 0;
-			var content = document.getElementById('output444');
-			
-			if (!content) return;
-			
-			var length = content.childNodes.length;
-			
-			if (length == 0)
-			{
-				if (__adv_cnt < 10)
-				{
-					window.setTimeout(prepareAdvertisementZone, 2000);
-					
-					__adv_cnt++;
-				}
-				
-				return;
-			}
-			
-			for (var i = 0; i < length; i++)
-			{
-				if (content.childNodes[i].nodeName == 'TABLE')
-				{
-					content.childNodes[i].className = content.childNodes[i].className + (cnt%2 > 0 ? ' odd' : ' even');
-					
-					cnt++;
-				}
-			}
-		}
-		
-		//first news web part
-		var firstnews = document.getElementById('cbqwpctl00_ctl23_g_609a7931_1a98_4a97_9bda_1aea13b2ac52');
-		if (firstnews != null) {
-		firstnews.style.marginTop = '-7px'; }
-		
-		//second news web part
-		var secondnews = document.getElementById('cbqwpctl00_ctl23_g_640afe3e_7358_4f7a_baf7_00b3054fada5');
-		if (secondnews != null) {
-			secondnews.style.marginTop = '-7px';
-			if (secondnews.getElementsByTagName('ul').length > 0) {
-				var secondnewsUl = secondnews.getElementsByTagName('ul')[0];
-				if (secondnewsUl.getElementsByTagName('li').length > 0) {
-					if (secondnewsUl.getElementsByTagName('li')[0] != null)
-						//hide 1-st news
-						var secondnewsSecondLi = secondnewsUl.getElementsByTagName('li')[0].style.display = 'none';
-				}
-			}
-		}
-		
-		//third news web part
-		var thirdnews = document.getElementById('cbqwpctl00_ctl23_g_817acae3_1df3_43ed_97f8_0cbb0cc52150');
-		if (thirdnews != null) {
-			thirdnews.style.marginTop = '-7px';
-			if (thirdnews.getElementsByTagName('ul').length > 0) {
-				var thirdnewsUl = thirdnews.getElementsByTagName('ul')[0];
-				if (thirdnewsUl.getElementsByTagName('li').length > 0)
-				{
-					if (thirdnewsUl.getElementsByTagName('li')[0] != null)
-					{
-						//hide 1-st news
-						var thirdnewsSecondLi = thirdnewsUl.getElementsByTagName('li')[0].style.display = 'none';
-					}
-					if (thirdnewsUl.getElementsByTagName('li')[1] != null)
-					{
-						//hide 2-nd news
-						var thirdnewsSecondLi = thirdnewsUl.getElementsByTagName('li')[1].style.display = 'none';
-					}
-				}
-			}
-		}
-		
-		//new employees web part
-		var newemployees = document.getElementById('cbqwpctl00_ctl23_g_baa41682_3244_4741_82d3_de7a07ef0d42');
-		if (newemployees != null) {
-			if (newemployees.getElementsByTagName('ul').length > 0)
-			{
-				var newemployeesUl = newemployees.getElementsByTagName('ul')[0];
-				if (newemployeesUl.getElementsByTagName('li').length > 0)
-				{
-					var newemployeesSecondLi = newemployeesUl.getElementsByTagName('li')[newemployeesUl.getElementsByTagName('li').length - 1];
-					//hide bottom border for second employee
-					newemployeesSecondLi.getElementsByTagName('div')[0].style.borderBottomWidth = "0px";
-				}
-			}
-		}
-		
-		//birthday web part
-		var birthday = document.getElementById('cbqwpctl00_ctl23_g_509f6c12_d388_4241_9b50_50938aa6ea39');
-		if (birthday != null) {
-			if (birthday.getElementsByTagName('ul').length > 0)
-			{
-				var birthdayUl = birthday.getElementsByTagName('ul')[0];
-				if(birthdayUl.getElementsByTagName('li').length > 0)
-				{
-					var birthdaySecondLi = birthdayUl.getElementsByTagName('li')[birthdayUl.getElementsByTagName('li').length - 1];
-					//hide bottom border for second employee
-					birthdaySecondLi.getElementsByTagName('div')[0].style.borderBottomWidth = "0px";
-				}
-			}
-		}
-		
-		//work with date
-		var today = new Date();
-		var dayNumber = today.getDate() + "";
-		if(dayNumber.length == 1)
-		{
-			dayNumber = "0" + dayNumber;
-		}
-		var monthNumber = (today.getMonth() + 1);
-		if(monthNumber.length == 1)
-		{
-			monthNumber = "0" + monthNumber;
-		} 
-		var todayDate = dayNumber + "." + monthNumber + "." + today.getFullYear();
-		var allDivs = document.getElementsByTagName('div');
-		for(i=0; i<allDivs.length; i++) {
-			if (allDivs[i].className == "description") {
-				if (allDivs[i].innerHTML.match("%br%")) {
-					while (allDivs[i].innerHTML.match("%br%")) {
-						allDivs[i].innerHTML = allDivs[i].innerHTML.replace("%br%","<br />");
-					}
-				}
-				if (allDivs[i].innerHTML.match(todayDate)) {
-					allDivs[i].innerHTML = allDivs[i].innerHTML.replace(todayDate,"Сьогодні");
-				}
-				/*
-				else if (allDivs[i].innerHTML.match("00:00:00")) {
-					allDivs[i].innerHTML = allDivs[i].innerHTML.replace(" 00:00:00","");
-								
-					var today = new Date();
-					if ( (today.getMonth() - parseInt(allDivs[i].innerHTML.substr(5,2)-1) == 0)
-						&& (today.getDate() - parseInt(allDivs[i].innerHTML.substr(8,2)) == 0) ) 
-					{
-						allDivs[i].innerHTML = "Сьогодні";
-					}
-					else
-					{
-						allDivs[i].innerHTML = allDivs[i].innerHTML.substr(8,2) + "." 
-							+ allDivs[i].innerHTML.substr(5,2) +  "." + allDivs[i].innerHTML.substr(0,4);
-					}
-				}*/
-			}
-		}
-		
-		//---------surveys----------
-		//make syrvey table smaller
-		var allTables = document.getElementsByTagName('table');
-		for(i=0; i<allTables.length; i++) {
-			if (allTables[i].style.width == "375pt") {
-				allTables[i].style.width = "155pt";
-			}
-		}
-		//remove last 'Тип вмісту'
-		var survey = document.getElementById('WebPartWPQ3');
-		if (survey != null)
-		{
-			if (survey.getElementsByTagName('table').length > 0)
-			{
-				var surTable = survey.getElementsByTagName('table')[0];
-				var surTbody = surTable.getElementsByTagName('tbody')[0];
-				var surTr = surTbody.getElementsByTagName('tr')[0];
-				var surTd = surTr.getElementsByTagName('td')[0];
-				if (surTd.getElementsByTagName('h3').length > 0)
-				{
-					surTd.getElementsByTagName('h3')[surTd.getElementsByTagName('h3').length - 1].style.display = "none";
-				}
-				if (surTd.getElementsByTagName('table').length > 0)
-				{
-					surTd.getElementsByTagName('table')[surTd.getElementsByTagName('table').length - 1].style.display = "none";
-					
-					for(i=0; i<surTd.getElementsByTagName('table').length - 1;i++)
-					{
-						var surTable1 = surTd.getElementsByTagName('table')[i];
-						//если это не таблица с состоянием голосования по конретному варианту 
-						if (surTable1.style.width == '')
-						{
-							var surTbody1 = surTable1.getElementsByTagName('tbody')[0];
-							surTbody1.getElementsByTagName('tr')[surTbody1.getElementsByTagName('tr').length - 1].style.display = "none";
-						}
-					}
-				}
-			}
-		}
-
-	</script>
 	<SharePointWebControls:UIVersionedContent UIVersion="4" runat="server">
 		<ContentTemplate>
 			

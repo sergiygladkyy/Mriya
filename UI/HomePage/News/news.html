@@ -17,14 +17,12 @@
 		'</ViewFields>'
 	;
 	
-	var strRowFormat = 
-		'<div style="font-family: Tahoma; padding: 5px;">' +
-			'<div style="float: left; padding: 0pt 10px 0pt 0px;">{image}</div>' +
-			'<a style="color: rgb(121, 29, 126); font-size: 13pt; text-decoration: none;" href="{link}">{header}</a><br>' +
-			'<span style="color: rgb(84, 185, 72); font-size: x-small;">{date}</span>' +
-			'<p></p>' +
-			'<p style="padding: 0px; font-size: small; color: Gray;">{lead}</p>' +
-			'<div style="height: 2px; border-width: medium medium 2px; border-style: none none solid; border-color: #E8D3E4; clear: both;margin: 0px 0px 16px; padding 0px;">&nbsp;</div>' +
+	var strRowFormat =
+		'<div class="news_block">' +
+			'<div class="news_image">{image}</div>' +
+			'<a class="news_header_link" href="{link}">{header}</a><br>' +
+			'<span class="news_date">{date}</span>' +
+			'<p class="news_text">{lead}</p>' +			
 		'</div>'
 	;
 	
@@ -111,6 +109,13 @@
 						if (rows[i].attributes[j].name == 'ows_ArticleStartDate') date = rows[i].attributes[j].value.split(' ')[0];
 						if (rows[i].attributes[j].name == 'ows_FileRef') link = ('../' + rows[i].attributes[j].value.split(';#')[1]);
 						if (rows[i].attributes[j].name == 'ows__x041e__x043f__x0438__x0441__x0020__x043d__x043e__x0432__x0438__x043d__x0438_') lead = rows[i].attributes[j].value;
+					}
+					
+					date = date.split('-');
+					
+					if (date && date.length == 3)
+					{
+						date = date[2] + '.' + date[1] + '.' + date[0];
 					}
 					
 					str2 = str2 + strRowFormat.replace('{image}', img)

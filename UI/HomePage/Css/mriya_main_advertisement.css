@@ -1,6 +1,11 @@
 #advertisement_zone .s4-wpTopTable table {
-	margin: 0 !important;
-	padding: 8px 10px !important;
+	border: 0 none;
+	border-collapse: collapse;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	max-width: 100%;
+	font-family: Tahoma;
 }
 
 #advertisement_zone .s4-wpTopTable .even {
@@ -8,19 +13,22 @@
 }
 
 #advertisement_zone .s4-wpTopTable table td {
-    vertical-align: top !important;
-	display: inline !important;
-	color: #333 !important;
+    vertical-align: top;
+	white-space: nowrap;
+	padding: 8px 10px;
+	display: inline;
+	color: #333;
 }
 
 #advertisement_zone .s4-wpTopTable table td a {
-	color: #333 !important;
-	font-size: 12px !important;
-	font-weight: normal !important;
+	color: #333;
+	font-size: 12px;
+	font-weight: normal;
+	text-decoration: none;
 }
 
 #advertisement_zone .s4-wpTopTable table td span {
-	color: #8f0fa0 !important;
-	font-size: 9px !important;
-	font-weight: normal !important;
+	color: #8f0fa0;
+	font-size: 9px;
+	font-weight: normal;
 }

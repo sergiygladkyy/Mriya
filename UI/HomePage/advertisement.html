@@ -1,0 +1,110 @@
+<script type="text/javascript" src="../SitePages/SPAPI/SPAPI_Core.js"></script>
+<script type="text/javascript" src="../SitePages/SPAPI/SPAPI_Lists.js"></script>
+
+<script language="JavaScript">
+var fildslistAnn =
+	'<ViewFields>' +
+		'<FieldRef Name="Title"/>' +
+		'<FieldRef Name="FileRef"/>' +
+		'<FieldRef Name="Created_x0020_Date"/>' +
+		'<FieldRef Name="LinkFilename"/>' +
+		'<FieldRef Name="PublishingPageLayout"/>' +
+	'</ViewFields>'
+;
+
+var strRowAnnFormat =
+	'<div class="advert_block {cls}">' +
+		'<span class="date">{date}</span>&nbsp;' +
+		'<a href="{link}">{header}</a>' +
+	'</div>'
+;
+
+function getItemsAnn()
+{
+	try
+	{
+		var list  = new SPAPI_Lists('http://neso.contoso.com/sites/mriya/Community/News/Announsment');
+		var items = list.getListItems('Сторінки', '', '<Query />', fildslistAnn, 5);
+		
+		if (items.status == 200)
+			return items;
+		else
+			alert('There was an error: '+ items.status + ' | ' + items.statusText);
+	}
+	catch(ex)
+	{
+		alert(ex);
+	}
+	
+	return null;
+}
+
+function setToElement(elementid, val)
+{
+	var control = document.getElementById(elementid);
+	
+	if (typeof(control) != 'object')
+		alert('control not found! id="' + elementid + '" val="' + val + '"');
+	else 
+		control.innerHTML = val;
+}
+
+function GetNewsItemsAnn()
+{
+	var items = getItemsAnn();
+	
+	if (items != null)
+	{
+		var rows = items.responseXML.getElementsByTagName('z:row');
+		
+		var str2 = '';
+		var c = 0;
+		
+		for (var i = 0; i < rows.length && c < 3; i++)
+		{
+			var title = '';
+			var date  = '';
+			var link  = '';
+			var name  = '';
+			
+			for (var j = 0; j < rows[i].attributes.length; j++)
+			{
+				if (rows[i].attributes[j].name == 'ows_LinkFilename') name = rows[i].attributes[j].value;
+				if (rows[i].attributes[j].name == 'ows_Title') title = rows[i].attributes[j].value;
+				if (rows[i].attributes[j].name == 'ows_Created_x0020_Date') date = rows[i].attributes[j].value.split(';#')[1].split(' ')[0];
+				if (rows[i].attributes[j].name == 'ows_FileRef') link = ('../' + rows[i].attributes[j].value.split(';#')[1]);
+			}
+			
+			if (name.indexOf('default.aspx') < 0)
+			{
+				date = date.split('-');
+				
+				if (date && date.length == 3)
+				{
+					date = date[2] + '.' + date[1] + '.' +date[0];
+				}
+				
+				var cls = c % 2 > 0 ? 'odd' : 'even';
+				
+				str2 = str2 + strRowAnnFormat.
+					replace('{cls}',    cls).
+					replace('{header}', title).
+					replace('{date}',   date).
+					replace('{link}',   link);
+				
+				c = c + 1;
+			}
+		}
+		
+		str2 = str2 + '';
+		
+		setToElement('output444', str2);
+	}
+	else alert('Items is null!!');
+}
+
+_spBodyOnLoadFunctionNames.push('GetNewsItemsAnn');
+</script>
+
+<div id="output444"></div>
+<div id="output445"></div>

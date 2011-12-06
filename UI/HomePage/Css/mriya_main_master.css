@@ -24,7 +24,7 @@ body #s4-ribbonrow {
 	height: auto !important;
 	margin: 0 20px;
 	padding: 0;
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/system_header.jpg") no-repeat left -18px;
+	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/system_header.jpg") /*no-*/repeat left -18px;
 	min-height: 26px;
 }
 
@@ -54,6 +54,7 @@ body #s4-ribbonrow {
 
 .ms-cui-tabContainer {
 	border-width: 0;
+	margin-bottom: 53px;
 }
 
 .ms-cui-topBar2 {
@@ -97,7 +98,7 @@ body #s4-ribbonrow {
 
 body #s4-workspace {
 	width: 100% !important;
-	overflow-x: hidden;
+	overflow-x: auto;
 }
 
 body #s4-bodyContainer {
@@ -111,6 +112,11 @@ body #s4-bodyContainer {
 
 #s4-titlerow {
 	width: 980px !important;
+	height: 144px;
+}
+
+#s4-titlerow .s4-titlerow {
+	width: 100%;
 	height: 91px;
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/header_top.jpg") left top no-repeat;
 }
@@ -278,17 +284,7 @@ body #s4-bodyContainer {
 #main_menu .menu-item-4  > .additional-background  { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/4.png") left bottom no-repeat; padding-left: 18px; }
 #main_menu .menu-item-5  > .additional-background  { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/5.png") left bottom no-repeat; padding-left: 18px; }
 #main_menu .menu-item-6  > .additional-background  { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/6.png") left bottom no-repeat; padding-left: 18px; }
-
-#footer
-{
-	height: 60px;
-	background-color: #e1f39E;
-	position: relative;
-	bottom: 0px;
-	color: black;
-	margin-top: 20px;
-}
-
+ 
 #mriyaCC
 {
 	float: left;
@@ -421,3 +417,73 @@ body #s4-bodyContainer {
 	padding: 0;
 	margin-left: 2px;
 }
+
+
+/* Footer */
+
+#footer_space {
+	height: 195px;
+	clear: both;
+}
+
+#footer {
+	background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/footer_bg.jpg");
+	background-repeat: no-repeat;
+	background-position: center bottom;
+	height: 195px;
+	width: 980px;
+	margin-top: -195px;
+	margin-right: auto;
+	margin-left: auto;
+}
+#footer_links {
+	padding-top: 80px;
+	padding-left: 25px;
+	font-size: 11px;
+	font-weight: bold;
+}
+#footer_links ul {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+	display: block;
+	float: left;
+}
+#footer_links ul li {
+	height: 24px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #84b151;
+	display: block;
+	width: 200px;
+	line-height: 22px;
+}
+#footer_links ul li:first-child {
+	border-top-style: none;
+}
+#footer_links ul li a {
+	display: block;
+	padding-left: 25px;
+	color: #eaffb7;
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-decoration: none;
+}
+#footer_links ul li a:hover {
+	color: #FFF;
+}
+#footer_logos {
+	float: left;
+	padding-top: 20px;
+	padding-left: 20px;
+}
+#footer_logos a {
+	margin-right: 4px;
+}
+
+#footer .menu-item-1 { background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/1.png"); }
+#footer .menu-item-2 { background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/2.png"); }
+#footer .menu-item-3 { background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/3.png"); }
+#footer .menu-item-4 { background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/4.png"); }
+#footer .menu-item-5 { background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/5.png"); }
+#footer .menu-item-6 { background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/6.png"); }
