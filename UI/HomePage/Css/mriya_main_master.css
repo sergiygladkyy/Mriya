@@ -24,7 +24,7 @@ body #s4-ribbonrow {
 	height: auto !important;
 	margin: 0 20px;
 	padding: 0;
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/system_header.jpg") /*no-*/repeat left -18px;
+	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/header_full.jpg") no-repeat left -52px;
 	min-height: 26px;
 }
 
@@ -54,7 +54,7 @@ body #s4-ribbonrow {
 
 .ms-cui-tabContainer {
 	border-width: 0;
-	margin-bottom: 53px;
+	margin-bottom: 19px;
 }
 
 .ms-cui-topBar2 {
@@ -112,20 +112,20 @@ body #s4-bodyContainer {
 
 #s4-titlerow {
 	width: 980px !important;
-	height: 144px;
+	height: 110px;
 }
 
 #s4-titlerow .s4-titlerow {
 	width: 100%;
-	height: 91px;
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/header_top.jpg") left top no-repeat;
+	height: 71px;
+	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/header_middle.jpg") left top no-repeat;
 }
 
 #s4-titlerow #logo {
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/logo.png") no-repeat transparent;
     float: left;
     height: 48px;
-    margin: 24px 0 0 37px;
+    margin: 11px 0 0 37px;
     width: 140px;
 }
 
@@ -161,13 +161,13 @@ body #s4-bodyContainer {
 
 #header_menu {
     width: 980px;
-	height: 53px;
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/header_bottom.jpg") center top no-repeat;
+	height: 39px;
+	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/header_menu_zone.jpg") center top no-repeat;
 }
 
 #header_menu td.search {
 	width: 177px;
-	padding: 8px 8px 7px;
+	padding: 3px 8px 2px;
 }
 
 #header_menu .search,
@@ -214,7 +214,7 @@ body #s4-bodyContainer {
 	position: relative;
 	top: 1px;
 	width: 100%;
-	height: 38px;
+	height: 28px;
 	overflow: hidden;
 }
 
@@ -246,10 +246,11 @@ body #s4-bodyContainer {
 	background-color: #f7f7f7;
 	border: 1px solid #c0c0c0;
 	padding: 5px 0 7px;
+	margin-top: 2px;
 }
 
 #main_menu .s4-topmenulinks, #main_menu .s4-topmenu, #main_menu .menu-horizontal, #main_menu li.static {
-	height: 38px;
+	height: 28px;
 	margin: 0;
 	padding: 0;
 }
@@ -260,7 +261,7 @@ body #s4-bodyContainer {
 
 #main_menu .static  > .additional-background {
 	margin: 0 4px 0 0;
-	padding: 11px 10px 1px 0;
+	padding: 6px 10px 1px 0;
 	background-position: right 75%;
 }
 
@@ -306,7 +307,7 @@ body #s4-bodyContainer {
 #right_header_block {
 	float: right;
 	text-align: right;
-	margin: 9px 1px 0 0;
+	margin: 7px 1px 0 0;
 	max-width: 790px;
 	max-height: 28px;
 }
