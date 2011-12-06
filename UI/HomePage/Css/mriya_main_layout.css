@@ -10,14 +10,39 @@
 	overflow: hidden;
 }
 
-#clmn_middle {
-	float: left;
-	width: 240px;
+#clmn_right {
+	width: 500px;
 	padding: 0 0 0 20px;
 	overflow: hidden;
 }
 
-#clmn_right {
+#top_block {
+	width: 100%;
+	overflow: hidden;
+}
+
+#top_block, #advertisement_zone, #panel_zone {
+	max-height: 179px;
+}
+
+#middle_block {
+	width: 100%;
+	overflow: hidden;
+}
+
+#bottom_block {
+	width: 100%;
+	overflow: hidden;
+}
+
+.left_column {
+	float: left;
+	width: 240px;
+	overflow: hidden;
+}
+
+.right_column {
+	float: left;
 	width: 240px;
 	padding: 0 0 0 20px;
 	overflow: hidden;
