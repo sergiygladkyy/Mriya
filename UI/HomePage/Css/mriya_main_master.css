@@ -102,11 +102,16 @@ body #s4-workspace {
 }
 
 body #s4-bodyContainer {
+	margin: 0 auto;
+	padding: 0px;
+	width: 1020px !important;
+}
+
+body #s4-bodyContainer #bodyContent {
 	margin: 0 20px;
 	padding: 0px;
 	width: 980px !important;
 	background-color: #fff;
-	display: inline-block;
 	text-align: left;
 }
 

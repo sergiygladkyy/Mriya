@@ -188,6 +188,9 @@ h3 {
 	font-size: 11px;
 	line-height: 14px;
 	padding-bottom: 4px;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-weight: normal;
+	color: #000;
 }
 
 #discussion_zone .ms-WPBody {
@@ -207,7 +210,7 @@ h3 {
 	border-top-color: #cccccc;
 }
 
-#discussion_zone .discussion_post:first-child {
+#discussion_zone .discussion_post.first {
 	margin-top: 0px;
 	padding-top: 0px;
 	border-top: none;
