@@ -177,14 +177,19 @@ body #s4-bodyContainer {
 	margin: 0 auto;
 	padding: 0px;
 	width: 1020px !important;
+	min-height: 100%;
 }
 
 body #s4-bodyContainer #bodyContent {
 	margin: 0 20px;
-	padding: 0px;
+	padding: 0;
 	width: 980px !important;
 	background-color: #fff;
 	text-align: left;
+}
+
+body #s4-bodyContainer #bodyContent .body-wrapper {
+	padding-top: 20px;
 }
 
 #s4-titlerow {
@@ -218,6 +223,10 @@ body #s4-bodyContainer #bodyContent {
 
 #s4-bodyContainer .main-container {
 	margin: 0 0 0 22%;
+}
+
+.welcome-content {
+	margin: 0;
 }
 
 .ms-titlerowborder {
@@ -421,6 +430,7 @@ body #s4-bodyContainer #bodyContent {
 }
 
 
+
 /* Left menu */
 
 .menu-vertical .menu-item-text {
@@ -436,8 +446,8 @@ body #s4-bodyContainer #bodyContent {
 }
 
 body #s4-leftpanel {
-	width: 90%;
-	margin: 20px 2% 20px 0;
+	width: 88%;
+	margin: 0 4% 0 0;
 	padding: 16px 4%;
 	background-color: #eeeeee;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fbfbfb', endColorstr='#ebebeb');
@@ -598,6 +608,11 @@ body #s4-leftpanel {
 }
 #footer_logos a {
 	margin-right: 4px;
+}
+#footer_logos img {
+	margin: 0;
+	padding: 0;
+	border: 0 none;
 }
 
 #footer .menu-item-1 { background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/1.png"); }
