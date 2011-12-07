@@ -24,20 +24,44 @@ body #s4-ribbonrow {
 	height: auto !important;
 	margin: 0 20px;
 	padding: 0;
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/header_full.jpg") no-repeat left -52px;
+	background: transparent;
 	min-height: 26px;
 }
 
 .ribbonbackground {
-	background-color: #fff;
+	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/toolbar_gradient.png") repeat-x left top transparent;
 }
 
 .ms-browseTab.ms-cui-tt-s > a.ms-cui-tt-a {
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/toolbar-selector.gif");
+	background: transparent;
+	border-color: transparent;
 }
 
 .ms-cui-TabRowLeft {
-	margin-top: 3px
+	margin-top: 3px;
+	border-color: #8c8c8c;
+}
+
+.ms-siteactionsmenuinner .ms-menu-a,
+.ms-siteactionsmenuhover .ms-menu-a {
+    margin-right: 3px;
+}
+
+.ms-siteactionsmenu .ms-viewselector-arrow {
+	width: 7px !important;
+	height: 4px !important;
+	margin: 6px 0 1px;
+	background: url("/_layouts/images/fgimg.png") no-repeat scroll 0 -330px transparent;
+}
+
+.ms-siteactionsmenu .ms-viewselector-arrow img{
+	width: 0 !important;
+	height: 0 !important;
+}
+
+#Ribbon.Read-title {
+	border-width: 0px;
+	background: transparent;
 }
 
 .ms-siteactionsmenuinner {
@@ -54,12 +78,20 @@ body #s4-ribbonrow {
 
 .ms-cui-tabContainer {
 	border-width: 0;
-	margin-bottom: 19px;
 }
 
 .ms-cui-topBar2 {
-    border-bottom: 1px solid #CCCCCC;
+    border-bottom: 1px solid #8c8c8c;
 	height: 26px;
+}
+
+.ms-siteactionsmenuinner,
+.ms-siteactionsmenuhover {
+	height: 16px;
+}
+
+.ms-siteactionsmenu > span > a {
+    color: #222;
 }
 
 .ms-cui-tts, .ms-cui-tts-scale-1, .ms-cui-tts-scale-2 {
@@ -72,6 +104,7 @@ body #s4-ribbonrow {
 
 .ms-cui-tt-a {
 	margin-top: 3px;
+	color: #777 !important;
 }
 
 .ms-cui-cg-i{
@@ -80,6 +113,21 @@ body #s4-ribbonrow {
 
 .ms-cui-cg {
 	margin: 3px 2px 0;
+}
+
+.ms-cui-tt-s > .ms-cui-tt-a {
+    background-color: #fefefe;
+    border-color: #8c8c8c;
+}
+
+.ms-cui-tt-a:hover {
+    border-color: #acacac;
+    color: #777 !important;
+}
+
+.ms-cui-tt-s .ms-cui-tt-a:hover {
+    border-color: #8c8c8c;
+    color: #222 !important;
 }
 
 .ms-cui-ct-first .ms-cui-tt-a {
@@ -94,6 +142,30 @@ body #s4-ribbonrow {
     border-width: 0 1px 1px;
     border-color: #aaa;
     width: auto;
+	height: 109px;
+	background-position: 0 -527px;
+}
+
+.ms-cui-group {
+	height: 109px;
+}
+
+.ms-cui-groupContainer {
+    height: 109px;
+    vertical-align: top;
+}
+
+.ms-cui-groupSeparator {
+	height: 101px;
+}
+
+.ms-cui-groupBody {
+	height: 75px;
+	padding-top: 7px;
+}
+
+.ms-cui-groupTitle {
+    padding-top: 7px;
 }
 
 body #s4-workspace {
@@ -161,7 +233,7 @@ body #s4-bodyContainer #bodyContent {
 }
 
 .s4-breadcrumb-anchor, .ms-qatbutton {
-	padding: 3px 5px 2px;
+	padding: 3px 5px 0;
 }
 
 #header_menu {
@@ -291,8 +363,7 @@ body #s4-bodyContainer #bodyContent {
 #main_menu .menu-item-5  > .additional-background  { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/5.png") left bottom no-repeat; padding-left: 18px; }
 #main_menu .menu-item-6  > .additional-background  { background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/6.png") left bottom no-repeat; padding-left: 18px; }
  
-#mriyaCC
-{
+#mriyaCC {
 	float: left;
 	border-width: 0px;
 	margin-top: 22px;
@@ -300,8 +371,7 @@ body #s4-bodyContainer #bodyContent {
 	vertical-align: middle;
 }
 
-#bottommenu
-{
+#bottommenu {
 	float: right;
 	border-width: 0px;
 	margin-top: 22px;
@@ -473,6 +543,7 @@ body #s4-bodyContainer #bodyContent {
 	color: #eaffb7;
 	background-repeat: no-repeat;
 	background-position: left center;
+	text-align: left;
 	text-decoration: none;
 }
 #footer_links ul li a:hover {
