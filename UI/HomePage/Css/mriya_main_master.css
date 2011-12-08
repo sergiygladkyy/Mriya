@@ -429,7 +429,10 @@ body #s4-bodyContainer #bodyContent .body-wrapper {
     margin: 0;
 }
 
-
+.s4-ctx > a > img {
+	padding-top: 9px;
+	vertical-align: top;
+}
 
 /* Left menu */
 
