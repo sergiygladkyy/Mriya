@@ -568,6 +568,8 @@ body #s4-leftpanel {
 	margin-top: -195px;
 	margin-right: auto;
 	margin-left: auto;
+	position: relative;
+	z-index: 10;
 }
 #footer_links {
 	padding-top: 80px;
