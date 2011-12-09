@@ -186,6 +186,7 @@ body #s4-bodyContainer #bodyContent {
 	width: 980px !important;
 	background-color: #fff;
 	text-align: left;
+	position: relative;
 }
 
 body #s4-bodyContainer #bodyContent .body-wrapper {
@@ -429,10 +430,11 @@ body #s4-bodyContainer #bodyContent .body-wrapper {
     margin: 0;
 }
 
-.s4-ctx > a > img {
-	padding-top: 9px;
-	vertical-align: top;
+.s4-ctx > a {
+	line-height: inherit;
+	vertical-align: middle;
 }
+
 
 /* Left menu */
 
