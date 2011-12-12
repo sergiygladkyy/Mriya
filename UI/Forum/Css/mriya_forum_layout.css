@@ -1,0 +1,207 @@
+div.forum_content {
+	margin: 0;
+	padding: 0 0 0 10px;
+	border: 0 none;
+}
+
+.forum_content #_invisibleIfEmpty {
+	padding: 0;
+}
+
+
+/* Header */
+
+.forum_content .ms-WPHeader {
+	background-color: #F0F0F0;
+	border: 1px solid #E9E9E9;
+    border-radius: 8px 8px 8px 8px;
+    height: 40px;
+    line-height: 38px;
+    margin: 0;
+    display: block;
+}
+
+.forum_content .ms-WPHeader td {
+	border: 0 none;
+	height: 40px;
+}
+
+.forum_content .ms-WPHeader > .ms-wpTdSpace:first-child {
+	display: none;
+}
+
+.forum_content .ms-WPHeaderTd {
+	width: 98%;
+	border: 0px solid transparent;
+    border-radius: 8px 0 0 8px;
+}
+
+.forum_content .ms-WPHeader .ms-WPTitle {
+	margin: 0;
+	padding: 0 0 0 48px;
+	background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/forum/forum_theme_icon.png");
+	background-position: 8px center;
+    background-repeat: no-repeat;
+	color: #88009C;
+	font-family: Tahoma,Geneva,sans-serif;
+	font-size: 20px;
+    font-weight: normal;
+}
+
+.forum_content .ms-WPHeader .ms-WPHeaderTdMenu {
+	border: 0px solid transparent;
+    border-radius: 0 8px 8px 0;
+}
+
+.forum_content .s4-wpcell-plain .ms-wpContentDivSpace {
+	margin: 0;
+	padding: 0;
+	height: 0;
+	line-height: 0;
+}
+
+
+
+/* Discussions list */
+
+.forum_content .ms-listviewtable {
+	margin-bottom: 10px;
+}
+
+.forum_content .ms-vh,
+.forum_content .ms-vh2,
+.forum_content .ms-vh-icon,
+.forum_content .ms-vb,
+.forum_content .ms-vb2,
+.forum_content .ms-vb-tall,
+.forum_content .ms-vb-user {
+	font-family: Tahoma,Geneva,sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.forum_content .ms-viewheadertr th,
+.forum_content .ms-viewheadertr th.ms-vh,
+.forum_content .ms-viewheadertr th.ms-vh2{
+	padding: 0 6px;
+	color: #781d7e;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #E8E8E8;
+	border-top-width: 1px;
+	border-top-style: dotted;
+	border-top-color: #E8E8E8;
+	border-right-width: 1px;
+	border-right-style: dotted;
+	border-right-color: #E8E8E8;
+	background-color: #FBFBFB;
+}
+
+.forum_content .ms-viewheadertr th:first-child {
+	border-left-style: dotted;
+	border-left-width: 1px;
+	border-left-color: #E8E8E8;
+}
+
+.forum_content .ms-viewheadertr th.ms-vh-icon {
+	padding-bottom: 3px;
+}
+
+.forum_content .ms-viewheadertr th a {
+	color: #8A009D;
+	text-decoration: underline;
+}
+
+.forum_content .ms-viewheadertr th a:hover {
+	color: #8A009D;
+	text-decoration: none;
+}
+
+.forum_content td.ms-vb {
+	font-family: Tahoma,Geneva,sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #999;
+	padding-top: 30px;
+}
+
+.forum_content .ms-listviewtable a {
+	text-decoration: underline;
+	color: #0000ee;
+}
+
+.forum_content tr.ms-itmhover a:hover {
+	text-decoration: none !important;
+	color: #0000ee !important;
+}
+
+.forum_content .ms-listviewtable .ms-vb-title,
+.forum_content .ms-listviewtable .ms-vb-user,
+.forum_content .ms-listviewtable .ms-vb2 {
+	padding: 8px 6px 4px;
+	height: 33px;
+}
+
+.forum_content .ms-listviewtable .ms-vb-itmcbx {
+	padding: 6px;
+}
+
+.forum_content .ms-listviewtable tr.ms-itmhover > td {
+	border-top: 1px solid #e8e8e8;
+	vertical-align: top;
+}
+
+.forum_content .ms-listviewtable .ms-vb,
+.forum_content .ms-listviewtable .ms-vb2,
+.forum_content .ms-listviewtable .ms-vb-user,
+.forum_content .ms-listviewtable .ms-vb-tall,
+.forum_content .ms-listviewtable .ms-pb,
+.forum_content .ms-listviewtable .ms-pb-selected {
+	color: #000;
+}
+
+.forum_content .ms-vb-title .ms-vb {
+    padding: 0 6px 4px 2px;
+}
+
+
+/* Add new */
+
+.forum_content .ms-partline {
+    border-bottom: 1px solid #E8E8E8;
+    height: 7px;
+}
+
+.forum_content td.ms-addnew {
+	padding-top: 8px;
+	padding-left: 8px;
+}
+
+.forum_content td.ms-addnew span.s4-clust {
+	width: 24px !important;
+	height: 16px !important;
+	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/forum/forum_add_theme.png") no-repeat left top transparent;
+}
+
+.forum_content td.ms-addnew span.s4-clust img {
+	display: none;
+}
+
+.forum_content a.ms-addnew {
+    font-family: Tahoma,Geneva,sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 12px;
+    vertical-align: top;
+	text-decoration: underline;
+	color: #0000ee;
+}
+
+.forum_content a.ms-addnew:hover {
+	text-decoration: none;
+	color: #0000ee;
+}
+
+.forum_content .ms-PartSpacingVertical {
+    margin-top: 32px;
+}
