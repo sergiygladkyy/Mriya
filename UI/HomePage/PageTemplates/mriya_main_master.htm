@@ -41,6 +41,7 @@
 <SharePoint:SPHelpPageComponent Visible="false" runat="server"/>
 <SharePoint:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Themable/Core Styles/controls_mriya.css %>" runat="server"/>
 <SharePoint:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Themable/Core Styles/mriya_main_master.css %>" After="corev4.css" runat="server"/>
+<SharePoint:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Themable/Core Styles/mriya_forum_thread.css %>" After="mriya_main_master.css" runat="server"/>
 </head>
 
 <body scroll="no" onload="if (typeof(_spBodyOnLoadWrapper) != 'undefined') _spBodyOnLoadWrapper(); " class="nightandday">
@@ -405,7 +406,7 @@
 				<a name="startNavigation"></a>
 				<asp:ContentPlaceHolder id="PlaceHolderGlobalNavigation" runat="server" />
 				<asp:ContentPlaceHolder id="PlaceHolderGlobalNavigationSiteMap" runat="server" />
-				<div id="wrapper-inline-block" class="wrapper-inline">
+				<div id="wrapper-inline-block" class="wrapper-inline s4-notdlg">
 					<div class="bottom-menuplace-container">
 						<div id="s4-leftpanel" class="left-nav-bar s4-notdlg res-nav-l">
 							<asp:ContentPlaceHolder id="PlaceHolderLeftNavBarDataSource" runat="server" />

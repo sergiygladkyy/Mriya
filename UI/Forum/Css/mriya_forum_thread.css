@@ -1,0 +1,238 @@
+.discussion-board-container {
+	position: relative;
+	margin-left: 1.6%;
+	padding-top: 80px;
+	display: block;
+	width: 98.4%;
+}
+
+body .discussion-board,
+table.discussion-board td,
+table.discussion-board div,
+table.discussion-board td div {
+	font-family: Tahoma,Geneva,sans-serif;
+	color: #666;
+	font-size: 12px;
+}
+
+.discussion-board .ms-disc-bordered-noleft .discussion-title {
+	position: absolute;
+	color: red;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/footer_bg.jpg");
+	background-repeat: no-repeat;
+	background-position: -16px -16px;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	line-height: 38px;
+	padding-right: 0;
+	padding-left: 0;
+	padding-bottom: 0 !important;
+	color: #FFF;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+.discussion-board .ms-disc-bordered-noleft .discussion-title > b {
+	display: block;
+	padding-left: 32px;
+	background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/forum/icon_theme.png");
+	background-repeat: no-repeat;
+	background-position: left 7px;
+	margin: 0 8px;
+}
+
+.discussion-board .ms-viewheadertr {
+    display: block;
+    margin: 8px 0;
+    position: absolute;
+    top: 40px;
+    width: 100%;
+}
+
+.discussion-board .ms-viewheadertr .ms-vh2 {
+	width: 70%;
+	display: block;
+	float: left;
+	height: 24px;
+	overflow: hidden;
+}
+
+.discussion-board .ms-viewheadertr .ms-vh2:first-child {
+	width: 30%;
+}
+
+.discussion-board .ms-disc-padabove {
+	padding: 0 8px;
+	height: 32px;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	line-height: 30px;
+	color: #999;
+	background-color: #F9F9F9;
+	border: 1px solid #DBDBDB;
+}
+
+.discussion-board table.ms-disc-bar {
+    background: none;
+    border: 0 none;
+}
+
+.discussion-board table.ms-disc-bar td {
+	padding: 0;
+}
+
+.discussion-board .anchor {
+	font-size: 11px;
+}
+
+.discussion-board .created-date {
+	color: #87BB55;
+    font-size: 10px;
+	line-height: 30px;
+}
+
+.discussion-board .reply_options {
+	background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/forum/icon_options.png");
+    background-position: 0 9px;
+    background-repeat: no-repeat;
+    margin-right: 16px;
+    padding-left: 24px;
+    color: #999999;
+    line-height: 30px;
+	font-size: 11px;
+}
+
+.discussion-board .reply_options  a {
+	color: #999999;
+	text-decoration: underline;
+}
+
+.discussion-board .reply_options  a:hover {
+	text-decoration: none;
+}
+
+.discussion-board .reply_message {
+	background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/forum/icon_reply.png");
+    background-position: 2px 8px;
+    background-repeat: no-repeat;
+    padding-left: 24px;
+    color: #999999;
+    line-height: 30px;
+    font-size: 11px;
+}
+
+.discussion-board .reply_message  a {
+	color: #8A009E;
+    font-weight: bold;
+	text-decoration: underline;
+	white-space: nowrap;
+}
+
+.discussion-board .reply_message  a:hover {
+	text-decoration: none;
+}
+
+.discussion-board #replyButton {
+	display: none;
+}
+
+.discussion-board table.ms-disc-bar B {
+    padding-right: 0;
+    vertical-align: inherit;
+}
+
+.discussion-board .ms-disc-bordered-noleft {
+	padding: 8px 0 8px 18px;
+}
+
+.discussion-board .ms-disc-bordered {
+    margin: 0;
+	padding: 8px 0;
+    border: 0 none;
+    text-align: center;
+    width: 150px;
+	display: block;
+}
+
+.discussion-board .ms-disc-bordered > table {
+	width: 143px;
+	text-align: center;
+	border-right: 1px solid #E5E5E5;
+	padding: 0 3px;
+}
+
+.discussion-board .ms-disc-bordered > table > tbody > tr > td {
+	padding: 0;
+	padding-left: 0 !important;
+	display: block;
+	overflow: hidden;
+	width: auto;
+}
+
+.discussion-board  td.ms-disc-bordered-noleft {
+	border-left-width: 0;
+}
+
+.discussion-board  .ms-disc-bordered > table > tbody > tr > td[nowrap] {
+	padding: 4px 0;
+}
+.discussion-board  .ms-disc-bordered > table > tbody > tr > td > table {
+	width: 100%;
+}
+.discussion-board  .ms-disc-bordered > table > tbody > tr > td > table > tbody > tr > td:first-child {
+	width: 96px;
+	height: 96px;
+}
+
+.discussion-board  .ms-disc-bordered > table > tbody > tr > td > table > tbody > tr > td:first-child a img {
+	width: 96px !important;
+	height: 96px !important;
+}
+
+.discussion-board  .ms-disc-bordered > table > tbody > tr > td > table > tbody > tr > td[valign] {
+	display: none;
+}
+
+.discussion-board  .ms-disc-bordered  span a {
+	padding: 4px;
+	margin: 0 auto;
+	color: #6A9C39;
+    display: block;
+    font-weight: bold;
+    text-decoration: none;
+    width: 120px;
+}
+
+.discussion-board  .ms-disc-bordered nobr {
+	white-space: pre-wrap;
+}
+
+.discussion-board .toggle-quoted-text {
+	background-color: #F8F8F8;
+	padding: 8px;
+	border: 1px solid #EBEBEB;
+	color: #999;
+	font-size: 11px;
+	margin-top: 12px;
+}
+
+.discussion-board .toggle-quoted-text a {
+	display: block;
+	height: 16px;
+	padding-left: 18px;
+	background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/forum/icon_show_quotes.png");
+	background-repeat: no-repeat;
+	background-position: left center;
+	color: #8a009e;
+	text-decoration: underline;
+}
+
+.discussion-board .toggle-quoted-text a:hover {
+	text-decoration: none;
+}

@@ -628,3 +628,33 @@ body #s4-leftpanel {
 #footer .menu-item-4 { background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/4.png"); }
 #footer .menu-item-5 { background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/5.png"); }
 #footer .menu-item-6 { background-image: url("/sites/mriya/SiteCollectionImages/Mriya Theme/nav_icons/6.png"); }
+
+
+
+/* Dialog view */
+
+.ms-dialog .ribbonbackground {
+	background-image: none;
+}
+.ms-dialog .ribbonbackground #ribbon_line {
+	margin: 0 5px 5px;
+}
+.ms-dialog body #s4-bodyContainer,
+.ms-dialog body #s4-bodyContainer #bodyContent {
+	width: auto !important;
+	padding: 0;
+	margin: 0;
+}
+.ms-dialog body #s4-bodyContainer #bodyContent .body-wrapper {
+	padding-top: 0;
+}
+.ms-dialog body #s4-bodyContainer .main-container {
+	margin: 0;
+	padding: 0;
+}
+.ms-dialog .ms-ButtonHeightWidth {
+	margin: 0 8px 6px 0;
+}
+.ms-dialog body #s4-ribbonrow {
+	margin: 0;
+}
