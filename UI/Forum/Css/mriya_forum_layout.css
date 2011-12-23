@@ -8,6 +8,11 @@ div.forum_content {
 	padding: 0;
 }
 
+.forum_content .s4-wpcell .s4-wpTopTable,
+.forum_content .s4-wpActive .s4-wpTopTable {
+	margin-bottom: 16px;
+}
+
 
 /* Header */
 
@@ -19,6 +24,11 @@ div.forum_content {
     line-height: 38px;
     margin: 0;
     display: block;
+}
+
+.forum_content .ms-WPHeader .ms-MenuUIPopupBody,
+.forum_content .ms-WPHeader  .ms-MenuUIPopupScreen {
+	line-height: 1.1em;
 }
 
 .forum_content .ms-WPHeader td {
@@ -56,7 +66,7 @@ div.forum_content {
 .forum_content .s4-wpcell-plain .ms-wpContentDivSpace {
 	margin: 0;
 	padding: 0;
-	height: 0;
+	height: auto;
 	line-height: 0;
 }
 
@@ -127,12 +137,16 @@ div.forum_content {
 
 .forum_content .ms-listviewtable a {
 	text-decoration: underline;
-	color: #0000ee;
+	color: #8a009d;
 }
 
 .forum_content tr.ms-itmhover a:hover {
 	text-decoration: none !important;
-	color: #0000ee !important;
+	color: #8a009d !important;
+}
+
+.forum_content tr.ms-itmhover a:visited {
+	color: #da50ee !important;
 }
 
 .forum_content .ms-listviewtable .ms-vb-title,
@@ -194,14 +208,18 @@ div.forum_content {
     line-height: 12px;
     vertical-align: top;
 	text-decoration: underline;
-	color: #0000ee;
+	color: #8a009d;
 }
 
 .forum_content a.ms-addnew:hover {
 	text-decoration: none;
-	color: #0000ee;
+	color: #8a009d;
+}
+
+.forum_content  a.ms-addnew:visited {
+	color: #da50ee;
 }
 
 .forum_content .ms-PartSpacingVertical {
-    margin-top: 32px;
+    margin-top: 16px;
 }

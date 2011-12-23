@@ -1,4 +1,167 @@
-.discussion-board-container {
+
+/*********************************************************** Discussion board ********************************************************************/
+
+.discussion-board-container,
+.discussion-board-container + #Hero-WPQ2 {
+	padding-left: 10px;
+}
+
+
+/* Discussion list */
+
+.discussion-board-container .ms-listviewtable {
+	margin-bottom: 10px;
+}
+
+.discussion-board-container .ms-vh,
+.discussion-board-container .ms-vh2,
+.discussion-board-container .ms-vh-icon,
+.discussion-board-container .ms-vb,
+.discussion-board-container .ms-vb2,
+.discussion-board-container .ms-vb-tall,
+.discussion-board-container .ms-vb-user {
+	font-family: Tahoma,Geneva,sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+.discussion-board-container .ms-viewheadertr th,
+.discussion-board-container .ms-viewheadertr th.ms-vh,
+.discussion-board-container .ms-viewheadertr th.ms-vh2{
+	padding: 0 6px;
+	color: #781d7e;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #E8E8E8;
+	border-top-width: 1px;
+	border-top-style: dotted;
+	border-top-color: #E8E8E8;
+	border-right-width: 1px;
+	border-right-style: dotted;
+	border-right-color: #E8E8E8;
+	background-color: #FBFBFB;
+}
+
+.discussion-board-container .ms-viewheadertr th:first-child {
+	border-left-style: dotted;
+	border-left-width: 1px;
+	border-left-color: #E8E8E8;
+}
+
+.discussion-board-container .ms-viewheadertr th.ms-vh-icon {
+	padding-bottom: 3px;
+}
+
+.discussion-board-container .ms-viewheadertr th a {
+	color: #8A009D;
+	text-decoration: underline;
+}
+
+.discussion-board-container .ms-viewheadertr th a:hover {
+	color: #8A009D;
+	text-decoration: none;
+}
+
+.discussion-board-container td.ms-vb {
+	font-family: Tahoma,Geneva,sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+	color: #999;
+	padding-top: 30px;
+}
+
+.discussion-board-container .ms-listviewtable a:link {
+	text-decoration: underline;
+	color: #8a009d;
+}
+
+.discussion-board-container tr.ms-itmhover a:hover {
+	text-decoration: none !important;
+	color: #8a009d !important;
+}
+
+.discussion-board-container tr.ms-itmhover a:visited {
+	color: #da50ee !important;
+}
+
+.discussion-board-container .ms-listviewtable .ms-vb-title,
+.discussion-board-container .ms-listviewtable .ms-vb-user,
+.discussion-board-container .ms-listviewtable .ms-vb2 {
+	padding: 8px 6px 4px;
+	height: 33px;
+}
+
+.discussion-board-container .ms-listviewtable .ms-vb-itmcbx {
+	padding: 6px;
+}
+
+.discussion-board-container .ms-listviewtable tr.ms-itmhover > td {
+	border-top: 1px solid #e8e8e8;
+	vertical-align: top;
+}
+
+.discussion-board-container .ms-listviewtable .ms-vb,
+.discussion-board-container .ms-listviewtable .ms-vb2,
+.discussion-board-container .ms-listviewtable .ms-vb-user,
+.discussion-board-container .ms-listviewtable .ms-vb-tall,
+.discussion-board-container .ms-listviewtable .ms-pb,
+.discussion-board-container .ms-listviewtable .ms-pb-selected {
+	color: #000;
+}
+
+.discussion-board-container .ms-vb-title .ms-vb {
+    padding: 0 6px 4px 2px;
+}
+
+
+/* Add control */
+
+.discussion-board-container + #Hero-WPQ2 .ms-partline {
+    border-bottom: 1px solid #E8E8E8;
+    height: 7px;
+}
+
+.discussion-board-container + #Hero-WPQ2  td.ms-addnew {
+	padding-top: 8px;
+	padding-left: 8px;
+}
+
+.discussion-board-container + #Hero-WPQ2  td.ms-addnew span.s4-clust {
+	width: 24px !important;
+	height: 16px !important;
+	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/forum/forum_add_theme.png") no-repeat left top transparent;
+}
+
+.discussion-board-container + #Hero-WPQ2  td.ms-addnew span.s4-clust img {
+	display: none;
+}
+
+.discussion-board-container + #Hero-WPQ2  a.ms-addnew {
+    font-family: Tahoma,Geneva,sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    line-height: 12px;
+    vertical-align: top;
+	text-decoration: underline;
+	color: #8a009d;
+}
+
+.discussion-board-container + #Hero-WPQ2 a.ms-addnew:hover {
+	text-decoration: none;
+	color: #8a009d;
+}
+
+.discussion-board-container + #Hero-WPQ2  a.ms-addnew:visited {
+	color: #da50ee;
+}
+
+
+
+/************************************************************** Discussion ***********************************************************************/
+
+
+
+.discussion-container {
 	position: relative;
 	margin-left: 1.6%;
 	padding-top: 80px;
@@ -59,7 +222,7 @@ table.discussion-board td div {
 	display: block;
 	float: left;
 	height: 24px;
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 
 .discussion-board .ms-viewheadertr .ms-vh2:first-child {
@@ -190,6 +353,14 @@ table.discussion-board td div {
 	height: 96px;
 }
 
+.discussion-board  .ms-disc-bordered > table > tbody > tr > td > table > tbody > tr > td:first-child a {
+	color: #8A009E;
+}
+
+.discussion-board  .ms-disc-bordered > table > tbody > tr > td > table > tbody > tr > td:first-child a:visited {
+	color: #dA50eE;
+}
+
 .discussion-board  .ms-disc-bordered > table > tbody > tr > td > table > tbody > tr > td:first-child a img {
 	width: 96px !important;
 	height: 96px !important;
@@ -207,6 +378,10 @@ table.discussion-board td div {
     font-weight: bold;
     text-decoration: none;
     width: 120px;
+}
+
+.discussion-board  .ms-disc-bordered  span a:hover {
+	text-decoration: underline;
 }
 
 .discussion-board  .ms-disc-bordered nobr {
@@ -235,4 +410,8 @@ table.discussion-board td div {
 
 .discussion-board .toggle-quoted-text a:hover {
 	text-decoration: none;
+}
+
+.discussion-board .toggle-quoted-text a:visited {
+	color: #dA50eE;
 }

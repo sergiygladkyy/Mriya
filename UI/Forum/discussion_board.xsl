@@ -391,7 +391,15 @@
 		</tr>
 	</xsl:template>
 	<xsl:template name="View_Thread_Default_RootTemplate" match="View[List/@TemplateType='108']" mode="RootTemplate" ddwrt:dvt_mode="root">
-		<table width="100%" cellspacing="0" cellpadding="0" border="0" class="discussion-board-container">
+		<table width="100%" cellspacing="0" cellpadding="0" border="0">
+			<xsl:attribute name="class">
+				<xsl:choose>
+					<!-- Threaded/Flat view with non-zero number of items = class="ms-disc" -->
+					<xsl:when test="(@BaseViewID='1' or @BaseViewID='2')">discussion-container</xsl:when>
+					<!-- Subject view with non-zero number of items = class="ms-listviewtable" -->
+					<xsl:otherwise>discussion-board-container</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
 			<xsl:call-template name="CTXGeneration"/>
 			<tr>
 				<td>
