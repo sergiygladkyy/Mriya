@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="ac6d6723-f547-48f5-96c3-2dc0e151431c" solutionId="ac6d6723-f547-48f5-96c3-2dc0e151431c" resetWebServer="false" title="Mriya Staff Webparts" description="Sharepoint webparts for Mriya enterprise website" name="Mriya Staff" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <assemblies>
+    <projectOutputAssembly location="MriyaStaffDAL.dll" deploymentTarget="GlobalAssemblyCache" projectPath="..\MriyaStaffDAL\MriyaStaffDAL.csproj" />
+  </assemblies>
+  <features>
+    <featureReference itemId="ff257c66-f18e-4721-8129-74659c800ef7" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="d56c93b7-0a2d-4c59-9c74-7312a62fd138" />
+  </projectItems>
+</package>
