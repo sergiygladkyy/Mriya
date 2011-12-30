@@ -13,6 +13,7 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
         private DateTime _lastModified;
         private string _url;
         private string _correctBodyToShow;
+        private string _xml;
 
         partial void OnLoaded()
         {
@@ -54,35 +55,52 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
             {
                 if (value != this._url)
                 {
-                    this.OnPropertyChanging("Url", this._lastModified);
+                    this.OnPropertyChanging("Url", this._url);
                     this._url = value;
                     this.OnPropertyChanged("Url");
                 }
             }
         }
 
-    }
-
-            /// <summary>
-        /// List item URL 
+        /// <summary>
+        /// User's reply without the rest of the discussion attached to it
         /// </summary>
-        public string Url
+        public string CorrectBodyToShow
         {
             get
             {
-                return this._url;
+                return this._correctBodyToShow;
             }
             set
             {
-                if (value != this._url)
+                if (value != this._correctBodyToShow)
                 {
-                    this.OnPropertyChanging("Url", this._lastModified);
-                    this._url = value;
-                    this.OnPropertyChanged("Url");
+                    this.OnPropertyChanging("CorrectBodyToShow", this._correctBodyToShow);
+                    this._correctBodyToShow = value;
+                    this.OnPropertyChanged("CorrectBodyToShow");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Full list fieldset in xml
+        /// </summary>
+        public string Xml
+        {
+            get
+            {
+                return this._xml;
+            }
+            set
+            {
+                if (value != this._xml)
+                {
+                    this.OnPropertyChanging("Xml", this._xml);
+                    this._xml = value;
+                    this.OnPropertyChanged("Xml");
                 }
             }
         }
 
     }
-
 }

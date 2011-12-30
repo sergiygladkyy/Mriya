@@ -19,6 +19,8 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
         //private SPSite _site = null;
 
         private bool _bShowErrorMessage = false;
+
+        private const int _pageId = 4; //used for making a topic view URL in ShowRecords()
        
 
 
@@ -103,35 +105,49 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
                              for (int i = 0; i < numberOfDiscussionsToDisplay; i++)
                              {
                                  Discussion discussion = topics.ElementAt<Discussion>(i);
-                                 SPListItem discussionItem = _discussionBoard.GetItemById((int)discussion.Id); // workaround for having a url
+                                 SPListItem discussionTopic = _discussionBoard.GetItemById((int)discussion.Id); // workaround for having a url
 
                                  var allReplies = dataContext.GetList<Message>(_discussionBoard.Title)
-                                     .ScopeToFolder( SPHttpUtility.UrlPathEncode( discussionItem.Folder.Url,true), false); 
+                                     .ScopeToFolder( SPHttpUtility.UrlPathEncode( discussionTopic.Folder.Url,true), false); 
 
-                                 // this is a really shitty code, but I can't get a system LastModified attribute from the spmetal-wrapped class. Any ideas?
+                                 // this is a really shitty code, but how else can I get the missing Item attributes from an spmetal-wrapped class. Any ideas?
                                  foreach (Message reply in allReplies)
                                  {
-                                     reply.LastModified = (DateTime)_discussionBoard.GetItemById((int)reply.Id)["Modified"];
-                                     reply.Url = (string)_discussionBoard.GetItemById((int)reply.Id).Url; //this doesn't work, needs some conversion
+                                     SPListItem discussionReply = _discussionBoard.GetItemById((int)reply.Id);
+
+                                     reply.LastModified = (DateTime)discussionReply["Modified"];
+                                     //reply.Url = // assigned later only for the latest reply
+                                     reply.CorrectBodyToShow = (string)discussionReply["CorrectBodyToShow"].ToString();
+                                     reply.Xml = (string)discussionReply.Xml;
                                  }
 
                                  var latestReply = (from reply in allReplies
                                                     orderby reply.LastModified descending
                                                     select reply).FirstOrDefault();
 
-                                 //string trimmedBody = Microsoft.SharePoint.Utilities.SPHttpUtility.ConvertSimpleHtmlToText(latestReply.Body, 50); 
-                                 
+                                 latestReply.CorrectBodyToShow = Microsoft.SharePoint.Utilities.SPHttpUtility.ConvertSimpleHtmlToText(latestReply.CorrectBodyToShow, 50);
 
+                                 //{$SubWebUrl}{$DisplayForm}?PageType={$PageType}&ListId={$ListID}&ID={&ItemID}
+                                 latestReply.Url = string.Format("{0}{1}?PageType={2}&ListId={{{3}}}&ID={4}",boardSubWeb.Url, _discussionBoard.DefaultDisplayFormUrl, _pageId, _discussionBoard.ID, latestReply.Id);
+
+                                 //string viewCounter = string.Format("g_ViewIdToViewCounterMap({{{0}}})", "D5A3F622-AC4C-4BB8-9F2B-2C548388EC4D");
+                                 string viewCounter = "1";
+ 
                                  if (i == 0)
                                      _sbRecords.Append("<div class=\"discussion_post first\">");
                                  else
                                      _sbRecords.Append("<div class=\"discussion_post\">");
                                  _sbRecords.Append("<h3>");
-                                 _sbRecords.Append("<a href=\"" + discussionItem.Url + "\">" + discussion.Title + "</a>");
+                                 _sbRecords.Append("<a href=\"" + discussionTopic.Url + "\">" + discussion.Title + "</a>");
                                  _sbRecords.Append("</h3>");
                                  _sbRecords.Append(latestReply.LastModified.ToString("dd.MM hh:mm "));
-                                 _sbRecords.Append("<a href=\"" + latestReply.Url + "\">" + "trimmedBody" + "</a>");
-                                 _sbRecords.Append("</div>");//Discussion post                           
+                                 _sbRecords.Append("<a  onclick=\"EditLink2(this," + viewCounter + ");return false;\" href=\"" + latestReply.Url + "\" target=_self>" + "<NOBR>" + latestReply.CorrectBodyToShow + "</NOBR>" + "</a>");
+                               
+                                 _sbRecords.Append("</div>");//Discussion post
+
+                                 
+                           
+                                
                              }
                          }
                          catch (Exception ex)
