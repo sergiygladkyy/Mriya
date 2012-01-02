@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Linq;
+using System.Web;
 using System.Web.UI;
 using System.Collections;
 using System.Web.UI.WebControls;
@@ -54,19 +55,39 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(@"
+<script type=""text/javascript"" language=""javascript"">
+
+function ShowReplyInDialog( url)
+	{
+        var options = {
+	        url: url,
+	        autoSize:true,
+	        allowMaximize:true,
+	        title: ""reply"",
+	        showClose: true,
+            width: 800
+        };
+	    var dialog = SP.UI.ModalDialog.showModalDialog(options);
+	}
+</script>
+");
+            this.Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "ShowReplyInDialog", sb.ToString()); 
+
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="e"></param>
         protected override void OnPreRender(EventArgs e)
-        {
+        {           
+            // Show error message (if there are any)
+            labelErrorMessage.Visible = _bShowErrorMessage;          
             // Show table
             ShowRecords();
-
-            // Show error message (if there are any)
-            labelErrorMessage.Visible = _bShowErrorMessage;
-
             base.OnPreRender(e);
         }       
         #endregion Page generation
@@ -98,7 +119,7 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
 
                         int numberOfDiscussionsToDisplay = topics.Count<Discussion>() < webpart.NumberOfDiscussionsToDisplay ? topics.Count<Discussion>() : webpart.NumberOfDiscussionsToDisplay;
 
-                         _sbRecords.AppendLine("<div id=\"discussion_zone\">");
+                        // _sbRecords.AppendLine("<div id=\"discussion_zone\">");
 
                          try
                          {
@@ -108,7 +129,10 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
                                  SPListItem discussionTopic = _discussionBoard.GetItemById((int)discussion.Id); // workaround for having a url
 
                                  var allReplies = dataContext.GetList<Message>(_discussionBoard.Title)
-                                     .ScopeToFolder( SPHttpUtility.UrlPathEncode( discussionTopic.Folder.Url,true), false); 
+                                     .ScopeToFolder( SPHttpUtility.UrlPathEncode( discussionTopic.Folder.Url,true), false);
+
+                                 if (allReplies.Count<Message>() == 0)
+                                     throw new Exception(Properties.Resources.textExceptionQueryingDiscussionBoardNoReplies);
 
                                  // this is a really shitty code, but how else can I get the missing Item attributes from an spmetal-wrapped class. Any ideas?
                                  foreach (Message reply in allReplies)
@@ -116,8 +140,17 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
                                      SPListItem discussionReply = _discussionBoard.GetItemById((int)reply.Id);
 
                                      reply.LastModified = (DateTime)discussionReply["Modified"];
-                                     //reply.Url = // assigned later only for the latest reply
-                                     reply.CorrectBodyToShow = (string)discussionReply["CorrectBodyToShow"].ToString();
+                                     try
+                                     {
+                                         reply.CorrectBodyToShow = (string)discussionReply["CorrectBodyToShow"].ToString();
+
+                                     }
+                                     catch (Exception ex)
+                                     {
+
+                                         reply.CorrectBodyToShow = ex.Message;
+                                     }
+                                     
                                      reply.Xml = (string)discussionReply.Xml;
                                  }
 
@@ -128,10 +161,11 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
                                  latestReply.CorrectBodyToShow = Microsoft.SharePoint.Utilities.SPHttpUtility.ConvertSimpleHtmlToText(latestReply.CorrectBodyToShow, 50);
 
                                  //{$SubWebUrl}{$DisplayForm}?PageType={$PageType}&ListId={$ListID}&ID={&ItemID}
-                                 latestReply.Url = string.Format("{0}{1}?PageType={2}&ListId={{{3}}}&ID={4}",boardSubWeb.Url, _discussionBoard.DefaultDisplayFormUrl, _pageId, _discussionBoard.ID, latestReply.Id);
+                                 //latestReply.Url = string.Format("{0}{1}?PageType={2}&ListId={{{3}}}&ID={4}",boardSubWeb.Url, _discussionBoard.DefaultDisplayFormUrl, _pageId, _discussionBoard.ID, latestReply.Id);
+                                 latestReply.Url = "http://www.google.com";
 
-                                 //string viewCounter = string.Format("g_ViewIdToViewCounterMap({{{0}}})", "D5A3F622-AC4C-4BB8-9F2B-2C548388EC4D");
-                                 string viewCounter = "1";
+                                 //string viewCounter = "1";
+                                 //string viewCounter = string.Format("g_ViewIdToViewCounterMap({{{0}}})", CurrentViewId());
  
                                  if (i == 0)
                                      _sbRecords.Append("<div class=\"discussion_post first\">");
@@ -141,12 +175,9 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
                                  _sbRecords.Append("<a href=\"" + discussionTopic.Url + "\">" + discussion.Title + "</a>");
                                  _sbRecords.Append("</h3>");
                                  _sbRecords.Append(latestReply.LastModified.ToString("dd.MM hh:mm "));
-                                 _sbRecords.Append("<a  onclick=\"EditLink2(this," + viewCounter + ");return false;\" href=\"" + latestReply.Url + "\" target=_self>" + "<NOBR>" + latestReply.CorrectBodyToShow + "</NOBR>" + "</a>");
+                                 _sbRecords.Append("<a  onclick=\"ShowReplyInDialog(this);return false;\" href=\"" + latestReply.Url + "\" target=_self>" + "<NOBR>" + latestReply.CorrectBodyToShow + "</NOBR>" + "</a>");
                                
-                                 _sbRecords.Append("</div>");//Discussion post
-
-                                 
-                           
+                                 _sbRecords.Append("</div>");//Discussion post                           
                                 
                              }
                          }
@@ -156,7 +187,7 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
                          }
 
 
-                        _sbRecords.Append("</div>");//Discussion Zone
+                        //_sbRecords.Append("</div>");//Discussion Zone
 
                     }//using datacontext                                                          
               } // using board subweb
@@ -168,8 +199,37 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
             return true;
         }
 
-        #region dealing with Sharepoint site collections
+        /// <summary>
+        /// not used
+        /// </summary>
+        /// <returns></returns>
+        public string CurrentViewId()
+        {
+            string viewId = string.Empty;
 
+            try
+            {
+                  SPList currentList = SPContext.Current.Web.GetList(HttpContext.Current.Request.Url.OriginalString);
+
+                foreach (SPView view in currentList.Views)
+                {
+                    if (HttpContext.Current.Request.Url.AbsolutePath.IndexOf(view.Url, StringComparison.OrdinalIgnoreCase) > 0)
+                    {
+                        viewId = view.ID.ToString();
+                        break;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                viewId = new Guid().ToString();
+            }
+
+            return viewId;
+        }
+
+        #region dealing with Sharepoint site collections
         /// <summary>
         /// Gets a SharePoint web site object from its Guid
         /// </summary>

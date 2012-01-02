@@ -97,11 +97,20 @@ namespace MriyaDiscussionDashboard.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Помилка отримання даних дошки оголошень: .
+        ///   Looks up a localized string similar to При запиті до дошки оголошень .
         /// </summary>
         internal static string textExceptionQueryingDiscussionBoard {
             get {
                 return ResourceManager.GetString("textExceptionQueryingDiscussionBoard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to не вдалося отримати відповіді.
+        /// </summary>
+        internal static string textExceptionQueryingDiscussionBoardNoReplies {
+            get {
+                return ResourceManager.GetString("textExceptionQueryingDiscussionBoardNoReplies", resourceCulture);
             }
         }
     }

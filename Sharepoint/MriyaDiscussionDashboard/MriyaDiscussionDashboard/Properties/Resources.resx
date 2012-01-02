@@ -131,7 +131,10 @@
     <value>На знайдено жодної дошки обговорень</value>
   </data>
   <data name="textExceptionQueryingDiscussionBoard" xml:space="preserve">
-    <value>Помилка отримання даних дошки оголошень: </value>
+    <value>При запиті до дошки оголошень </value>
     <comment>В обработчике формирования хтмл веб части (Page.OnPreRender)</comment>
+  </data>
+  <data name="textExceptionQueryingDiscussionBoardNoReplies" xml:space="preserve">
+    <value>не вдалося отримати відповіді</value>
   </data>
 </root>

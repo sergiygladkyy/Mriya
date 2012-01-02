@@ -55,12 +55,13 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
             }
         }
         /// <summary>
-        /// Recursively retrieves all the subwebs of this site
+        /// Recursively retrieves all discussion boards from website and the subwebs of website
         /// </summary>
         /// <param name="webSite"></param>
         private void FillBoards(SPWeb webSite)
-        {
-            RetrieveDiscussionBoards(webSite);
+        {          
+            if (webSite.ID == thisSite.RootWeb.ID)
+                RetrieveDiscussionBoards(webSite);
             foreach (SPWeb web in webSite.Webs)
                 if (web.DoesUserHavePermissions(currentUser.LoginName, Microsoft.SharePoint.SPBasePermissions.ViewPages))
                 {
@@ -107,7 +108,12 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
             DiscussionDashboard dashBoardToEdit = this.WebPartToEdit as DiscussionDashboard;
 
             if (dashBoardToEdit.currentBoardWithMetadata != null)
-                discussionSelectionDropDownList.SelectedIndex = boardsWithMetadata.IndexOf(dashBoardToEdit.currentBoardWithMetadata);
+                for (int i = 0; i < boardsWithMetadata.Count(); i++ )
+                    if (boardsWithMetadata[i].boardID == dashBoardToEdit.currentBoardWithMetadata.boardID)
+                        discussionSelectionDropDownList.SelectedIndex = i;
+
+
+                //discussionSelectionDropDownList.SelectedIndex = boardsWithMetadata.IndexOf(dashBoardToEdit.currentBoardWithMetadata);
         }
         /// <summary>
         /// On Cancel rollback all the changes
