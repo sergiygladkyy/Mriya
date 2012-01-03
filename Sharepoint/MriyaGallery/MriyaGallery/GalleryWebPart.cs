@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Web;
@@ -12,6 +13,9 @@ using Microsoft.SharePoint.WebControls;
 
 namespace MriyaGallery
 {
+    /// <summary>
+    /// Base class for Mriya image and video galleries
+    /// </summary>
     public class GalleryWebPart : WebPart
     {
         // Definitions
@@ -23,6 +27,7 @@ namespace MriyaGallery
 
         protected const int c_MaxImages = 11;
         protected const int c_MaxVideos = 5;
+        protected const int c_MaxItems = c_MaxImages;
 
         protected const int c_SliderImageWidth = 45;
         protected const int c_SliderImageHeight = 30;
@@ -47,10 +52,30 @@ namespace MriyaGallery
 
         protected List<GalleryItem> m_Items = new List<GalleryItem>();
 
-        public GalleryWebPart()
+        // Type and property to specify what exactly gallery is
+
+        public enum GalleryType
         {
+            Images = 1,
+            Video = 2
         }
 
+        public GalleryType Type { get; private set; }
+
+        public int MaxItemsCount { get { return m_MaxItems; } }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="type">Type of the gallery</param>
+        public GalleryWebPart(GalleryType type)
+        {
+            this.Type = type;
+        }
+
+        /// <summary>
+        /// Create children custom controls, register CSS and JS
+        /// </summary>
         protected override void CreateChildControls()
         {
             Controls.Clear();
@@ -68,6 +93,12 @@ namespace MriyaGallery
             linkVideo.Attributes.Add("rel", "stylesheet");
             this.Page.Header.Controls.Add(linkVideo);
 
+            HtmlLink linkProperties = new HtmlLink();
+            linkProperties.Href = c_PathCSS + "StylesheetProperties.css";
+            linkProperties.Attributes.Add("type", "text/css");
+            linkProperties.Attributes.Add("rel", "stylesheet");
+            this.Page.Header.Controls.Add(linkProperties);
+
             // Add Java scripts
             ClientScriptManager csm = Page.ClientScript;
             if (!csm.IsClientScriptIncludeRegistered("javascript_jquery_min"))
@@ -82,10 +113,55 @@ namespace MriyaGallery
                 csm.RegisterClientScriptInclude(this.GetType(), "javascript_player_wmvplayer", c_PathPlayers + "wmvplayer.js");
             if (!csm.IsClientScriptIncludeRegistered("javascript_player_qtime"))
                 csm.RegisterClientScriptInclude(this.GetType(), "javascript_player_qtime", c_PathPlayers + "AC_QuickTime.js");
+            if (!csm.IsClientScriptIncludeRegistered("javascript_property_images"))
+                csm.RegisterClientScriptInclude(this.GetType(), "javascript_gallery_properties", c_PathJS + "gallery_properties.js");
 
         }
 
+        /// <summary>
+        /// This method sets a flag indicating that the personalization data has changed.
+        /// This will allow the changes to the Web Part properties from outside the Web Part class.
+        /// </summary>
+        public virtual void SaveChanges()
+        {
+            this.SetPersonalizationDirty();
+        }
+
+        /// <summary>
+        /// Called when a control enters edit display mode. It creates EditPart controls
+        /// </summary>
+        /// <returns>The collection of EditorPart controls</returns>
+        public override EditorPartCollection CreateEditorParts()
+        {
+            ArrayList editorArray = new ArrayList();
+            PropertyImages edPart = new PropertyImages();
+            edPart.ID = this.ID + "_PropertyImages";
+            editorArray.Add(edPart);
+            EditorPartCollection editorParts =
+              new EditorPartCollection(editorArray);
+            return editorParts;
+        }
+
+        /// <summary>
+        /// Web part custom properties
+        /// </summary>
         #region WebPart Properties
+
+
+        List<GalleryItem> m_GalleryItems = new List<GalleryItem>();
+
+        [Personalizable(true)]
+        public List<GalleryItem> GalleryItems
+        {
+            get
+            {
+                return m_GalleryItems;
+            }
+            set
+            {
+                m_GalleryItems = value;
+            }
+        }
 
         [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
         System.Web.UI.WebControls.WebParts.WebDisplayName("Загальна ширина слайдера в пікселях"),

@@ -7,7 +7,7 @@
  *
  * @return void
  */
-function oiltecGallery(slider_tag_id, preview_tag_id, settings)
+function mriyaGallery(slider_tag_id, preview_tag_id, settings)
 {
     var players_dir = settings.players_dir ? settings.players_dir : '/players/';
 	

@@ -1,0 +1,40 @@
+﻿.gallery_properties {
+	width: 100%;
+	border-collapse: collapse;
+	border: 0 none;
+}
+
+.gallery_properties table,
+.gallery_properties tr,
+.gallery_properties td  {
+	border: 0 none;
+}
+
+.gallery_properties td {
+	padding: 0;
+	text-align: left;
+}
+
+.gallery_properties .row {
+	width: 100%;
+	border-collapse: collapse;
+	border: 0 none;
+}
+
+.gallery_properties .row .label {
+	font-weight: bold;
+	margin: 10px 0 2px;
+	padding: 0;
+}
+
+.gallery_properties .row input[type="text"] {
+	width: 100%;
+}
+
+.gallery_properties .row .delete_control {
+	padding: 9px 0 15px;
+}
+
+.gallery_properties .controls {
+	text-align: right;
+}

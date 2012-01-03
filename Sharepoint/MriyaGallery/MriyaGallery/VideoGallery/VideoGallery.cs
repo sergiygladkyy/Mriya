@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Web;
@@ -12,14 +13,20 @@ using Microsoft.SharePoint.WebControls;
 
 namespace MriyaGallery.VideoGallery
 {
+    /// <summary>
+    /// Mriya video gallery web part implementation (on main page)
+    /// </summary>
     [ToolboxItemAttribute(false)]
     public class VideoGallery : GalleryWebPart
     {
-        public VideoGallery()
+        public VideoGallery() : base(GalleryWebPart.GalleryType.Video)
         {
             m_MaxItems = c_MaxVideos; 
         }
 
+        /// <summary>
+        /// Creates children controls, registres webpart javascripts
+        /// </summary>
         protected override void CreateChildControls()
         {
             // Call parent to include css/js
@@ -58,6 +65,10 @@ namespace MriyaGallery.VideoGallery
                 csm.RegisterClientScriptBlock(this.GetType(), "videoInitializeUniqueKeySlider", CreateJSUniqueKeySlider(), true);
         }
 
+        /// <summary>
+        /// Renders the control to the specified HTML writer 
+        /// </summary>
+        /// <param name="output">The HtmlTextWriter object that receives the server control content</param>
         protected override void Render(HtmlTextWriter output)
         {
             RenderChildren(output);
@@ -103,6 +114,10 @@ namespace MriyaGallery.VideoGallery
             output.Write(sbPart.ToString());
         }
 
+        /// <summary>
+        /// Generates JavaScript to run video gallery
+        /// </summary>
+        /// <returns>String which containing JavaScript</returns>
         protected string CreateJSUniqueKeySlider()
         {
             StringBuilder sbJS = new StringBuilder();
@@ -110,7 +125,7 @@ namespace MriyaGallery.VideoGallery
             string functionName = "initializeUniqueKeySlider_" + this.UniqueID;
             sbJS.AppendLine("function " + functionName + "()");
             sbJS.AppendLine("{");
-            sbJS.AppendLine("   var gallery = new oiltecGallery('gallery_slider_UniqueKey1', 'gallery_preview_UniqueKey1', {");
+            sbJS.AppendLine("   var gallery = new mriyaGallery('gallery_slider_UniqueKey1', 'gallery_preview_UniqueKey1', {");
             sbJS.AppendLine("   players_dir: '" + c_PathPlayers + "',");
             sbJS.AppendLine("   slider: {");
             sbJS.AppendLine("       img_width:  " + m_SliderImageWidth.ToString() + ",");
@@ -152,6 +167,15 @@ namespace MriyaGallery.VideoGallery
             sbJS.AppendLine("_spBodyOnLoadFunctionNames.push('" + functionName + "');");
 
             return sbJS.ToString();
+        }
+
+        /// <summary>
+        /// Provides a way for EditorPart controls to get a reference to the server controls they are associated with
+        /// </summary>
+        public override object WebBrowsableObject
+        {
+            // Return a reference to the Web Part instance.
+            get { return this; }
         }
     }
 }

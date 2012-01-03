@@ -5,6 +5,7 @@ using System.Text;
 
 namespace MriyaGallery
 {
+    [Serializable]
     public class GalleryItem
     {
         private string m_Thumbnail = "";
