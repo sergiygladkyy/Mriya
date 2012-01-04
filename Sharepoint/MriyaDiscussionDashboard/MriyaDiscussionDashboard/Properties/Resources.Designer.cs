@@ -113,5 +113,68 @@ namespace MriyaDiscussionDashboard.Properties {
                 return ResourceManager.GetString("textExceptionQueryingDiscussionBoardNoReplies", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Верхня розділова лінія.
+        /// </summary>
+        internal static string textWebPartPropertyEnableTopLine {
+            get {
+                return ResourceManager.GetString("textWebPartPropertyEnableTopLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Виберіть опцію, якщо понад цією веб частиною розташовується ще одна така ж.
+        /// </summary>
+        internal static string textWebPartPropertyEnableTopLineDescription {
+            get {
+                return ResourceManager.GetString("textWebPartPropertyEnableTopLineDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Кількість дискусій.
+        /// </summary>
+        internal static string textWebPartPropertyNumberOfDiscussions {
+            get {
+                return ResourceManager.GetString("textWebPartPropertyNumberOfDiscussions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Відображаються найактивніші..
+        /// </summary>
+        internal static string textWebPartPropertyNumberOfDiscussionsDescription {
+            get {
+                return ResourceManager.GetString("textWebPartPropertyNumberOfDiscussionsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Додаткова категорія.
+        /// </summary>
+        internal static string textWebPartPropertySupplementalCategory {
+            get {
+                return ResourceManager.GetString("textWebPartPropertySupplementalCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aдреса декоративної стрілки.
+        /// </summary>
+        internal static string textWebPartPropertyUrlForArrow {
+            get {
+                return ResourceManager.GetString("textWebPartPropertyUrlForArrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Посилання на стрілку яку виводиться наприкінці кожного дайджесту.
+        /// </summary>
+        internal static string textWebPartPropertyUrlForArrowDescription {
+            get {
+                return ResourceManager.GetString("textWebPartPropertyUrlForArrowDescription", resourceCulture);
+            }
+        }
     }
 }

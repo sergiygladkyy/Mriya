@@ -137,4 +137,32 @@
   <data name="textExceptionQueryingDiscussionBoardNoReplies" xml:space="preserve">
     <value>не вдалося отримати відповіді</value>
   </data>
+  <data name="textWebPartPropertyEnableTopLine" xml:space="preserve">
+    <value>Верхня розділова лінія</value>
+    <comment>не используется (hardcoded in DiscussionDashboard.cs)</comment>
+  </data>
+  <data name="textWebPartPropertyEnableTopLineDescription" xml:space="preserve">
+    <value>Виберіть опцію, якщо понад цією веб частиною розташовується ще одна така ж</value>
+    <comment>не используется (hardcoded in DiscussionDashboard.cs)</comment>
+  </data>
+  <data name="textWebPartPropertyNumberOfDiscussions" xml:space="preserve">
+    <value>Кількість дискусій</value>
+    <comment>не используется (hardcoded in DiscussionDashboard.cs)</comment>
+  </data>
+  <data name="textWebPartPropertyNumberOfDiscussionsDescription" xml:space="preserve">
+    <value>Відображаються найактивніші.</value>
+    <comment>не используется (hardcoded in DiscussionDashboard.cs)</comment>
+  </data>
+  <data name="textWebPartPropertySupplementalCategory" xml:space="preserve">
+    <value>Додаткова категорія</value>
+    <comment>не используется (hardcoded in DiscussionDashboard.cs)</comment>
+  </data>
+  <data name="textWebPartPropertyUrlForArrow" xml:space="preserve">
+    <value>Aдреса декоративної стрілки</value>
+    <comment>не используется (hardcoded in DiscussionDashboard.cs)</comment>
+  </data>
+  <data name="textWebPartPropertyUrlForArrowDescription" xml:space="preserve">
+    <value>Посилання на стрілку яку виводиться наприкінці кожного дайджесту</value>
+    <comment>не используется (hardcoded in DiscussionDashboard.cs)</comment>
+  </data>
 </root>
