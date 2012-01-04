@@ -32,34 +32,6 @@ namespace MriyaGallery.VideoGallery
             // Call parent to include css/js
             base.CreateChildControls();
 
-            // Initialize items
-            m_Items.Clear();
-            m_Items.Add(new GalleryItem("/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_1.jpg",
-                "/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_1.jpg",
-                "/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_1.wmv"
-                ));
-            m_Items.Add(new GalleryItem("/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_2.jpg",
-                "/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_2.jpg",
-                "/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_2.wmv"
-                ));
-            m_Items.Add(new GalleryItem("/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_3.jpg",
-                "/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_3.jpg",
-                "/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_3.wmv"
-                ));
-            m_Items.Add(new GalleryItem("/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_4.jpg",
-                "/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_4.jpg",
-                "/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_4.wmv"
-                ));
-            m_Items.Add(new GalleryItem("/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_5.jpg",
-                "/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_5.jpg",
-                "/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_5.mp4"
-                ));
-            m_Items.Add(new GalleryItem("/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_6.jpg",
-                "/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_6.jpg",
-                "/sites/mriya/SiteCollectionImages/Mriya Theme/galleries/video/video_6.flv"
-                ));
-
-
             ClientScriptManager csm = Page.ClientScript;
             if (!csm.IsClientScriptBlockRegistered("videoInitializeUniqueKeySlider"))
                 csm.RegisterClientScriptBlock(this.GetType(), "videoInitializeUniqueKeySlider", CreateJSUniqueKeySlider(), true);
@@ -80,8 +52,8 @@ namespace MriyaGallery.VideoGallery
             sbPart.AppendLine("    <div id=\"gallery_preview_UniqueKey1\" class=\"gallery_preview\">");
             sbPart.AppendLine("        <a class=\"photo_icon\" href=\"#\"><img width=\"45\" height=\"39\" src=\"" +
                 c_PathImages + "video_icon.png\"></a>");
-            if (m_Items.Count > 0)
-                sbPart.AppendLine("        <img src=\"" + m_Items[0].Image + "\" class=\"preview\"/>");
+            if (GalleryItems.Count > 0)
+                sbPart.AppendLine("        <img src=\"" + GalleryItems[0].Image + "\" class=\"preview\"/>");
             sbPart.AppendLine("    </div>");
 
             sbPart.AppendLine("    <div id=\"gallery_slider_UniqueKey1\" class=\"gallery_slider\">");
@@ -93,12 +65,12 @@ namespace MriyaGallery.VideoGallery
             sbPart.AppendLine("            <table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">");
             sbPart.AppendLine("            <tr>");
 
-            for (int i = 0; i < m_Items.Count && i < m_MaxItems; i++)
+            for (int i = 0; i < GalleryItems.Count && i < m_MaxItems; i++)
             {
                 sbPart.AppendLine("                <td class=\"zoom" + ((i == 0) ? (" first") : ("")) + "\">");
                 sbPart.AppendLine("                    <div class=\"item\" node=\"" + i.ToString() +
                     "\"><a href=\"#\" onclick=\"return false;\"><img src=\"" +
-                    m_Items[i].Image + "\" alt=\"video_" + (i + 1).ToString() + "\" /></a></div>");
+                    GalleryItems[i].Image + "\" alt=\"video_" + (i + 1).ToString() + "\" /></a></div>");
                 sbPart.AppendLine("                </td>");
             }
             sbPart.AppendLine("            </tr>");
@@ -146,12 +118,12 @@ namespace MriyaGallery.VideoGallery
             sbJS.AppendLine("       auto_play: false");
             sbJS.AppendLine("   },");
             sbJS.AppendLine("   data: {");
-            for (int i = 0; i < m_Items.Count && i < m_MaxItems; i++)
+            for (int i = 0; i < GalleryItems.Count && i < m_MaxItems; i++)
             {
                 sbJS.AppendLine("       " + i.ToString() + ": {");
-                sbJS.AppendLine("           s_img: '" + m_Items[i].Thumbnail + "',");
-                sbJS.AppendLine("           b_img: '" + m_Items[i].Image + "',");
-                sbJS.AppendLine("           video: '" + m_Items[i].Video + "'");
+                sbJS.AppendLine("           s_img: '" + GalleryItems[i].Thumbnail + "',");
+                sbJS.AppendLine("           b_img: '" + GalleryItems[i].Image + "',");
+                sbJS.AppendLine("           video: '" + GalleryItems[i].Video + "'");
                 sbJS.Append("       }");
                 if (i < m_MaxItems - 1)
                     sbJS.AppendLine(",");

@@ -50,8 +50,6 @@ namespace MriyaGallery
         protected int m_PreviewWidth = c_PreviewWidth;
         protected int m_PreviewHeight = c_PreviewHeight;
 
-        protected List<GalleryItem> m_Items = new List<GalleryItem>();
-
         // Type and property to specify what exactly gallery is
 
         public enum GalleryType
@@ -113,9 +111,6 @@ namespace MriyaGallery
                 csm.RegisterClientScriptInclude(this.GetType(), "javascript_player_wmvplayer", c_PathPlayers + "wmvplayer.js");
             if (!csm.IsClientScriptIncludeRegistered("javascript_player_qtime"))
                 csm.RegisterClientScriptInclude(this.GetType(), "javascript_player_qtime", c_PathPlayers + "AC_QuickTime.js");
-            if (!csm.IsClientScriptIncludeRegistered("javascript_property_images"))
-                csm.RegisterClientScriptInclude(this.GetType(), "javascript_gallery_properties", c_PathJS + "gallery_properties.js");
-
         }
 
         /// <summary>

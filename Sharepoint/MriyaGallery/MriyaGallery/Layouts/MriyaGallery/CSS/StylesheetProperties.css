@@ -4,6 +4,11 @@
 	border: 0 none;
 }
 
+.gallery_properties table 
+{
+    width: 100%;
+}
+
 .gallery_properties table,
 .gallery_properties tr,
 .gallery_properties td  {
