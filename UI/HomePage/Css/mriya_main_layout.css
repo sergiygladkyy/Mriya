@@ -217,18 +217,33 @@ h3 {
 	border-top: none;
 }
 
+#discussion_zone .discussion_post h3 {
+	margin-bottom: 3px;
+}
+
 #discussion_zone h3 a {
 	font-size: 12px;
 	font-weight: normal;
 	color: #88009c;
 	text-decoration: none;
 }
+
 #discussion_zone a {
 	color: #000;
 	text-decoration: none;
 }
+
 #discussion_zone a:hover {
 	text-decoration: underline;
+}
+
+#discussion_zone .ms-PartSpacingVertical {
+	margin-top: 0px;
+}
+
+#discussion_zone .discussion_timestamp {
+	display: inline;
+	color: #666;
 }
 
 

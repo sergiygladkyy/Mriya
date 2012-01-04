@@ -169,6 +169,13 @@
 	width: 98.4%;
 }
 
+.discussion-container > tbody {
+	display: table;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
 body .discussion-board,
 table.discussion-board td,
 table.discussion-board div,
@@ -319,6 +326,7 @@ table.discussion-board td div {
 	padding: 8px 0;
     border: 0 none;
     text-align: center;
+	vertical-align: top;
     width: 150px;
 	display: block;
 }
@@ -340,6 +348,7 @@ table.discussion-board td div {
 
 .discussion-board  td.ms-disc-bordered-noleft {
 	border-left-width: 0;
+	vertical-align: top;
 }
 
 .discussion-board  .ms-disc-bordered > table > tbody > tr > td[nowrap] {

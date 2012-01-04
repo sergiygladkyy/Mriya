@@ -164,7 +164,7 @@
 				<td width="100%" nowrap="TRUE">
 					<div class="anchor">
 						<a name="{$thisNode/@GUID}"/>
-						#<xsl:value-of select="$thisNode/@GUID" />
+						#<!--<xsl:value-of select="$thisNode/@GUID" />-->
 					</div>
 				</td>
 				<xsl:if test="$thisNode/@Attachments='1'">
@@ -410,7 +410,7 @@
 						<xsl:if test="@BaseViewID='3'">
 							<xsl:attribute name="onmouseover">EnsureSelectionHandler(event,this,<xsl:value-of select="$ViewCounter"/>)</xsl:attribute>
 						</xsl:if>
-						<xsl:attribute name="class"><xsl:choose><!-- Any time we display 0 items in a view = class="ms-viewEmpty" --><xsl:when test="$dvt_RowCount = 0">ms-viewEmpty</xsl:when><xsl:otherwise><xsl:choose><!-- Threaded/Flat view with non-zero number of items = class="ms-disc" --><xsl:when test="(@BaseViewID='1' or @BaseViewID='2')">ms-disc discussion-board</xsl:when><!-- Subject view with non-zero number of items = class="ms-listviewtable" --><xsl:otherwise>ms-listviewtable</xsl:otherwise></xsl:choose></xsl:otherwise></xsl:choose></xsl:attribute>
+						<xsl:attribute name="class"><xsl:choose><!-- Any time we display 0 items in a view = class="ms-viewEmpty" --><xsl:when test="$dvt_RowCount = 0">ms-viewEmpty discussion-board</xsl:when><xsl:otherwise><xsl:choose><!-- Threaded/Flat view with non-zero number of items = class="ms-disc" --><xsl:when test="(@BaseViewID='1' or @BaseViewID='2')">ms-disc discussion-board</xsl:when><!-- Subject view with non-zero number of items = class="ms-listviewtable" --><xsl:otherwise>ms-listviewtable</xsl:otherwise></xsl:choose></xsl:otherwise></xsl:choose></xsl:attribute>
 						<xsl:apply-templates select="." mode="full"/>
 					</table>
 				</td>
