@@ -164,7 +164,7 @@
 				<td width="100%" nowrap="TRUE">
 					<div class="anchor">
 						<a name="{$thisNode/@GUID}"/>
-						#<xsl:value-of select="$thisNode/@GUID" />
+						#<!--<xsl:value-of select="$thisNode/@GUID" />-->
 					</div>
 				</td>
 				<xsl:if test="$thisNode/@Attachments='1'">
