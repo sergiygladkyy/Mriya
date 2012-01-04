@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="MriyaStaffWebparts.PhoneBook.PhoneBook, $SharePoint.Project.AssemblyFullName$" />
+      <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">Телефонна книга (OmniTracker)</property>
+        <property name="Description" type="string">Телефонна книга корпоративного веб-сайту агроходлинга Мрія.</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>

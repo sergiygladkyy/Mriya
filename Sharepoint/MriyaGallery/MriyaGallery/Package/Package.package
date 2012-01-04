@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="9c6ee0c1-0623-4d86-a62f-43e383c1cf2f" solutionId="9c6ee0c1-0623-4d86-a62f-43e383c1cf2f" resetWebServer="false" name="MriyaGallery" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="7fd587bb-98c1-4879-bb21-b35c86069063" />
+  </features>
+  <projectItems>
+    <projectItemReference itemId="1e0cb719-f61b-46b2-9e1f-b26ccb39729e" />
+    <projectItemReference itemId="0006191a-d0b5-439e-8fbe-017163fe35fc" />
+  </projectItems>
+</package>

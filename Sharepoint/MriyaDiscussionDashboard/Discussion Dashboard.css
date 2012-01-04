@@ -1,0 +1,59 @@
+﻿#discussion_zone {
+			background-color: #eeeeee;
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fbfbfb', endColorstr='#ebebeb');
+			background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#ebebeb));
+			background: -moz-linear-gradient(top,  #fbfbfb,  #ebebeb);
+			border-radius: 8px;
+			-webkit-border-radius: 8px;
+			-moz-border-radius: 8px;
+			border: solid 1px #ebebeb;
+			-moz-box-shadow: 0px 1px 0px #9d9d9d;
+			-webkit-box-shadow: 0px 1px 0px #9d9d9d;
+			box-shadow: 0px 1px 0px #9d9d9d;
+			padding: 16px 8px;
+			font-size: 11px;
+			line-height: 14px;
+			padding-bottom: 4px;
+			font-family: Tahoma, Geneva, sans-serif;
+			font-weight: normal;
+			color: #000;
+		}
+		
+		#discussion_zone .ms-WPBody {
+			font-family: Tahoma, Geneva, sans-serif;
+			font-size: 11px;
+			font-weight: normal;
+			color: #000;
+		}
+		
+		#discussion_zone .discussion_post {
+			margin-top: 8px;
+			margin-bottom: 8px;
+			padding-top: 16px;
+			padding-bottom: 8px;
+			border-top-width: 1px;
+			border-top-style: solid;
+			border-top-color: #cccccc;
+		}
+		
+		#discussion_zone .discussion_post.first {
+			margin-top: 0px;
+			padding-top: 0px;
+			border-top: none;
+		}
+		
+		#discussion_zone h3 a {
+			font-size: 12px;
+			font-weight: normal;
+			color: #88009c;
+			text-decoration: none;
+		}
+		
+		#discussion_zone a {
+			color: #000;
+			text-decoration: none;
+		}
+		
+		#discussion_zone a:hover {
+			text-decoration: underline;
+		}

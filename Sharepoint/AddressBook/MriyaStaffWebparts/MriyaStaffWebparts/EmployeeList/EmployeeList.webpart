@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="MriyaStaffWebparts.EmployeeList.EmployeeList, $SharePoint.Project.AssemblyFullName$" />
+      <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="Title" type="string">Список співробітників</property>
+        <property name="Description" type="string">Список співробітників корпоративного веб-сайту агроходлинга Мрія.</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>

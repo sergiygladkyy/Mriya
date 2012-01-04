@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="cd16daf4-af34-48ea-8359-376b5e227c02" solutionId="cd16daf4-af34-48ea-8359-376b5e227c02" resetWebServer="false" name="MriyaDiscussionDashboard" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="a0854ba4-7adf-403b-a676-2f1ca4f5f417" />
+  </features>
+</package>
