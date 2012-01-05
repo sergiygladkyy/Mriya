@@ -21,6 +21,7 @@ namespace MriyaGallery
         private int m_nMaxItemsCount = 0;
         private bool m_bMaxItemsCountRestored = false;
 
+        UpdatePanel m_PanelAJAX = new UpdatePanel();
         private Panel m_PanelContent = new Panel();
         private Label m_Caption = new Label();
         private Table m_TableItems = new Table();
@@ -29,6 +30,7 @@ namespace MriyaGallery
         private List<TextBox> m_TextSmallImage = new List<TextBox>();
         private List<TextBox> m_TextBigImage = new List<TextBox>();
         private List<TextBox> m_TextVideo = new List<TextBox>();
+        private List<TextBox> m_TextDescription = new List<TextBox>();
 
         private List<int> m_ItemsID = null;
 
@@ -122,10 +124,19 @@ namespace MriyaGallery
         /// </summary>
         protected override void CreateChildControls()
         {
+            // Enable AJAX 
+            if (ScriptManager.GetCurrent(this.Page) == null)
+            {
+                ScriptManager manager = new ScriptManager();
+                manager.EnablePartialRendering = true;
+                Controls.Add(manager);
+            }
+
+
             //LiteralControl 
             m_PanelContent.CssClass = "gallery_properties";
-            m_PanelContent.Controls.Add(new LiteralControl("<span class=\"gallery_properties_caption\">" +
-                Properties.Resources.PropertiesCaption + "</span>"));
+            m_PanelContent.Controls.Add(new LiteralControl("<span class=\"gallery_properties_caption\"><h3>" +
+                Properties.Resources.PropertiesCaption + "</h3></span>"));
 
 
             m_PanelContent.Controls.Add(m_TableItems);
@@ -139,11 +150,15 @@ namespace MriyaGallery
             m_PanelContent.Controls.Add(new LiteralControl("<br/>"));
 
             m_LinkAdd.ID = "buttonAddItem";
+            m_LinkAdd.CssClass = "add_control";
             m_LinkAdd.Text = Properties.Resources.PropertiesCaptionAddItem;
             m_LinkAdd.Command += new CommandEventHandler(OnAddCommand);
             m_PanelContent.Controls.Add(m_LinkAdd);
+            m_PanelContent.Controls.Add(new LiteralControl("<br/><br/>"));
 
-            Controls.Add(m_PanelContent);
+            m_PanelAJAX.ID = "updatePanel_" + ID;
+            m_PanelAJAX.ContentTemplateContainer.Controls.Add(m_PanelContent);
+            Controls.Add(m_PanelAJAX);
 
             base.CreateChildControls();
             this.ChildControlsCreated = true;
@@ -172,6 +187,7 @@ namespace MriyaGallery
                 string imageSmallID = "textBoxSmallImage" + sId;
                 string imageBigID = "textBoxBigImage" + sId;
                 string videoID = "textBoxVideo" + sId;
+                string descriptionID = "textBoxDescription" + sId;
                 GalleryItem item = new GalleryItem();
 
                 // Small image
@@ -209,6 +225,15 @@ namespace MriyaGallery
                 }
                 else
                 {
+                    foreach (TextBox textBox in m_TextDescription)
+                    {
+                        if (textBox.ID == descriptionID)
+                        {
+                            item.Description = textBox.Text.Trim();
+                            break;
+                        }
+                    }
+
                     if (item.Image.Length > 0 || item.Thumbnail.Length > 0)
                         gitems.Add(item);
                 }
@@ -245,7 +270,12 @@ namespace MriyaGallery
                 if (AddVideo)
                 {
                     if (m_TextVideo.Count > 0)
-                        m_TextVideo[m_TextVideo.Count - 1].Text = gitems[i].Image;
+                        m_TextVideo[m_TextVideo.Count - 1].Text = gitems[i].Video;
+                }
+                else
+                {
+                    if (m_TextDescription.Count > 0)
+                        m_TextDescription[m_TextDescription.Count - 1].Text = gitems[i].Description;
                 }
             }
         }
@@ -295,14 +325,24 @@ namespace MriyaGallery
             if (AddVideo)
             {
                 tableChildItem.Rows.Add(
-                    CreateTextControl("textBoxVideo" + sId, 
-                    "label video_label", "label_video", 
+                    CreateTextControl("textBoxVideo" + sId,
+                    "label video_label", "label_video",
                     Properties.Resources.PropertiesCaptionVideo,
                     ref m_TextVideo)
                     );
             }
+            else
+            {
+                tableChildItem.Rows.Add(
+                    CreateTextControl("textBoxDescription" + sId,
+                    "label description_label", "description",
+                    Properties.Resources.PropertiesCaptionDescription,
+                    ref m_TextDescription)
+                    );
+            }
             tableChildItem.Rows.Add(
-                CreateButtonControl("buttonDeleteItem" + sId, "delete_control", 
+                CreateButtonControl("buttonDeleteItem" + sId, 
+                "delete_row", "delete_control", 
                 Properties.Resources.PropertiesCaptionDeleteItem, 
                 "deleteItem" + id.ToString(), id.ToString())
                 );
@@ -379,16 +419,18 @@ namespace MriyaGallery
         /// Creates gallery item properties text control
         /// </summary>
         /// <param name="id">TextBox ID</param>
+        /// <param name="cssCell">CSS style of the table cell</param>
         /// <param name="cssControl">CSS style of the TextBox</param>
         /// <param name="label">Field label</param>
         /// <param name="command">Command name</param>
         /// <param name="commandArgs">Command arguments - id of the controls</param>
         /// <returns>TableRow with created crontrol</returns>
-        TableRow CreateButtonControl(string id, string cssControl, string label, string command, string commandArgs)
+        TableRow CreateButtonControl(string id, string cssCell, string cssControl, string label, string command, string commandArgs)
         {
             TableRow row = new TableRow();
 
             TableCell cell = new TableCell();
+            cell.CssClass = cssCell;
 
             LinkButton control = new LinkButton();
             control.ID = id;

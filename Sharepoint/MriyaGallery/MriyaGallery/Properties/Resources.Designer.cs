@@ -97,6 +97,15 @@ namespace MriyaGallery.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Опис.
+        /// </summary>
+        internal static string PropertiesCaptionDescription {
+            get {
+                return ResourceManager.GetString("PropertiesCaptionDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Маленьке зображення.
         /// </summary>
         internal static string PropertiesCaptionSmallImage {

@@ -83,15 +83,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ImageGallery\Elements.xml" />
-    <Content Include="Images\MriyaGallery\arrow_left.png" />
-    <Content Include="Images\MriyaGallery\arrow_right.png" />
+    <Content Include="Images\MriyaGallery\close.png" />
+    <Content Include="Images\MriyaGallery\loading_animation.gif" />
     <Content Include="Images\MriyaGallery\photo_icon.png" />
     <Content Include="Images\MriyaGallery\prev_ar_lft.png" />
     <Content Include="Images\MriyaGallery\prev_ar_rgt.png" />
     <Content Include="Images\MriyaGallery\video_icon.png" />
-    <Content Include="Layouts\MriyaGallery\CSS\StylesheetImageGallery.css" />
+    <Content Include="Layouts\MriyaGallery\CSS\StylesheetGallery.css" />
     <Content Include="Layouts\MriyaGallery\CSS\StylesheetProperties.css" />
-    <Content Include="Layouts\MriyaGallery\CSS\StylesheetVideoGallery.css" />
     <Content Include="Layouts\MriyaGallery\JS\gallery.js" />
     <Content Include="Layouts\MriyaGallery\JS\jquery-1.3.2.min.js" />
     <Content Include="Layouts\MriyaGallery\JS\jquery.easing.1.3.js" />

@@ -36,8 +36,24 @@
 	width: 100%;
 }
 
-.gallery_properties .row .delete_control {
+.gallery_properties .row .delete_row 
+{
+    text-align: right;
 	padding: 9px 0 15px;
+}
+
+.gallery_properties .delete_control, 
+.gallery_properties .delete_control a, 
+.gallery_properties .delete_control a:link, 
+.gallery_properties .delete_control a:hover, 
+.gallery_properties .delete_control a:visited
+{
+    color: #ff5555 !important; 
+}
+
+.gallery_properties .add_control
+{
+    font-weight: bold;
 }
 
 .gallery_properties .controls {
