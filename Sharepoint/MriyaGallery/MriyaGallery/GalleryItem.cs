@@ -5,6 +5,7 @@ using System.Text;
 
 namespace MriyaGallery
 {
+    [Serializable]
     public class GalleryItem
     {
         private string m_Thumbnail = "";
@@ -40,22 +41,29 @@ namespace MriyaGallery
 
         public string Video { get; set; }
 
+        public string Description { get; set; }
+
         public GalleryItem()
         {
             Thumbnail = "";
             Image = "";
             Video = "";
+            Description = "";
         }
 
         public GalleryItem(string image)
         {
             this.Image = image;
+            Video = "";
+            Description = "";
         }
 
         public GalleryItem(string image, string thumbnail)
         {
             this.Image = image;
             this.Thumbnail = thumbnail;
+            Video = "";
+            Description = "";
         }
 
         public GalleryItem(string image, string thumbnail, string video)
@@ -63,7 +71,7 @@ namespace MriyaGallery
             this.Image = image;
             this.Thumbnail = thumbnail;
             this.Video = video;
+            Description = "";
         }
-
     }
 }

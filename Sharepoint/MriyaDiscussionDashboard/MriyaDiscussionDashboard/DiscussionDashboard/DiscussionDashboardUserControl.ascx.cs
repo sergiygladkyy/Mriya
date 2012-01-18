@@ -55,27 +55,20 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            
+
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(@"
-<script type=""text/javascript"" language=""javascript"">
-
-function ShowReplyInDialog( url)
+function ShowReplyInDialog(url, title)
+// more info: http://www.chaholl.com/archive/2010/11/17/using-the-dialog-framework-in-sharepoint-2010.aspx
 	{
-        var options = {
-	        url: url,
-	        autoSize:true,
-	        allowMaximize:true,
-	        title: ""reply"",
-	        showClose: true,
-            width: 800
-        };
+        var options = SP.UI.$create_DialogOptions();
+        options.title = title;
+        options.url = url;
 	    var dialog = SP.UI.ModalDialog.showModalDialog(options);
 	}
-</script>
 ");
-            this.Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "ShowReplyInDialog", sb.ToString()); 
+            this.Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "ShowReplyInDialog", sb.ToString(),true); 
 
         }
         /// <summary>
@@ -158,25 +151,31 @@ function ShowReplyInDialog( url)
                                                     orderby reply.LastModified descending
                                                     select reply).FirstOrDefault();
 
-                                 latestReply.CorrectBodyToShow = Microsoft.SharePoint.Utilities.SPHttpUtility.ConvertSimpleHtmlToText(latestReply.CorrectBodyToShow, 50);
+                                 latestReply.CorrectBodyToShow = Microsoft.SharePoint.Utilities.SPHttpUtility.ConvertSimpleHtmlToText(latestReply.CorrectBodyToShow, webpart.DigestLength);
 
-                                 //{$SubWebUrl}{$DisplayForm}?PageType={$PageType}&ListId={$ListID}&ID={&ItemID}
-                                 //latestReply.Url = string.Format("{0}{1}?PageType={2}&ListId={{{3}}}&ID={4}",boardSubWeb.Url, _discussionBoard.DefaultDisplayFormUrl, _pageId, _discussionBoard.ID, latestReply.Id);
-                                 latestReply.Url = "http://www.google.com";
+                                 //{$SubWebUrl}{$DisplayForm}?PageType={$PageType}&ListId={$ListID}&ID={&ItemID}                                                                  
+                                 latestReply.Url = string.Format("http://{0}{1}?PageType={2}&ListId={{{3}}}&ID={4}", SPContext.Current.Site.HostName, _discussionBoard.DefaultDisplayFormUrl, _pageId, _discussionBoard.ID, latestReply.Id);
+                                 string onClickHref = string.Format(@"<a  onclick=""ShowReplyInDialog('{0}','{1}');return false;"" href='{0}' target=_self><NOBR>{2}... </NOBR>",latestReply.Url, Server.HtmlEncode(discussion.Title), latestReply.CorrectBodyToShow);
 
-                                 //string viewCounter = "1";
-                                 //string viewCounter = string.Format("g_ViewIdToViewCounterMap({{{0}}})", CurrentViewId());
+                                 string arrowHref;
+                                 if (webpart.UrlForArrow.IndexOf("http://") == -1)
+                                     arrowHref = "http://" + SPContext.Current.Site.HostName + webpart.UrlForArrow;
+                                 else
+                                     arrowHref = webpart.UrlForArrow;
  
-                                 if (i == 0)
+                                 if ((i == 0) & (!webpart.EnableTopLine))
                                      _sbRecords.Append("<div class=\"discussion_post first\">");
                                  else
                                      _sbRecords.Append("<div class=\"discussion_post\">");
                                  _sbRecords.Append("<h3>");
-                                 _sbRecords.Append("<a href=\"" + discussionTopic.Url + "\">" + discussion.Title + "</a>");
+                                 _sbRecords.Append("<a href=\"" + boardSubWeb.Url + "//" + discussionTopic.Url + "\">" + discussion.Title + "</a>");
                                  _sbRecords.Append("</h3>");
-                                 _sbRecords.Append(latestReply.LastModified.ToString("dd.MM hh:mm "));
-                                 _sbRecords.Append("<a  onclick=\"ShowReplyInDialog(this);return false;\" href=\"" + latestReply.Url + "\" target=_self>" + "<NOBR>" + latestReply.CorrectBodyToShow + "</NOBR>" + "</a>");
-                               
+                                 _sbRecords.Append("<div class=\"discussion_timestamp\">");
+                                 _sbRecords.Append(latestReply.LastModified.ToString("dd.MM hh:mm  "));
+                                 _sbRecords.Append("</div>");//Discussion timestamp                           
+                                 _sbRecords.Append(onClickHref);                                                                                                    
+                                 _sbRecords.Append("</a>");
+                                  _sbRecords.Append("<img width=\"9\" height=\"7\" src=\"" + arrowHref + "\">");
                                  _sbRecords.Append("</div>");//Discussion post                           
                                 
                              }
@@ -237,7 +236,7 @@ function ShowReplyInDialog( url)
         /// <returns></returns>
         public static SPWeb getSPWeb(Guid guid)
         {
-            SPWeb web = GetSPWebCollectionFromCurrentSite()[guid]; // don't want to return this spweb since it has admin privileges
+            SPWeb web = GetSPWebCollectionFromCurrentSite()[guid]; // doesn't want to return this spweb since it has admin privileges
             return getRootSPSite().OpenWeb(web.ID);
         }
         public static SPSite getRootSPSite()

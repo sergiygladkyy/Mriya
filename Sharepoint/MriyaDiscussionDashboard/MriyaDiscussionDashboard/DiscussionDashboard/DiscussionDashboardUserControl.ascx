@@ -13,6 +13,8 @@
 	08.08 12:55 <a href="#">&quot;Остання репліка з агротеми що відповідає заданій тематиці...&quot; <img src="imgs/arrow_link.gif" width="9" height="7" /></a></div>
 --%> 
 
+
+
 <div class="discussion_dashboard_records">
     <asp:Label ID="labelErrorMessage" runat="server" Font-Bold="True" ForeColor="#CC0000" 
         Text="There are no errors!" Visible="False" CssClass="discussion_dashboard_error_message"></asp:Label>

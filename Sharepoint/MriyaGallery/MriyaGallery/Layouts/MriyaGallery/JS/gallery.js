@@ -1,25 +1,34 @@
 /**
  * Gallery constructor
  *
- * @param string slider_tag_id
- * @param string preview_tag_id
- * @param object settings       - gallery settings
+ * @param string slider_jquery_selector
+ * @param string preview_jquery_selector
+ * @param object settings - gallery settings
  *
  * @return void
  */
-function oiltecGallery(slider_tag_id, preview_tag_id, settings)
+function mriyaGallery(slider_jquery_selector, preview_jquery_selector, settings)
 {
     var players_dir = settings.players_dir ? settings.players_dir : '/players/';
 	
 	var _use_share_point_silver_light = settings.use_share_point_silver_light ? true : false;
 	
-	var s_tag_id = slider_tag_id;
-	var p_tag_id = preview_tag_id;
+	var s_selector = slider_jquery_selector  ? slider_jquery_selector  : '.gallery_slider';
+	var p_selector = preview_jquery_selector ? preview_jquery_selector : '.gallery_preview';
 	
 	var data  = settings.data ? settings.data : {};
 	var s_set = settings.slider ? settings.slider : {};
 	var p_set = settings.preview ? settings.preview : {};
 	
+	var blanket_id = 'pop_up_blanket';
+	var pop_up_id  = 'pop_up_win';
+	var opened     = false;
+	var options    = {
+		show_title: true,
+		show_desc:  true
+	};
+	
+	var pop_up_padding = 15;
 	
 	/* Check slider options */
 	
@@ -63,8 +72,8 @@ function oiltecGallery(slider_tag_id, preview_tag_id, settings)
 	var w_max  = n_vis * w_item;
 	var h_max  = h_item;
 	
-	var _w_lft = parseInt(jQuery('#' + s_tag_id + ' .prev_btn_container').css('width'), 10);
-	var _w_rgt = parseInt(jQuery('#' + s_tag_id + ' .next_btn_container').css('width'), 10);
+	var _w_lft = parseInt(jQuery(s_selector).find('.prev_btn_container').css('width'), 10);
+	var _w_rgt = parseInt(jQuery(s_selector).find('.next_btn_container').css('width'), 10);
 	
 	
 	/* Check preview options */
@@ -114,12 +123,12 @@ function oiltecGallery(slider_tag_id, preview_tag_id, settings)
 			slider_width = w_slider;
 		}
 		
-		jQuery('#' + s_tag_id).css('width', slider_width).css('height', h_max).css('borderWidth', '0').css('padding', '0').css('margin', '0').
+		jQuery(s_selector).css('width', slider_width).css('height', h_max).css('borderWidth', '0').css('padding', '0').css('margin', '0').
 			find('.container').css('width', cont_width).css('height', h_max).css('borderWidth', '0').css('padding', '0').css('margin', '0').
 			find('.slides').css('width', w_max).css('height', h_max).css('borderWidth', '0').css('padding', '0').css('margin', '0 auto').
 			find('table').css('width', w_max).css('height', h_max).css('borderWidth', '0').css('padding', '0').css('margin', '0 auto').css('borderCollapse', 'collapse').css('position', 'relative');
 		
-		jQuery('#' + s_tag_id + ' .zoom').each(function(index) {
+		jQuery(s_selector).find('.zoom').each(function(index) {
 			if (index == 0)
 			{
 				jQuery(this).addClass('first_visible');
@@ -136,44 +145,41 @@ function oiltecGallery(slider_tag_id, preview_tag_id, settings)
 			}
 		});
 		
-		jQuery('#' + s_tag_id + ' .item').css('width', w_img).css('height', h_img).
+		jQuery(s_selector).find('.item').css('width', w_img).css('height', h_img).
 			css('borderWidth', item_border.top + 'px ' + item_border.right + 'px ' + item_border.bottom + 'px ' + item_border.left + 'px').
 			css('padding',  item_padding.top + 'px ' + item_padding.right + 'px ' + item_padding.bottom + 'px ' + item_padding.left + 'px').
 			css('margin', '0px');
 		
 		
-		if (jQuery('#' + s_tag_id + ' .first_visible').hasClass('first'))
+		if (jQuery(s_selector).find('.first_visible').hasClass('first'))
 		{
-			jQuery('#' + s_tag_id + ' .prev_btn').css('cursor', 'default');
+			jQuery(s_selector).find('.prev_btn').css('cursor', 'default');
 		}
 		
-		if (jQuery('#' + s_tag_id + ' .last_visible').hasClass('last'))
+		if (jQuery(s_selector).find('.last_visible').hasClass('last'))
 		{
-			jQuery('#' + s_tag_id + ' .next_btn').css('cursor', 'default');
+			jQuery(s_selector).find('.next_btn').css('cursor', 'default');
 		}
 		
 		
 		/* Initialize preview */
 		
-		jQuery('#' + p_tag_id).css('width', w_preview).css('height', h_preview).
-			css('borderWidth', border.top + 'px ' + border.right + 'px ' + border.bottom + 'px ' + border.left + 'px').
-			css('padding', padding.top + 'px ' + padding.right + 'px ' + padding.bottom + 'px ' + padding.left + 'px').
-			css('margin', '0px');
+		initializePreview.call(this);
 		
 		
 		/* Events */
 		
-		jQuery('#' + s_tag_id + ' .prev_btn').click(function(event) {
+		jQuery(s_selector).find('.prev_btn').click(function(event) {
 			prevItem(event);
 		});
 		
-		jQuery('#' + s_tag_id + ' .next_btn').click(function(event) {
+		jQuery(s_selector).find('.next_btn').click(function(event) {
 			nextItem(event);
 		});
 		
 		var onClick = this.onClick;
 		
-		jQuery('#' + s_tag_id + ' .item a').click(function(event) {
+		jQuery(s_selector).find('.item a').click(function(event) {
 			event = event || window.event;
 			var node = event.target || event.srcElement;
 			
@@ -183,7 +189,90 @@ function oiltecGallery(slider_tag_id, preview_tag_id, settings)
 		});
 	};
 	
+	/**
+	 * Initialize preview block
+	 *
+	 * @return void
+	 */
+	function initializePreview()
+	{
+		jQuery(p_selector).css('width', w_preview).css('height', h_preview).
+			css('borderWidth', border.top + 'px ' + border.right + 'px ' + border.bottom + 'px ' + border.left + 'px').
+			css('padding', padding.top + 'px ' + padding.right + 'px ' + padding.bottom + 'px ' + padding.left + 'px').
+			css('margin', '0px');
 		
+		generatePopUpHtml();
+		
+		if (jQuery(s_selector).find('.item.current').size() == 0)
+		{
+			var node = jQuery(s_selector).find('.item:first').get(0);
+			
+			if (node) this.onClick(node);
+		}
+		else
+		{
+			previewEvents();
+		}
+	}
+	
+	/**
+	 * Add preview events listeneres
+	 *
+	 * @return void
+	 */
+	function previewEvents()
+	{
+		var current = jQuery(s_selector).find('.item.current');
+		var node_id = current.attr('node');
+		
+		if (data[node_id] && !data[node_id].video && data[node_id].b_img)
+		{
+			jQuery(p_selector).find('img.preview').css('cursor', 'pointer').click(function(event) {
+				event = event || window.event;
+				var node = event.target || event.srcElement;
+				
+				onShowFullImage(node);
+			});
+		}
+	}
+		
+	/**
+	 * Process item onClick event
+	 *
+	 * @param object node - DOMElements
+	 *
+	 * @return void
+	 */
+	this.onClick = function(node)
+	{
+		var html    = '';
+		var node_id = node.getAttribute('node');
+		
+		jQuery(s_selector).find('.item.current').removeClass('current');
+		jQuery(node).addClass('current');
+		
+		if (!data[node_id] || !(data[node_id].video || data[node_id].b_img))
+		{
+			html = '<img src="' + jQuery(node).find('a img').attr('src') + '" alt="" />';
+		}
+		else if (data[node_id].video)
+		{
+			html = generateHTMLForVideo(node, data[node_id]);
+		}
+		else
+		{
+			html = '<img class="preview" src="' + data[node_id].b_img + '" alt="" />';
+		}
+		
+		jQuery(p_selector).html(html);
+		
+		previewEvents();
+	};
+	
+	
+	
+	
+	
 	/**
 	 * Move left
 	 *
@@ -193,16 +282,16 @@ function oiltecGallery(slider_tag_id, preview_tag_id, settings)
 	 */
 	function prevItem(event)
 	{
-		var slider = jQuery('#' + s_tag_id);
+		var slider = jQuery(s_selector);
 		var first  = slider.find('.first_visible');
 		var node   = first.prev();
 		
 		if (node.size() == 0) return;
 		
-		var last = jQuery('#' + s_tag_id + ' .last_visible');
+		var last = jQuery(s_selector).find('.last_visible');
 		
-		jQuery('#' + s_tag_id + ' .prev_btn').css('cursor', node.hasClass('first') ? 'default' : 'pointer');
-		jQuery('#' + s_tag_id + ' .next_btn').css('cursor', 'pointer');
+		jQuery(s_selector).find('.prev_btn').css('cursor', node.hasClass('first') ? 'default' : 'pointer');
+		jQuery(s_selector).find('.next_btn').css('cursor', 'pointer');
 		
 		var tab = slider.find('.slides table');
 		
@@ -224,16 +313,16 @@ function oiltecGallery(slider_tag_id, preview_tag_id, settings)
 	 */
 	function nextItem(event)
 	{
-		var slider = jQuery('#' + s_tag_id);
+		var slider = jQuery(s_selector);
 		var last   = slider.find('.last_visible');
 		var node   = last.next();
 		
 		if (node.size() == 0) return;
 		
-		var first = jQuery('#' + s_tag_id + ' .first_visible');
+		var first = jQuery(s_selector).find('.first_visible');
 		
-		jQuery('#' + s_tag_id + ' .prev_btn').css('cursor', 'pointer');
-		jQuery('#' + s_tag_id + ' .next_btn').css('cursor', node.hasClass('last') ? 'default' : 'pointer');
+		jQuery(s_selector).find('.prev_btn').css('cursor', 'pointer');
+		jQuery(s_selector).find('.next_btn').css('cursor', node.hasClass('last') ? 'default' : 'pointer');
 		
 		var tab = slider.find('.slides table');
 		
@@ -246,33 +335,9 @@ function oiltecGallery(slider_tag_id, preview_tag_id, settings)
 		});
 	}
 	
-	/**
-	 * Process item onClick event
-	 *
-	 * @param object node - DOMElements
-	 *
-	 * @return void
-	 */
-	this.onClick = function(node)
-	{
-		var html    = '';
-		var node_id = node.getAttribute('node');
-		
-		if (!data[node_id] || !(data[node_id].video || data[node_id].b_img))
-		{
-			html = '<img src="' + jQuery(node).find('a img').attr('src') + '" alt="" />';
-		}
-		else if (data[node_id].video)
-		{
-			html = generateHTMLForVideo(node, data[node_id]);
-		}
-		else
-		{
-			html = '<img src="' + data[node_id].b_img + '" alt="" />';
-		}
-		
-		jQuery('#' + p_tag_id).html(html);
-	};
+	
+	
+	
 
 	/**
 	 * Return video type
@@ -490,5 +555,391 @@ function oiltecGallery(slider_tag_id, preview_tag_id, settings)
 				'<param name="initparams" value="showstatistics=false, autoplay=true, muted=false, playlistoverlay=false, theme=SmoothHD.xaml, stretchmode=Stretch, stretchmodefullscreen=Stretch, mediasource=' + parametr[0] + '" />' +
 			'</object>'
 		;
+	}
+	
+	
+	
+	
+	/***************************************************** Application functions ********************************************************/
+	
+	
+	
+	/**
+	 * Set Application in Active
+	 * 
+	 * @return void
+	 */
+	function appActive()
+	{
+		jQuery('#TB_overlay').remove();
+		jQuery('#TB_load').remove();
+	}
+	
+	/**
+	 * Set Application in Inactive
+	 * 
+	 * @return void
+	 */
+	function appInactive()
+	{
+		if (jQuery('#TB_overlay').size() != 0) return;
+		
+		jQuery('body').append('<div id="TB_overlay" class="TB_overlayBG"></div>');
+	}
+	
+	/**
+	 * Add Loader to page
+	 *
+	 * @return void
+	 */
+	function appAddLoader()
+	{
+		if (jQuery('#TB_load').size() != 0) return;
+		
+		jQuery('body').append('<div id="TB_load" style="display: block;"><div class="loader"></div></div>');
+	}
+	
+	/**
+	 * Display loader
+	 *
+	 * @param boolean flag - if false - loader hide. Else - lodaer show
+	 *
+	 * @return void
+	 */
+	function appDisplayLoader(flag)
+	{
+		if (jQuery('#TB_load').size() == 0 && flag)
+		{
+			appAddLoader();
+		}
+		else
+		{
+			jQuery('#TB_load').css("display", flag ? 'block' : 'none');
+		}
+	}
+	
+	
+	
+	
+	
+	/******************************************************* Image gallery function *********************************************************/
+	
+	
+	/**
+	 * Show full image
+	 * 
+	 * @param DOMElements node
+	 * 
+	 * @return void
+	 */
+	function onShowFullImage(node)
+	{
+		if (opened)
+		{
+			hideImage();
+		}
+		else
+		{
+			showBlanket();
+		}
+		
+		appDisplayLoader(true);
+		
+		var path = jQuery(node).attr('src');
+		
+		if (!path.length || path.length == 0) return false;
+		
+		
+		var img    = new Image();
+		img.onload = function()	{ onLoad(node, this); };
+		img.src    = path;
+	};
+
+	/**
+	 * Close popup window with full image
+	 * 
+	 * @return void
+	 */
+	function onCloseFullImage()
+	{
+		hideImage();
+		
+		hideBlanket();
+	};
+	
+	/**
+	 * Load full image
+	 * 
+	 * @param DOMElements node - small image container
+	 * @param object obj       - full image object
+	 * 
+	 * @return void
+	 */
+	function onLoad(node, obj)
+	{
+		var current = jQuery(s_selector).find('.item.current');
+		var node_id = current.attr('node');
+		
+		var img_title = (data[node_id] && data[node_id]['title']) ? data[node_id]['title'] : '';
+		var img_desc  = (data[node_id] && data[node_id]['description']) ? data[node_id]['description'] : '';
+		
+		var win  = jQuery('#' + pop_up_id);
+		var func = 'checkPosition(obj)';
+		
+		var win_cont  = win.find('.pop_up_content');
+		var alt       = (img_title ? img_title + '. ' : '') + (img_desc ? img_desc : '');
+		var content   = '<img src="' + obj.src + '" alt="' + alt + '" />';
+		var signature = '';
+		
+		if (options.show_title && img_title)
+		{
+			signature += '<div class="title">' + img_title + '</div>';
+		}
+		
+		if (options.show_desc && img_desc)
+		{
+			signature += '<div class="description">' + img_desc + '</div>';
+		}
+		
+		if (signature)
+		{
+			content += '<div class="signature">' + signature + '</div>';
+			
+			win_cont.css('padding-bottom', '0px');
+			
+			func = 'checkPositionWithSignature(obj)';
+		}
+		
+		win_cont.html(content);
+		
+		if (signature) win_cont.find('.signature :last').css('padding-bottom', '11px');
+		
+		eval(func);
+				
+		appDisplayLoader(false);
+		
+		showImage();
+	}
+	
+	/**
+	 * Set popup window position
+	 *
+	 * @return void
+	 */
+	function checkPosition(obj)
+	{
+		var win  = jQuery('#' + pop_up_id);
+		var img  = win.find('.pop_up_content img');
+		var html = document.documentElement;
+		
+		var width  = obj.width;
+		var height = obj.height;
+		
+		if ((obj.width + 85) > html.clientWidth)
+		{
+			if ((obj.height + 85) > html.clientHeight)
+			{
+				if (obj.width/obj.height < html.clientWidth/html.clientHeight)
+				{
+					height = html.clientHeight - 85;
+					width  = Math.round(obj.width*height/obj.height);
+				}
+				else
+				{
+					width  = html.clientWidth - 85;
+					height = Math.round(obj.height*width/obj.width);
+				}
+			}
+			else
+			{
+				width  = html.clientWidth - 85;
+				height = Math.round(obj.height*width/obj.width);
+			}
+		}
+		else if ((obj.height + 85) > html.clientHeight)
+		{
+			height = html.clientHeight - 85;
+			width  = Math.round(obj.width*height/obj.height);
+		}
+		
+		if (width  < 0) width  = 0;
+		if (height < 0) height = 0;
+		
+		img.attr('width', width);
+		
+		var left = Math.round((html.clientWidth - width - 30)/2);
+		var top  = Math.round((html.clientHeight - height - 30)/2);
+		
+		if (html.scrollLeft == 0 && html.scrollTop == 0)
+		{
+			var body = jQuery(html).find('body').get(0);
+			
+			left += body.scrollLeft;
+			top  += body.scrollTop;
+		}
+		else
+		{
+			left += html.scrollLeft;
+			top  += html.scrollTop;
+		}
+		
+		win.css('left', left + 'px');
+		win.css('top',  top  + 'px');
+		
+		win.find('.pop_up_content').attr('style', '').css('width', width);
+		win.css('width', (width + 32)).css('min-width', (width + 32));
+	}
+	
+	/**
+	 * Set popup window position (for window with signature)
+	 *
+	 * @return void
+	 */
+	function checkPositionWithSignature(obj)
+	{
+		var win      = jQuery('#' + pop_up_id);
+		var win_cont = win.find('.pop_up_content');
+		var sign     = win_cont.find('.signature');
+		
+	   	var img  = win_cont.find('img');
+		var html = document.documentElement;
+		
+		var i_width  = obj.width;
+		var i_height = obj.height;
+		
+		win_cont.css('width',  i_width).css('height', 'auto');
+		sign.css('height', 'auto');
+		win.css('width', 'auto').css('height', 'auto').css('min-width', '')
+		   .css('top', '9999px').css('display', 'block');
+		
+		var w_width  = i_width;
+		var w_height = win_cont.get(0).offsetHeight - 28;
+		
+		var s_height = sign.get(0).offsetHeight;
+		
+		if (s_height > i_height)
+		{
+			w_height -= s_height - i_height;
+			s_height  = i_height;
+		}
+		
+		var width  = w_width;
+		var height = w_height;
+		
+		if ((w_width + 85) > html.clientWidth)
+		{
+			if ((w_height + 85) > html.clientHeight)
+			{
+				if (w_width/w_height < html.clientWidth/html.clientHeight)
+				{
+					height    = html.clientHeight - 85;
+					var n_i_h = Math.round(i_height*height/w_height);
+					s_height  = height - n_i_h;
+					width     = Math.round(i_width*n_i_h/i_height);
+				}
+				else
+				{
+					width     = html.clientWidth - 85;
+					height    = Math.round(w_height*width/w_width);
+					var n_i_w = Math.round(i_width*width/w_width);
+					var n_i_h = Math.round(i_height*n_i_w/i_width);
+					s_height  = height - n_i_h;
+				}
+			}
+			else
+			{
+				width     = html.clientWidth - 85;
+				height    = Math.round(w_height*width/w_width);
+				var n_i_w = Math.round(i_width*width/w_width);
+				var n_i_h = Math.round(i_height*n_i_w/i_width);
+				s_height  = height - n_i_h;
+			}
+		}
+		else if ((w_height + 85) > html.clientHeight)
+		{
+			height    = html.clientHeight - 85;
+			var n_i_h = Math.round(i_height*height/w_height);
+			s_height  = height - n_i_h;
+			width     = Math.round(i_width*n_i_h/i_height);
+		}
+		
+		s_height -= 11;
+		
+		if (width  < 0) width  = 0;
+		if (height < 0) height = 0;
+		if (s_height < 20) s_height = 20;
+		
+		img.attr('width', width);
+		
+		var left = Math.round((html.clientWidth - width - 30)/2);
+		var top  = Math.round((html.clientHeight - height - 30)/2);
+		
+		if (html.scrollLeft == 0 && html.scrollTop == 0)
+		{
+			var body = jQuery(html).find('body').get(0);
+			
+			left += body.scrollLeft;
+			top  += body.scrollTop;
+		}
+		else
+		{
+			left += html.scrollLeft;
+			top  += html.scrollTop;
+		}
+		
+		win.css('left', left + 'px');
+		win.css('top',  top  + 'px');
+		
+		win_cont.css('width', width).css('height', 'auto');
+		sign.css('height', s_height);
+		win.css('width', (width + 32)).css('min-width', (width + 32));
+	}
+	
+	function showBlanket()
+	{
+		jQuery('#' + blanket_id).css('display', 'block');
+	}
+	
+	function hideBlanket()
+	{
+		jQuery('#' + blanket_id).css('display', 'none');
+	}
+	
+	function showImage()
+	{
+		jQuery('#' + pop_up_id).css('display', 'block');
+	}
+	
+	function hideImage()
+	{
+		jQuery('#' + pop_up_id).css('display', 'none');
+	}
+	
+	function generatePopUpHtml()
+	{
+		if (jQuery('#' + blanket_id).size() == 0)
+		{
+			jQuery('body').append('<div id="' + blanket_id + '" style="display: none;"></div>');
+			
+			jQuery('#' + blanket_id).click(function(event) {
+				onCloseFullImage();
+			});
+		}
+		
+		if (jQuery('#' + pop_up_id).size() == 0)
+		{
+			var html = 
+				'<div id="' + pop_up_id + '" style="display: none;">' +
+					'<div class="close"></div>' +
+					'<div class="pop_up_content"></div>' +
+				'</div>'
+			;
+			
+			jQuery('body').append(html);
+			
+			jQuery('#' + pop_up_id + ' .close').click(function(event) {
+				onCloseFullImage();
+			});
+		}
 	}
 }
