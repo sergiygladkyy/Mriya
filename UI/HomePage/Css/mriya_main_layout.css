@@ -76,8 +76,15 @@ h1 {
 }
 
 h1.news  {
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/2.gif") left 80% no-repeat;
+	padding-left: 0px;
 	margin-bottom: 0px;
+}
+
+h1.news a {
+	color: #88019b;
+	text-decoration: none;
+	padding-left: 25px;
+	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/2.gif") left 80% no-repeat;
 }
 
 h1.celebrating {
@@ -85,21 +92,49 @@ h1.celebrating {
 }
 
 h1.advertisement {
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/1.gif") left 80% no-repeat;
+	padding-left: 0px;
 	margin-top: 0px;
 }
 
+h1.advertisement a {
+	color: #88019b;
+	text-decoration: none;
+	padding-left: 25px;
+	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/1.gif") left 80% no-repeat;
+}
+
 h1.photo {
+	padding-left: 0px;
+}
+
+h1.photo a {
+	color: #88019b;
+	text-decoration: none;
+	padding-left: 25px;
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/7.gif") left 80% no-repeat;
 }
 
 h1.move {
+	padding-left: 0px;
+}
+
+h1.move a {
+	color: #88019b;
+	text-decoration: none;
+	padding-left: 25px;
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/9.gif") left 80% no-repeat;
 }
 
 h1.discussion {
-	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/5.gif") left 80% no-repeat;
+	padding-left: 0px;
 	margin-top: 28px;
+}
+
+h1.discussion a {
+	color: #88019b;
+	text-decoration: none;
+	padding-left: 25px;
+	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/5.gif") left 80% no-repeat;
 }
 
 h1.new_employees {
@@ -108,6 +143,15 @@ h1.new_employees {
 
 h1.map {
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/8.gif") left 80% no-repeat;
+}
+
+h1.news a:visited, h1.news a:hover,
+h1.advertisement a:visited, h1.advertisement a:hover,
+h1.photo a:visited, h1.photo a:hover,
+h1.move a:visited, h1.move a:hover,
+h1.discussion a:visited, h1.discussion a:hover {
+	color: #88019b;
+	text-decoration: none;
 }
 
 h3 {
