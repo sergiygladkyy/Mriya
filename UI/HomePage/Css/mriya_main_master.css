@@ -28,6 +28,10 @@ body #s4-ribbonrow {
 	min-height: 26px;
 }
 
+body a img {
+	border: 0 none;
+}
+
 .ribbonbackground {
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/toolbar_gradient.png") repeat-x left top transparent;
 }
