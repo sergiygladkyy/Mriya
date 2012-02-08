@@ -37,27 +37,27 @@
 
 	function initializeNews()
 	{
-		function getItems()
+		function getItems(tag_id)
 		{
 			try
 			{
 				var list  = new SPAPI_Lists('http://neso.contoso.com/sites/mriya/Community/News');
-				var items = list.getListItems('Сторінки', '{FE7CD840-136B-469A-87D3-6A1DE3C72CF7}', query, fildslist, 4); //'{760D639D-2632-4F96-A092-1998C51C7AF1}'
+				var items = list.getListItems('Сторінки', '{FE7CD840-136B-469A-87D3-6A1DE3C72CF7}', query, fildslist, 4);
 				
 				if (items.status == 200)
 					return items;
 				else
-					alert('There was an error: '+ items.status + ' | ' + items.statusText);
+					jQuery('#' + tag_id).append('There was an error: '+ items.status + ' | ' + items.statusText + '<br>');
 			}
 			catch (ex)
 			{
-				alert(ex);
+				jQuery('#' + tag_id).append('Exception: ' + ex + '<br>');
 			}
 			
 			return null;
 		}
 		
-		function setToElement(elementid,val)
+		function setToElement(elementid, val)
 		{
 			//setvals(elementid, val);
 			//return ;
@@ -83,9 +83,9 @@
 			container.appendChild(newdiv);
 		}
 		
-		function GetNewsItems()
+		function GetNewsItems(tag_id)
 		{
-			var items = getItems();
+			var items = getItems(tag_id);
 			
 			if (items != null)
 			{
@@ -129,12 +129,12 @@
 				
 				str2 = str2 + '';
 				
-				setToElement('output2',str2);
+				setToElement(tag_id, str2);
 			}
-			else alert('Items is null!!');
+			else jQuery('#' + tag_id).append('Items param is null' + '<br>');
 		}
 		
-		GetNewsItems();
+		GetNewsItems('output2');
 	}
 	
 	_spBodyOnLoadFunctionNames.push('initializeNews');

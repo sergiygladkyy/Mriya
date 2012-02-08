@@ -14,7 +14,7 @@ function initializeSlider()
 			'<FieldRef Name="_x041e__x043f__x0438__x0441__x0020__x043d__x043e__x0432__x0438__x043d__x0438_"/>' + // Краткое описание
 			'<FieldRef Name="_x0424__x043e__x043d__x0020__x0441__x043b__x0430__x0439__x0434__x0435__x0440__x0430_"/>' + // Фон слайдера
 			'<FieldRef Name="_x0421__x043b__x0430__x0439__x0434__x0435__x0440_"/>' + // Слайдер
-			'<FieldRef Name="_x0417__x043e__x0432__x043d__x0456__x0448__x043d__x0435__x0020__x041f__x043e__x0441__x0438__x043b__x0430__x043d__x043d__x044f_"/>' + // Внешняя ссылка
+			'<FieldRef Name="_x0417__x043e__x0432__x043d__x0456__x0448__x043d__x0435__x0020__x043f__x043e__x0441__x0438__x043b__x0430__x043d__x043d__x044f_"/>' + // Зовнішне посилання
 		'</ViewFields>'
 	;
 	
@@ -42,7 +42,7 @@ function initializeSlider()
 		'</Where></Query>'
 	;
 	
-	function getItems()
+	function getItems(slider_id)
 	{
 		try
 		{
@@ -52,11 +52,11 @@ function initializeSlider()
 			if (items.status == 200)
 				return items;
 			else
-				alert('There was an error: '+ items.status + ' | ' + items.statusText); 
+				jQuery('#' + slider_id).append('There was an error: '+ items.status + ' | ' + items.statusText + '<br>'); 
 		}
 		catch(ex)
 		{
-			alert(ex);
+			jQuery('#' + slider_id).append(ex + '<br>');
 		}
 		
 		return null;
@@ -77,7 +77,7 @@ function initializeSlider()
 	
 	function PrepareNewsItems(slider_id, slider_controls_id)
 	{
-		var items = getItems();
+		var items = getItems(slider_id);
 		
 		if (items != null)
 		{
@@ -99,7 +99,7 @@ function initializeSlider()
 					if (rows[i].attributes[j].name == 'ows__x041e__x043f__x0438__x0441__x0020__x043d__x043e__x0432__x0438__x043d__x0438_') text = rows[i].attributes[j].value;
 					if (rows[i].attributes[j].name == 'ows__x0424__x043e__x043d__x0020__x0441__x043b__x0430__x0439__x0434__x0435__x0440__x0430_') img = rows[i].attributes[j].value;
 					if (rows[i].attributes[j].name == 'ows_FileRef') int_link = ('../' + rows[i].attributes[j].value.split(';#')[1]);
-					if (rows[i].attributes[j].name == 'ows__x0417__x043e__x0432__x043d__x0456__x0448__x043d__x0435__x0020__x041f__x043e__x0441__x0438__x043b__x0430__x043d__x043d__x044f_') ext_link = rows[i].attributes[j].value;
+					if (rows[i].attributes[j].name == 'ows__x0417__x043e__x0432__x043d__x0456__x0448__x043d__x0435__x0020__x043f__x043e__x0441__x0438__x043b__x0430__x043d__x043d__x044f_') ext_link = rows[i].attributes[j].value;
 				}
 				
 				if (img)
@@ -118,7 +118,7 @@ function initializeSlider()
 				setToElement(slider_id, slider_controls_id, str2);
 			}
 		}
-		else alert('Items is null!!');
+		else jQuery('#' + slider_id).append('Items param is null<br>');
 	}
 	
 	PrepareNewsItems('slider', 'slider_controls');
