@@ -573,7 +573,7 @@ body #s4-leftpanel {
 	margin: -51px auto 0;
 	border-style: solid;
 	border-width: 1px 1px 0;
-	border-color: #aaa;
+	border-color: #dfdfdf;
 	-webkit-border-radius: 8px 8px 0 0;
 	-moz-border-radius: 8px 8px 0 0;
 	border-radius: 8px 8px 0 0;
@@ -607,7 +607,7 @@ body #s4-leftpanel {
 #footer_links ul li a {
 	display: block;
 	padding-left: 22px;
-	color: #88019B;
+	color: #88009C;
 	background-repeat: no-repeat;
 	background-position: left 3px;
 	text-align: left;
