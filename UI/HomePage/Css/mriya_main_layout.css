@@ -28,7 +28,7 @@
 #middle_block {
 	width: 100%;
 	overflow: hidden;
-	padding-bottom: 1px;
+	padding: 30px 0 1px;
 }
 
 #bottom_block {
