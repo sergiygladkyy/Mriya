@@ -224,6 +224,16 @@ table.discussion-board td div {
     width: 100%;
 }
 
+.discussion-board .ms-viewheadertr  .ms-vb,
+.discussion-board .ms-viewheadertr a {
+	color: #6A9C39;
+	text-decoration: none;
+}
+
+.discussion-board .ms-viewheadertr  td.ms-vb {
+	padding-left: 8px !important;
+}
+
 .discussion-board .ms-viewheadertr .ms-vh2 {
 	width: 70%;
 	display: block;
