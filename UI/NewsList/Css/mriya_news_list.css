@@ -1,7 +1,7 @@
 .custom-news-list  {
-	color: #444;
-	font-family: Tahoma,Geneva,sans-serif;
-	font-size: 11px;
+	color: #7f7f7f;
+	font-family: Tahoma,sans-serif;
+	font-size: 9pt;
 }
 
 .custom-news-list .news_block {
@@ -87,9 +87,9 @@
 }
 
 .custom-news-list .news_block .news_text {
-	color: #444;
-	font-family: Tahoma,Geneva,sans-serif !important;
-	font-size: 11px;
+	color: #7f7f7f;
+	font-family: Tahoma,sans-serif !important;
+	font-size: 9pt;
 	margin: 6px 0 0;
 	padding: 0;
 }

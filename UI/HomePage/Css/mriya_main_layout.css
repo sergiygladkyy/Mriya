@@ -327,9 +327,9 @@ h3 {
 }
 
 .news_block  .news_text {
-	font-family: Tahoma,Geneva,sans-serif !important;
-	font-size: 11px;
-    color: #000;
+	font-family: Tahoma,sans-serif !important;
+	font-size: 9pt;
+    color: #7f7f7f;
     padding: 0;
     margin: 6px 0 0;
     overflow: hidden;
