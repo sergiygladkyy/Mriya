@@ -373,6 +373,7 @@ function mriyaGallery(slider_jquery_selector, preview_jquery_selector, settings)
 	    var BACKGROUND = 'transparent';
 		var CONTROLBAR = '&controlbar=bottom';
 		var WMODE      = 'transparent'; // window, transparent, opaque
+		var WINDOWLESS = 'true';
 		
 		switch (type)
 		{
@@ -452,7 +453,8 @@ function mriyaGallery(slider_jquery_selector, preview_jquery_selector, settings)
 							"width:'" + w_preview + "'," +
 							"height:'" + h_preview + "'," +
 							"autostart:'" + AUTOPLAY + "'," +
-							"image:'" + (data.b_img ? data.b_img : '' ) + "'" +
+							"image:'" + (data.b_img ? data.b_img : '' ) + "', " + 
+							"windowless: '" + WINDOWLESS + "'" +
 						"};" +
 						"var ply = new jeroenwijering.Player(cnt,src,cfg);" +
 					'</script>'
@@ -493,7 +495,8 @@ function mriyaGallery(slider_jquery_selector, preview_jquery_selector, settings)
 							"width:'" + w_preview + "'," +
 							"height:'" + h_preview + "'," +
 							"autostart:'" + AUTOPLAY + "'," +
-							"usefullscreen: 'false'" +
+							"usefullscreen: 'false'" + "'," +
+							"windowless: '" + WINDOWLESS + "'" +
 						"};" +
 						"var ply = new jeroenwijering.Player(cnt,src,cfg);" +
 					'</script>'
