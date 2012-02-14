@@ -10,7 +10,7 @@ div.forum_content {
 
 .forum_content .s4-wpcell .s4-wpTopTable,
 .forum_content .s4-wpActive .s4-wpTopTable {
-	margin-bottom: 16px;
+	margin-bottom: 20px;
 }
 
 
@@ -93,7 +93,7 @@ div.forum_content {
 .forum_content .ms-viewheadertr th,
 .forum_content .ms-viewheadertr th.ms-vh,
 .forum_content .ms-viewheadertr th.ms-vh2{
-	padding: 0 6px;
+	padding: 0 6px !important;
 	color: #781d7e;
 	border-bottom-width: 1px;
 	border-bottom-style: dotted;
@@ -114,16 +114,16 @@ div.forum_content {
 }
 
 .forum_content .ms-viewheadertr th.ms-vh-icon {
-	padding-bottom: 3px;
+	padding: 5px 5px 4px !important;
 }
 
 .forum_content .ms-viewheadertr th a {
-	color: #8A009D;
+	color: #333;
 	text-decoration: underline;
 }
 
 .forum_content .ms-viewheadertr th a:hover {
-	color: #8A009D;
+	color: #333;
 	text-decoration: none;
 }
 
@@ -137,15 +137,28 @@ div.forum_content {
 
 .forum_content .ms-listviewtable a {
 	text-decoration: underline;
+	color: #838383;
+}
+
+.forum_content .ms-listviewtable .ms-vb-title a {
 	color: #8a009d;
 }
 
 .forum_content tr.ms-itmhover a:hover {
 	text-decoration: none !important;
+	color: #666 !important;
+}
+
+.forum_content tr.ms-itmhover .ms-vb-title a:hover {
+	text-decoration: none !important;
 	color: #8a009d !important;
 }
 
 .forum_content tr.ms-itmhover a:visited {
+	color: #a0a0a0 !important;
+}
+
+.forum_content tr.ms-itmhover .ms-vb-title a:visited {
 	color: #da50ee !important;
 }
 
@@ -157,12 +170,20 @@ div.forum_content {
 }
 
 .forum_content .ms-listviewtable .ms-vb-itmcbx {
-	padding: 6px;
+	padding: 6px 5px;
 }
 
 .forum_content .ms-listviewtable tr.ms-itmhover > td {
 	border-top: 1px solid #e8e8e8;
 	vertical-align: top;
+}
+
+.forum_content .ms-listviewtable tr.ms-viewheadertr  + tr.ms-itmhover > td {
+	border-top: 1px solid transparent;
+}
+
+.forum_content .ms-listviewtable tr.ms-itmhover:hover  + tr.ms-itmhover > td {
+	border-top: 1px solid transparent;
 }
 
 .forum_content .ms-listviewtable .ms-vb,
@@ -171,7 +192,7 @@ div.forum_content {
 .forum_content .ms-listviewtable .ms-vb-tall,
 .forum_content .ms-listviewtable .ms-pb,
 .forum_content .ms-listviewtable .ms-pb-selected {
-	color: #000;
+	color: #666;
 }
 
 .forum_content .ms-vb-title .ms-vb {
@@ -221,5 +242,5 @@ div.forum_content {
 }
 
 .forum_content .ms-PartSpacingVertical {
-    margin-top: 16px;
+    margin-top: 3px;
 }
