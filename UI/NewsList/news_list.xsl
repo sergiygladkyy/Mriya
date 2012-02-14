@@ -319,7 +319,7 @@
 					<xsl:attribute name="href">
 						<xsl:value-of select="$thisNode/@FileRef.urlencodeasurl"/>
 					</xsl:attribute>
-					<xsl:value-of select="$thisNode/@FileLeafRef.Name" />
+					<xsl:value-of select="$thisNode/@Title" />
 				</a>
 				<br />
 				<span class="news_date"><xsl:value-of select="$thisNode/@ArticleStartDate" /></span>
@@ -341,7 +341,7 @@
 					<xsl:attribute name="href">
 						<xsl:value-of select="$thisNode/@FileRef.urlencodeasurl"/>
 					</xsl:attribute>
-					<xsl:value-of select="$thisNode/@FileLeafRef.Name" />
+					<xsl:value-of select="$thisNode/@Title" />
 				</a>
 				<br />
 				<span class="news_date"><xsl:value-of select="$thisNode/@ArticleStartDate" /></span>
