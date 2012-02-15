@@ -27,12 +27,17 @@
 	;
 	
 	var query = 
-		'<Query><Where>' + 
-			'<Eq>' +
-				'<FieldRef Name="_x041d__x0430__x0020__x0433__x043e__x043b__x043e__x0432__x043d__x0443_"/>' + // На главную
-				'<Value Type="Text">1</Value>' +
-			'</Eq>' +
-		'</Where></Query>'
+		'<Query>' +
+			'<Where>' + 
+				'<Eq>' +
+					'<FieldRef Name="_x041d__x0430__x0020__x0433__x043e__x043b__x043e__x0432__x043d__x0443_"/>' + // На главную
+					'<Value Type="Text">1</Value>' +
+				'</Eq>' +
+			'</Where>' +
+			'<OrderBy>' +
+				'<FieldRef Name="ArticleStartDate" Ascending="FALSE"/>' +
+			'</OrderBy>' +
+		'</Query>'
 	;
 
 	function initializeNews()
