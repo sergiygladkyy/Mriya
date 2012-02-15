@@ -1,0 +1,204 @@
+﻿/*****************************************************************************
+ * Phone book
+ ****************************************************************************/
+
+#divMrPBook {
+	margin: 0px;
+	padding: 0px;
+	padding-bottom: 64px;
+}
+
+#divMrPBook h1 {
+	font-size: 26px;
+	font-weight: normal;
+	color: #781D7E;
+}
+
+#divMrPBook a:link {
+	color: #781d7e;
+}
+
+#divMrPBook .a {
+	color: #781d7e;
+}
+
+#divMrPBook a img {
+	border: none;
+}
+
+#divMrPBook table {
+	width: 100%;
+}
+
+#divMrPBook table, #divMrPBook td, #divMrPBook th {
+	border:0;
+	margin:0;		
+	padding:0;
+	text-align:left;	
+}
+
+#divMrPBook td, #divMrPBook th {
+	padding:4px;
+}
+
+.styleMrPBookTableHeader th {
+	height: 20px;
+}
+
+.styleMrPBookTableRowAlt td {
+	background:#eaeaea;
+	border:0;
+}
+
+.styleMrPBookPopupPhoto {
+	position: absolute;
+	background-image: url('../../../../SiteCollectionImages/popup_photo_bg.png');
+	background-repeat: no-repeat;
+	left: 0px;
+	top: 0px;
+	height: 100px;
+	width: 110px;
+	display: none;
+}
+
+.styleMrPBookPopupPhotoInner {
+	padding-top: 5px;
+	padding-left: 15px;
+}
+
+.styleMrPBookPopupPhotoInner img {
+	border: 1px solid #FFF;
+	background:#e6e6e6;
+	height:80px;
+	width:80px;
+}
+
+.styleMrPBookStatus {
+	padding-top:5px;
+	padding-left:4px;
+	height: 25px;
+	word-spacing:100%;
+}
+
+
+#divMrPBookDetailsPhoto {
+	border:4px;
+	border-style:solid;
+	border-color:#e6e6e6;
+	background:#e6e6e6;
+	height:120px;
+	width:120px;
+}
+
+.styleMrPBookDetailsTable td
+{
+	border-bottom: 1px #e0e0e0 solid;
+}
+
+.stylrMrPBookName
+{
+	min-height:20px;
+	padding-bottom:10px;
+	font-weight:bold;
+	font-size:12px;
+}
+
+.stylrMrPBookPosition, .stylrMrPBookDeparment, .stylrMrPBookDob, .stylrMrPBookWPhone, .stylrMrPBookMPhone, .stylrMrPBookEmail, .stylrMrPBookCity {
+	vertical-align:bottom;
+	min-height:20px;
+	font-size:12px;
+}
+
+.styleMrPBookDetailsPhoto {
+	border: 1px solid #FFF;
+	background:#e6e6e6;
+	height:120px;
+	width:120px;
+}
+
+#divMrPBookRecordDetailsBackground {
+	width:100%;
+	height:100%;
+/*	display:block; */
+	position:fixed;
+	left:0;
+	top:0;
+	z-index:1000;
+	background:#000;
+	opacity: 0.6;
+	filter: alpha(opacity=60);
+}
+
+#divMrPBookRecordDetailsOuter {
+	height:250px !important;
+	width:550px !important;
+
+	border:2px;
+	border-style:solid;
+	border-color:#0072BC;
+	background-color:white;
+	padding:15px;
+	z-index:1001 !important;
+}
+
+#divMrPBookRecordDetailsInner {
+	height:210px !important;
+}
+
+/*****************************************************************************
+ * The list of employees
+ ****************************************************************************/
+ 
+.styleMrEListTable {
+    font-family: Tahoma,Geneva,sans-serif;
+    width: 100%;
+}
+.styleMrEListTable .styleMrEListTableRow td {
+    vertical-align: top;
+}
+.styleMrEListTable .styleMrEListCardPAdd {
+    display: inline-block;
+    font-size: 9px;
+    margin: 0 6px 8px;
+    min-height: 94px;
+    padding: 0;
+    text-align: center;
+    width: 66px;
+}
+.styleMrEListTable .styleMrEListCardPAdd a {
+    color: #87BB56;
+    text-decoration: none;
+}
+.styleMrEListTable .styleMrEListCardPhotoImg {
+    background: none repeat scroll 0 0 #DEE5C4;
+    border-radius: 3px 3px 3px 3px;
+    padding: 3px 3px 1px;
+}
+.styleMrEListTable .styleMrEListCardPhotoImg img {
+    border-style: none;
+    height: 60px;
+    width: 60px;
+}
+.styleMrEListTable .styleMrEListCardText {
+    margin-top: 2px;
+}
+.styleMrEListTable .styleMrEListCardPAdd .styleMrEListCardTodayIsBirthday a {
+    color: #DD0000;
+}
+.styleMrEListTable .styleMrEListCardShadBttmLft, .styleMrEListTable .styleMrEListCardShadBttmRgt {
+    display: none;
+}
+
+.styleMrEListPanelRefresh {
+    border-top: 1px dashed #AAAAAA;
+    padding-top: 8px;
+    text-align: right;
+    width: 230px;
+}
+
+#celebrating_zone .styleMrEListTable .styleMrEListCardPhotoImg {
+    background: none repeat scroll 0 0 #DEE5C4;
+}
+#new_employees_zone .styleMrEListTable .styleMrEListCardPhotoImg {
+    background: none repeat scroll 0 0 #E8D3E4;
+}
