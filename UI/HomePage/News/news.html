@@ -47,7 +47,7 @@
 			try
 			{
 				var list  = new SPAPI_Lists('http://neso.contoso.com/sites/mriya/Community/News');
-				var items = list.getListItems('Сторінки', '{FE7CD840-136B-469A-87D3-6A1DE3C72CF7}', query, fildslist, 4);
+				var items = list.getListItems('Сторінки', '{FE7CD840-136B-469A-87D3-6A1DE3C72CF7}', query, fildslist, 6);
 				
 				if (items.status == 200)
 					return items;
