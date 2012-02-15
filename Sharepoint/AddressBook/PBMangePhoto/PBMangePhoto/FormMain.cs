@@ -7,15 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Microsoft.SharePoint;
+using Microsoft.SharePoint.Security;
+using Microsoft.Office.Server;
+using Microsoft.Office.Server.UserProfiles;
 
 namespace PBMangePhoto
 {
     public partial class FormMain : Form
     {
         private bool bIgnoreNotification = false;
-        private int nRecordID = 0;
-        private bool bUploadPending = false;
-        MriyaUserDataDataSet.UserPhotoRow rowPicture = null;
+        private int m_nRecordID = 0;
+        private string m_sLogin = "";
+        private bool m_bUploadPending = false;
+        MriyaUserDataDataSet.UserPhotoRow m_rowPicture = null;
 
         public FormMain()
         {
@@ -92,7 +97,11 @@ namespace PBMangePhoto
             if (rw == null)
                 return;
 
-            nRecordID = Convert.ToInt32(rw["id"]);
+            m_nRecordID = Convert.ToInt32(rw["id"]);
+            if (rw["login"] != null && rw["login"] != DBNull.Value)
+                m_sLogin = rw["login"].ToString();
+            else
+                m_sLogin = "";
             labelPIB.Text = rw["PIB"].ToString();
 
             ReadPictureFromDB();
@@ -105,8 +114,8 @@ namespace PBMangePhoto
             if (openFileDialogImage.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 pictureBox1.Image = System.Drawing.Image.FromFile(openFileDialogImage.FileName);
-                bUploadPending = true;
-                buttonUpload.Enabled = true & (nRecordID > 0);
+                m_bUploadPending = true;
+                buttonUpload.Enabled = true & (m_nRecordID > 0);
                 buttonDelete.Enabled = true;
                 buttonSaveImageAs.Enabled = false;
             }
@@ -209,15 +218,15 @@ namespace PBMangePhoto
             {
                 labelPIB.Text = "Виберіть потрібний запис у таблиці";
                 pictureBox1.Image = null;
-                bUploadPending = false;
-                rowPicture = null;
-                nRecordID = 0;
+                m_bUploadPending = false;
+                m_rowPicture = null;
+                m_nRecordID = 0;
             }
             pictureBox1.Enabled = enable;
             buttonOpen.Enabled = enable;
-            buttonUpload.Enabled = enable & bUploadPending;
-            buttonDelete.Enabled = enable & (rowPicture != null);
-            buttonSaveImageAs.Enabled = enable & (rowPicture != null);
+            buttonUpload.Enabled = enable & m_bUploadPending;
+            buttonDelete.Enabled = enable & (m_rowPicture != null);
+            buttonSaveImageAs.Enabled = enable & (m_rowPicture != null);
         }
 
         private void ReadPictureFromDB()
@@ -225,16 +234,16 @@ namespace PBMangePhoto
             MriyaUserDataDataSet.UserPhotoDataTable tablePhoto = new MriyaUserDataDataSet.UserPhotoDataTable();
             MriyaUserDataDataSetTableAdapters.UserPhotoTableAdapter tablePhotoAdapter = new MriyaUserDataDataSetTableAdapters.UserPhotoTableAdapter();
 
-            rowPicture = null;
+            m_rowPicture = null;
             pictureBox1.Image = null;
 
-            if (nRecordID < 1)
+            if (m_nRecordID < 1)
                 return;
 
             tablePhoto.Clear();
             try
             {
-                tablePhotoAdapter.FillById(tablePhoto, nRecordID);
+                tablePhotoAdapter.FillById(tablePhoto, m_nRecordID);
             }
             catch(Exception ex)
             {
@@ -244,60 +253,92 @@ namespace PBMangePhoto
                 return;
             }
             if (tablePhoto.Rows.Count > 0)
-                rowPicture = tablePhoto.Rows[0] as MriyaUserDataDataSet.UserPhotoRow;
+                m_rowPicture = tablePhoto.Rows[0] as MriyaUserDataDataSet.UserPhotoRow;
 
-            if (rowPicture != null)
+            if (m_rowPicture != null)
             {
-                System.IO.MemoryStream streamMem = new System.IO.MemoryStream(rowPicture.PhotoBinary);
+                System.IO.MemoryStream streamMem = new System.IO.MemoryStream(m_rowPicture.PhotoBinary);
                 pictureBox1.Image = System.Drawing.Image.FromStream(streamMem);
             }
             else
             {
                 pictureBox1.Refresh();
             }
-            bUploadPending = false;
+            m_bUploadPending = false;
             buttonUpload.Enabled = false;
-            buttonDelete.Enabled = (rowPicture != null);
-            buttonSaveImageAs.Enabled = (rowPicture != null);
+            buttonDelete.Enabled = (m_rowPicture != null);
+            buttonSaveImageAs.Enabled = (m_rowPicture != null);
         }
 
         private void UploadPictureToDB()
         {
-            if (!bUploadPending)
+            if (!m_bUploadPending)
                 return;
 
             if (!System.IO.Directory.Exists(openFileDialogImage.FileName) == false)
             {
                 MessageBox.Show("Файл \"" + openFileDialogImage.FileName + "\" не знайден!", "Загрузка фото",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                bUploadPending = false;
+                m_bUploadPending = false;
                 buttonUpload.Enabled = false;
                 return;
             }
 
+            Byte[] byteImage = null;
+            bool updateSPProfile = true;
+
+            // Update OmniTrack custom database
+            FormWait formWait = new FormWait("Оновлення бази даних");
             try
             {
-
                 Image image = System.Drawing.Image.FromFile(openFileDialogImage.FileName);
-                Byte[] byteImage = System.IO.File.ReadAllBytes(openFileDialogImage.FileName);
+                byteImage = System.IO.File.ReadAllBytes(openFileDialogImage.FileName);
                 string sFileName = System.IO.Path.GetFileNameWithoutExtension(openFileDialogImage.FileName);
                 string sFileExt = System.IO.Path.GetExtension(openFileDialogImage.FileName);
                 int nSize = byteImage.Length;
                 int nWidth = image.Width;
                 int nHeight = image.Height;
 
-                if (rowPicture != null)
+                if (m_rowPicture != null)
                     UpdatePicture(image, byteImage, sFileName, sFileExt, nSize, nWidth, nHeight);
                 else
                     InsertPicture(image, byteImage, sFileName, sFileExt, nSize, nWidth, nHeight);
+
+                formWait.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Сталася помилка під час завантаження файлу:\r\n" + ex.Message,
+                updateSPProfile = false;
+                MessageBox.Show("Сталася помилка під час завантаження файлу:\r\n\r\n" + ex.Message,
                     "Завантажити файл", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            formWait.Close();
 
-            bUploadPending = false;
+            // Update Sharepoint profile if there were no errors while reading file and updating DB
+            if (updateSPProfile && byteImage != null)
+            {
+
+                string login = GetLogingName();
+                string sharepointUrl = Properties.Settings.Default.sharepointSite;
+
+                // User has no SP profile (user name is not specified) or Sharepoint is not configured
+                if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(sharepointUrl))
+                {
+                    formWait = new FormWait("Оновлення профілю користувача Sharepoint");
+                    try
+                    {
+                        UpdateSPProfile(sharepointUrl, login, byteImage);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Сталася помилка під час оновлення профілю Sharepoint:\r\n\r\n" + ex.Message,
+                            "Завантажити файл", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    formWait.Close();
+                }
+            }
+
+            m_bUploadPending = false;
             buttonUpload.Enabled = false;
 
             ReadPictureFromDB();
@@ -309,7 +350,7 @@ namespace PBMangePhoto
             SqlConnection connection = new SqlConnection(Properties.Settings.Default.connectionStringMriyaDataDb);
             SqlCommand cmd = new SqlCommand("UPDATE [UserPhoto] SET [PhotoBinary]=@PhotoBinary, [PhotoFileName]=@PhotoFileName, [PhotoFileExtension]=@PhotoFileExtension, [PhotoSize]=@PhotoSize, [PhotoWidth]=@PhotoWidth, [PhotoHeight]=@PhotoHeight, [TimeStamp]=@TimeStamp, [Description]=@Description WHERE [Id]=@Id;", 
                 connection);
-            cmd.Parameters.Add("@Id", SqlDbType.Int).Value = nRecordID;
+            cmd.Parameters.Add("@Id", SqlDbType.Int).Value = m_nRecordID;
             cmd.Parameters.Add("@PhotoBinary", SqlDbType.VarBinary).Value = byteImage;
             cmd.Parameters.Add("@PhotoFileName", SqlDbType.NVarChar, 255).Value = sFileName;
             cmd.Parameters.Add("@PhotoFileExtension", SqlDbType.NVarChar, 10).Value = sFileExt;
@@ -330,7 +371,7 @@ namespace PBMangePhoto
             SqlConnection connection = new SqlConnection(Properties.Settings.Default.connectionStringMriyaDataDb);
             SqlCommand cmd = new SqlCommand("INSERT INTO [UserPhoto] ([Id], [PhotoBinary], [PhotoFileName], [PhotoFileExtension], [PhotoSize], [PhotoWidth], [PhotoHeight], [TimeStamp], [Description]) VALUES (@Id, @PhotoBinary, @PhotoFileName, @PhotoFileExtension, @PhotoSize, @PhotoWidth, @PhotoHeight, @TimeStamp, @Description);", 
                 connection);
-            cmd.Parameters.Add("@Id", SqlDbType.Int).Value = nRecordID;
+            cmd.Parameters.Add("@Id", SqlDbType.Int).Value = m_nRecordID;
             cmd.Parameters.Add("@PhotoBinary", SqlDbType.VarBinary).Value = byteImage;
             cmd.Parameters.Add("@PhotoFileName", SqlDbType.NVarChar, 255).Value = sFileName;
             cmd.Parameters.Add("@PhotoFileExtension", SqlDbType.NVarChar, 10).Value = sFileExt;
@@ -350,8 +391,10 @@ namespace PBMangePhoto
             SqlConnection connection = new SqlConnection(Properties.Settings.Default.connectionStringMriyaDataDb);
             SqlCommand cmd = new SqlCommand("DELETE FROM [UserPhoto] WHERE Id=@Id;",
                 connection);
-            cmd.Parameters.Add("@Id", SqlDbType.Int).Value = nRecordID;
+            cmd.Parameters.Add("@Id", SqlDbType.Int).Value = m_nRecordID;
 
+            // Omnitrack db
+            FormWait formWait = new FormWait("Оновлення бази даних");
             try
             {
                 connection.Open();
@@ -363,21 +406,42 @@ namespace PBMangePhoto
                 MessageBox.Show("Сталася помилка під час видалення фотографії:\r\n" + ex.Message,
                     "Видалення фотографії", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            formWait.Close();
+
+            // Update Sharepoint profile if there were no errors while reading file and updating DB
+            string login = GetLogingName();
+            string sharepointUrl = Properties.Settings.Default.sharepointSite;
+
+            // User has no SP profile (user name is not specified) or Sharepoint is not configured
+            if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(sharepointUrl))
+            {
+                formWait = new FormWait("Оновлення профілю користувача Sharepoint");
+                try
+                {
+                    UpdateSPProfile(sharepointUrl, login, null);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Сталася помилка під час оновлення профілю Sharepoint:\r\n\r\n" + ex.Message,
+                        "Завантажити файл", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                formWait.Close();
+            }
 
             ReadPictureFromDB();
         }
 
         private void SavePicture()
         {
-            if (rowPicture == null)
+            if (m_rowPicture == null)
                 return;
 
-            saveFileDialogImage.FileName = rowPicture.PhotoFileName + rowPicture.PhotoFileExtension;
+            saveFileDialogImage.FileName = m_rowPicture.PhotoFileName + m_rowPicture.PhotoFileExtension;
             if (saveFileDialogImage.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 try
                 {
-                    System.IO.File.WriteAllBytes(saveFileDialogImage.FileName, rowPicture.PhotoBinary);
+                    System.IO.File.WriteAllBytes(saveFileDialogImage.FileName, m_rowPicture.PhotoBinary);
                 }
                 catch (Exception ex)
                 {
@@ -385,6 +449,100 @@ namespace PBMangePhoto
                         "Зберегти файл", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void UpdateSPProfile(string server, string login, byte[] image)
+        {
+            using (SPSite site = new SPSite(server))
+            {
+                using (SPWeb web = site.OpenWeb())
+                {
+                    SPServiceContext sc = SPServiceContext.GetContext(site);
+                    UserProfileManager upm = null;
+                    UserProfile profile = null;
+
+                    try
+                    {
+                        upm = new UserProfileManager(sc);
+                    }
+                    catch (Exception e)
+                    {
+                        string message = "Не вдалося отримати доступ до профілів користувачів. Повідомлення Sharepoint:\r\n" +
+                            e.Message;
+                        throw new Exception(message);
+                    }
+
+                    try
+                    {
+                        profile = upm.GetUserProfile(login);
+                    }
+                    catch (Exception e)
+                    {
+                        string message = string.Format("Не вдалося отримати доступ к профілю користувача \"{0}\". Повідомлення Sharepoint:\r\n{1}",
+                            login, e.Message);
+                        throw new Exception(message);
+                    }
+
+                    if (profile != null)
+                    {
+                        if (image != null)
+                        {
+                            SPProfilePhotoUploader imageUploader = new SPProfilePhotoUploader(web);
+
+                            if (imageUploader != null)
+                            {
+                                imageUploader.UploadPhoto(profile, image);
+                                string pictureUrl = String.Format("{0}/{1}/{2}_MThumb.jpg", site.Url,
+                                    imageUploader.GetSubfolderName(), imageUploader.GetFileNameFromAccount(profile));
+                                WriteSPProfileField(ref profile, "PictureUrl", pictureUrl);
+                            }
+                        }
+                        else
+                        {
+                                                   
+                            if (profile["PictureUrl"].Value != null && profile["PictureUrl"].Value.ToString().Length > 0)
+                            {
+                                // TODO: Remove image?
+                                WriteSPProfileField(ref profile, "PictureUrl", null);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Writes SharePoint UserProfile property value
+        /// </summary>
+        /// <param name="profile">reference to the UserProfile object instance</param>
+        /// <param name="strField">property name</param>
+        /// <param name="objValue">property value</param>
+        void WriteSPProfileField(ref UserProfile profile, string strField, object objValue)
+        {
+            try
+            {
+                profile[strField].Value = objValue;
+            }
+            catch (Exception e)
+            {
+                string message = string.Format("Помилка запису значення \"{0}\" профілю користувача. Повідомлення Sharepoint:\r\n{1}",
+                    strField, e.Message);
+                throw new Exception(message);
+            }
+        }
+
+        private string GetLogingName()
+        {
+            string login = "";
+
+            if (m_sLogin.Trim().Length < 1)
+                return login;
+
+            login = (Properties.Settings.Default.sharepointDefDomain.Trim().Length > 0) ?
+                (Properties.Settings.Default.sharepointDefDomain.Trim() + "\\" + m_sLogin.Trim()) :
+                (m_sLogin.Trim());
+
+            return login;
         }
     }
 }
