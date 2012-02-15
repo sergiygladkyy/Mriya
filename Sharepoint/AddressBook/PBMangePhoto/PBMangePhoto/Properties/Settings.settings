@@ -18,5 +18,11 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=NESO;Initial Catalog=MriyaUserData;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="sharepointSite" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://neso.contoso.com/sites/my</Value>
+    </Setting>
+    <Setting Name="sharepointDefDomain" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
