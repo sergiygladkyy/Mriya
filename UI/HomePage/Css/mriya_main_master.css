@@ -440,6 +440,17 @@ body #s4-bodyContainer #bodyContent .body-wrapper {
 }
 
 
+
+
+.ms-WPBody a.ms-rteThemeForeColor-2-1,
+.ms-WPBody a.ms-rteThemeForeColor-2-1:hover,
+.ms-WPBody a.ms-rteThemeForeColor-2-1:visited {
+	color: #7f7f7f;
+}
+
+
+
+
 /* Left menu */
 
 .menu-vertical .menu-item-text {
