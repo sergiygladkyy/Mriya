@@ -681,3 +681,45 @@ body #s4-leftpanel {
 .ms-dialog body #s4-ribbonrow {
 	margin: 0;
 }
+
+
+
+
+/* Веб-часть стандартного редактора (мультимедія та вміст) */
+
+.s4-wpcell-plain .ms-WPBody a:link {
+	font-family: tahoma;
+	font-size: 10pt;
+	color: #7f7f7f;
+	text-decoration: none;
+}
+.s4-wpcell-plain .ms-WPBody a:hover {
+	font-family: tahoma;
+	font-size: 10pt;
+	color: #7f7f7f;
+	text-decoration: underline;
+}
+.s4-wpcell-plain .ms-WPBody a:visited {
+	font-family: tahoma;
+	font-size: 10pt;
+	color: #7f7f7f;
+	text-decoration: none;
+}
+
+.ms-WPBody .ms-rteFontFace-1 a:link,
+.ms-WPBody .ms-rteFontFace-1 a:hover,
+.ms-WPBody .ms-rteFontFace-1 a:visited {
+	font-family: tahoma;
+}
+
+.ms-WPBody .ms-rteFontSize-2 a:link,
+.ms-WPBody .ms-rteFontSize-2 a:hover,
+.ms-WPBody .ms-rteFontSize-2 a:visited {
+	font-size: 10pt;
+}
+
+.ms-WPBody .ms-rteThemeForeColor-2-1 a:link,
+.ms-WPBody .ms-rteThemeForeColor-2-1 a:hover,
+.ms-WPBody .ms-rteThemeForeColor-2-1 a:visited {
+	color: #7f7f7f;
+}
