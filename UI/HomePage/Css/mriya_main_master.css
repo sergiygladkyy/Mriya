@@ -687,19 +687,19 @@ body #s4-leftpanel {
 
 /* Веб-часть стандартного редактора (мультимедія та вміст) */
 
-.s4-wpcell-plain .ms-WPBody a:link {
+.s4-wpcell-plain .ms-WPBody .ms-rteTable-0 a:link {
 	font-family: tahoma;
 	font-size: 10pt;
 	color: #7f7f7f;
 	text-decoration: none;
 }
-.s4-wpcell-plain .ms-WPBody a:hover {
+.s4-wpcell-plain .ms-WPBody .ms-rteTable-0 a:hover {
 	font-family: tahoma;
 	font-size: 10pt;
 	color: #7f7f7f;
 	text-decoration: underline;
 }
-.s4-wpcell-plain .ms-WPBody a:visited {
+.s4-wpcell-plain .ms-WPBody .ms-rteTable-0 a:visited {
 	font-family: tahoma;
 	font-size: 10pt;
 	color: #7f7f7f;
