@@ -5,7 +5,7 @@
 <%@ Register Tagprefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" %>
 <%@ Import Namespace="Microsoft.SharePoint" %> 
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PhoneBookUC.ascx.cs" Inherits="MriyaStaffWebparts.PhoneBook.PhoneBookUC" %>
+<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PhoneBookMiniUserControl.ascx.cs" Inherits="MriyaStaffWebparts.PhoneBookMini.PhoneBookMiniUserControl" %>
 
 <script language="javascript" type="text/javascript">
 
@@ -25,33 +25,33 @@
 
     function showMrPBProfileDialog(caption, url) {
         var options = {
-	        url: url,
-	        autoSize:true,
-	        allowMaximize:true,
-	        title: caption,
-	        showClose: true,
+            url: url,
+            autoSize: true,
+            allowMaximize: true,
+            title: caption,
+            showClose: true,
             width: 800
         };
-	    var dialog = SP.UI.ModalDialog.showModalDialog(options);
-	}
+        var dialog = SP.UI.ModalDialog.showModalDialog(options);
+    }
 
-	function findMrPBElementPos(element) {
-	    var x = y = 0;
-//        Works for FF
-//        if (element.x && element.y)
-//        {
-//            x = element.x;
-//            y = element.y;
-//        }
-//        else
+    function findMrPBElementPos(element) {
+        var x = y = 0;
+        //        Works for FF
+        //        if (element.x && element.y)
+        //        {
+        //            x = element.x;
+        //            y = element.y;
+        //        }
+        //        else
         {
-	        while ((element = element.offsetParent) != null) {
-		        x += element.offsetLeft;
-		        y += element.offsetTop;
-	        }
+            while ((element = element.offsetParent) != null) {
+                x += element.offsetLeft;
+                y += element.offsetTop;
+            }
         }
 
-	    return {'x':x,'y':y};
+        return { 'x': x, 'y': y };
     }
 
     function showMrPBPhotoDialog(control, url) {
@@ -82,9 +82,9 @@
         if (ctlImage) {
             ctlImage.src = url;
         }
-	}
+    }
 
-	function hideMrPBPhotoDialog(urlDefNoImage) {
+    function hideMrPBPhotoDialog(urlDefNoImage) {
         var ctlDiv = null;
 
         if ((ctlDiv = document.getElementById('divShowMrPBPhotoDialog')) != null) {
@@ -146,104 +146,40 @@
 
 </script>
 
+<div class="styleMrMiniPBook">
+
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
-        <div class="styleMrPBook" id="divMrPBook">
-
-            <asp:Panel ID="panelMrPBookCaption" runat="server">
-                <h1>
-                    <asp:Label ID="labelMrPBookCaption" runat="server" Text="Phone book"></asp:Label>
-                </h1>
-            </asp:Panel>
-
-            <asp:Panel ID="panelSearch" runat="server">
-                <div class="styleMrPBookSearchBlock">
-                    <table class="styleMrPBookSearchTable" cellpadding="0" cellspacing="0" border="0">
-                        <tr valign="top">
-                            <td width="100%">
-                                <asp:TextBox ID="textBoxSearch" runat="server" 
-                                    CssClass="styleMrPBookSearch" ToolTip="Пошук..." Width="99%" 
-                                    AutoPostBack="True" CausesValidation="False" AutoCompleteType="Search" 
-                                    ontextchanged="buttonSearch_Click" Wrap="False"></asp:TextBox>
-                                <br />
-                                <asp:LinkButton ID="buttonClearSearch" runat="server" 
-                                    onclick="buttonClearSearch_Click">Clear</asp:LinkButton>
-                            </td>
-                            <td width="45px">
-                                <asp:Button ID="buttonSearch" runat="server" Text="Search" 
-                                    CssClass="styleMrPBookSearchButton" CausesValidation="False" 
-                                    onclick="buttonSearch_Click"/>
-                            </td>
-                            <td width="45px">
-                                <asp:Button ID="buttonSearchFilter" runat="server" Text="Filter" 
-                                    CssClass="styleMrPBookSearchFilterButton" 
-                                    onclick="buttonSearchFilter_Click" CausesValidation="False" 
-                                    UseSubmitBehavior="False" />
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <asp:Panel ID="panelFilterBlock" runat="server" Visible="False">
-                    <div class="styleMrPBookFilterBlock">
-                        <table class="styleMrPBookFilterTable" cellpadding="0" cellspacing="0" border="0">
-                            <tr>
-                                <td>
-                                    <asp:Label ID="labelCity" runat="server" Text="City"></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="listCity" runat="server" AutoPostBack="True" 
-                                        onselectedindexchanged="listCity_SelectedIndexChanged">
-                                    </asp:DropDownList>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <asp:Label ID="labelDepartment" runat="server" Text="Department"></asp:Label>
-                                </td>
-                                <td>
-                                    <asp:DropDownList ID="listDepartment" runat="server" AutoPostBack="True" 
-                                        onselectedindexchanged="listDepartment_SelectedIndexChanged">
-                                    </asp:DropDownList>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </asp:Panel>
-            </asp:Panel>
-
-            <div class="styleMrPBook">
-                <asp:Panel ID="panelMrPBookStatus" runat="server">
-                    <div class="styleMrPBookStatus">
-                        <asp:Label ID="labelRecords" runat="server" Text="No records were found"></asp:Label>
-                    </div>
-                </asp:Panel>
-                <div class="styleMrPBookTableHeader">
-                </div>
-                <asp:Label ID="labelError" runat="server" Font-Bold="True" ForeColor="#CC0000" 
-                    Text="There are no errors!" Visible="False" 
-                    CssClass="styleMrPBookErrorMessage"></asp:Label>
-                <asp:Table ID="tableMrPBook" runat="server" CssClass="styleMrPBookTable" cellpadding="0" cellspacing="0" border="0">
-                </asp:Table>
-                <div class="styleMrPBookTableFooter">
-                    
-                    <asp:Table ID="tableMrPBookFooter" runat="server" CssClass="styleMrPBookFooter" cellpadding="0" cellspacing="0" border="0">
-                    </asp:Table>
-                    
-                </div>
-            </div>
-
-        </div>
-
+        <table class="styleMrMiniPBookSearchPanel">
+        <tr>
+        <td>
+            <asp:TextBox ID="textBoxSearch" runat="server" 
+                CssClass="styleMrPBookMiniText" ontextchanged="textBoxSearch_TextChanged"></asp:TextBox>
+        </td>
+        <td>
+            <asp:ImageButton ID="imageButtonClear" runat="server" 
+                onclick="imageButtonClear_Click" CssClass="styleMrPBookMiniClear" 
+                CausesValidation="False" />
+        </td>
+        <td>
+            <asp:ImageButton ID="imageButtonSearch" runat="server" 
+                onclick="imageButtonSearch_Click" CssClass="styleMrPBookMiniSearch" 
+                CausesValidation="False" />
+        </td>
+        </tr>
+        </table>
+        <asp:Label ID="labelError" runat="server" CssClass="styleMrPBookMiniErrorMessage" 
+            Font-Bold="True" ForeColor="#CC0000" Text="There are no errors!" 
+            Visible="False"></asp:Label>
+        <asp:Panel ID="panelResults" runat="server" CssClass="styleMrPBookMiniResults" 
+            Visible="False">
+            <asp:Table ID="tableResults" runat="server" 
+                CssClass="styleMrPBookMiniTableResults">
+            </asp:Table>
+            <asp:Label ID="labelRecords" runat="server" Visible="False"></asp:Label>
+        </asp:Panel>
     </ContentTemplate>
-
 </asp:UpdatePanel>
-
-<div id="divShowMrPBPhotoDialog" class="styleMrPBookPopupPhoto" style="display:none">
-    <div class="styleMrPBookPopupPhotoInner">
-        <img id="divShowMrPBPhotoDialogImg" src="./" alt="Фото" />
-    </div>
-</div>
 
 <div id="divMrPBookRecordDetailsOuter" style="height:350px;width:550px;display:none">
     <asp:Panel ID="panelMrPBookRecordDetails" runat="server" 
@@ -277,4 +213,6 @@
 </div>
 
 <div id="divMrPBookRecordDetailsBackground" style="display:none">
+</div>
+
 </div>

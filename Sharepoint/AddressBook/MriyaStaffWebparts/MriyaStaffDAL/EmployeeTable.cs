@@ -16,6 +16,7 @@ namespace MriyaStaffDAL
         private string _sFilterCity = "";
         private string _sFilterDepartment = "";
         private string _sFilterCustom = "";
+        private string _sFilterCustom1 = "";
         private DateTime _dtFilterDobMin = DateTime.MinValue;
         private DateTime _dtFilterDobMax = DateTime.MinValue;
         private DateTime _dtFilterEmployedMin = DateTime.MinValue;
@@ -45,6 +46,12 @@ namespace MriyaStaffDAL
         {
             get { return _sFilterCustom; }
             set { _sFilterCustom = value.Trim(); } 
+        }
+
+        public string FilterCustom1
+        {
+            get { return _sFilterCustom1; }
+            set { _sFilterCustom1 = value.Trim(); }
         }
 
         public string FilterCity
@@ -93,8 +100,7 @@ namespace MriyaStaffDAL
                 }
             }
         }
-
-
+        
         public DateTime FilterDOBMaxDT
         {
             get { return _dtFilterDobMax; }
@@ -268,6 +274,7 @@ namespace MriyaStaffDAL
             _sFilterCity = "";
             _sFilterDepartment = "";
             _sFilterCustom = "";
+            _sFilterCustom1 = "";
             _nPage = 0;
             _nRecordsOnPage = 0;
        }
@@ -426,6 +433,7 @@ namespace MriyaStaffDAL
         private SqlCommand BuildSelectQuery(SqlConnection connection, bool countQuery)
         {
             bool param_custom = (FilterCustom.Length > 0);
+            bool param_custom1 = (FilterCustom1.Length > 0);
             bool param_department = (FilterDepartment.Length > 0);
             bool param_city = (FilterCity.Length > 0);
             bool paging = (RecordsOnPage > 0);
@@ -486,6 +494,28 @@ namespace MriyaStaffDAL
                         sbQuery.AppendFormat("AND search_field like @search_field{0} ", i + 1);
                         query.Parameters.Add(String.Format("@search_field{0}", i + 1), SqlDbType.NVarChar).Value = string.Format("%{0}%", listSearchParams[i]);
                     }
+                }
+            }
+            if (param_custom1)
+            {
+                List<string> listSearchParams = GetSearchParams(_sFilterCustom1);
+                int count = listSearchParams.Count;
+
+                if (count > 0)
+                {
+                    sbQuery.Append("AND (");
+                    for (int i = 0; i < count; i++)
+                    {
+                        if (i > 0)
+                            sbQuery.Append("OR ");
+                        sbQuery.AppendFormat("last_name like @last_name{0} ", i + 1);
+                        query.Parameters.Add(String.Format("@last_name{0}", i + 1), SqlDbType.NVarChar).Value = string.Format("{0}%", listSearchParams[i]);
+                        sbQuery.AppendFormat("OR first_name like @first_name{0} ", i + 1);
+                        query.Parameters.Add(String.Format("@first_name{0}", i + 1), SqlDbType.NVarChar).Value = string.Format("{0}%", listSearchParams[i]);
+                        sbQuery.AppendFormat("OR middle_name like @middle_name{0} ", i + 1);
+                        query.Parameters.Add(String.Format("@middle_name{0}", i + 1), SqlDbType.NVarChar).Value = string.Format("{0}%", listSearchParams[i]);
+                    }
+                    sbQuery.Append(") ");
                 }
             }
             if (param_department)
