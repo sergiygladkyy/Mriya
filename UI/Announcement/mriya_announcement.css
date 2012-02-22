@@ -4,6 +4,10 @@
 	color: #7f7f7f;
 }
 
+.announcement-list .ms-viewheadertr {
+	display: none;
+}
+
 .announcement-list .ms-viewheadertr th a {
 	font-family: Tahoma,sans-serif;
 	font-size: 10pt;
@@ -26,9 +30,11 @@
 .announcement-list .ms-vb2 a {
 	font-family: Tahoma,sans-serif;
 	font-size: 10pt;
+	font-weight: bold;
 	color: #7f7f7f;
 }
 
 .announcement-list .ms-vb2 a:hover {
+	font-weight: bold;
 	color: #7f7f7f;
 }
