@@ -16,7 +16,8 @@ namespace MriyaStaffWebparts.EmployeeList
     public partial class EmployeeListUC : UserControl
     {
         public EmployeeList _webPart = null;
-        private SPSite _site = null;
+        
+        private string _siteUrl = "";
 
         // Database
         System.Data.SqlClient.SqlConnection _connectionDb = null;
@@ -203,7 +204,10 @@ namespace MriyaStaffWebparts.EmployeeList
         {
             bool bPost = this.IsPostBack;
 
-            _site = new SPSite(SPContext.Current.Site.ID);
+            using (SPSite site = new SPSite(SPContext.Current.Site.ID))
+            {
+                _siteUrl = site.Url;
+            }
 
             // Set search hint
             SetLocalizedText();
@@ -410,10 +414,10 @@ namespace MriyaStaffWebparts.EmployeeList
 
             panelMrPBookRecordDetails.Visible = show;
             ViewState["_bShowDetailsDiv"] = _bShowDetailsDiv = show;
-            string encodedDefPhotoUrl = Server.UrlEncode(_site.Url + _sNoProfileImageFile);
+            string encodedDefPhotoUrl = Server.UrlEncode(_siteUrl + _sNoProfileImageFile);
             string encodedConnectionString = Server.UrlEncode(EncryptString(_sConnectionStringPhoto, _sEncodeParams));
             string sPictureHandler = String.Format("{0}/_layouts/MriyaStaffWebparts/ShowPhoto.ashx?id={1}&npi={2}&cs={3}",
-                _site.Url, rec_id, encodedDefPhotoUrl, encodedConnectionString);
+                _siteUrl, rec_id, encodedDefPhotoUrl, encodedConnectionString);
 
             if (show)
             {
@@ -500,7 +504,7 @@ namespace MriyaStaffWebparts.EmployeeList
             else
             {
                 javaScript = "hideDetailsDiv('divMrPBookRecordDetailsOuter');";
-                imageDetails.ImageUrl = _site.Url + _sNoProfileImageFile;
+                imageDetails.ImageUrl = _siteUrl + _sNoProfileImageFile;
                 literalDetails.Text = "";
             }
             javaScript = String.Format("showDetailsDiv({0});",
@@ -623,10 +627,10 @@ namespace MriyaStaffWebparts.EmployeeList
 
             if (_dataListRow[(int)dataListRowNames.rowPhoto].Visible)
             {
-                string encodedDefPhotoUrl = Server.UrlEncode(_site.Url + _sNoProfileImageFile);
+                string encodedDefPhotoUrl = Server.UrlEncode(_siteUrl + _sNoProfileImageFile);
                 string encodedConnectionString = Server.UrlEncode(EncryptString(_sConnectionStringPhoto, _sEncodeParams));
                 string sPictureHandler = String.Format("{0}/_layouts/MriyaStaffWebparts/ShowPhoto.ashx?id={1}&npi={2}&cs={3}",
-                    _site.Url, record.ID, encodedDefPhotoUrl, encodedConnectionString);
+                    _siteUrl, record.ID, encodedDefPhotoUrl, encodedConnectionString);
 
                 sbRecord.AppendLine("<div class=\"styleMrEListCardPhotoImg\">");
                 sbRecord.AppendLine(string.Format("<a href=\"{0}\"><img  src=\"{1}\"></a>",

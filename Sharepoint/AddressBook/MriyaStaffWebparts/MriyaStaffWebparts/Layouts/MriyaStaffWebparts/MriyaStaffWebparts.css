@@ -1,0 +1,49 @@
+﻿.styleMrMiniPBook table {    
+    margin: 0;
+    padding: 0;
+}
+
+.styleMrPBookMiniText {
+    background: url("/_layouts/images/MriyaStaffWebparts/bgximg.png") repeat-x scroll 0 -511px #FFFFFF;
+    border: 1px solid #B0B0B0 !important;
+    border-style: solid none solid solid !important;
+    font-size: 1.1em;
+    height: 17px;
+    padding: 2px 3px 0;
+    width: 200px !important;
+}
+
+.styleMrPBookMiniClear {
+    -moz-border-bottom-colors: none !important;
+    -moz-border-image: none !important;
+    -moz-border-left-colors: none !important;
+    -moz-border-right-colors: none !important;
+    -moz-border-top-colors: none !important;
+    background: url("/_layouts/images/MriyaStaffWebparts/bgximg.png") repeat-x scroll 0 -511px #FFFFFF;
+    border: 1px solid #B0B0B0 !important;
+    border-style: solid none solid none !important;
+    border-width: 1px 1px 1px medium !important;
+    height: 19px;
+    padding: 0 !important;
+}
+
+.styleMrPBookMiniSearch {
+    -moz-border-bottom-colors: none !important;
+    -moz-border-image: none !important;
+    -moz-border-left-colors: none !important;
+    -moz-border-right-colors: none !important;
+    -moz-border-top-colors: none !important;
+    background: url("/_layouts/images/MriyaStaffWebparts/bgximg.png") repeat-x scroll 0 -511px #FFFFFF;
+    border: 1px solid #B0B0B0 !important;
+    border-style: solid solid solid none !important;
+    border-width: 1px 1px 1px medium !important;
+    height: 19px;
+    padding: 0 !important;
+}
+
+.styleMrPBookMiniResults a,
+.styleMrPBookMiniResults a:link {
+    color: #88009C;
+    font-weight: normal;
+    text-decoration: none;
+}

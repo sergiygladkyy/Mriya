@@ -16,7 +16,8 @@ namespace MriyaStaffWebparts.PhoneBook
     {
         // Public attributes
         public PhoneBook _webPart = null;
-        private SPSite _site = null;
+
+        private string _siteUrl = "";
 
         // Database
         System.Data.SqlClient.SqlConnection _connectionDb = null;
@@ -141,7 +142,10 @@ namespace MriyaStaffWebparts.PhoneBook
         {
             bool bPost = this.IsPostBack;
 
-            _site = new SPSite(SPContext.Current.Site.ID);
+            using (SPSite site = new SPSite(SPContext.Current.Site.ID))
+            {
+                _siteUrl = site.Url;
+            }
 
             // Set search hint
             SetTextBoxHint(textBoxSearch, Properties.Resources.textSearchLabel);
@@ -517,7 +521,7 @@ namespace MriyaStaffWebparts.PhoneBook
                     labelRecords.Text = String.Format(Properties.Resources.textRecorsFound, _tableEmployees.CountTotal);
             }
 
-            string encodedDefPhotoUrl = Server.UrlEncode(_site.Url + _sNoProfileImageFile);
+            string encodedDefPhotoUrl = Server.UrlEncode(_siteUrl + _sNoProfileImageFile);
             string encodedConnectionString = Server.UrlEncode(EncryptString(_sConnectionStringPhoto, _sEncodeParams));
 
             // Show records
@@ -534,14 +538,14 @@ namespace MriyaStaffWebparts.PhoneBook
                     LiteralControl lcCell = new LiteralControl();
 
                     string sPictureHandler = String.Format("{0}/_layouts/MriyaStaffWebparts/ShowPhoto.ashx?id={1}&npi={2}&cs={3}",
-                        _site.Url, rec.ID, encodedDefPhotoUrl, encodedConnectionString);
+                        _siteUrl, rec.ID, encodedDefPhotoUrl, encodedConnectionString);
 
                     string sPhotoURL = string.Format("<a onmouseover=\"showMrPBPhotoDialog('{0}', '{1}'); return true;\" " +
                         "onmouseout=\"hideMrPBPhotoDialog('{1}'); return true;\" " +
                         "href=\"{3}\"> " +
                         "<img id=\"{0}\" width=\"23\" height=\"16\" src=\"{2}\"></a>",
                         this.ClientID + "_photo_img_ctl_" + nRec.ToString(),
-                        sPictureHandler, _site.Url + _sPhotoImageFile, showDetailsCmd);
+                        sPictureHandler, _siteUrl + _sPhotoImageFile, showDetailsCmd);
                     lcCell.Text = sPhotoURL;
                     cell.Controls.Add(lcCell);
                     row.Cells.Add(cell);
@@ -849,10 +853,10 @@ namespace MriyaStaffWebparts.PhoneBook
 
             panelMrPBookRecordDetails.Visible = show;
             ViewState["_bShowDetailsDiv"] = _bShowDetailsDiv = show;
-            string encodedDefPhotoUrl = Server.UrlEncode(_site.Url + _sNoProfileImageFile);
+            string encodedDefPhotoUrl = Server.UrlEncode(_siteUrl + _sNoProfileImageFile);
             string encodedConnectionString = Server.UrlEncode(EncryptString(_sConnectionStringPhoto, _sEncodeParams));
             string sPictureHandler = String.Format("{0}/_layouts/MriyaStaffWebparts/ShowPhoto.ashx?id={1}&npi={2}&cs={3}",
-                _site.Url, rec_id, encodedDefPhotoUrl, encodedConnectionString);
+                _siteUrl, rec_id, encodedDefPhotoUrl, encodedConnectionString);
 
             if (show)
             {
@@ -939,7 +943,7 @@ namespace MriyaStaffWebparts.PhoneBook
             else
             {
                 javaScript = "hideDetailsDiv('divMrPBookRecordDetailsOuter');";
-                imageDetails.ImageUrl = _site.Url + _sNoProfileImageFile;
+                imageDetails.ImageUrl = _siteUrl + _sNoProfileImageFile;
                 literalDetails.Text = "";
             }
             javaScript = String.Format("showDetailsDiv({0});",

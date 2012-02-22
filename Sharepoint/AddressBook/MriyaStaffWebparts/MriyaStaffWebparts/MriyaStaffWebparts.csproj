@@ -73,6 +73,14 @@
       <DependentUpon>EmployeeListUC.ascx.cs</DependentUpon>
     </Compile>
     <Compile Include="EmployeeList\ListItem.cs" />
+    <Compile Include="PhoneBookMini\PhoneBookMini.cs" />
+    <Compile Include="PhoneBookMini\PhoneBookMiniUserControl.ascx.cs">
+      <DependentUpon>PhoneBookMiniUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PhoneBookMini\PhoneBookMiniUserControl.ascx.designer.cs">
+      <DependentUpon>PhoneBookMiniUserControl.ascx.cs</DependentUpon>
+    </Compile>
     <Compile Include="PhoneBook\TableColumn.cs" />
     <Compile Include="PhoneBook\SearchPBService.asmx.cs">
       <DependentUpon>SearchPBService.asmx</DependentUpon>
@@ -91,9 +99,16 @@
     <None Include="EmployeeList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e41efb6f-7747-462d-ac1d-bdbe0dbc9187}</SharePointProjectItemId>
     </None>
+    <None Include="Images\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{0e3efd31-a8d0-4a5c-9877-67f55d92fe37}</SharePointProjectItemId>
+    </None>
     <None Include="intellect_solutions.snk.pfx" />
     <None Include="Layouts\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{d56c93b7-0a2d-4c59-9c74-7312a62fd138}</SharePointProjectItemId>
+    </None>
+    <None Include="PhoneBookMini\PhoneBookMini.webpart" />
+    <None Include="PhoneBookMini\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{4b2c8d05-7e68-48c4-b87b-9d3514449625}</SharePointProjectItemId>
     </None>
     <None Include="PhoneBook\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{b2562dce-d211-48c8-9b78-1a8a68f85130}</SharePointProjectItemId>
@@ -104,13 +119,23 @@
     <None Include="PhoneBook\Elements.xml">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="EmployeeList\Elements.xml" />
+    <Content Include="EmployeeList\Elements.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="EmployeeList\EmployeeListUC.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
+    <Content Include="Images\MriyaStaffWebparts\bgximg.png" />
+    <Content Include="Images\MriyaStaffWebparts\gosearch15.png" />
+    <Content Include="Images\MriyaStaffWebparts\searchclear.png" />
+    <Content Include="Layouts\MriyaStaffWebparts\MriyaStaffWebparts.css" />
     <Content Include="Layouts\MriyaStaffWebparts\ShowPhoto.ashx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="PhoneBookMini\Elements.xml" />
+    <Content Include="PhoneBookMini\PhoneBookMiniUserControl.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Content Include="PhoneBook\PhoneBookUC.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </Content>
