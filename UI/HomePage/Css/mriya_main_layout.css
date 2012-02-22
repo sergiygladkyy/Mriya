@@ -95,7 +95,13 @@ h1.linked_with_image a {
 }
 
 h1.news  {
+	margin-top: 0px;
 	margin-bottom: 0px;
+}
+
+h1.phone_book_search {
+	margin-top: 44px;
+	margin-bottom: 11px;
 }
 
 h1.news a,
@@ -121,10 +127,6 @@ h1.photo a {
 
 h1.move a {
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/9.gif") left 80% no-repeat;
-}
-
-h1.discussion {
-	margin-top: 28px;
 }
 
 h1.discussion a {
@@ -232,33 +234,33 @@ h3 {
 	-webkit-box-shadow: 0px 1px 0px #9d9d9d;
 	box-shadow: 0px 1px 0px #9d9d9d;
 	padding: 16px 8px;
-	font-size: 11px;
+	font-size: 9pt;
 	line-height: 14px;
 	padding-bottom: 4px;
 	font-family: Tahoma, Geneva, sans-serif;
 	font-weight: normal;
-	color: #000;
+	color: #7f7f7f;
 }
 
 #discussion_zone .ms-WPBody {
 	font-family: Tahoma, Geneva, sans-serif;
-	font-size: 11px;
+	font-size: 9pt;
 	font-weight: normal;
-	color: #000;
+	color: #7f7f7f;
 }
 
 #discussion_zone .discussion_post {
-	margin-top: 8px;
-	margin-bottom: 8px;
-	padding-top: 16px;
-	padding-bottom: 8px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top: 12px;
+	padding-bottom: 12px;
 	border-top-width: 1px;
 	border-top-style: solid;
 	border-top-color: #cccccc;
 }
 
 #discussion_zone .discussion_post.first {
-	margin-top: 0px;
+	margin-top: -4px;
 	padding-top: 0px;
 	border-top: none;
 }
@@ -268,14 +270,14 @@ h3 {
 }
 
 #discussion_zone h3 a {
-	font-size: 12px;
+	font-size: 10pt;
 	font-weight: normal;
 	color: #88009c;
 	text-decoration: none;
 }
 
 #discussion_zone a {
-	color: #000;
+	color: #7f7f7f;
 	text-decoration: none;
 }
 
@@ -289,7 +291,8 @@ h3 {
 
 #discussion_zone .discussion_timestamp {
 	display: inline;
-	color: #666;
+	font-size: 8pt;
+	color: #636363;
 }
 
 
