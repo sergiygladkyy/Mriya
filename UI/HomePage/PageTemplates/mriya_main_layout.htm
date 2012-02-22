@@ -50,6 +50,9 @@
 					.web_part_zone {
 						overflow: auto !important;
 					}
+					#panel_zone {
+						max-height: inherit !important;
+					}
 				</style>
 				<SharePointWebControls:CssRegistration name="<% $SPUrl:~sitecollection/Style Library/~language/Core Styles/edit-mode-21.css %>"
 					After="<% $SPUrl:~sitecollection/Style Library/~language/Core Styles/page-layouts-21.css %>" runat="server"/>
@@ -125,7 +128,7 @@
 			</div>
 			
 			<div id="news_zone" class="web_part_zone">
-				<h1 class="news"><a href="/sites/mriya/Community/News/Pages/Forms/newsview.aspx">Новини</a></h1>
+				<h1 class="news linked_with_image"><a href="/sites/mriya/Community/News/Pages/Forms/newsview.aspx">Новини</a></h1>
 				<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="NewsZone" FrameType="TitleBarOnly"
 					Title="NewsZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
 			</div>
@@ -135,9 +138,14 @@
 			<div id="top_block">
 				<div class="left_column">
 					<div id="advertisement_zone" class="web_part_zone">
-						<h1 class="advertisement"><a href="/sites/mriya/Community/Announcements/Pages/Forms/AnoncmentsView.aspx">Оголошення</a></h1>
+						<h1 class="advertisement linked_with_image"><a href="/sites/mriya/Community/Announcements/Pages/Forms/AnoncmentsView.aspx">Оголошення</a></h1>
 						<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="AdvertisementZone" FrameType="TitleBarOnly"
 							Title="AdvertisementZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
+					</div>
+					<div id="phone_book_search_zone" class="web_part_zone">
+						<h1 class="phone_book_search linked_with_image"><a href="/sites/mriya/Toolbox/Pages/Довідник%20працівників.aspx">Довідник працівників</a></h1>
+						<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="PhoneBookSearchZone" FrameType="TitleBarOnly"
+							Title="PhoneBookSearchZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
 					</div>
 				</div>
 				
@@ -150,7 +158,7 @@
 			</div>
 			
 			<div id="middle_block">
-				<h1 class="discussion"><a href="/sites/mriya/Community/Forum/Pages/default.aspx">Cпілкування</a></h1>
+				<h1 class="discussion linked_with_image"><a href="/sites/mriya/Community/Forum/Pages/default.aspx">Cпілкування</a></h1>
 				<div id="discussion_zone" class="web_part_zone">
 					<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="DiscussionZone" FrameType="TitleBarOnly"
 						Title="DiscussionZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
@@ -160,19 +168,19 @@
 			<div id="bottom_block">
 				<div class="left_column">
 					<div id="photo_zone" class="web_part_zone">
-					<h1 class="photo"><a href="/sites/mriya/Community/PhotoGallery/Pages/default.aspx">Фото</a></h1>
+					<h1 class="photo linked_with_image"><a href="/sites/mriya/Community/PhotoGallery/Pages/default.aspx">Фото</a></h1>
 					<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="PhotoZone" FrameType="TitleBarOnly"
 						Title="PhotoZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
 					</div>
 					
 					<div id="move_zone" class="web_part_zone">
-						<h1 class="move"><a href="/sites/mriya/Community/VideoGallery/Pages/default.aspx">Відео</a></h1>
+						<h1 class="move linked_with_image"><a href="/sites/mriya/Community/VideoGallery/Pages/default.aspx">Відео</a></h1>
 						<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="MoveZone" FrameType="TitleBarOnly"
 							Title="MoveZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
 					</div>
 					
 					<div id="map_zone" class="web_part_zone">
-						<h1 class="map"><a href="/sites/mriya/Company/Contacts/Pages/default.aspx"><nobr>Карта Мрії</nobr></a></h1>
+						<h1 class="map linked_with_image"><a href="/sites/mriya/Company/Contacts/Pages/default.aspx"><nobr>Карта Мрії</nobr></a></h1>
 						<WebPartPages:WebPartZone runat="server" AllowPersonalization="true" ID="MapZone" FrameType="TitleBarOnly"
 							Title="MapZone" Orientation="Vertical"><ZoneTemplate></ZoneTemplate></WebPartPages:WebPartZone>
 					</div>

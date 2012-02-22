@@ -21,14 +21,14 @@
 	overflow: hidden;
 }
 
-#top_block, #advertisement_zone, #panel_zone {
-	max-height: 179px;
+#advertisement_zone, #panel_zone {
+	max-height: 175px;
 }
 
 #middle_block {
 	width: 100%;
 	overflow: hidden;
-	padding: 30px 0 1px;
+	padding: 0 0 1px;
 }
 
 #bottom_block {
@@ -48,6 +48,15 @@
 	padding: 0 0 0 20px;
 	overflow: hidden;
 }
+
+#top_block .left_column {
+	width: 260px;
+}
+
+#top_block .right_column {
+	width: 220px;
+}
+
 
 div.welcome {
 	padding: 0 !important;
@@ -75,15 +84,22 @@ h1 {
 	padding-left: 25px;
 }
 
-h1.news  {
+h1.linked_with_image {
 	padding-left: 0px;
-	margin-bottom: 0px;
 }
 
-h1.news a {
+h1.linked_with_image a {
 	color: #88019b;
 	text-decoration: none;
 	padding-left: 25px;
+}
+
+h1.news  {
+	margin-bottom: 0px;
+}
+
+h1.news a,
+h1.phone_book_search a {
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/2.gif") left 80% no-repeat;
 }
 
@@ -92,48 +108,26 @@ h1.celebrating {
 }
 
 h1.advertisement {
-	padding-left: 0px;
 	margin-top: 0px;
 }
 
 h1.advertisement a {
-	color: #88019b;
-	text-decoration: none;
-	padding-left: 25px;
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/1.gif") left 80% no-repeat;
 }
 
-h1.photo {
-	padding-left: 0px;
-}
-
 h1.photo a {
-	color: #88019b;
-	text-decoration: none;
-	padding-left: 25px;
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/7.gif") left 80% no-repeat;
 }
 
-h1.move {
-	padding-left: 0px;
-}
-
 h1.move a {
-	color: #88019b;
-	text-decoration: none;
-	padding-left: 25px;
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/9.gif") left 80% no-repeat;
 }
 
 h1.discussion {
-	padding-left: 0px;
 	margin-top: 28px;
 }
 
 h1.discussion a {
-	color: #88019b;
-	text-decoration: none;
-	padding-left: 25px;
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/5.gif") left 80% no-repeat;
 }
 
@@ -141,24 +135,12 @@ h1.new_employees {
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/6.gif") left 80% no-repeat;
 }
 
-
-h1.map {
-	padding-left: 0px;
-}
-
 h1.map a {
-	color: #88019b;
-	text-decoration: none;
-	padding-left: 25px;
 	background: url("/sites/mriya/SiteCollectionImages/Mriya Theme/icons/8.gif") left 80% no-repeat;
 }
 
-h1.news a:visited, h1.news a:hover,
-h1.advertisement a:visited, h1.advertisement a:hover,
-h1.photo a:visited, h1.photo a:hover,
-h1.move a:visited, h1.move a:hover,
-h1.discussion a:visited, h1.discussion a:hover,
-h1.map a:visited, h1.map a:hover  {
+h1.linked_with_image a:visited,
+h1.linked_with_image a:hover {
 	color: #88019b;
 	text-decoration: none;
 }
@@ -194,17 +176,28 @@ h3 {
 	background: #e8d3e4;
 }
 
+#phone_book_search_zone {
+	width: 100%;
+	overflow: visible;
+}
+
 
 
 /* Advertisement */
 
 #advertisement_zone  .advert_block {
     font-family: Tahoma,Geneva,sans-serif;
-    padding: 10px;
+    padding: 7px 10px;
 }
 
 #advertisement_zone .advert_block.even {
 	background-color: #eeeeee;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#eaeaea');
+	background: -webkit-gradient(linear, left top, left bottom, from(#f5f5f5), to(#eaeaea));
+	background: -moz-linear-gradient(top,  #f5f5f5,  #eaeaea);
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
 }
 
 #advertisement_zone .advert_block .date {
