@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
 using Microsoft.SharePoint;
 using Microsoft.SharePoint.WebControls;
 
@@ -14,6 +15,8 @@ namespace MriyaStaffWebparts.PhoneBookMini
     {
         // Visual Studio might automatically update this path when you change the Visual Web Part project item.
         private const string _ascxPath = @"~/_CONTROLTEMPLATES/MriyaStaffWebparts/PhoneBookMini/PhoneBookMiniUserControl.ascx";
+        protected const string c_PathLayouts = @"/_layouts/MriyaStaffWebparts/";
+        protected const string c_PathImages = "/_layouts/images/MriyaStaffWebparts/";
 
         #region Attributes
 
@@ -23,6 +26,8 @@ namespace MriyaStaffWebparts.PhoneBookMini
 
         const string c_PhotoImageFile = "/SiteCollectionImages/photo_icn.gif";
         const string c_NoProfileImageFile = "/SiteCollectionImages/mrab_no_profile_image.png";
+
+        const bool c_UseDefaultCSS = true;
 
         const string c_OTConnectionString = "Data Source=NESO;Initial Catalog=OmniTracker;Integrated Security=True";
         const string c_PhotoConnectionString = "Data Source=NESO;Initial Catalog=MriyaUserData;Integrated Security=True";
@@ -45,6 +50,8 @@ namespace MriyaStaffWebparts.PhoneBookMini
 
         private string photoImageFile = c_PhotoImageFile;
         private string noProfileImageFile = c_NoProfileImageFile;
+
+        private bool useDefaultCSS = c_UseDefaultCSS;
 
         private string otConnectionString = c_OTConnectionString;
         private string photoConnectionString = c_PhotoConnectionString;
@@ -141,6 +148,26 @@ namespace MriyaStaffWebparts.PhoneBookMini
             set
             {
                 noProfileImageFile = value;
+            }
+        }
+
+        [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
+        System.Web.UI.WebControls.WebParts.WebDisplayName("Використовувати вбудовані стилі CSS"),
+        System.Web.UI.WebControls.WebParts.WebDescription("Використовувати вбудовані стилі CSS"),
+        System.Web.UI.WebControls.WebParts.Personalizable(
+        System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared),
+        System.ComponentModel.Category("Додатково"),
+        System.ComponentModel.DefaultValue(c_UseDefaultCSS)
+        ]
+        public bool UseDefaultCSS
+        {
+            get
+            {
+                return useDefaultCSS;
+            }
+            set
+            {
+               useDefaultCSS = value;
             }
         }
 
@@ -359,6 +386,19 @@ namespace MriyaStaffWebparts.PhoneBookMini
 
         protected override void CreateChildControls()
         {
+            Controls.Clear();
+
+            if (UseDefaultCSS)
+            {
+
+                // Add style sheets
+                HtmlLink linkStyles = new HtmlLink();
+                linkStyles.Href = c_PathLayouts + "MriyaStaffWebparts.css";
+                linkStyles.Attributes.Add("type", "text/css");
+                linkStyles.Attributes.Add("rel", "stylesheet");
+                this.Page.Header.Controls.Add(linkStyles);
+            }
+
             if (ScriptManager.GetCurrent(this.Page) == null)
             {
                 ScriptManager manager = new ScriptManager();

@@ -270,7 +270,7 @@ namespace MriyaStaffWebparts.PhoneBookMini
 
                 if (nRec > _nMaxResults)
                 {
-                    labelRecords.Text = "Уточніть пошук...";
+                    labelRecords.Text = "Уточніть пошук будь ласка...";
                     labelRecords.Visible = true;
                     break;
                 }

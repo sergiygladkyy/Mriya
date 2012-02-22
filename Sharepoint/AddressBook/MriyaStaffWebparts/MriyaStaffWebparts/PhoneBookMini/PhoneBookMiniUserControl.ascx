@@ -150,7 +150,7 @@
 
 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
     <ContentTemplate>
-        <table class="styleMrMiniPBookSearchPanel">
+        <table class="styleMrMiniPBookSearchPanel" cellspacing="0" cellpadding="0" border="0">
         <tr>
         <td>
             <asp:TextBox ID="textBoxSearch" runat="server" 
@@ -159,27 +159,35 @@
         <td>
             <asp:ImageButton ID="imageButtonClear" runat="server" 
                 onclick="imageButtonClear_Click" CssClass="styleMrPBookMiniClear" 
-                CausesValidation="False" />
+                CausesValidation="False" 
+                ImageUrl="~/_layouts/images/MriyaStaffWebparts/searchclear.png" />
         </td>
         <td>
             <asp:ImageButton ID="imageButtonSearch" runat="server" 
                 onclick="imageButtonSearch_Click" CssClass="styleMrPBookMiniSearch" 
-                CausesValidation="False" />
+                CausesValidation="False" 
+                ImageUrl="~/_layouts/images/MriyaStaffWebparts/gosearch15.png" />
         </td>
         </tr>
         </table>
         <asp:Label ID="labelError" runat="server" CssClass="styleMrPBookMiniErrorMessage" 
             Font-Bold="True" ForeColor="#CC0000" Text="There are no errors!" 
             Visible="False"></asp:Label>
-        <asp:Panel ID="panelResults" runat="server" CssClass="styleMrPBookMiniResults" 
-            Visible="False">
-            <asp:Table ID="tableResults" runat="server" 
-                CssClass="styleMrPBookMiniTableResults">
-            </asp:Table>
-            <asp:Label ID="labelRecords" runat="server" Visible="False"></asp:Label>
-        </asp:Panel>
+        <div class="styleMrPBookMiniResults-outer">
+            <asp:Panel ID="panelResults" runat="server" CssClass="styleMrPBookMiniResults" 
+                    Visible="False">
+                <div class="styleMrPBookMiniResults-inner">
+                    <asp:Table ID="tableResults" runat="server" 
+                        CssClass="styleMrPBookMiniTableResults">
+                    </asp:Table>
+                    <br />
+                    <asp:Label ID="labelRecords" runat="server" Visible="False"></asp:Label>
+                </div>
+            </asp:Panel>
+        </div>
     </ContentTemplate>
 </asp:UpdatePanel>
+    
 
 <div id="divMrPBookRecordDetailsOuter" style="height:350px;width:550px;display:none">
     <asp:Panel ID="panelMrPBookRecordDetails" runat="server" 
