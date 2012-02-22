@@ -11,6 +11,7 @@ function initializeSlider()
 		'<ViewFields>' +
 			'<FieldRef Name="Title"/>' +
 			'<FieldRef Name="FileRef"/>' +
+			'<FieldRef Name="ArticleStartDate"/>' +
 			'<FieldRef Name="_x041e__x043f__x0438__x0441__x0020__x043d__x043e__x0432__x0438__x043d__x0438_"/>' + // Краткое описание
 			'<FieldRef Name="_x0424__x043e__x043d__x0020__x0441__x043b__x0430__x0439__x0434__x0435__x0440__x0430_"/>' + // Фон слайдера
 			'<FieldRef Name="_x0421__x043b__x0430__x0439__x0434__x0435__x0440_"/>' + // Слайдер
@@ -34,12 +35,17 @@ function initializeSlider()
 	var strControlFormat = '<div class="control"></div>\n';
 	
 	var query = 
-		'<Query><Where>' + 
-			'<Eq>' +
-				'<FieldRef Name="_x0421__x043b__x0430__x0439__x0434__x0435__x0440_"/>' + // Слайдер
-				'<Value Type="Text">1</Value>' +
-			'</Eq>' +
-		'</Where></Query>'
+		'<Query>' +
+			'<Where>' + 
+				'<Eq>' +
+					'<FieldRef Name="_x0421__x043b__x0430__x0439__x0434__x0435__x0440_"/>' + // Слайдер
+					'<Value Type="Text">1</Value>' +
+				'</Eq>' +
+			'</Where>' +
+			'<OrderBy>' +
+				'<FieldRef Name="ArticleStartDate" Ascending="FALSE"/>' +
+			'</OrderBy>' +
+		'</Query>'
 	;
 	
 	function getItems(slider_id)
