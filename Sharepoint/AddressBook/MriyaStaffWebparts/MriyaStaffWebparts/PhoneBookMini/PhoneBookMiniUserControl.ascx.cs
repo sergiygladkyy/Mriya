@@ -102,7 +102,7 @@ namespace MriyaStaffWebparts.PhoneBookMini
             if (bPost)
             {
                 if (ViewState["_tableEmployees.FilterCustom"] != null)
-                    _tableEmployees.FilterCustom1 = ViewState["_tableEmployees.FilterCustom"].ToString();
+                    _tableEmployees.FilterCustom = ViewState["_tableEmployees.FilterCustom"].ToString();
 
                 if (ViewState["_bShowDetailsDiv"] != null)
                     _bShowDetailsDiv = Convert.ToBoolean(ViewState["_bShowDetailsDiv"]);
@@ -178,9 +178,9 @@ namespace MriyaStaffWebparts.PhoneBookMini
                 return;
             }
 
-            if (_tableEmployees.FilterCustom1 != textBoxSearch.Text)
+            if (_tableEmployees.FilterCustom != textBoxSearch.Text)
             {
-                ViewState["_tableEmployees.FilterCustom"] = _tableEmployees.FilterCustom1 = SanitizeSearchText(textBoxSearch.Text);
+                ViewState["_tableEmployees.FilterCustom"] = _tableEmployees.FilterCustom = SanitizeSearchText(textBoxSearch.Text);
                 panelResults.Visible = true;
             }
         }
@@ -190,7 +190,7 @@ namespace MriyaStaffWebparts.PhoneBookMini
             textBoxSearch.Text = "";
             SetTextBoxHint(textBoxSearch, _sCaptionText);
             panelResults.Visible = false;
-            ViewState["_tableEmployees.FilterCustom"] = _tableEmployees.FilterCustom1 = "";
+            ViewState["_tableEmployees.FilterCustom"] = _tableEmployees.FilterCustom = "";
         }
 
         protected void ShowResults()
