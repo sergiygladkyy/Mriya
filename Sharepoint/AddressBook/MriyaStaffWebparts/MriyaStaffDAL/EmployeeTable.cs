@@ -458,11 +458,11 @@ namespace MriyaStaffDAL
             sbQuery.Append("u407.f7_vorname AS first_name, ");
             sbQuery.Append("u407.f34_ AS middle_name, ");
             sbQuery.Append("u407.f16_geburtst AS dob, ");
-            sbQuery.Append("u407.f3_telefon AS phone_work, ");
+            sbQuery.Append("u278.f10_internen AS phone_work, ");
             sbQuery.Append("u407.f9_mobil AS phone_mobile, ");
             sbQuery.Append("u407.f26_email AS email, ");
-            sbQuery.Append("u407.f16_abteilun AS department, ");
-            sbQuery.Append("u407.f35_ AS job_title, ");
+            sbQuery.Append("a278.f18_titel AS department, ");
+            sbQuery.Append("u407.f61_ AS job_title, ");
             sbQuery.Append("u407.f32_ad AS city, ");
             sbQuery.Append("u407.f45_ AS employed ");
             if (param_custom)
@@ -470,16 +470,20 @@ namespace MriyaStaffDAL
                 sbQuery.Append(", LOWER( ");
                 sbQuery.Append("ISNULL(u407.f8_nachname + ' ', '') ");
                 sbQuery.Append("+ ISNULL(u407.f7_vorname + ' ', '') "); 
-                sbQuery.Append("+ ISNULL(u407.f34_ + ' ', '') "); 
-                sbQuery.Append("+ REPLACE(REPLACE(REPLACE(REPLACE(ISNULL(u407.f3_telefon + ' ', ''),')',''),'(',''),'+',''), ' ', '') "); 
+                sbQuery.Append("+ ISNULL(u407.f34_ + ' ', '') ");
+                sbQuery.Append("+ REPLACE(REPLACE(REPLACE(REPLACE(ISNULL(u278.f10_internen + ' ', ''),')',''),'(',''),'+',''), ' ', '') "); 
                 sbQuery.Append("+ REPLACE(REPLACE(REPLACE(REPLACE(ISNULL(u407.f9_mobil + ' ', ''),')',''),'(',''),'+',''), ' ', '') ");
                 sbQuery.Append("+ ISNULL(u407.f26_email + ' ', '') ");
-                sbQuery.Append("+ ISNULL(u407.f16_abteilun + ' ', '') ");
-                sbQuery.Append("+ ISNULL(u407.f35_ + ' ', '') ");
+                sbQuery.Append("+ ISNULL(a278.f18_titel + ' ', '') ");
+                sbQuery.Append("+ ISNULL(u407.f61_ + ' ', '') ");
                 sbQuery.Append("+ ISNULL(u407.f32_ad + ' ', '') ");
                 sbQuery.Append(") AS search_field ");
             }
             sbQuery.Append("FROM [OmniTracker].[dbo].[UserFields407] AS u407 ");
+            sbQuery.Append("LEFT OUTER JOIN [OmniTracker].[dbo].[UserFields278] AS u278 ON u407.request = u278.request ");
+            sbQuery.Append("LEFT OUTER JOIN [OmniTracker].[dbo].[UserFields278] AS a278 ON u407.f44_ = a278.request ");
+            sbQuery.Append("WHERE u407.f60_ <> 1 ");
+            sbQuery.Append("AND u278.f9_status = 161 ");
             sbQuery.Append(") AS SearchTable ");
             sbQuery.Append("WHERE id > 0 ");
             if (param_custom)
@@ -592,11 +596,11 @@ namespace MriyaStaffDAL
             sbQuery.AppendLine("u407.f7_vorname AS first_name,");
             sbQuery.AppendLine("u407.f34_ AS middle_name,");
             sbQuery.AppendLine("u407.f16_geburtst AS dob,");
-            sbQuery.AppendLine("u407.f3_telefon AS phone_work,");
+            sbQuery.AppendLine("u278.f10_internen AS phone_work,");
             sbQuery.AppendLine("u407.f9_mobil AS phone_mobile,");
             sbQuery.AppendLine("u407.f26_email AS email,");
-            sbQuery.AppendLine("u407.f16_abteilun AS department,");
-            sbQuery.AppendLine("u407.f35_ AS job_title,");
+            sbQuery.AppendLine("a278.f18_titel AS department,");
+            sbQuery.AppendLine("u407.f61_ AS job_title,");
             sbQuery.AppendLine("u407.f32_ad AS city,");
             sbQuery.AppendLine("u407.f30_ad AS login_name,");
             sbQuery.AppendLine("u407.f45_ AS employed,");
@@ -607,10 +611,10 @@ namespace MriyaStaffDAL
             sbQuery.AppendLine("u408.f14_postfach AS post_box");
             sbQuery.AppendLine("FROM");
             sbQuery.AppendLine("[OmniTracker].[dbo].[UserFields407] AS u407");
-            sbQuery.AppendLine("LEFT OUTER JOIN [OmniTracker].[dbo].ReferenceList2444 AS link_table");
-            sbQuery.AppendLine("ON u407.request = link_table.request");
-            sbQuery.AppendLine("LEFT OUTER JOIN [OmniTracker].[dbo].[UserFields408] AS u408");
-            sbQuery.AppendLine("ON link_table.reference = u408.request");
+            sbQuery.AppendLine("LEFT OUTER JOIN [OmniTracker].[dbo].ReferenceList2444 AS link_table ON u407.request = link_table.request");
+            sbQuery.AppendLine("LEFT OUTER JOIN [OmniTracker].[dbo].[UserFields408] AS u408 ON link_table.reference = u408.request");
+            sbQuery.AppendLine("LEFT OUTER JOIN [OmniTracker].[dbo].[UserFields278] AS u278 ON u407.request = u278.request");
+            sbQuery.AppendLine("LEFT OUTER JOIN [OmniTracker].[dbo].[UserFields278] AS a278 ON u407.f44_ = a278.request");
             sbQuery.AppendLine("WHERE u407.request = @request");
 
             query.Connection = connection;

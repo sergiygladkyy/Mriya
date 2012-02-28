@@ -486,7 +486,7 @@ namespace MriyaStaffWebparts.PhoneBookMini
                 if (_bShowDetailsWPhone && rec.PhoneWork.Trim().Length > 0)
                 {
                     sb.AppendFormat("<tr class=\"{0}\"><td valign=\"top\"><div class=\"stylrMrPBookWPhone\"><span class=\"styleMrPBookDetailsLabel\">{1}: </span></div></td>",
-                        ((line++ % 2) != 0) ? (cssRowStyleAlt) : (cssRowStyle), Properties.Resources.textHeaderPhoneWork);
+                        ((line++ % 2) != 0) ? (cssRowStyleAlt) : (cssRowStyle), Properties.Resources.textHeaderPhoneWork1);
                     sb.AppendFormat("<td valign=\"top\"><div class=\"stylrMrPBookWPhone\">{0}</div></td></tr>\n",
                         rec.PhoneWork);
                 }
