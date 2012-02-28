@@ -55,7 +55,12 @@ function GetNewsItemsAnn()
 	
 	if (items != null)
 	{
-		var rows = items.responseXML.getElementsByTagName('z:row');
+		var rows = items.responseXML.getElementsByTagName('z:row'); // Not work in Google Chrome
+			
+		if (rows instanceof NodeList) // Only Google Chrome
+		{
+			rows = getElementsByTagName(items.responseXML.documentElement, 'z:row'); // Not work in IE8
+		}
 		
 		var str2 = '';
 		var c = 0;
@@ -101,6 +106,26 @@ function GetNewsItemsAnn()
 		setToElement('output444', str2);
 	}
 	else alert('Items is null!!');
+}
+
+function getElementsByTagName(root, tag_name)
+{
+	var list = new Array();
+	
+	if (root.nodeName == tag_name)
+	{
+		list.push(root);
+	}
+	
+	if (root.hasChildNodes && root.hasChildNodes())
+	{
+		for (var i in root.childNodes)
+		{
+			list = list.concat(getElementsByTagName(root.childNodes[i], tag_name));
+		}
+	}
+	
+	return list;
 }
 
 _spBodyOnLoadFunctionNames.push('GetNewsItemsAnn');

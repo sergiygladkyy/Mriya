@@ -2,6 +2,8 @@
 <script type="text/javascript" src="../SitePages/SPAPI/SPAPI_Lists.js"></script>
 
 <script language="JavaScript">
+function initializeNews()
+{
 	var fildslist = 
 		'<ViewFields>' +
 			'<FieldRef Name="Title"/>' +
@@ -40,109 +42,133 @@
 		'</Query>'
 	;
 
-	function initializeNews()
+	function getItems(tag_id)
 	{
-		function getItems(tag_id)
+		try
 		{
-			try
-			{
-				var list  = new SPAPI_Lists('http://neso.contoso.com/sites/mriya/Community/News');
-				var items = list.getListItems('Сторінки', '{FE7CD840-136B-469A-87D3-6A1DE3C72CF7}', query, fildslist, 6);
-				
-				if (items.status == 200)
-					return items;
-				else
-					jQuery('#' + tag_id).append('There was an error: '+ items.status + ' | ' + items.statusText + '<br>');
-			}
-			catch (ex)
-			{
-				jQuery('#' + tag_id).append('Exception: ' + ex + '<br>');
-			}
+			var list  = new SPAPI_Lists('http://neso.contoso.com/sites/mriya/Community/News');
+			var items = list.getListItems('Сторінки', '{FE7CD840-136B-469A-87D3-6A1DE3C72CF7}', query, fildslist, 6);
 			
-			return null;
-		}
-		
-		function setToElement(elementid, val)
-		{
-			//setvals(elementid, val);
-			//return ;
-			
-			var control = document.getElementById(elementid);
-			
-			if (typeof(control)!='object')
-				alert('control not found! id="'+elementid+'" val="'+val+'"');
+			if (items.status == 200)
+				return items;
 			else
-			{
-				control.innerHTML = val;
-				//return control.firstChild;
-			}
+				jQuery('#' + tag_id).append('There was an error: '+ items.status + ' | ' + items.statusText + '<br>');
 		}
-		
-		function setvals(elementid, val)
+		catch (ex)
 		{
-			var control = document.getElementById(elementid);
-			
-			var newdiv = document.createElement("div");
-			newdiv.innerHTML =  val; //xhr.responseText;
-			var container = document.getElementById(elementid);
-			container.appendChild(newdiv);
+			jQuery('#' + tag_id).append('Exception: ' + ex + '<br>');
 		}
 		
-		function GetNewsItems(tag_id)
-		{
-			var items = getItems(tag_id);
-			
-			if (items != null)
-			{
-				var rows = items.responseXML.getElementsByTagName('z:row');
-				var str2 = '';
-				
-				for (var i=0; i<rows.length; i++)
-				{
-					var img = '';
-					var title = '';
-					var author = '';
-					var date = '';
-					var link = '';
-					var lead = '';
-					
-					for (var j=0; j<rows[i].attributes.length; j++)
-					{
-						if (rows[i].attributes[j].name == 'ows_PublishingRollupImage') img = rows[i].attributes[j].value;
-						if (rows[i].attributes[j].name == 'ows_Title') title = rows[i].attributes[j].value;
-						if (rows[i].attributes[j].name == 'ows_ArticleByLine') author = rows[i].attributes[j].value;
-						if (rows[i].attributes[j].name == 'ows_ArticleStartDate') date = rows[i].attributes[j].value.split(' ')[0];
-						if (rows[i].attributes[j].name == 'ows_FileRef') link = ('../' + rows[i].attributes[j].value.split(';#')[1]);
-						if (rows[i].attributes[j].name == 'ows__x041e__x043f__x0438__x0441__x0020__x043d__x043e__x0432__x0438__x043d__x0438_') lead = rows[i].attributes[j].value;
-					}
-					
-					date = date.split('-');
-					
-					if (date && date.length == 3)
-					{
-						date = date[2] + '.' + date[1] + '.' + date[0];
-					}
-					
-					str2 = str2 + strRowFormat.replace('{image}', img)
-						.replace('{header}', title)
-						.replace('{author}', author)
-						.replace('{date}', date)
-						.replace('{link}', link)
-						.replace('{lead}',lead)
-					;
-				}
-				
-				str2 = str2 + '';
-				
-				setToElement(tag_id, str2);
-			}
-			else jQuery('#' + tag_id).append('Items param is null' + '<br>');
-		}
-		
-		GetNewsItems('output2');
+		return null;
 	}
 	
-	_spBodyOnLoadFunctionNames.push('initializeNews');
+	function setToElement(elementid, val)
+	{
+		//setvals(elementid, val);
+		//return ;
+		
+		var control = document.getElementById(elementid);
+		
+		if (typeof(control)!='object')
+			alert('control not found! id="'+elementid+'" val="'+val+'"');
+		else
+		{
+			control.innerHTML = val;
+			//return control.firstChild;
+		}
+	}
+	
+	function setvals(elementid, val)
+	{
+		var control = document.getElementById(elementid);
+		
+		var newdiv = document.createElement("div");
+		newdiv.innerHTML =  val; //xhr.responseText;
+		var container = document.getElementById(elementid);
+		container.appendChild(newdiv);
+	}
+	
+	function PrepareNewsItems(tag_id)
+	{
+		var items = getItems(tag_id);
+		
+		if (items != null)
+		{
+			var rows = items.responseXML.getElementsByTagName('z:row'); // Not work in Google Chrome
+			
+			if (rows instanceof NodeList) // Only Google Chrome
+			{
+				rows = getElementsByTagName(items.responseXML.documentElement, 'z:row'); // Not work in IE8
+			}
+			
+			var str2 = '';
+			
+			for (var i=0; i<rows.length; i++)
+			{
+				var img = '';
+				var title = '';
+				var author = '';
+				var date = '';
+				var link = '';
+				var lead = '';
+				
+				for (var j=0; j<rows[i].attributes.length; j++)
+				{
+					if (rows[i].attributes[j].name == 'ows_PublishingRollupImage') img = rows[i].attributes[j].value;
+					if (rows[i].attributes[j].name == 'ows_Title') title = rows[i].attributes[j].value;
+					if (rows[i].attributes[j].name == 'ows_ArticleByLine') author = rows[i].attributes[j].value;
+					if (rows[i].attributes[j].name == 'ows_ArticleStartDate') date = rows[i].attributes[j].value.split(' ')[0];
+					if (rows[i].attributes[j].name == 'ows_FileRef') link = ('../' + rows[i].attributes[j].value.split(';#')[1]);
+					if (rows[i].attributes[j].name == 'ows__x041e__x043f__x0438__x0441__x0020__x043d__x043e__x0432__x0438__x043d__x0438_') lead = rows[i].attributes[j].value;
+				}
+				
+				date = date.split('-');
+				
+				if (date && date.length == 3)
+				{
+					date = date[2] + '.' + date[1] + '.' + date[0];
+				}
+				
+				str2 = str2 + strRowFormat.replace('{image}', img)
+					.replace('{header}', title)
+					.replace('{author}', author)
+					.replace('{date}', date)
+					.replace('{link}', link)
+					.replace('{lead}',lead)
+				;
+			}
+			
+			str2 = str2 + '';
+			
+			setToElement(tag_id, str2);
+		}
+		else jQuery('#' + tag_id).append('Items param is null' + '<br>');
+	}
+	
+	function getElementsByTagName(root, tag_name)
+	{
+		var list = new Array();
+		
+		if (root.nodeName == tag_name)
+		{
+			list.push(root);
+		}
+		
+		if (root.hasChildNodes && root.hasChildNodes())
+		{
+			for (var i in root.childNodes)
+			{
+				list = list.concat(getElementsByTagName(root.childNodes[i], tag_name));
+			}
+		}
+		
+		return list;
+	}
+	
+	PrepareNewsItems('output2');
+}
+	
+_spBodyOnLoadFunctionNames.push('initializeNews');
 </script>
 
 <div id="output2" style="overflow: hidden;" ></div>
