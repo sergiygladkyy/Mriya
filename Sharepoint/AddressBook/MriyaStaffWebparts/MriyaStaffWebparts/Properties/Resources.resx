@@ -219,4 +219,7 @@
   <data name="textButtonHide" xml:space="preserve">
     <value>Сховати</value>
   </data>
+  <data name="textHeaderPhoneWork1" xml:space="preserve">
+    <value>Тел роб</value>
+  </data>
 </root>

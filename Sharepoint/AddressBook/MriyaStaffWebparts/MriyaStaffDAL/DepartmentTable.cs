@@ -56,10 +56,22 @@ namespace MriyaStaffDAL
 
         public void ReadFromDB(SqlConnection connection)
         {
-            string sQuery = "SELECT DISTINCT f16_abteilun AS department " +
-                "FROM UserFields407 " +
-                "WHERE f16_abteilun IS NOT NULL AND f16_abteilun > '' " +
-                "ORDER BY f16_abteilun";
+            string sQuery = @"
+SELECT 
+	DISTINCT f18_titel AS department 
+FROM 
+	[OmniTracker].[dbo].[UserFields278] as u278,
+	[OmniTracker].[dbo].[UserFields407] as u407
+WHERE 
+	u278.request = u407.f44_ AND
+	f18_titel IS NOT NULL AND f18_titel > ''
+ORDER BY 
+	f18_titel
+                            ";
+//            string sQuery = @"SELECT DISTINCT f8_kundennr AS department 
+//                FROM UserFields406
+//                WHERE f8_kundennr IS NOT NULL AND f8_kundennr > ''
+//                ORDER BY f8_kundennr";
             SqlCommand sqlSelect = new SqlCommand(sQuery, connection);
             bool connectionCloseOnExit = false;
 

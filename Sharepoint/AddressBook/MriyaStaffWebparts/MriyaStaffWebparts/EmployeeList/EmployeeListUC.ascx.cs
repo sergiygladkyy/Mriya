@@ -472,7 +472,7 @@ namespace MriyaStaffWebparts.EmployeeList
                 if (_bShowDetailsWPhone && rec.PhoneWork.Trim().Length > 0)
                 {
                     sb.AppendFormat("<tr class=\"{0}\"><td valign=\"top\"><div class=\"stylrMrPBookWPhone\"><span class=\"styleMrPBookDetailsLabel\">{1}: </span></div></td>",
-                        ((line++ % 2) != 0) ? (cssRowStyleAlt) : (cssRowStyle), Properties.Resources.textHeaderPhoneWork);
+                        ((line++ % 2) != 0) ? (cssRowStyleAlt) : (cssRowStyle), Properties.Resources.textHeaderPhoneWork1);
                     sb.AppendFormat("<td valign=\"top\"><div class=\"stylrMrPBookWPhone\">{0}</div></td></tr>\n",
                         rec.PhoneWork);
                 }
@@ -703,7 +703,7 @@ namespace MriyaStaffWebparts.EmployeeList
             {
                 sbRecord.AppendFormat("{0}<span class=\"styleMrEListCardPhoneWork\"><span class=\"styleMrEListCardItemCaption\">{1}:</span> {2}</span>\n",
                     (bEOLNeeded) ? ("<br/>") : (""),
-                    Properties.Resources.textHeaderPhoneWork,
+                    Properties.Resources.textHeaderPhoneWork1,
                     record.PhoneWork);
                 bEOLNeeded = true;
             }

@@ -277,6 +277,15 @@ namespace MriyaStaffWebparts.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Тел роб.
+        /// </summary>
+        internal static string textHeaderPhoneWork1 {
+            get {
+                return ResourceManager.GetString("textHeaderPhoneWork1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Фото.
         /// </summary>
         internal static string textHeaderPhoto {
