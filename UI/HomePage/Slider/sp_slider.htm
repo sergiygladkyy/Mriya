@@ -87,12 +87,15 @@ function initializeSlider()
 		
 		if (items != null)
 		{
-			var rows = items.responseXML.getElementsByTagName('z:row');
-			var str2 = '';
+			var rows = items.responseXML.getElementsByTagName('z:row'); // Not work in Google Chrome
+			
+			if (rows instanceof NodeList) // Only Google Chrome
+			{
+				rows = getElementsByTagName(items.responseXML.documentElement, 'z:row'); // Not work in IE8
+			}
 			
 			for (var i=0; i<rows.length; i++)
 			{
-				
 				var title = '';
 				var text  = '';
 				var img   = '';
@@ -124,7 +127,27 @@ function initializeSlider()
 				setToElement(slider_id, slider_controls_id, str2);
 			}
 		}
-		else jQuery('#' + slider_id).append('Items param is null<br>');
+		else {jQuery('#news_zone').append('Items param is null');jQuery('#' + slider_id).append('Items param is null<br>');}
+	}
+	
+	function getElementsByTagName(root, tag_name)
+	{
+		var list = new Array();
+		
+		if (root.nodeName == tag_name)
+		{
+			list.push(root);
+		}
+		
+		if (root.hasChildNodes && root.hasChildNodes())
+		{
+			for (var i in root.childNodes)
+			{
+				list = list.concat(getElementsByTagName(root.childNodes[i], tag_name));
+			}
+		}
+		
+		return list;
 	}
 	
 	PrepareNewsItems('slider', 'slider_controls');
@@ -137,7 +160,7 @@ function initializeSlider()
 	
 	slider.initialize();
 }
-	
+
 _spBodyOnLoadFunctionNames.push('initializeSlider');
 </script>
 <style type="text/css">
