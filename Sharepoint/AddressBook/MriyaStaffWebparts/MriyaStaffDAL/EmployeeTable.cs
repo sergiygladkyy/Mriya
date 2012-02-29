@@ -537,8 +537,18 @@ namespace MriyaStaffDAL
                 )
             {
                 DateTime date = (_dtFilterDobMin != DateTime.MinValue) ? (_dtFilterDobMin) : (_dtFilterDobMax);
-                sbQuery.AppendFormat("AND dob = CAST( (STR(YEAR(dob)) + '-{0}-{1}') AS DATETIME) ",
-                    date.Month, date.Day);
+
+                if (date.Day == 29 && date.Month == 2)
+                {
+                    sbQuery.AppendFormat("AND '{0}-{1}-{2}' = CAST( ('{0}-' + STR(MONTH(dob)) + '-' + STR(DAY(dob))) AS DATETIME) ",
+                        date.Year, date.Month, date.Day);
+                }
+                else
+                {
+                    // We have troubles with a leaf day (29 Feb) and this query
+                    sbQuery.AppendFormat("AND dob = CAST( (STR(YEAR(dob)) + '-{0}-{1}') AS DATETIME) ",
+                        date.Month, date.Day);
+                }
             }
             else if (_dtFilterDobMin != DateTime.MinValue && _dtFilterDobMax != DateTime.MinValue)
             {
@@ -546,10 +556,22 @@ namespace MriyaStaffDAL
                 DateTime date_max = (_dtFilterDobMin > _dtFilterDobMax) ? (_dtFilterDobMin) : (_dtFilterDobMax);
                 bool bOr = date_min.Year != date_max.Year;
 
-                sbQuery.AppendFormat("AND (dob >= CAST( (STR(YEAR(dob)) + '-{0}-{1}') AS DATETIME) ",
-                    date_min.Month, date_min.Day);
-                sbQuery.AppendFormat("{2} dob <= CAST( (STR(YEAR(dob)) + '-{0}-{1}') AS DATETIME) ) ",
-                    date_max.Month, date_max.Day, (bOr) ? ("OR") : ("AND"));
+                if ((date_min.Day == 29 && date_min.Month == 2) ||
+                    (date_max.Day == 29 && date_max.Month == 2))
+                {
+                    sbQuery.AppendFormat("AND ('{0}-{1}-{2}' <= CAST( ('{0}-' + STR(MONTH(dob)) + '-' + STR(DAY(dob))) AS DATETIME) ",
+                        date_min.Year, date_min.Month, date_min.Day);
+                    sbQuery.AppendFormat("{3} '{0}-{1}-{2}' >= CAST( ('{0}-' + STR(MONTH(dob)) + '-' + STR(DAY(dob))) AS DATETIME) ) ",
+                        date_max.Year, date_max.Month, date_max.Day, (bOr) ? ("OR") : ("AND"));
+                }
+                else
+                {
+                    // We have troubles if min or max date is a leaf day (29 Feb), query will be failed
+                    sbQuery.AppendFormat("AND (dob >= CAST( (STR(YEAR(dob)) + '-{0}-{1}') AS DATETIME) ",
+                        date_min.Month, date_min.Day);
+                    sbQuery.AppendFormat("{2} dob <= CAST( (STR(YEAR(dob)) + '-{0}-{1}') AS DATETIME) ) ",
+                        date_max.Month, date_max.Day, (bOr) ? ("OR") : ("AND"));
+                }
             }
             if ((_dtFilterEmployedMin != DateTime.MinValue && _dtFilterEmployedMax == DateTime.MinValue) ||
                 (_dtFilterEmployedMax != DateTime.MinValue && _dtFilterEmployedMin == DateTime.MinValue)
