@@ -118,6 +118,10 @@ function ShowReplyInDialog(url, title)
                          {
                              for (int i = 0; i < numberOfDiscussionsToDisplay; i++)
                              {
+                                 System.Nullable<int> replyId;
+                                 string correctBodyToShow;
+                                 System.DateTime lastModified;
+
                                  Discussion discussion = topics.ElementAt<Discussion>(i);
                                  SPListItem discussionTopic = _discussionBoard.GetItemById((int)discussion.Id); // workaround for having a url
 
@@ -125,53 +129,65 @@ function ShowReplyInDialog(url, title)
                                      .ScopeToFolder( SPHttpUtility.UrlPathEncode( discussionTopic.Folder.Url,true), false);
 
                                  if (allReplies.Count<Message>() == 0)
-                                     throw new Exception(Properties.Resources.textExceptionQueryingDiscussionBoardNoReplies);
-
-                                 // this is a really shitty code, but how else can I get the missing Item attributes from an spmetal-wrapped class. Any ideas?
-                                 foreach (Message reply in allReplies)
                                  {
-                                     SPListItem discussionReply = _discussionBoard.GetItemById((int)reply.Id);
-
-                                     reply.LastModified = (DateTime)discussionReply["Modified"];
-                                     try
-                                     {
-                                         reply.CorrectBodyToShow = (string)discussionReply["CorrectBodyToShow"].ToString();
-
-                                     }
-                                     catch (Exception ex)
-                                     {
-
-                                         reply.CorrectBodyToShow = ex.Message;
-                                     }
-                                     
-                                     reply.Xml = (string)discussionReply.Xml;
+                                     replyId = discussion.Id;
+                                     correctBodyToShow = discussion.Post;
+                                     lastModified = discussion.LastModified;
                                  }
+                                 else
+                                 {
+                                     // this is a really shitty code, but how else can I get the missing Item attributes from an spmetal-wrapped class. Any ideas?
+                                     foreach (Message reply in allReplies)
+                                     {
+                                         SPListItem discussionReply = _discussionBoard.GetItemById((int)reply.Id);
 
-                                 var latestReply = (from reply in allReplies
-                                                    orderby reply.LastModified descending
-                                                    select reply).FirstOrDefault();
+                                         reply.LastModified = (DateTime)discussionReply["Modified"];
 
-                                 latestReply.CorrectBodyToShow = Microsoft.SharePoint.Utilities.SPHttpUtility.ConvertSimpleHtmlToText(latestReply.CorrectBodyToShow, webpart.DigestLength);
+                                         try
+                                         {
+                                             reply.CorrectBodyToShow = (string)discussionReply["CorrectBodyToShow"].ToString();
 
+                                         }
+                                         catch (Exception ex)
+                                         {
+                                             reply.CorrectBodyToShow = (string)reply.Post;
+                                         }
+
+                                         reply.Xml = (string)discussionReply.Xml;
+                                     }
+
+                                     var latestReply = (from reply in allReplies
+                                                        orderby reply.LastModified descending
+                                                        select reply).FirstOrDefault();
+
+                                     replyId = latestReply.Id;
+                                     correctBodyToShow = latestReply.CorrectBodyToShow;
+                                     lastModified = latestReply.LastModified;
+                                 }
+                                 
+                                 correctBodyToShow = Microsoft.SharePoint.Utilities.SPHttpUtility.ConvertSimpleHtmlToText(correctBodyToShow, webpart.DigestLength);
+                                 
                                  //{$SubWebUrl}{$DisplayForm}?PageType={$PageType}&ListId={$ListID}&ID={&ItemID}                                                                  
-                                 latestReply.Url = string.Format("http://{0}{1}?PageType={2}&ListId={{{3}}}&ID={4}", SPContext.Current.Site.HostName, _discussionBoard.DefaultDisplayFormUrl, _pageId, _discussionBoard.ID, latestReply.Id);
-                                 string onClickHref = string.Format(@"<a  onclick=""ShowReplyInDialog('{0}','{1}');return false;"" href='{0}' target=_self><NOBR>{2}... </NOBR>",latestReply.Url, Server.HtmlEncode(discussion.Title), latestReply.CorrectBodyToShow);
-
+                                 string replyUrl    = string.Format("http://{0}{1}?PageType={2}&ListId={{{3}}}&ID={4}", SPContext.Current.Site.HostName, _discussionBoard.DefaultDisplayFormUrl, _pageId, _discussionBoard.ID, replyId);
+                                 string onClickHref = string.Format(@"<a  onclick=""ShowReplyInDialog('{0}','{1}');return false;"" href='{0}' target=_self><NOBR>{2}... </NOBR>", replyUrl, Server.HtmlEncode(discussion.Title), correctBodyToShow);
+                                 
                                  string arrowHref;
+                                     
                                  if (webpart.UrlForArrow.IndexOf("http://") == -1)
                                      arrowHref = "http://" + SPContext.Current.Site.HostName + webpart.UrlForArrow;
                                  else
                                      arrowHref = webpart.UrlForArrow;
  
                                  if ((i == 0) & (!webpart.EnableTopLine))
-                                     _sbRecords.Append("<div class=\"discussion_post first\">");
+                                         _sbRecords.Append("<div class=\"discussion_post first\">");
                                  else
                                      _sbRecords.Append("<div class=\"discussion_post\">");
+                                 
                                  _sbRecords.Append("<h3>");
                                  _sbRecords.Append("<a href=\"" + boardSubWeb.Url + "//" + discussionTopic.Url + "\">" + discussion.Title + "</a>");
                                  _sbRecords.Append("</h3>");
                                  _sbRecords.Append("<div class=\"discussion_timestamp\">");
-                                 _sbRecords.Append(latestReply.LastModified.ToString("dd.MM hh:mm  "));
+                                 _sbRecords.Append(lastModified.ToString("dd.MM hh:mm  "));
                                  _sbRecords.Append("</div>");//Discussion timestamp                           
                                  _sbRecords.Append(onClickHref);                                                                                                    
                                  _sbRecords.Append("</a>");
