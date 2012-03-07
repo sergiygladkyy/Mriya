@@ -29,6 +29,7 @@ namespace MriyaDiscussionDashboard.DiscussionDashboard
         /// </summary>
         const int c_NumberOfDiscussionsToDisplay = 2;
         int numberOfDiscussionsToDisplay = c_NumberOfDiscussionsToDisplay;
+
         [System.Web.UI.WebControls.WebParts.WebBrowsable(true),
         System.Web.UI.WebControls.WebParts.WebDisplayName("Кількість дискусій"),
         System.Web.UI.WebControls.WebParts.WebDescription("Відображаються найактивніші."),
