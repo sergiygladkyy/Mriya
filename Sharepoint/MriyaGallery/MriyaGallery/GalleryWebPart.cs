@@ -182,12 +182,37 @@ namespace MriyaGallery
             sbPart.AppendLine("            <table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">");
             sbPart.AppendLine("            <tr>");
 
-            for (int i = 0; i < GalleryItems.Count && i < m_MaxItems; i++)
+            int max_items = GalleryItems.Count < m_MaxItems ? GalleryItems.Count : m_MaxItems;
+
+            for (int i = 0; i < max_items; i++)
             {
-                sbPart.AppendLine("                <td class=\"zoom" + ((i == 0) ? (" first") : ("")) + "\">");
+                int n = i + 1;
+                string str = "<td class=\"zoom";
+
+                if (n < m_SliderVisibleImages)
+                {
+                    if (n == 1)
+                        str += " first first_visible";
+                    else if (n == max_items)
+                        str += " last";
+                }
+                else
+                {
+                    if (n == max_items)
+                        str += " last";
+
+                    if (n == m_SliderVisibleImages)
+                        str += " last_visible";
+                    else
+                        str += "\" style=\"display: none;";
+                }
+                
+                str += "\">";
+
+                sbPart.AppendLine("                " + str);
                 sbPart.AppendLine("                    <div class=\"item" + ((i == 0) ? (" current") : ("")) + "\" node=\"" + i.ToString() +
                     "\"><a href=\"#\" onclick=\"return false;\"><img src=\"" +
-                    GalleryItems[i].Image + "\" alt=\"item_" + (i + 1).ToString() + "\" /></a></div>");
+                    GalleryItems[i].Image + "\" alt=\"item_" + (n).ToString() + "\" /></a></div>");
                 sbPart.AppendLine("                </td>");
             }
             sbPart.AppendLine("            </tr>");
@@ -239,7 +264,10 @@ namespace MriyaGallery
             sbJS.AppendLine("       auto_play: false");
             sbJS.AppendLine("   },");
             sbJS.AppendLine("   data: {");
-            for (int i = 0; i < GalleryItems.Count && i < m_MaxItems; i++)
+
+            int max_items = GalleryItems.Count < m_MaxItems ? GalleryItems.Count : m_MaxItems;
+
+            for (int i = 0; i < max_items; i++)
             {
                 sbJS.AppendLine("       " + i.ToString() + ": {");
                 sbJS.AppendLine("           s_img: '" + GalleryItems[i].Thumbnail + "'");

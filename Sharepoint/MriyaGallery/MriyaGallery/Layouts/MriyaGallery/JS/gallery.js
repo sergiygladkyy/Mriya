@@ -283,8 +283,12 @@ function mriyaGallery(slider_jquery_selector, preview_jquery_selector, settings)
 	function prevItem(event)
 	{
 		var slider = jQuery(s_selector);
-		var first  = slider.find('.first_visible');
-		var node   = first.prev();
+		var tab    = slider.find('.slides table');
+		
+		tab.stop(true, true);
+		
+		var first = slider.find('.first_visible');
+		var node  = first.prev();
 		
 		if (node.size() == 0) return;
 		
@@ -292,8 +296,6 @@ function mriyaGallery(slider_jquery_selector, preview_jquery_selector, settings)
 		
 		jQuery(s_selector).find('.prev_btn').css('cursor', node.hasClass('first') ? 'default' : 'pointer');
 		jQuery(s_selector).find('.next_btn').css('cursor', 'pointer');
-		
-		var tab = slider.find('.slides table');
 		
 		tab.css('width', w_max + w_item).css('left', -w_item);
 		node.css('display', 'table-cell');
@@ -314,8 +316,12 @@ function mriyaGallery(slider_jquery_selector, preview_jquery_selector, settings)
 	function nextItem(event)
 	{
 		var slider = jQuery(s_selector);
-		var last   = slider.find('.last_visible');
-		var node   = last.next();
+		var tab    = slider.find('.slides table');
+		
+		tab.stop(true, true);
+		
+		var last = slider.find('.last_visible');
+		var node = last.next();
 		
 		if (node.size() == 0) return;
 		
@@ -323,8 +329,6 @@ function mriyaGallery(slider_jquery_selector, preview_jquery_selector, settings)
 		
 		jQuery(s_selector).find('.prev_btn').css('cursor', 'pointer');
 		jQuery(s_selector).find('.next_btn').css('cursor', node.hasClass('last') ? 'default' : 'pointer');
-		
-		var tab = slider.find('.slides table');
 		
 		tab.css('width', w_max + w_item);
 		node.css('display', 'table-cell');
